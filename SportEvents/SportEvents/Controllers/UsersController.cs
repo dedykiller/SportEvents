@@ -46,13 +46,26 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Password,FirstName,Surname,Telephone,RegistrationTime")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (user.Password == user.PasswordComparison) // 
+                {
+                    user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("PasswordDoesNotMatch");
+                }
+
+                
+
+                  
+                
             }
 
             return View(user);

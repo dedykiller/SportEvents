@@ -40,6 +40,14 @@
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PasswordComparison, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PasswordComparison, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PasswordComparison, "", new { @class = "text-danger" })
+                </div>
+            </div>
     
             <div class="form-group">
                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -65,13 +73,7 @@
                 </div>
             </div>
     
-            <div class="form-group">
-                @Html.LabelFor(model => model.RegistrationTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RegistrationTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RegistrationTime, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
