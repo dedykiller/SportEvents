@@ -48,16 +48,43 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool duplicated = false;
                 // ZaHASHujeme heslo
                 user.Password = UtilityMethods.CalculateHashMd5(user.Password);
                 // A pro dobro modelu taky porovnani hesla... (tohle mozna vyresit jinak)
                 user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
-
+                
                 user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
 
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var isDuplicatedQuery = db.Users.Select(x => x.Email == user.Email);
+                foreach (bool item in isDuplicatedQuery)
+                {
+                    if (item)
+                    {
+                        duplicated = true;
+                        break;
+                        
+                    }                    
+                }
+
+                if (duplicated)
+                {
+                    ViewBag.Error  = "Uživatel pod tímto emailem je již registrován";
+                    return View();
+                }
+                else
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                
+                
+                
+                
+
+                
             }
 
             return View(user);
