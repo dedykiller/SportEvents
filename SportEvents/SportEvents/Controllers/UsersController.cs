@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using SportEvents.Controllers.Utility;
+using SportEvents.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SportEvents.Models;
 
 namespace SportEvents.Controllers
 {
@@ -42,7 +40,7 @@ namespace SportEvents.Controllers
         }
 
         // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -50,22 +48,16 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (user.Password == user.PasswordComparison) // 
-                {
-                    user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("PasswordDoesNotMatch");
-                }
+                // ZaHASHujeme heslo
+                user.Password = UtilityMethods.CalculateHashMd5(user.Password);
+                // A pro dobro modelu taky porovnani hesla... (tohle mozna vyresit jinak)
+                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
 
-                
+                user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
 
-                  
-                
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             return View(user);
@@ -87,7 +79,7 @@ namespace SportEvents.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
