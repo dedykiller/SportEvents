@@ -20,7 +20,7 @@ namespace SportEvents.Models
 
         [DisplayName("Heslo")]
         [Required(ErrorMessage = "Vyplňte prosím heslo.")]
-        [RegularExpression("^[a-zA-Z0-9]{8,}$", ErrorMessage = "Povolené znaky jsou a-z, A-Z a 0-9 s minimální délkou 8 znaků")]
+        [RegularExpression("^[a-zA-Z0-9]{8,}$", ErrorMessage = "Povolené znaky jsou a-z, A-Z a 0-9 s minimální délkou 8 znaků.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
               
@@ -39,9 +39,8 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím příjmení.")] 
         public string Surname { get; set; }
 
-
         [DisplayName("Telefon")]
-        [RegularExpression ("^[+]?[()/0-9. -]{9,}$", ErrorMessage = "Neplatné telefonní číslo")] // TODO : upravit validaci telefonu
+        [RegularExpression ("^[+]?[()/0-9. -]{9,}$", ErrorMessage = "Neplatné telefonní číslo.")] 
         public string Telephone { get; set; }
         
         public DateTime RegistrationTime { get; set; }
