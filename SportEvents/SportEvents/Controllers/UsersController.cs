@@ -78,13 +78,6 @@ namespace SportEvents.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
-                
-                
-                
-                
-
-                
             }
 
             return View(user);
