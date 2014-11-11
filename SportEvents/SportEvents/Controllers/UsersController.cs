@@ -13,6 +13,7 @@ namespace SportEvents.Controllers
         private DataContext db = new DataContext();
 
         // GET: Users
+        
         public ActionResult Index()
         {
             return View(db.Users.ToList());
