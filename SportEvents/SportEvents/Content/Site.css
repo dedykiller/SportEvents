@@ -1,0 +1,75 @@
+﻿input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.field-validation-error {
+    color: #ba0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #ba0000;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #ba0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*form*/
+
+form{
+    margin: 40px 0 0 30px;
+}
+
+input{
+    background: white;
+    padding: 10px 15px 10px 15px;
+    font-size: 15px;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+   border:1px solid #ff7417;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2x;
+    margin-bottom: 10px;
+
+}
+.label{
+    font-size: 15px; 
+    text-shadow:none;  
+}
+
+
+
+.button{
+    background: #79cbc9;
+    color: white;
+    text-shadow: none;
+}
+
+.button:hover{
+   background: #67bfbc;
+}
+
+/*písma*/
+
+
+
+h2{
+    font-size: 40px;
+    font-weight: 100;
+}
+
