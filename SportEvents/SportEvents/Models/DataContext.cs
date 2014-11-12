@@ -14,5 +14,10 @@ namespace SportEvents.Models
         }
 
         public DbSet<User> Users { get; set; }
-    }
+        
+        }
+
+
+
+
 }

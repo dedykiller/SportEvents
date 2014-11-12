@@ -11,8 +11,10 @@ namespace SportEvents.Controllers
     public class UsersController : Controller
     {
         private DataContext db = new DataContext();
+        private bool emailFound = false;
 
         // GET: Users
+        
         public ActionResult Index()
         {
             return View(db.Users.ToList());
@@ -39,55 +41,38 @@ namespace SportEvents.Controllers
             return View();
         }
 
+
+
         // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
-                bool duplicated = false;
-                // ZaHASHujeme heslo
-                user.Password = UtilityMethods.CalculateHashMd5(user.Password);
-                // A pro dobro modelu taky porovnani hesla... (tohle mozna vyresit jinak)
-                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
                 
-                user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
+                user.RegistrationTime = DateTime.Now; // Vytvoření data registrace
+                user.Password = UtilityMethods.CalculateHashMd5(user.Password); // Zahashování hesla
+                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
 
-                var isDuplicatedQuery = db.Users.Select(x => x.Email == user.Email);
-                foreach (bool item in isDuplicatedQuery)
+                emailFound = db.Users.Any(x => x.Email == user.Email); //Vyhodnotí, zda je zadaný e-mail v databázi
+                if (emailFound) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
                 {
-                    if (item)
-                    {
-                        duplicated = true;
-                        break;
-                        
-                    }                    
-                }
-
-                if (duplicated)
-                {
-                    ViewBag.Error  = "Uživatel pod tímto emailem je již registrován";
+                    ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
                     return View();
                 }
                 else
                 {
-                    db.Users.Add(user);
+                    db.Users.Add(user); // uložení uživatele a uložení změn v tabulce
                     db.SaveChanges();
+
                     return RedirectToAction("Index");
                 }
 
-                
-                
-                
-                
-
-                
             }
 
             return View(user);
+   
         }
 
         // GET: Users/Edit/5
@@ -106,8 +91,6 @@ namespace SportEvents.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,Password,FirstName,Surname,Telephone,RegistrationTime")] User user)
