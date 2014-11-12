@@ -13,9 +13,15 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Register", "Create")
+        @Html.ActionLink("Login", "Login")
+        @Html.ActionLink("Logout", "Logout")
     </p>
-    <table class="table">
+
+   
+    @if (Session["LoginSession"]==null)
+    {
+        <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -67,5 +73,13 @@
     }
     
     </table>
+        
+    }
+    else
+    {
+        <h3>User @Session["LoginSession"] is logged in</h3>
+    }
+
+    
 </body>
 </html>
