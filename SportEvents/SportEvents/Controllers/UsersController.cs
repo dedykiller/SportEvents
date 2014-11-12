@@ -13,57 +13,6 @@ namespace SportEvents.Controllers
         private DataContext db = new DataContext();
         private bool emailFound = false;
 
-        // GET: Users/Login
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        //POST: Users/Login
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(Login login)
-        {
-            if (ModelState.IsValid)
-            {
-                emailFound = db.Users.Any(x => x.Email == login.Email); //Vyhodnotí, zda je zadaný e-mail v databázi
-
-                if (!emailFound) // Pokud databáze e-mail neobsahuje, vrátí nás na formulář pro přihlášení
-                {
-                    ViewBag.Error = "Neexistující uživatel nebo chybné heslo";
-                    return View(); 
-                }
-
-                string hashedFormPassword = UtilityMethods.CalculateHashMd5(login.Password); // Zahashování hesla z loginu
-                string hashedDBPassword = db.Users.Where(x => x.Email == login.Email) // Dotaz pro získání zahashovaného hesla z databáze
-                                                .Select(x => x.Password)
-                                                .Single();
-
-                if (!hashedDBPassword.Equals(hashedFormPassword)) // Pokud se hashované hesla neshodují, uživatel se přepošle na přihlášení
-                {
-                    ViewBag.Error = "Neexistující uživatel nebo chybné heslo";
-                    return View(); 
-                }
-
-            }
-
-            Session["LoginSession"] = login.Email; // Vytvoření Session prozatím jen s loginem uživatele
-            return RedirectToAction("Index");
-           
-            //TO-DO správně se vypisující errory, metoda na porovnání hashovaných hesel zvlášť, oddělit dotazování od controlleru a předávat usera
-            
-        }
-
-        //GET: Users/Logout
-        public ActionResult Logout()
-        {
-            Session["LoginSession"] = null; // vynulování session
-
-            return RedirectToAction("Index");
-        }
-
         // GET: Users
         
         public ActionResult Index()

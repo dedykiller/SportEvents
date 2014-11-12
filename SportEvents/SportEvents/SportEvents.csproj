@@ -101,6 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\Utility\UtilityMethods.cs" />
     <Compile Include="Global.asax.cs">
@@ -132,6 +134,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Logout\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
