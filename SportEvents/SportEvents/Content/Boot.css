@@ -1,103 +1,103 @@
 ﻿body {
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px; /*ne absolutní hodnoty*/
-line-height: 1.428571429;
-color: #333333;
-background-color: #ff7417;
-margin: 0;
-padding: 0;
-min-width: 800px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px; /*ne absolutní hodnoty*/
+    line-height: 1.428571429;
+    color: #333333;
+    background-color: #ff7417;
+    margin: 0;
+    padding: 0;
+    min-width: 800px;
 }
 
 /*header*/
-header{
-width: 100%;
-background-color: #222222;
-border-color: #080808;
+header {
+    width: 100%;
+    background-color: #222222;
+    border-color: #080808;
 }
 
-#header-container{
+#header-container {
     width: 85%;
     margin: 0 auto;
-    height:70px;
+    height: 70px;
 }
 
-.header-brand a{
-    float:left;
-padding: 25px 15px;
-font-size: 18px;
-line-height: 20px;
-color: white;
+.header-brand a {
+    float: left;
+    padding: 25px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    color: white;
 }
 
-nav{
+nav {
     float: left;
     list-style-type: none;
     width: 80%;
     padding-top: 10px;
 }
 
-nav a{
-color: #999999;
+    nav a {
+        color: #999999;
+    }
+
+#navbar-nav {
+    float: left;
 }
 
-#navbar-nav{
-    float: left;    
-}
 #navbar-login {
-    float: right;   
+    float: right;
 }
 
-#navbar-login li a:hover{
-    color: white; 
-}
+    #navbar-login li a:hover {
+        color: white;
+    }
 
 
-#navbar-nav li{
+#navbar-nav li {
     float: left;
     display: block;
     padding: 4px 15px;
 }
 
-#navbar-login li{
-    float:left;
+#navbar-login li {
+    float: left;
     display: block;
     padding: 4px 15px;
 }
 
-#navbar-nav li a:hover{
+#navbar-nav li a:hover {
     color: white;
     border-bottom: 1px solid white;
 }
 
-#navbar-nav li a:active{
+#navbar-nav li a:active {
     border-bottom: 1px solid white;
-
 }
 
 
 /*body*/
 
-main{
-    width:85%;
+main {
+    width: 85%;
     margin: 0 auto;
 }
 
 
-hr{
-   border: 1px solid #ce5d12;
+hr {
+    border: 1px solid #ce5d12;
 }
 
 
 /* písma */
-a{
+a {
     text-decoration: none;
 }
 
-h1{
+h1 {
     font-size: 800%;
-    font-weight:100;
+    font-weight: 100;
     font-family: Arial;
-    text-align: center; 
-    color: #ce5d12;   
+    text-align: center;
+    color: #ce5d12;
 }

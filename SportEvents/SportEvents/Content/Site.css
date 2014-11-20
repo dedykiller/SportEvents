@@ -30,46 +30,48 @@ input[type="checkbox"].input-validation-error {
 
 /*form*/
 
-form{
+form {
     margin: 40px 0 0 30px;
 }
 
-input{
+input {
     background: white;
     padding: 10px 15px 10px 15px;
     font-size: 15px;
     color: #888;
     text-shadow: 1px 1px 1px #FFF;
-   border:1px solid #ff7417;
+    border: 1px solid #ff7417;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2x;
     margin-bottom: 10px;
-
-}
-.label{
-    font-size: 15px; 
-    text-shadow:none;  
+    -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
 }
 
+.label {
+    font-size: 15px;
+    text-shadow: none;
+}
 
 
-.button{
+
+.button {
     background: #79cbc9;
     color: white;
     text-shadow: none;
 }
 
-.button:hover{
-   background: #67bfbc;
-}
+    .button:hover {
+        background: #67bfbc;
+    }
 
 /*písma*/
 
 
 
-h2{
+h2 {
     font-size: 40px;
     font-weight: 100;
 }
-

@@ -11,13 +11,45 @@ namespace SportEvents.Controllers
     public class UsersController : Controller
     {
         private DataContext db = new DataContext();
-        private bool emailFound = false;
 
-        // GET: Users
-        
-        public ActionResult Index()
+        // GET: Users/ListOfUsers
+        public ActionResult ListOfUsers()
         {
             return View(db.Users.ToList());
+        }
+
+        // GET: Users/Registration
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+
+
+        // POST: Users/Registration
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registration(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.IsEmailInDatabase(user.Email)) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
+                {
+                    ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
+                    return View();
+                }
+
+                user.RegistrationTime = DateTime.Now; // Vytvoření data registrace
+                user.Password = UtilityMethods.CalculateHashMd5(user.Password);
+                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
+                db.Users.Add(user); // uložení uživatele a uložení změn
+                db.SaveChanges();
+                return RedirectToAction("ListOfUsers");
+                
+            }
+
+            return View();
+
         }
 
         // GET: Users/Details/5
@@ -35,45 +67,6 @@ namespace SportEvents.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-
-        // POST: Users/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                user.RegistrationTime = DateTime.Now; // Vytvoření data registrace
-                user.Password = UtilityMethods.CalculateHashMd5(user.Password); // Zahashování hesla
-                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
-
-                emailFound = db.Users.Any(x => x.Email == user.Email); //Vyhodnotí, zda je zadaný e-mail v databázi
-                if (emailFound) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
-                {
-                    ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
-                    return View();
-                }
-                else
-                {
-                    db.Users.Add(user); // uložení uživatele a uložení změn v tabulce
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-
-            }
-
-            return View(user);
-   
-        }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
@@ -99,7 +92,7 @@ namespace SportEvents.Controllers
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ListOfUsers");
             }
             return View(user);
         }
@@ -127,7 +120,7 @@ namespace SportEvents.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ListOfUsers");
         }
 
         protected override void Dispose(bool disposing)

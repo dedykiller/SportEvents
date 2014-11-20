@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SportEvents.Models.User>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,19 +9,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>List of users</title>
 </head>
-<body>
-    <p>
-        @Html.ActionLink("Register", "Create")
-        @Html.ActionLink("Login", "Login")
-        @Html.ActionLink("Logout", "Logout")
-    </p>
-
+<body>   
    
-    @if (Session["LoginSession"]==null)
+   @if (TempData["notice"] != null)
     {
-        <table class="table">
+    <h3 style="text-align:center">@TempData["notice"] @Session["LoginSession"]</h3>
+    }
+    
+    <h2>Výpis registrovaných uživatelů</h2>
+    <hr />
+    
+     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -74,11 +74,6 @@
     
     </table>
         
-    }
-    else
-    {
-        <h3>User @Session["LoginSession"] is logged in</h3>
-    }
 
     
 </body>
