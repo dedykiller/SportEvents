@@ -45,5 +45,7 @@ namespace SportEvents.Models
         public string Telephone { get; set; }
         
         public DateTime RegistrationTime { get; set; }
+
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

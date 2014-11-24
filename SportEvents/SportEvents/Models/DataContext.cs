@@ -10,7 +10,7 @@ namespace SportEvents.Models
     public class DataContext : DbContext
     {
         public DataContext()
-            : base("SportEventsDB")
+            : base("RoprDedeskDB")
         {
         }
 
@@ -45,6 +45,8 @@ namespace SportEvents.Models
         {
             return new User();
         }
+
+        public System.Data.Entity.DbSet<SportEvents.Models.Group> Groups { get; set; }
         
     }
 }
