@@ -16,6 +16,7 @@ namespace SportEvents.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Login> Logins { get; set; }
 
         public bool IsEmailInDatabase(string email)
         {

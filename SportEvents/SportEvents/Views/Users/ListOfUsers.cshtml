@@ -12,7 +12,9 @@
     <title>List of users</title>
 </head>
 <body>   
-   
+    <div>
+        <h2>@Html.ActionLink("Groups", "Index", "Group")</h2>
+    </div>
    @if (TempData["notice"] != null)
     {
     <h3 style="text-align:center">@TempData["notice"] @Session["LoginSession"]</h3>
