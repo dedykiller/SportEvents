@@ -49,5 +49,11 @@ namespace SportEvents.Models
 
         [DisplayName("Skupiny")]
         public virtual ICollection<Group> Groups { get; set; }
+
+        //public User()
+        //{
+        //    Groups = new HashSet<Group>();
+
+        //}
     }
 }

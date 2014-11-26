@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SportEvents.Models.Group>
+﻿@model IEnumerable<SportEvents.Models.Groups>
 
 @{
-    ViewBag.Title = "Seznam skupin";
+    ViewBag.Title = "Index";
 }
 
-<h2>List of groups</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Creator.Email)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Creator.Email)
+            @Html.DisplayNameFor(model => model.PaymentType)
         </th>
         <th></th>
     </tr>
@@ -26,13 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Creator.Email)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Creator.Email)
+            @Html.DisplayFor(modelItem => item.PaymentType)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

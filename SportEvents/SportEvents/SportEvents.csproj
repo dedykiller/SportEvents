@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\Groups1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\Utility\UtilityMethods.cs" />
@@ -128,11 +128,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\Users\Registration.cshtml" />
-    <Content Include="Views\Group\Create.cshtml" />
-    <Content Include="Views\Group\Delete.cshtml" />
-    <Content Include="Views\Group\Details.cshtml" />
-    <Content Include="Views\Group\Edit.cshtml" />
-    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Groups1\Create.cshtml" />
+    <Content Include="Views\Groups1\Delete.cshtml" />
+    <Content Include="Views\Groups1\Details.cshtml" />
+    <Content Include="Views\Groups1\Edit.cshtml" />
+    <Content Include="Views\Groups1\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
