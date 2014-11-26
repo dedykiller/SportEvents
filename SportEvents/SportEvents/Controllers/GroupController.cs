@@ -20,20 +20,6 @@ namespace SportEvents.Controllers
             return View(db.Groups.ToList());
         }
 
-        // GET: Group/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
-            return View(group);
-        }
 
         // GET: Group/Create
         public ActionResult Create()
@@ -50,11 +36,34 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Session["LoginSession"] != null)
+                {
+                    String login = (String)Session["LoginSession"];
+                    User user = db.GetUserByEmail(login);
+                    group.Creator = user;
+                }
+                
                 db.Groups.Add(group);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            return View(group);
+        }
+
+
+        // GET: Group/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = db.Groups.Find(id);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
             return View(group);
         }
 

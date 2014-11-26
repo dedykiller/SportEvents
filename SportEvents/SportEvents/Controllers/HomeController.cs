@@ -28,7 +28,7 @@ namespace SportEvents.Controllers
             {
                 if (db.IsUserRegistered(login.Email, UtilityMethods.CalculateHashMd5(login.Password))) // Zahashuje heslo a zjistí zda je uživatel registrován
                 {
-                    Session["LoginSession"] = login.Email; // Vytvoření Session prozatím jen s Emailem uživatele
+                    Session["LoginSession"] = login.Email; // Vytvoření Session
                     TempData["notice"] = "Vítejte";
                     return RedirectToAction("ListOfUsers", "Users");
                 }

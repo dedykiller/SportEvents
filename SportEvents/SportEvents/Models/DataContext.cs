@@ -15,6 +15,7 @@ namespace SportEvents.Models
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Group> Groups { get; set; }
 
         public bool IsEmailInDatabase(string email)
         {
@@ -43,10 +44,11 @@ namespace SportEvents.Models
 
         public User GetUserByEmail(string email)
         {
-            return new User();
+            User user = (User) Users.Where(x => x.Email == email).Single();
+            return user;
         }
 
-        public System.Data.Entity.DbSet<SportEvents.Models.Group> Groups { get; set; }
+        
         
     }
 }
