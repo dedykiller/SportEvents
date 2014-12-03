@@ -6,53 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SportEvents.Models;
 
-namespace SportEvents.Controllers
+namespace SportEvents.Models
 {
-    public class GroupController : Controller
+    public class GroupsController : Controller
     {
         private DataContext db = new DataContext();
 
-        // GET: Group
+        // GET: /Groups/
         public ActionResult Index()
         {
             return View(db.Groups.ToList());
         }
 
-
-        // GET: Group/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Group/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Group group)
-        {
-            if (ModelState.IsValid)
-            {
-                if (Session["LoginSession"] != null)
-                {
-                    String login = (String)Session["LoginSession"];
-                    User user = db.GetUserByEmail(login);
-                    group.Creator = user;
-                }
-                
-                db.Groups.Add(group);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(group);
-        }
-
-
-        // GET: Group/Details/5
+        // GET: /Groups/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -67,7 +34,87 @@ namespace SportEvents.Controllers
             return View(group);
         }
 
-        // GET: Group/Edit/5
+        // GET: /Groups/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /Groups/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include="Id,Name,Description")] Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["UserSession"] != null)
+                {
+                    User user = (User)Session["UserSession"];
+                    user = db.GetUserByEmail(user.Email);
+                    group.Creator = user;
+
+                    user.Groups.Add(group);
+                    group.Users.Add(user);
+
+                    db.Groups.Add(group);
+                    db.SaveChanges();
+                    TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
+                    return RedirectToAction("Index");
+                    
+                }
+
+                
+            }
+
+            return View(group);
+        }
+
+        // GET: /Groups/AddUserToGroup/5
+        public ActionResult AddUserToGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = db.Groups.Find(id);
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+            return View(group);
+        }
+
+
+        // POST: /Groups/AddUserToGroup/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("AddUserToGroup")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUserToGroup(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["UserSession"] != null)
+                {
+                    Group group = db.Groups.Find(id);
+                    User user = (User)Session["UserSession"];
+                    user = db.GetUserByEmail(user.Email);
+
+                    user.Groups.Add(group);
+                    group.Users.Add(user);
+                    
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");  
+                }
+            }
+
+            return View();
+        }
+
+        // GET: /Groups/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,12 +129,12 @@ namespace SportEvents.Controllers
             return View(group);
         }
 
-        // POST: Group/Edit/5
+        // POST: /Groups/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Group group)
+        public ActionResult Edit([Bind(Include="Id,Name,Description")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +145,7 @@ namespace SportEvents.Controllers
             return View(group);
         }
 
-        // GET: Group/Delete/5
+        // GET: /Groups/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +160,7 @@ namespace SportEvents.Controllers
             return View(group);
         }
 
-        // POST: Group/Delete/5
+        // POST: /Groups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
