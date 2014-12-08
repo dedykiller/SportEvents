@@ -54,10 +54,12 @@ namespace SportEvents.Models
                     User user = (User)Session["UserSession"];
                     user = db.GetUserByEmail(user.Email);
                     group.Creator = user;
-
                     user.Groups.Add(group);
                     group.Users.Add(user);
-
+                    group.CreateTime = DateTime.Now;
+                    group.StartOfPaymentPeriod = DateTime.Now;
+                    group.EndOfPaymentPeriod = DateTime.Now; // TODO: aby se cas konce obdobi zadaval pri vytvoreni skupiny
+                    // neuklada se do databaze enum typ
                     db.Groups.Add(group);
                     db.SaveChanges();
                     TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
