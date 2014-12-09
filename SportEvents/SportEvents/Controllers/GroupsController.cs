@@ -58,7 +58,7 @@ namespace SportEvents.Models
                     group.Users.Add(user);
                     group.CreateTime = DateTime.Now;
                     group.StartOfPaymentPeriod = DateTime.Now;
-                    group.EndOfPaymentPeriod = DateTime.Now; // TODO: aby se cas konce obdobi zadaval pri vytvoreni skupiny
+                    group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength); // TODO: aby se cas konce obdobi zadaval pri vytvoreni skupiny
                     // neuklada se do databaze enum typ
                     db.Groups.Add(group);
                     db.SaveChanges();

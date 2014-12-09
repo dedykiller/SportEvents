@@ -23,6 +23,7 @@ namespace SportEvents.Models
         public DateTime CreateTime { get; set; }
         public DateTime StartOfPaymentPeriod { get; set; }
         public DateTime EndOfPaymentPeriod { get; set; }
+        public int PaymentPeriodLength { get; set; }
         public TypeOfPayment Payment { get; set;  }
         public virtual ICollection<User> Users { get; set; }
 
