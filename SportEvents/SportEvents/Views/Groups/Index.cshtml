@@ -32,6 +32,12 @@
         <th>
             <h3>Number of users within the group</h3>
         </th>
+        <th>
+            <h3>Start of payment period</h3>
+        </th>
+        <th>
+            <h3>End of payment period</h3>
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +57,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Users.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
         </td>
         <td>
             @Html.ActionLink("Join group", "AddUserToGroup", new { id = item.Id }) |
