@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataContext.cs" />
+    <Compile Include="Models\Application\EmailService.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Models\Login.cs" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SendMail\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
