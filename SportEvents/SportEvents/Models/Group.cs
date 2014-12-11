@@ -38,6 +38,7 @@ namespace SportEvents.Models
         [DisplayName("Zadej typ platby pro následující účtovací období")]
         public TypeOfPayment Payment { get; set;  }
         public virtual ICollection<User> Users { get; set; }
+        public int NumberOfUsersInGroup { get; set; }
 
         public Group()
         {

@@ -33,6 +33,7 @@ namespace SportEvents.Models.Application
             group.CreateTime = DateTime.Now;
             group.StartOfPaymentPeriod = DateTime.Now;
             group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength);
+            group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
             db.SaveChanges();
         }
@@ -40,6 +41,7 @@ namespace SportEvents.Models.Application
         public void AddUserToGroup(Group group, User user)
         {
 
+            group.NumberOfUsersInGroup += 1;
             user = db.GetUserByEmail(user.Email);
             user.Groups.Add(group);
             group.Users.Add(user);
