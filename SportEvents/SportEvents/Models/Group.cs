@@ -10,8 +10,7 @@ namespace SportEvents.Models
 {
     public enum TypeOfPayment
     {
-       
-        Cash,
+       Cash,
        AfterPeriod
     }
     public class Group

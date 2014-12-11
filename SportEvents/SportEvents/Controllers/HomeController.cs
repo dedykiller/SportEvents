@@ -1,6 +1,7 @@
 ﻿
 using SportEvents.Controllers.Utility;
 using SportEvents.Models;
+using SportEvents.Models.Application;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SportEvents.Controllers
     public class HomeController : Controller
     {
         private DataContext db = new DataContext();
+        private UsersBO usersBO = new UsersBO();
 
         // GET: /Home/Index
         public ActionResult Index()
@@ -26,9 +28,9 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.IsUserRegistered(login.Email, UtilityMethods.CalculateHashMd5(login.Password))) // Zahashuje heslo a zjistí zda je uživatel registrován
+                if (usersBO.IsUserRegistered(login.Email, login.Password)) 
                 {
-                    User user = db.GetUserByEmail(login.Email);
+                    User user = usersBO.GetUser(login);
                     Session["UserSession"] = user;
                     TempData["notice"] = "Uživatel " + login.Email + " byl úspěšně přihlášen";
                     return RedirectToAction("index", "Groups");

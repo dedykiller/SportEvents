@@ -10,7 +10,7 @@ namespace SportEvents.Models
 {
     public class EmailService
     {
-        public bool Send(string smtpUserName, string smtpPassword, string smtpHost, int smtpPort, string toEmail, string subject, string body)
+        public bool Send(string smtpUserName, string smtpPassword, string smtpHost, int smtpPort, string emailTo, string subject, string body)
         {
             try
             {
@@ -27,19 +27,18 @@ namespace SportEvents.Models
                         From = new MailAddress(smtpUserName),
                         Subject = subject,
                         Body = body,
-
                         Priority = MailPriority.Normal,
 
                     };
-                    msg.To.Add(toEmail);
+                    msg.To.Add(emailTo);
                     smtpClient.Send(msg);
                     return true;
 
                 }
-
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.InnerException);
                 return false;
             }
         }

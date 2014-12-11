@@ -9,6 +9,7 @@ namespace SportEvents.Models
 {
     public class DataContext : DbContext
     {
+
         public DataContext()
             : base("RoprDedeskDB")
         {

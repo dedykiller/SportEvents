@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportEvents.Models.Application;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,12 +12,12 @@ namespace SportEvents.Models
 {
     public class GroupsController : Controller
     {
-        private DataContext db = new DataContext();
+        GroupsBO groupsBO = new GroupsBO();
 
         // GET: /Groups/
         public ActionResult Index()
         {
-            return View(db.Groups.ToList());
+            return View(groupsBO.Index());
         }
 
         // GET: /Groups/Details/5
@@ -26,11 +27,9 @@ namespace SportEvents.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
+
+            Group group = groupsBO.GetGroupById(id);
+
             return View(group);
         }
 
@@ -52,22 +51,12 @@ namespace SportEvents.Models
                 if (Session["UserSession"] != null)
                 {
                     User user = (User)Session["UserSession"];
-                    user = db.GetUserByEmail(user.Email);
-                    group.Creator = user;
-                    user.Groups.Add(group);
-                    group.Users.Add(user);
-                    group.CreateTime = DateTime.Now;
-                    group.StartOfPaymentPeriod = DateTime.Now;
-                    group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength); // TODO: aby se cas konce obdobi zadaval pri vytvoreni skupiny
-                    // neuklada se do databaze enum typ
-                    db.Groups.Add(group);
-                    db.SaveChanges();
+                    groupsBO.CreateGroup(group, user);
                     TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
+
                     return RedirectToAction("Index");
                     
-                }
-
-                
+                }              
             }
 
             return View(group);
@@ -80,11 +69,8 @@ namespace SportEvents.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
+            Group group = groupsBO.GetGroupById(id);
+   
             return View(group);
         }
 
@@ -100,14 +86,10 @@ namespace SportEvents.Models
             {
                 if (Session["UserSession"] != null)
                 {
-                    Group group = db.Groups.Find(id);
                     User user = (User)Session["UserSession"];
-                    user = db.GetUserByEmail(user.Email);
+                    Group group = groupsBO.GetGroupById(id);
 
-                    user.Groups.Add(group);
-                    group.Users.Add(user);
-                    
-                    db.SaveChanges();
+                    groupsBO.AddUserToGroup(group, user);
 
                     return RedirectToAction("Index");  
                 }
@@ -123,11 +105,8 @@ namespace SportEvents.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
+            Group group = groupsBO.GetGroupById(id);
+
             return View(group);
         }
 
@@ -140,8 +119,7 @@ namespace SportEvents.Models
         {
             if (ModelState.IsValid)
             {
-                db.Entry(group).State = EntityState.Modified;
-                db.SaveChanges();
+                groupsBO.EditGroup(group);
                 return RedirectToAction("Index");
             }
             return View(group);
@@ -154,11 +132,8 @@ namespace SportEvents.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
+            Group group = groupsBO.GetGroupById(id);
+
             return View(group);
         }
 
@@ -167,9 +142,10 @@ namespace SportEvents.Models
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Group group = db.Groups.Find(id);
-            db.Groups.Remove(group);
-            db.SaveChanges();
+            Group group = groupsBO.GetGroupById(id);
+
+            groupsBO.DeleteGroup(group);
+
             return RedirectToAction("Index");
         }
 
@@ -177,7 +153,7 @@ namespace SportEvents.Models
         {
             if (disposing)
             {
-                db.Dispose();
+                groupsBO.Dispose();
             }
             base.Dispose(disposing);
         }

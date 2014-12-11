@@ -1,5 +1,6 @@
 ﻿using SportEvents.Controllers.Utility;
 using SportEvents.Models;
+using SportEvents.Models.Application;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace SportEvents.Controllers
     public class UsersController : Controller
     {
         private DataContext db = new DataContext();
+        private UsersBO usersBO = new UsersBO();
 
         // GET: Users/ListOfUsers
         public ActionResult ListOfUsers()
@@ -19,7 +21,7 @@ namespace SportEvents.Controllers
         }
 
         // GET: Users/Registration
-        public ActionResult Registration()
+        public ActionResult Register()
         {
             return View();
         }
@@ -29,35 +31,19 @@ namespace SportEvents.Controllers
         // POST: Users/Registration
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration(User user)
+        public ActionResult Register(User user)
         {
             if (ModelState.IsValid)
             {
-                if (db.IsEmailInDatabase(user.Email)) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
+                if (usersBO.IsEmailInDatabase(user.Email)) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
                 {
                     ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
                     return View();
                 }
 
-                user.RegistrationTime = DateTime.Now; // Vytvoření data registrace
-                user.Password = UtilityMethods.CalculateHashMd5(user.Password);
-                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
-                db.Users.Add(user); // uložení uživatele a uložení změn
-                db.SaveChanges();
-                string smtpUserName = "sportevents1@seznam.cz";
-                string smtpPassword = "777003862";
-                string smtpHost = "smtp.seznam.cz";
-                int smtpPort = 25;
+                bool kq = usersBO.RegisterUser(user);
 
-                string emailTo = user.Email;
-                string subject = string.Format("Potvrzeni registrace");
-                string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
-
-
-                EmailService service = new EmailService();
-
-                bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
-                TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému";
+                TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
                 return RedirectToAction("ListOfUsers");
                 
             }
@@ -65,6 +51,8 @@ namespace SportEvents.Controllers
             return View();
 
         }
+
+        // TODO : 
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
