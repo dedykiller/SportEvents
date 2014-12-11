@@ -27,12 +27,12 @@ namespace SportEvents.Models.Application
         public void CreateGroup(Group group, User user)
         {
             user = db.GetUserByEmail(user.Email);
-            group.Creator = user;
+            group.Creator = user.Id;
             user.Groups.Add(group);
             group.Users.Add(user);
             group.CreateTime = DateTime.Now;
             group.StartOfPaymentPeriod = DateTime.Now;
-            group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength);
+           // group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength);
             group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
             db.SaveChanges();

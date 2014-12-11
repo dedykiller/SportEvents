@@ -24,10 +24,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            <h3>Owner of the group</h3>
-        </th>
-        <th>
-            <h3>Type of payment</h3>
+            <h3>ID of the owner of the group</h3>
         </th>
         <th>
             <h3>Number of users within the group</h3>
@@ -50,11 +47,8 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Creator.Email) 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Payment)
-        </td>
+            @Html.DisplayFor(modelItem => item.Creator) 
+        </td>        
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>

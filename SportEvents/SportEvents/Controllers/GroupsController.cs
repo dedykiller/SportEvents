@@ -44,7 +44,7 @@ namespace SportEvents.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,PaymentPeriodLength,Payment")] Group group)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,EndOfPaymentPeriod")] Group group)
         {
             if (ModelState.IsValid)
             {
