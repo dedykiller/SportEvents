@@ -26,13 +26,17 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím popis skupiny")]
         public string Description { get; set; }
         public DateTime CreateTime { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime StartOfPaymentPeriod { get; set; }
+        
+        [DataType(DataType.Date)]
         public DateTime EndOfPaymentPeriod { get; set; }
                 
         [DisplayName("Zadej typ platby pro následující účtovací období")]
         public virtual ICollection<User> Users { get; set; }
         public int NumberOfUsersInGroup { get; set; }
-
+        
         public Group()
         {
             Users = new HashSet<User>();

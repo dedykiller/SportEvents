@@ -32,7 +32,7 @@ namespace SportEvents.Models.Application
             group.Users.Add(user);
             group.CreateTime = DateTime.Now;
             group.StartOfPaymentPeriod = DateTime.Now;
-           // group.EndOfPaymentPeriod = DateTime.Now.AddMonths(group.PaymentPeriodLength);
+            //group.EndOfPaymentPeriod = DateTime.Now.AddMonths(2);
             group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
             db.SaveChanges();
