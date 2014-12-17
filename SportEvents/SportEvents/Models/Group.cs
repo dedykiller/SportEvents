@@ -8,11 +8,7 @@ using System.Web;
 
 namespace SportEvents.Models
 {
-    public enum TypeOfPayment
-    {
-       Cash,
-       AfterPeriod
-    }
+    
     public class Group
     {
         public int Id { get; set; }
@@ -35,12 +31,16 @@ namespace SportEvents.Models
                 
         [DisplayName("Zadej typ platby pro následující účtovací období")]
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
         public int NumberOfUsersInGroup { get; set; }
         
         public Group()
         {
             Users = new HashSet<User>();
+            Events = new HashSet<Event>();
         }
+
+        
 
 
 
