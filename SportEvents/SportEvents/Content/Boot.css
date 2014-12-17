@@ -64,7 +64,7 @@ nav {
     float: left;
     display: block;
     padding: 4px 15px;
-}
+}hr
 
 #navbar-nav li a:hover {
     color: white;
@@ -100,4 +100,10 @@ h1 {
     font-family: Arial;
     text-align: center;
     color: #ce5d12;
+}
+
+footer{
+    clear:both;
+    width: 85%;
+    margin: auto;
 }

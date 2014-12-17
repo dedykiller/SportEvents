@@ -75,3 +75,31 @@ h2 {
     font-size: 40px;
     font-weight: 100;
 }
+
+/*rozvržení body přihlášení*/
+
+#right{
+    float: left;
+    width: 60%;
+    height: 300px;
+}
+
+#left{
+    float: left;
+    width: 40%;
+    height: 300px;
+}
+
+#right img{
+    width: 500px;
+    height: 250px;
+    padding-top: 50px;
+    padding-left: 60px;
+}
+
+
+
+
+
+
+
