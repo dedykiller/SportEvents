@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Events</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.TimeOfEvent)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.RepeatUntil)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Place)
         </th>
         <th>
@@ -27,7 +30,10 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Payment)
+            @Html.DisplayNameFor(model => model.Repeat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Interval)
         </th>
         <th></th>
     </tr>
@@ -41,6 +47,9 @@
             @Html.DisplayFor(modelItem => item.TimeOfEvent)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.RepeatUntil)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Place)
         </td>
         <td>
@@ -50,7 +59,10 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Payment)
+            @Html.DisplayFor(modelItem => item.Repeat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Interval)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

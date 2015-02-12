@@ -29,7 +29,7 @@ namespace SportEvents.Models
                 {
                     x.MapLeftKey("User_Id");
                     x.MapRightKey("Group_Id");
-                    x.ToTable("GroupUsers");
+                    x.ToTable("GroupsUsers");
                 });
 
             modelBuilder.Entity<Event>()
@@ -40,6 +40,16 @@ namespace SportEvents.Models
                     x.MapLeftKey("Event_Id");
                     x.MapRightKey("Group_Id");
                     x.ToTable("GroupsEvents");
+                });
+
+            modelBuilder.Entity<Event>()
+                .HasMany(a => a.Users)
+                .WithMany()
+                .Map(x =>
+                {
+                    x.MapLeftKey("Event_Id");
+                    x.MapRightKey("User_Id");
+                    x.ToTable("EventsUsers");
                 });
         }
 
