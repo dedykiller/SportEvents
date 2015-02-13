@@ -17,7 +17,8 @@ namespace SportEvents.Controllers
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            var events = db.Events;
+            return View(events.ToList());
         }
 
         // GET: Events/Details/5
@@ -38,6 +39,7 @@ namespace SportEvents.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
+            ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name");
             return View();
         }
 
@@ -46,15 +48,32 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,Place,Description,Price,Repeat,Interval")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval")] Event @event)
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(@event);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                User user = (User)Session["UserSession"];
 
+                if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
+                {
+                    db.Events.Add(@event);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    ViewBag.Error = "Nejste zakladatelem tehle skupiny";
+                    return RedirectToAction("Index");
+                    
+                }
+                
+                
+            }
+            
+
+            ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name", @event.GrpId);
+            ViewBag.Error = "Nejste zakladatelem tehle skupiny";
             return View(@event);
         }
 
@@ -70,6 +89,7 @@ namespace SportEvents.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name", @event.GrpId);
             return View(@event);
         }
 
@@ -78,7 +98,7 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,Place,Description,Price,Repeat,Interval")] Event @event)
+        public ActionResult Edit([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +106,7 @@ namespace SportEvents.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name", @event.GrpId);
             return View(@event);
         }
 

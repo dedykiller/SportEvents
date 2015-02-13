@@ -28,8 +28,10 @@ namespace SportEvents.Models.Application
         {
             user = db.GetUserByEmail(user.Email);
             group.Creator = user.Id;
-            user.Groups.Add(group);
-            group.Users.Add(user);
+            //user.Groups.Add(group); 
+            // TODO : pada v tehle casti
+            //group.Users.Add(user); 
+            //TODO : pada v tehle casti
             group.CreateTime = DateTime.Now;
             group.StartOfPaymentPeriod = DateTime.Now;
             //group.EndOfPaymentPeriod = DateTime.Now.AddMonths(2);

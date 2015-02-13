@@ -33,14 +33,10 @@ namespace SportEvents.Models
                 });
 
             modelBuilder.Entity<Event>()
-                .HasMany(a => a.Groups)
-                .WithMany()
-                .Map(x =>
-                {
-                    x.MapLeftKey("Event_Id");
-                    x.MapRightKey("Group_Id");
-                    x.ToTable("GroupsEvents");
-                });
+                .HasRequired<Group>(a => a.Group)
+                .WithMany(a => a.Events)
+                .HasForeignKey(a => a.GrpId);
+                
 
             modelBuilder.Entity<Event>()
                 .HasMany(a => a.Users)
@@ -60,6 +56,15 @@ namespace SportEvents.Models
         {
             
             if (Users.Any(x => x.Email == email))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsUserCreatorOfGroup(int User_Id, int Grp_Id)
+        {
+            if (Groups.Any(x => x.Creator == User_Id && x.Id == Grp_Id))
             {
                 return true;
             }

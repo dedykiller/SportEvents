@@ -11,6 +11,10 @@ namespace SportEvents.Models
     
     public class Group
     {
+        public Group()
+        {
+            EventList = new List<Event>();
+        }
         public int Id { get; set; }
         public int Creator { get; set; }
 
@@ -34,15 +38,17 @@ namespace SportEvents.Models
         public virtual ICollection<Event> Events { get; set; }
         public int NumberOfUsersInGroup { get; set; }
         
-        public Group()
-        {
-            Users = new HashSet<User>();
-            Events = new HashSet<Event>();
-        }
-
-        
+        //public Group()
+        //{
+        //    Users = new HashSet<User>();
+        //    Events = new HashSet<Event>();
+        //}
 
 
 
+
+
+
+        public List<Event> EventList { get; set; }
     }
 }
