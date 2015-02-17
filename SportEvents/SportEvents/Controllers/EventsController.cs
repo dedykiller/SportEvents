@@ -56,14 +56,14 @@ namespace SportEvents.Controllers
 
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
-                    if (@event.Repeat == 0)
+                    if (@event.Repeat == 0) // TODO: místo 0 pro opakování používat 1 jako true
                     {
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
-                        for (DateTime i = @event.TimeOfEvent ; i <= @event.RepeatUntil; i = i.AddDays(7*@event.Interval)) {
-                           
+                        // TODO: ukládat do databáze i RepeatUntil a interval
+                        for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
                             db.Events.Add(@event);
                             db.SaveChanges();
-                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval);
+                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
                         }
                             
                     }
@@ -72,14 +72,12 @@ namespace SportEvents.Controllers
                         db.Events.Add(@event);
                         db.SaveChanges();
                     }
-
-                    
+                    TempData["notice"] = "Událost " + @event.Name + " byla vytvořena uživatelem " + user.Email;
                     return RedirectToAction("Index");
-
                 }
                 else
                 {
-                    ViewBag.Error = "Nejste zakladatelem tehle skupiny";
+                    TempData["notice"] = "Uživatel " + user.Email + " není uživatelem skupiny s ID:" + @event.GrpId;
                     return RedirectToAction("Index");
                     
                 }

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SportEvents.Models.Event>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of Events";
 }
 
-<h2>Index</h2>
-
+<h2>List of Events</h2>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Event", "Create")
 </p>
     @ViewBag.Error
 <table class="table">
