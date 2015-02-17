@@ -56,8 +56,24 @@ namespace SportEvents.Controllers
 
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
-                    db.Events.Add(@event);
-                    db.SaveChanges();
+                    if (@event.Repeat == 0)
+                    {
+                      //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
+                        for (DateTime i = @event.TimeOfEvent ; i <= @event.RepeatUntil; i = i.AddDays(7*@event.Interval)) {
+                           
+                            db.Events.Add(@event);
+                            db.SaveChanges();
+                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval);
+                        }
+                            
+                    }
+                    else
+                    {
+                        db.Events.Add(@event);
+                        db.SaveChanges();
+                    }
+
+                    
                     return RedirectToAction("Index");
 
                 }
