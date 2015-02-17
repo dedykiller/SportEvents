@@ -19,7 +19,7 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím název události")]
         public string Name { get; set; }
         public DateTime TimeOfEvent { get; set; }
-        [NotMapped]
+        
         public DateTime? RepeatUntil { get; set; }
         public int GrpId { get; set; }
        
@@ -31,7 +31,7 @@ namespace SportEvents.Models
         public int Price { get; set; }
         public RepeatEvent Repeat { get; set; } // opakovana udalost? ano x ne
 
-        [NotMapped]
+        
         public int Interval { get; set; } // interval opakovani udalosti v tydnech
         public virtual Group Group { get; set; }
         public virtual ICollection<User> Users { get; set; }

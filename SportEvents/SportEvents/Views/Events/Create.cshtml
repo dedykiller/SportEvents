@@ -6,6 +6,10 @@
 
 <h2>Create</h2>
 
+<link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
+<script src="~/Scripts/jquery.js"> </script>
+<script src="~/Scripts/jquery.datetimepicker.js"></script>
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -16,7 +20,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
         <div class="form-group">
-            @Html.LabelFor(model => model.GrpId, "Group ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GrpId, "Vyber skupinu, ve které chceš vytvořit události", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("GrpId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GrpId, "", new { @class = "text-danger" })
@@ -24,7 +28,7 @@
         </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name,"Název události", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -32,15 +36,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TimeOfEvent, "Time of Event (dd.MM.yyyy hh:mm:ss)", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TimeOfEvent, "Datum a čas události", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeOfEvent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TimeOfEvent, "", new { @class = "text-danger" })
+                <input id="datetimepicker" type="text" name="TimeOfEvent" />
+                <script>
+ jQuery('#datetimepicker').datetimepicker({
+     format: 'd.m.Y H:i',
+     lang: 'cs',
+     minDate: '0',
+     timepicker: true
+ }); </script>
+
+
             </div>
         </div>
            
         <div class="form-group">
-            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Place,"Místo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
@@ -48,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description,"Popis", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -56,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price,"Cena", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
@@ -64,24 +76,35 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Repeat, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Repeat,"Chceš vytvořit opakovanou událost?", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Repeat, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Repeat, "", new { @class = "text-danger" })
             </div>
         </div>
-        V případě, že je událost jednorázová, dále není nutno vyplňovat.
 
+        
+
+       
         <div class="form-group">
-            @Html.LabelFor(model => model.RepeatUntil, "End Date (dd.MM.yyyy hh:mm:ss)", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RepeatUntil, "Kdy opakovaná událost končí?", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RepeatUntil, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RepeatUntil, "", new { @class = "text-danger" })
+                <input id="datetimepicker" type="text" name="RepeatUntil" />
+                <script>
+                    jQuery('#datetimepicker').datetimepicker({
+                        format: 'd.m.Y H:i',
+                        lang: 'cs',
+                        minDate: '0',
+                        timepicker: true
+                    }); </script>
+
+
             </div>
         </div>
+        
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Interval, "Interval of repetition in weeks", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Interval, "Interval opakování v týdnech", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Interval, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Interval, "", new { @class = "text-danger" })
