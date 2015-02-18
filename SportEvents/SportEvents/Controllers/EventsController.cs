@@ -56,7 +56,7 @@ namespace SportEvents.Controllers
 
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
-                    if (@event.Repeat == 0) // TODO: místo 0 pro opakování používat 1 jako true
+                    if (@event.Repeat != 0) // TODO: místo 0 pro opakování používat 1 jako true
                     {
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval

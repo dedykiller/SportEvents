@@ -9,8 +9,8 @@ namespace SportEvents.Models
 {
     public enum RepeatEvent
     {
-        Ano,
-        Ne
+        Ne,
+        Ano
     }
     
     public class Event

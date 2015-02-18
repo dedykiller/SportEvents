@@ -78,8 +78,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Repeat,"Chceš vytvořit opakovanou událost?", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Repeat, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Repeat, "", new { @class = "text-danger" })
+                @Html.RadioButtonFor(e => e.Repeat, 1) Ano
+                @Html.RadioButtonFor(e => e.Repeat, 0) Ne
             </div>
         </div>
 
