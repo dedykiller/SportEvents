@@ -51,6 +51,7 @@ namespace SportEvents.Models
                 if (Session["UserSession"] != null)
                 {
                     User user = (User)Session["UserSession"];
+                    
                     groupsBO.CreateGroup(group, user);
                     TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
 

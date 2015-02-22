@@ -22,6 +22,7 @@ namespace SportEvents.Models
         
         public DateTime? RepeatUntil { get; set; }
         public int GrpId { get; set; }
+        public int CreatorId { get; set; }
        
         public string Place { get; set; }
         public string Description { get; set; }

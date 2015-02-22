@@ -28,15 +28,29 @@ namespace SportEvents.Models.Application
         {
             user = db.GetUserByEmail(user.Email);
             group.Creator = user.Id;
+            
             //user.Groups.Add(group); 
             // TODO : pada v tehle casti
             //group.Users.Add(user); 
             //TODO : pada v tehle casti
             group.CreateTime = DateTime.Now;
+            // db.UsersInGroups.Create(user.Id, group.Id);
+            UsersInGroup userIngroup = new UsersInGroup();
+
+            
+
             group.StartOfPaymentPeriod = DateTime.Now;
             //group.EndOfPaymentPeriod = DateTime.Now.AddMonths(2);
             group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
+
+            
+            
+
+            db.SaveChanges();
+            userIngroup.UserID = user.Id;
+            userIngroup.GroupID = group.Id;
+            db.UsersInGroups.Add(userIngroup);
             db.SaveChanges();
         }
 
@@ -45,8 +59,8 @@ namespace SportEvents.Models.Application
 
             group.NumberOfUsersInGroup += 1;
             user = db.GetUserByEmail(user.Email);
-            user.Groups.Add(group);
-            group.Users.Add(user);
+           // user.Groups.Add(group);
+           // group.Users.Add(user);
             db.SaveChanges();
         }
 

@@ -34,7 +34,7 @@ namespace SportEvents.Models
         public DateTime EndOfPaymentPeriod { get; set; }
                 
         [DisplayName("Zadej typ platby pro následující účtovací období")]
-        public virtual ICollection<User> Users { get; set; }
+      //  public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public int NumberOfUsersInGroup { get; set; }
         

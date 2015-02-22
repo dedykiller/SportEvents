@@ -17,20 +17,19 @@ namespace SportEvents.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
-
-       
+        public DbSet<UsersInGroup> UsersInGroups { get; set; }      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasMany(a => a.Groups)
-                .WithMany()
-                .Map(x =>
-                {
-                    x.MapLeftKey("User_Id");
-                    x.MapRightKey("Group_Id");
-                    x.ToTable("GroupsUsers");
-                });
+            //modelBuilder.Entity<User>()
+            //    .HasMany(a => a.Groups)
+            //    .WithMany()
+            //    .Map(x =>
+            //    {
+            //        x.MapLeftKey("User_Id");
+            //        x.MapRightKey("Group_Id");
+            //        x.ToTable("GroupsUsers");
+            //    });
 
             modelBuilder.Entity<Event>()
                 .HasRequired<Group>(a => a.Group)
@@ -60,6 +59,15 @@ namespace SportEvents.Models
                 return true;
             }
             return false;
+        }
+
+        public List<Event> AllEventsWhereIsUserCreator(int User_Id)
+        {
+            
+            List<Event> listOfEvents = new List<Event>();
+            listOfEvents = Events.Where(x => x.CreatorId == User_Id).ToList();
+            
+            return listOfEvents;
         }
 
         public bool IsUserCreatorOfGroup(int User_Id, int Grp_Id)
