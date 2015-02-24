@@ -7,11 +7,11 @@
 <h2>Seznam událostí</h2>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <p>
-    @Html.ActionLink("Vytvořit novou událost", "Create")
+    @Html.ActionLink("Nová událost", "Create")
 </p>
 
 <p>
-    @Html.ActionLink("zpět na seznam skupin", "Index", "Groups")
+    @Html.ActionLink("Zpět na seznam skupin", "Index", "Groups")
 </p>
     @ViewBag.Error
 <table class="table">
@@ -19,7 +19,7 @@
     <tr>
         
         <th>
-            název skupiny
+            Název skupiny
         </th>
         <th>
             @Html.ActionLink("Název události", "Index", new { sortOrder = ViewBag.NameSortParm })
@@ -28,22 +28,22 @@
             @Html.ActionLink("Datum a čas", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>        
         <th>
-            opakovaná událost do:
+            Opakovaná událost do:
         </th>
         <th>
-            místo
+            Místo
         </th>
         <th>
-            popis
+            Popis
         </th>
         <th>
-            cena
+            Cena
         </th>
         <th>
-            opakovaná událost?
+            Opakovaná událost?
         </th>
         <th>
-            interval opakování (týdny)
+            Interval opakování (týdny)
         </th>
         <th>
             ID skupiny
