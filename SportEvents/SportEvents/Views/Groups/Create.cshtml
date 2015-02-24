@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Vytvoření skupiny</h2>
 
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
 <script src="~/Scripts/jquery.js"> </script>
@@ -15,7 +15,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Group</h4>
+        
         <hr />
         @Html.ValidationSummary(true)
 
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndOfPaymentPeriod, htmlAttributes: new { @class = "label" })
+            Zadej konec první zúčtovacího období          
             <div class="col-md-10">
                <input id="datetimepicker" type="text" name="EndOfPaymentPeriod" />
                 <script> jQuery('#datetimepicker').datetimepicker({
@@ -51,12 +51,12 @@
         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Vytvoř skupinu" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Zpět na výpis skupin", "Index")
 </div>
