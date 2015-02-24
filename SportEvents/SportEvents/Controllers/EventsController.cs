@@ -17,6 +17,7 @@ namespace SportEvents.Controllers
         // GET: Events
         public ActionResult Index(string sortOrder)
         {
+            
             User user = (User)Session["UserSession"];
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date" : "Date";
@@ -73,7 +74,7 @@ namespace SportEvents.Controllers
                 @event.CreatorId = user.Id;
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
-                    if (@event.Repeat != 0) // TODO: místo 0 pro opakování používat 1 jako true
+                    if (@event.Repeat != 0) 
                     {
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval

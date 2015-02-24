@@ -110,6 +110,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SeparateGroupsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Models\Application\GroupsBO.cs" />
     <Compile Include="Models\Application\UsersBO.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\SeparateGroups.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersInGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,6 +153,7 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\SeparateGroups\SeparateGroups.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

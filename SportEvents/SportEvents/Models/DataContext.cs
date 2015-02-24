@@ -70,9 +70,18 @@ namespace SportEvents.Models
             return listOfEvents;
         }
 
-        public bool IsUserCreatorOfGroup(int User_Id, int Grp_Id)
+        public List<Group> AllGroupsWhereIsUserCreator(int User_Id)
         {
-            if (Groups.Any(x => x.Creator == User_Id && x.Id == Grp_Id))
+
+            List<Group> listOfGroups = new List<Group>();
+            listOfGroups = Groups.Where(x => x.Creator == User_Id).ToList();
+
+            return listOfGroups;
+        }
+
+        public bool IsUserCreatorOfGroup(int user_Id, int grp_Id)
+        {
+            if (Groups.Any(x => x.Creator == user_Id && x.Id == grp_Id))
             {
                 return true;
             }
@@ -98,6 +107,15 @@ namespace SportEvents.Models
         {
             User user = (User) Users.Where(x => x.Email == email).Single();
             return user;
+        }
+
+        public bool IsUserInGroup (int userId, int groupId) {
+
+            if (UsersInGroups.Any(x => x.UserID == userId && x.GroupID == groupId))
+            {
+                return true;
+            }
+            return false;
         }
 
         public System.Data.Entity.DbSet<SportEvents.Models.Event> Events { get; set; }

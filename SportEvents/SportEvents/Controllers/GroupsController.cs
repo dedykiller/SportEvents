@@ -10,8 +10,10 @@ using System.Web.Mvc;
 
 namespace SportEvents.Models
 {
+    
     public class GroupsController : Controller
     {
+        
         GroupsBO groupsBO = new GroupsBO();
 
         // GET: /Groups/
@@ -89,9 +91,10 @@ namespace SportEvents.Models
                 {
                     User user = (User)Session["UserSession"];
                     Group group = groupsBO.GetGroupById(id);
-
+                    
                     groupsBO.AddUserToGroup(group, user);
-
+                    
+                    
                     return RedirectToAction("Index");  
                 }
             }
