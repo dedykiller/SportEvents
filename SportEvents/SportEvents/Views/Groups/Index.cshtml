@@ -5,40 +5,39 @@
 }
 
 <h2>Seznam skupin</h2>
+    <hr />
 
 @if (Session["UserSession"] != null)
 {
     <h3 style="text-align:center"> @TempData["notice"]</h3>
-    <p>
-        @Html.ActionLink("Create New Group", "Create")
-    </p>
-     <p>
+     /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
-    </p>
-    
-    
+    </p>*/
+    <p class="button-link">
+        @Html.ActionLink("Nová skupina", "Create")
+    </p>    
 }
 
 
-<table class="table">
+<table class="table" >
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            <h3>Název</h3>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            <h3>Popis</h3>
         </th>
         <th>
-            <h3>ID of the owner of the group</h3>
+            <h3>ID vlastníka</h3>
         </th>
         <th>
-            <h3>Number of users within the group</h3>
+            <h3>Počet uživatelů</h3>
         </th>
         <th>
-            <h3>Start of payment period</h3>
+            <h3>Začátek období</h3>
         </th>
         <th>
-            <h3>End of payment period</h3>
+            <h3>Konec období</h3>
         </th>
         <th></th>
     </tr>
