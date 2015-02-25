@@ -10,6 +10,7 @@ using SportEvents.Models;
 
 namespace SportEvents.Controllers
 {
+    //nic
     public class EventsController : Controller
     {
         private DataContext db = new DataContext();
