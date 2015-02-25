@@ -16,6 +16,18 @@ namespace SportEvents.Models.Application
             return db.Groups.ToList();
         }
 
+        public List<Group> IndexCreator(int userId)
+        {
+            
+            return db.AllGroupsWhereIsUserCreator(userId);
+        }
+
+        public List<Group> IndexMember(int userId)
+        {
+
+            return db.AllGroupsWhereIsUserCreator(userId);
+        }
+
         public Group GetGroupById(int? id)
         {
             Group group = db.Groups.Find(id);

@@ -22,6 +22,18 @@ namespace SportEvents.Models
             return View(groupsBO.Index());
         }
 
+        public ActionResult IndexCreator()
+        {
+            User user = (User)Session["UserSession"];
+            return View(groupsBO.IndexCreator(user.Id));
+        }
+
+        public ActionResult IndexMember()
+        {
+            User user = (User)Session["UserSession"];
+            return View(groupsBO.IndexMember(user.Id));
+        }
+
         // GET: /Groups/Details/5
         public ActionResult Details(int? id)
         {

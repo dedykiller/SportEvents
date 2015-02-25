@@ -152,6 +152,8 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\SeparateGroups\SeparateGroups.cshtml" />
+    <Content Include="Views\Groups\IndexCreator.cshtml" />
+    <Content Include="Views\Groups\IndexMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
