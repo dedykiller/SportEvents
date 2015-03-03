@@ -79,6 +79,25 @@ namespace SportEvents.Models
             return listOfGroups;
         }
 
+        public List<Group> AllGroupsWhereIsUserMember(int userId)
+        {
+
+            List<UsersInGroup> listOfGroups = new List<UsersInGroup>();
+            var list = new List<Group>();
+
+
+            listOfGroups = UsersInGroups.Where(x => x.UserID == userId).ToList();
+
+            foreach (UsersInGroup usersInGroup in listOfGroups)
+            {
+                Group g = Groups.Find(usersInGroup.GroupID);
+
+                list.Add(g);
+            }
+
+            return list;
+        }
+
         public bool IsUserCreatorOfGroup(int user_Id, int grp_Id)
         {
             if (Groups.Any(x => x.Creator == user_Id && x.Id == grp_Id))

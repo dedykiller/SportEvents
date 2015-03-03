@@ -25,7 +25,7 @@ namespace SportEvents.Models.Application
         public List<Group> IndexMember(int userId)
         {
 
-            return db.AllGroupsWhereIsUserCreator(userId);
+            return db.AllGroupsWhereIsUserMember(userId);
         }
 
         public Group GetGroupById(int? id)
