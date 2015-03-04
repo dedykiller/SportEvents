@@ -17,7 +17,9 @@ namespace SportEvents.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<UsersInGroup> UsersInGroups { get; set; }      
+        public DbSet<UsersInGroup> UsersInGroups { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -49,8 +51,6 @@ namespace SportEvents.Models
         }
 
         
-
-
         public bool IsEmailInDatabase(string email)
         {
             
@@ -128,7 +128,8 @@ namespace SportEvents.Models
             return user;
         }
 
-        public bool IsUserInGroup (int userId, int groupId) {
+        public bool IsUserInGroup(int userId, int groupId)
+        {
 
             if (UsersInGroups.Any(x => x.UserID == userId && x.GroupID == groupId))
             {
@@ -137,6 +138,6 @@ namespace SportEvents.Models
             return false;
         }
 
-        public System.Data.Entity.DbSet<SportEvents.Models.Event> Events { get; set; }
+        
     }
 }
