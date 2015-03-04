@@ -16,6 +16,18 @@ namespace SportEvents.Models.Application
             return db.Groups.ToList();
         }
 
+        public List<Group> IndexCreator(int userId)
+        {
+            
+            return db.AllGroupsWhereIsUserCreator(userId);
+        }
+
+        public List<Group> IndexMember(int userId)
+        {
+
+            return db.AllGroupsWhereIsUserMember(userId);
+        }
+
         public Group GetGroupById(int? id)
         {
             Group group = db.Groups.Find(id);
@@ -28,26 +40,35 @@ namespace SportEvents.Models.Application
         {
             user = db.GetUserByEmail(user.Email);
             group.Creator = user.Id;
-            //user.Groups.Add(group); 
-            // TODO : pada v tehle casti
-            //group.Users.Add(user); 
-            //TODO : pada v tehle casti
-            group.CreateTime = DateTime.Now;
-            group.StartOfPaymentPeriod = DateTime.Now;
-            //group.EndOfPaymentPeriod = DateTime.Now.AddMonths(2);
+            group.CreateTime = DateTime.Now;            
+            UsersInGroup userIngroup = new UsersInGroup(); 
+            group.StartOfPaymentPeriod = DateTime.Now;            
             group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
+            db.SaveChanges();
+            userIngroup.UserID = user.Id;
+            userIngroup.GroupID = group.Id;
+            db.UsersInGroups.Add(userIngroup);
+            
             db.SaveChanges();
         }
 
         public void AddUserToGroup(Group group, User user)
         {
-
-            group.NumberOfUsersInGroup += 1;
-            user = db.GetUserByEmail(user.Email);
-            user.Groups.Add(group);
-            group.Users.Add(user);
-            db.SaveChanges();
+            if (db.IsUserInGroup(user.Id, group.Id) == false)   
+            {
+                group.NumberOfUsersInGroup += 1;
+                user = db.GetUserByEmail(user.Email);
+           
+                UsersInGroup userIngroup = new UsersInGroup();
+                userIngroup.UserID = user.Id;
+                userIngroup.GroupID = group.Id;
+                db.UsersInGroups.Add(userIngroup);
+                db.SaveChanges();
+                
+            }
+            // TODO : dodělat výpis zda byl uživatel nebo nebyl přidán do skupiny
+            
         }
 
 

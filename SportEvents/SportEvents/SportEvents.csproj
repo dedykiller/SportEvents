@@ -125,6 +125,7 @@
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UsersInGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,9 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\SeparateGroups\SeparateGroups.cshtml" />
+    <Content Include="Views\Groups\IndexCreator.cshtml" />
+    <Content Include="Views\Groups\IndexMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

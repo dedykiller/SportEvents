@@ -4,20 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Seznam všech skupin</h2>
+<h2>Seznam mých skupin</h2>
     <hr />
 
 @if (Session["UserSession"] != null)
 {
     <h3 style="text-align:center"> @TempData["notice"]</h3>
-     /*<p>
+    /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/
     <p class="button-link">
         @Html.ActionLink("Nová skupina", "Create")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Sezam událostí", "Index","Events")
+        @Html.ActionLink("Sezam událostí", "Index", "Events")
     </p>
     <p class="button-link">
         @Html.ActionLink("Všechny skupiny", "Index", "Groups")
@@ -76,10 +76,10 @@
             @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
         </td>
         <td>
-            @Html.ActionLink("Přidat se do skupiny", "AddUserToGroup", new { id = item.Id }) 
-            @*@Html.ActionLink("editovat", "Edit", new { id=item.Id }) |
+            @*@Html.ActionLink("Přidat se do skupiny", "AddUserToGroup", new { id = item.Id }) |*@
+            @Html.ActionLink("editovat", "Edit", new { id=item.Id }) |
             @Html.ActionLink("detail", "Details", new { id=item.Id }) |
-            @Html.ActionLink("smazat", "Delete", new { id=item.Id })*@
+            @Html.ActionLink("smazat", "Delete", new { id=item.Id })
 
         </td>
     </tr>

@@ -17,20 +17,19 @@ namespace SportEvents.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Event> Events { get; set; }
-
+        public DbSet<UsersInGroup> UsersInGroups { get; set; }      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasMany(a => a.Groups)
-                .WithMany()
-                .Map(x =>
-                {
-                    x.MapLeftKey("User_Id");
-                    x.MapRightKey("Group_Id");
-                    x.ToTable("GroupsUsers");
-                });
+            //modelBuilder.Entity<User>()
+            //    .HasMany(a => a.Groups)
+            //    .WithMany()
+            //    .Map(x =>
+            //    {
+            //        x.MapLeftKey("User_Id");
+            //        x.MapRightKey("Group_Id");
+            //        x.ToTable("GroupsUsers");
+            //    });
 
             modelBuilder.Entity<Event>()
                 .HasRequired<Group>(a => a.Group)
@@ -49,6 +48,8 @@ namespace SportEvents.Models
                 });
         }
 
+        
+
 
         public bool IsEmailInDatabase(string email)
         {
@@ -60,9 +61,46 @@ namespace SportEvents.Models
             return false;
         }
 
-        public bool IsUserCreatorOfGroup(int User_Id, int Grp_Id)
+        public List<Event> AllEventsWhereIsUserCreator(int User_Id)
         {
-            if (Groups.Any(x => x.Creator == User_Id && x.Id == Grp_Id))
+            
+            List<Event> listOfEvents = new List<Event>();
+            listOfEvents = Events.Where(x => x.CreatorId == User_Id).ToList();
+            
+            return listOfEvents;
+        }
+
+        public List<Group> AllGroupsWhereIsUserCreator(int User_Id)
+        {
+
+            List<Group> listOfGroups = new List<Group>();
+            listOfGroups = Groups.Where(x => x.Creator == User_Id).ToList();
+
+            return listOfGroups;
+        }
+
+        public List<Group> AllGroupsWhereIsUserMember(int userId)
+        {
+
+            List<UsersInGroup> listOfGroups = new List<UsersInGroup>();
+            var list = new List<Group>();
+
+
+            listOfGroups = UsersInGroups.Where(x => x.UserID == userId).ToList();
+
+            foreach (UsersInGroup usersInGroup in listOfGroups)
+            {
+                Group g = Groups.Find(usersInGroup.GroupID);
+
+                list.Add(g);
+            }
+
+            return list;
+        }
+
+        public bool IsUserCreatorOfGroup(int user_Id, int grp_Id)
+        {
+            if (Groups.Any(x => x.Creator == user_Id && x.Id == grp_Id))
             {
                 return true;
             }
@@ -90,6 +128,15 @@ namespace SportEvents.Models
             return user;
         }
 
-        
+        public bool IsUserInGroup (int userId, int groupId) {
+
+            if (UsersInGroups.Any(x => x.UserID == userId && x.GroupID == groupId))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public System.Data.Entity.DbSet<SportEvents.Models.Event> Events { get; set; }
     }
 }

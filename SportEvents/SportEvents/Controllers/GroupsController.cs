@@ -10,14 +10,28 @@ using System.Web.Mvc;
 
 namespace SportEvents.Models
 {
+    
     public class GroupsController : Controller
     {
+        
         GroupsBO groupsBO = new GroupsBO();
 
         // GET: /Groups/
         public ActionResult Index()
         {
             return View(groupsBO.Index());
+        }
+
+        public ActionResult IndexCreator()
+        {
+            User user = (User)Session["UserSession"];
+            return View(groupsBO.IndexCreator(user.Id));
+        }
+
+        public ActionResult IndexMember()
+        {
+            User user = (User)Session["UserSession"];
+            return View(groupsBO.IndexMember(user.Id));
         }
 
         // GET: /Groups/Details/5
@@ -51,6 +65,7 @@ namespace SportEvents.Models
                 if (Session["UserSession"] != null)
                 {
                     User user = (User)Session["UserSession"];
+                    
                     groupsBO.CreateGroup(group, user);
                     TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
 
@@ -88,9 +103,10 @@ namespace SportEvents.Models
                 {
                     User user = (User)Session["UserSession"];
                     Group group = groupsBO.GetGroupById(id);
-
+                    
                     groupsBO.AddUserToGroup(group, user);
-
+                    
+                    
                     return RedirectToAction("Index");  
                 }
             }

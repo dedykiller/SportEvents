@@ -31,7 +31,7 @@ input[type="checkbox"].input-validation-error {
 /*form*/
 
 form {
-    margin: 40px 0 0 30px;
+    margin: 30px 0 0 30px;
 }
 
 input {
@@ -55,6 +55,11 @@ input {
     text-shadow: none;
 }
 
+.textarea{
+    font-size: 15px;
+    text-shadow: none;
+}
+
 
 
 .button {
@@ -66,6 +71,50 @@ input {
     .button:hover {
         background: #67bfbc;
     }
+
+    /*table*/
+
+    table{
+        width: 100%;
+       /*background: #434242;*/
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px; 
+         -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
+    text-align: center;
+    border-collapse: collapse;
+    background: white;
+    }
+
+    td{
+        border-top: 1px solid #dcdcdc;
+        padding: 4px;
+        
+    }
+    
+
+tr:hover td {  
+    background: #eaeaea !important;
+    cursor: pointer;
+}
+tr:hover td:first-child {
+   
+    background: #eaeaea !important;
+    cursor: pointer;
+}
+tr:hover td:last-child {
+    background: #eaeaea !important;
+    cursor: pointer;
+}
+
+th{
+    color: white;
+    background: #434242;
+
+
+}
 
 /*písma*/
 

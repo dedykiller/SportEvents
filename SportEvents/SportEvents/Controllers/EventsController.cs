@@ -10,15 +10,34 @@ using SportEvents.Models;
 
 namespace SportEvents.Controllers
 {
+    //nic
     public class EventsController : Controller
     {
         private DataContext db = new DataContext();
 
         // GET: Events
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var events = db.Events;
-            return View(events.ToList());
+            
+            User user = (User)Session["UserSession"];
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date" : "Date";
+            var events = from s in db.Events select s;
+            switch (sortOrder)
+            {
+                case "name":
+                    events = events.OrderBy(s => s.Name);
+                    break;
+                case "date":
+                    events = events.OrderBy(s => s.TimeOfEvent);
+                    break;
+                default :
+                    
+                    break;
+    
+            }
+            //return View(db.AllEventsWhereIsUserCreator(user.Id)); pokud chceme vratit jen udalosti, kde je clovek zakladatel
+            return View(@events.ToList());
         }
 
         // GET: Events/Details/5
@@ -48,15 +67,15 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval,CreatorId")] Event @event)
         {
             if (ModelState.IsValid)
             {
                 User user = (User)Session["UserSession"];
-
+                @event.CreatorId = user.Id;
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
-                    if (@event.Repeat == 0) // TODO: místo 0 pro opakování používat 1 jako true
+                    if (@event.Repeat != 0) 
                     {
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval
@@ -77,7 +96,7 @@ namespace SportEvents.Controllers
                 }
                 else
                 {
-                    TempData["notice"] = "Uživatel " + user.Email + " není uživatelem skupiny s ID:" + @event.GrpId;
+                    TempData["notice"] = "Uživatel " + user.Email + " není zakladatelem skupiny s ID:" + @event.GrpId;
                     return RedirectToAction("Index");
                     
                 }
