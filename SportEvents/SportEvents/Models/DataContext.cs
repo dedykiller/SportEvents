@@ -17,8 +17,8 @@ namespace SportEvents.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Event> Events { get; set; }
 
-       
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -48,8 +48,6 @@ namespace SportEvents.Models
                     x.ToTable("EventsUsers");
                 });
         }
-
-        
 
 
         public bool IsEmailInDatabase(string email)
@@ -92,6 +90,6 @@ namespace SportEvents.Models
             return user;
         }
 
-        public System.Data.Entity.DbSet<SportEvents.Models.Event> Events { get; set; }
+        
     }
 }

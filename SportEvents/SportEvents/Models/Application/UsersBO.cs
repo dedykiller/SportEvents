@@ -16,27 +16,13 @@ namespace SportEvents.Models.Application
             return db.Users.ToList();
         }
 
-        public bool RegisterUser(User user)
+        public void RegisterUser(User user)
         {
             user.RegistrationTime = DateTime.Now;
             user.Password = UtilityMethods.CalculateHashMd5(user.Password);
             user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
             db.Users.Add(user);
             db.SaveChanges();
-
-            string smtpUserName = "sportevents1@seznam.cz";
-            string smtpPassword = "777003862";
-            string smtpHost = "smtp.seznam.cz";
-            int smtpPort = 25;
-            string emailTo = user.Email;
-            string subject = string.Format("Potvrzeni registrace");
-            string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
-
-            EmailService service = new EmailService();
-
-            bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
-
-            return kq;
 
         }
 

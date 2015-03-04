@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SportEvents.Controllers.Utility;
 using System.Text.RegularExpressions;
+using SportEvents.Models;
 
 namespace SportEventsTests
 {
@@ -25,7 +26,7 @@ namespace SportEventsTests
             Assert.IsTrue(Regex.IsMatch("namesmt@example.com", regExpEmail));
             Assert.IsTrue(Regex.IsMatch("name.smt@example.com", regExpEmail));
             Assert.IsTrue(Regex.IsMatch("namesxmfdddddddddddddddasdft@exampldfsssssssssafdsfsde.com", regExpEmail));
-            Assert.IsTrue(Regex.IsMatch("n@a.ma", regExpEmail));
+            Assert.IsTrue(Regex.IsMatch("n@student.osu.cz", regExpEmail));
         }
 
         [TestMethod]
@@ -37,6 +38,23 @@ namespace SportEventsTests
             Assert.IsFalse(Regex.IsMatch("name.smtexample.com", regExpEmail));
             Assert.IsFalse(Regex.IsMatch("namesmt@example.c", regExpEmail));
             Assert.IsFalse(Regex.IsMatch("n.f.d.f@@a.ma", regExpEmail));
+        }
+
+        [TestMethod]
+        public void RegisterEmailNotification()
+        {
+            string smtpUserName = "sportevents1@seznam.cz";
+            string smtpPassword = "777003862";
+            string smtpHost = "smtp.seznam.cz";
+            int smtpPort = 25;
+
+            string emailTo = "KuznikJan@seznam.cz";
+            string subject = string.Format("Potvrzení registrace");
+            string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", "Jane");
+
+            EmailService service = new EmailService();
+
+            Assert.IsTrue(service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body));
         }
     }
 }

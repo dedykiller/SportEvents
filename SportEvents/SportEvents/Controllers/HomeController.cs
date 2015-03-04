@@ -12,7 +12,6 @@ namespace SportEvents.Controllers
 {
     public class HomeController : Controller
     {
-        private DataContext db = new DataContext();
         private UsersBO usersBO = new UsersBO();
 
         // GET: /Home/Index

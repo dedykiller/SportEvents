@@ -33,12 +33,10 @@ namespace SportEvents.Models
                     msg.To.Add(emailTo);
                     smtpClient.Send(msg);
                     return true;
-
                 }
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e.InnerException);
                 return false;
             }
         }

@@ -27,7 +27,6 @@ namespace SportEvents.Controllers
         }
 
 
-
         // POST: Users/Registration
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -41,7 +40,20 @@ namespace SportEvents.Controllers
                     return View();
                 }
 
-                bool kq = usersBO.RegisterUser(user);
+                usersBO.RegisterUser(user);
+
+                string smtpUserName = "sportevents1@seznam.cz";
+                string smtpPassword = "777003862";
+                string smtpHost = "smtp.seznam.cz";
+                int smtpPort = 25;
+
+                string emailTo = user.Email;
+                string subject = string.Format("Potvrzeni registrace");
+                string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
+
+                EmailService service = new EmailService();
+
+                bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
 
                 TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
                 return RedirectToAction("ListOfUsers");
