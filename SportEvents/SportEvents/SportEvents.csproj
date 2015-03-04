@@ -91,6 +91,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\sportevents.pubxml" />
+    <None Include="Properties\PublishProfiles\VojtaPub.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Image\sport.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -153,7 +154,6 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\SeparateGroups\SeparateGroups.cshtml" />
     <Content Include="Views\Groups\IndexCreator.cshtml" />
     <Content Include="Views\Groups\IndexMember.cshtml" />
     <Content Include="Views\Article\Create.cshtml" />
