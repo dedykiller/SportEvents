@@ -1,42 +1,57 @@
-﻿@model SportEvents.Models.Group
+﻿﻿@model SportEvents.Models.Group
 
 @{
     ViewBag.Title = "Details";
 }
+		
 
-<h2>Přidat se do skupiny </h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <div>
-    
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            název skupiny
-        </dt>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
-        <dt>
-            popis skupiny
-        </dt>
+            <input type="submit" value="Přidat se" class="button" />
+        }
 
-        <dd>
+    </div>
+
+    <div class="description-groups">
+        <h2>
+            @Html.DisplayFor(model => model.Creator)
+        </h2>
+        <p class="date">
+            @Html.DisplayFor(model => model.StartOfPaymentPeriod) -
+            @Html.DisplayFor(model => model.EndOfPaymentPeriod)
+        </p>
+        <p>
             @Html.DisplayFor(model => model.Description)
-        </dd>
+        </p>
+    </div>
 
-    </dl>
-</div>
-<div>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    @*<table class="table">
+            <tr>
+                <th>Název skupiny</th>
+            </tr>
+            @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Name)
+                    </td>
+                </tr>
+            }
+        </table>*@
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Přidat se do skupiny" class="btn btn-default" /> |
-            @Html.ActionLink("zpět na výpis skupin", "Index")
-        </div>
-    }
-        
+
+
+
+
+
 </div>
+
