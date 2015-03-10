@@ -7,12 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SportEvents.Models;
+using System.IO;
 
 namespace SportEvents.Views
 {
     public class ArticleController : Controller
     {
         private DataContext db = new DataContext();
+        private const string ImagesPath = "~/Resources/images";
 
         // GET: /Article/
         public ActionResult Index()
@@ -48,28 +50,41 @@ namespace SportEvents.Views
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Body")] Article article)
         {
-
-            if (Request != null)
-            {
-                HttpPostedFileBase file = Request.Files["UploadedFile"];
-
-
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
-                {
-                    string fileName = file.FileName;
-                    string fileContentType = file.ContentType;
-                    byte[] fileBytes = new byte[file.ContentLength];
-                    file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-
-                    TempData["upload"] = "Soubor " + fileName + " typu " + fileContentType + " byl načten";
-                }
-            }
-
-
             if (ModelState.IsValid)
             {
+                string filePathName = null;
+
+                if (Request != null)
+                {
+                    HttpPostedFileBase file = Request.Files["UploadedFile"];
+
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        string fileContentType = file.ContentType;
+                        filePathName = Path.GetFileName(file.FileName);
+                        byte[] fileBytes = new byte[file.ContentLength];
+                        file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                        var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
+                        file.SaveAs(path);
+
+                        //Response.ContentType = "application/jpeg";
+                        //Response.AddHeader("Content-Disposition", @"filename=""jpg_test.jpg""");
+                        //Response.TransmitFile(@"~\Resources\images\jpg_test.jpg");
+
+                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten";
+                    }
+                }
+
                 User user = (User)Session["UserSession"];
                 article.UserID = user.Id;
+                if (filePathName != null)
+                {
+                    article.Picture = ImagesPath + "/" + filePathName;
+                }
+                else
+                {
+                    article.Picture = ImagesPath + "/jpg_test.jpg";
+                }
                 db.Articles.Add(article);
                 db.SaveChanges();
 
@@ -77,6 +92,7 @@ namespace SportEvents.Views
 
                 return RedirectToAction("Index");
             }
+
 
             return View(article);
         }

@@ -2,13 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3 style="text-align:center"> @TempData["upload"]</h3>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Vytvoř nový článek", "Create")
 </p>
+
 
 <table class="table">
     <tr>
@@ -22,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
+            @Html.DisplayNameFor(model => model.Picture)
         </th>
         <th></th>
     </tr>
@@ -38,8 +40,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Body)
+        <td> 
+            <img src="@Url.Content(item.Picture)" alt="images" width="200" height="200">
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
