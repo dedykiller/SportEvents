@@ -104,6 +104,7 @@ namespace SportEvents.Models
                     User user = (User)Session["UserSession"];
                     Group group = groupsBO.GetGroupById(id);
                     
+                    
                     groupsBO.AddUserToGroup(group, user);
                     
                     
@@ -135,7 +136,7 @@ namespace SportEvents.Models
         {
             if (ModelState.IsValid)
             {
-                groupsBO.EditGroup(group);
+                groupsBO.EditGroup(group);                
                 return RedirectToAction("Index");
             }
             return View(group);

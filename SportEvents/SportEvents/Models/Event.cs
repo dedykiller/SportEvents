@@ -12,7 +12,7 @@ namespace SportEvents.Models
         Ne,
         Ano
     }
-    
+    // jen pro komit
     public class Event
     {
         public int Id { get; set; }
@@ -35,7 +35,7 @@ namespace SportEvents.Models
         
         public int Interval { get; set; } // interval opakovani udalosti v tydnech
         public virtual Group Group { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<UsersInEvent> UserInEvents { get; set; }
 
         
 
