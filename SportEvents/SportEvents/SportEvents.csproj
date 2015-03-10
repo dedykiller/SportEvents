@@ -89,6 +89,7 @@
     <Content Include="Content\Boot.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Controllers\HtmlPage1.html" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\sportevents.pubxml" />
     <None Include="Properties\PublishProfiles\VojtaPub.pubxml" />
