@@ -83,12 +83,12 @@ namespace SportEvents.Views
                 }
                 else
                 {
-                    article.Picture = ImagesPath + "/jpg_test.jpg";
+                    article.Picture = ImagesPath + "/no_image.png";
                 }
                 db.Articles.Add(article);
                 db.SaveChanges();
 
-                TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek " + article.Title;
+                TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek : " + article.Title;
 
                 return RedirectToAction("Index");
             }

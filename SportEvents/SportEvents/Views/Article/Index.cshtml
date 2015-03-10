@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3 style="text-align:center"> @TempData["upload"]</h3>
@@ -40,7 +39,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td> 
+        <td>
             <img src="@Url.Content(item.Picture)" alt="images" width="200" height="200">
         </td>
         <td>
