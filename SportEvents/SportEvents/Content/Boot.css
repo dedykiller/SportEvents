@@ -109,14 +109,29 @@ footer{
 }
 
 .button-link a{
-background: #79cbc9;
+    background: #79cbc9;
     color: white;
     padding: 10px;
     -moz-box-shadow: 3px 3px 14px #3b3b3b;
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
+    float: left;
+    margin: 0 1px 20px 0;
 }
 
-.button-link a:hover{
+.button-link-first a{
+    margin-right: 20px;
+    background: #79cbc9;
+    color: white;
+    padding: 10px;
+    -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
+    float: left;
+    margin-right: 60px;
+
+}
+
+.button-link a:hover, .button-link-first a:hover{
     background: #67bfbc;
 }
