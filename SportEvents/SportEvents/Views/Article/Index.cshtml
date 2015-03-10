@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h3 style="text-align:center"> @TempData["upload"]</h3>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>

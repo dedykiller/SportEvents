@@ -9,6 +9,7 @@
 
 @if (Session["UserSession"] != null)
 {
+   
     <h3 style="text-align:center"> @TempData["notice"]</h3>
      /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
@@ -17,7 +18,7 @@
         @Html.ActionLink("Nová skupina", "Create")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Sezam událostí", "Index","Events")
+        @Html.ActionLink("Seznam událostí", "Index","Events")
     </p>
     <p class="button-link">
         @Html.ActionLink("Všechny skupiny", "Index", "Groups")
@@ -27,6 +28,9 @@
     </p>
     <p class="button-link">
         @Html.ActionLink("Mnou vytvořené skupiny", "IndexCreator", "Groups")
+    </p>
+     <p class="button-link">
+        @Html.ActionLink("Seznam článků", "Index", "Article")
     </p>
 
 }
