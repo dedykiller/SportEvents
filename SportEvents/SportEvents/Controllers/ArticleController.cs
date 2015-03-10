@@ -46,19 +46,41 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Title,Body")] Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Body")] Article article)
         {
+
+            if (Request != null)
+            {
+                HttpPostedFileBase file = Request.Files["UploadedFile"];
+
+
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    string fileContentType = file.ContentType;
+                    byte[] fileBytes = new byte[file.ContentLength];
+                    file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+
+                    TempData["upload"] = "Soubor " + fileName + " typu " + fileContentType + " byl načten";
+                }
+            }
+
+
             if (ModelState.IsValid)
             {
                 User user = (User)Session["UserSession"];
                 article.UserID = user.Id;
                 db.Articles.Add(article);
                 db.SaveChanges();
+
+                TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek " + article.Title;
+
                 return RedirectToAction("Index");
             }
 
             return View(article);
         }
+
 
         // GET: /Article/Edit/5
         public ActionResult Edit(int? id)
