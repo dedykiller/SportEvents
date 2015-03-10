@@ -14,6 +14,51 @@
 </head>
 <body>
     <h2>Přihlášení</h2>
+    <h2>@SportEvents.Languages.Resources.addPerson</h2>
+
+@using(Html.BeginForm("SetCulture", "Home"))
+{
+    <fieldset>
+        <legend></legend>
+
+        <div class="control-group">
+            <div class="controls">
+                <label for="en-us">
+                    <input name="culture" id="en-us" value="en-us" type="radio"/> English
+                </label>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <label for="es">
+                    <input name="culture" id="cs" value="cs" type="radio" /> Español
+                </label>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <label for="ar">
+                    <input name="culture" id="ar" value="ar" type="radio" /> العربية
+                </label>
+            </div>
+        </div>
+
+
+    </fieldset>
+}
+
+
+    <script type="text/javascript">
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
+    </script>
+
     <hr />
     <div id="zkouska">
         <section id="left">

@@ -1,4 +1,5 @@
-﻿using SportEvents.Models.Application;
+﻿using SportEvents.Controllers;
+using SportEvents.Models.Application;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace SportEvents.Models
 {
-    public class GroupsController : Controller
+    public class GroupsController : BaseController
     {
         GroupsBO groupsBO = new GroupsBO();
 
