@@ -58,7 +58,9 @@ namespace SportEvents.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name");
+            User user = (User)Session["UserSession"];
+            //ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name");
+            ViewBag.GrpId = new SelectList(db.AllGroupsWhereIsUserCreator(user.Id), "Id","Name");
             return View();
         }
 
