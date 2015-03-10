@@ -69,31 +69,46 @@ namespace SportEvents.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval,CreatorId")] Event @event)
         {
+            
             if (ModelState.IsValid)
             {
                 User user = (User)Session["UserSession"];
                 @event.CreatorId = user.Id;
+                List<int> EventsId = new List<int>();
+                int eventId = 0;
+                
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
+                    
                     if (@event.Repeat != 0) 
                     {
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            db.Events.Add(@event);
+                            @event.UserInEvents = null;                            
+                            db.Events.Add(@event);                                                     
                             db.SaveChanges();
+                            eventId = @event.Id;
+                            EventsId.Add(eventId);   
                             @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
                         }
-                            
+                        AddUsersToAllNewEvents(EventsId);   // TODO
                     }
                     else
                     {
-                        db.Events.Add(@event);
+                        db.Events.Add(@event);                        
                         db.SaveChanges();
+                        eventId = @event.Id;
+                        EventsId.Add(eventId);
+                       // AddUsersToAllNewEvents(@event);
+                       // Events.Add(@event);//
+                        AddUsersToAllNewEvents(EventsId); // TODO
                     }
                     TempData["notice"] = "Událost " + @event.Name + " byla vytvořena uživatelem " + user.Email;
+                    
                     return RedirectToAction("Index");
-                }
+                    
+                }                    
                 else
                 {
                     TempData["notice"] = "Uživatel " + user.Email + " není zakladatelem skupiny s ID:" + @event.GrpId;
@@ -108,6 +123,24 @@ namespace SportEvents.Controllers
             ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name", @event.GrpId);
             ViewBag.Error = "Nejste zakladatelem tehle skupiny";
             return View(@event);
+        }
+
+        public void AddUsersToAllNewEvents(List<int> listOfEventsId)
+        {
+            
+            List<Event> e = new List<Event>();
+            e = db.SelectEventsById(listOfEventsId);
+            var x = e.First();
+            List<User> users = db.AllUsersInGroup(x.GrpId);
+            foreach (var us in users)
+            {
+                foreach (var ev in e)
+                {
+                    db.AddUserToEvent(us, ev);
+                }
+                
+
+            }
         }
 
         // GET: Events/Edit/5

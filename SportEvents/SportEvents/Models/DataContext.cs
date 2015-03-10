@@ -20,6 +20,8 @@ namespace SportEvents.Models
         public DbSet<UsersInGroup> UsersInGroups { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<UsersInEvent> UserInEvents { get; set; }
+      //  public DbSet<UsersInEvent> UsersInEvents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,17 +39,13 @@ namespace SportEvents.Models
                 .HasRequired<Group>(a => a.Group)
                 .WithMany(a => a.Events)
                 .HasForeignKey(a => a.GrpId);
-                
 
-            modelBuilder.Entity<Event>()
-                .HasMany(a => a.Users)
-                .WithMany()
-                .Map(x =>
-                {
-                    x.MapLeftKey("Event_Id");
-                    x.MapRightKey("User_Id");
-                    x.ToTable("EventsUsers");
-                });
+
+            modelBuilder.Entity<UsersInEvent>().HasKey(x => new { x.UserId, x.EventId });
+
+
+                
+               
         }
 
         
@@ -59,6 +57,33 @@ namespace SportEvents.Models
                 return true;
             }
             return false;
+        }
+
+        public List<Event> SelectEventsById(List<int> eventsIds)
+        {
+            List<Event> events = new List<Event>();
+            foreach (var item in eventsIds)
+            {
+                //events = Events.Where(x => x.Id == item).ToList();// chyba
+                events.Add(Events.Single(x => x.Id == item));
+
+            }
+
+            return events;
+        }
+
+        //public List<Event> takeSeveralLastRecords(int numberOfRecords)
+        //{
+        //    List<Event> events = new List<Event>();
+        //    events = Events.skip
+        //    return events;
+        //}
+
+        public List<Event> AllEventsOfGroup(int groupId)
+        {
+            List<Event> list = new List<Event>();
+            list = Events.Where(x => x.GrpId == groupId).ToList();
+            return list;
         }
 
         public List<Event> AllEventsWhereIsUserCreator(int User_Id)
@@ -77,6 +102,40 @@ namespace SportEvents.Models
             listOfGroups = Groups.Where(x => x.Creator == User_Id).ToList();
 
             return listOfGroups;
+        }
+
+        public List<User> AllUsersInGroup(int GroupId)
+        {
+           
+
+            List<UsersInGroup> listOfGroups = new List<UsersInGroup>();
+            var list = new List<User>();
+
+
+            listOfGroups = UsersInGroups.Where(x => x.GroupID == GroupId).ToList();
+
+            foreach (UsersInGroup usersInGroup in listOfGroups)
+            {
+                User g = Users.Find(usersInGroup.UserID);
+
+                list.Add(g);
+            }
+
+            return list;
+        }
+
+        public void AddUserToEvent(User User, Event Event)
+        {            
+        //    User u = Users.First(x => x.Id == User.Id);
+        //   // u.UserInEvents.Add(Event);
+        //    Event e = Events.First(x => x.Id == Event.Id);
+        //   // e.UserInEvents.Add(User);
+
+            UsersInEvent UIE = new UsersInEvent();
+            UIE.User = User;
+            UIE.Event = Event;
+            UserInEvents.Add(UIE);            
+            SaveChanges();
         }
 
         public List<Group> AllGroupsWhereIsUserMember(int userId)

@@ -59,17 +59,43 @@ namespace SportEvents.Models.Application
             {
                 group.NumberOfUsersInGroup += 1;
                 user = db.GetUserByEmail(user.Email);
+
+                
            
                 UsersInGroup userIngroup = new UsersInGroup();
                 userIngroup.UserID = user.Id;
                 userIngroup.GroupID = group.Id;
                 db.UsersInGroups.Add(userIngroup);
+                AddUserToAllEventsOfGroup(group.Id, user);
                 db.SaveChanges();
                 
             }
             // TODO : dodělat výpis zda byl uživatel nebo nebyl přidán do skupiny
             
         }
+
+        public void AddUsersToAllNewEvents(Event e)
+        {
+            List<User> users = db.AllUsersInGroup(e.GrpId);
+            foreach (var item in users)
+            {
+                db.AddUserToEvent(item, e);
+                
+            }
+        }
+
+        public void AddUserToAllEventsOfGroup(int groupId, User user)
+        {
+            List<Event> AllEventsOfGroup = new List<Event>();
+            AllEventsOfGroup = db.AllEventsOfGroup(groupId);            
+            foreach (var item in AllEventsOfGroup)
+            {
+                db.AddUserToEvent(user, item);
+            }
+            
+        }
+
+      //  public void AddUserToEvent (int groupId, User user)
 
 
         public void EditGroup(Group group)
