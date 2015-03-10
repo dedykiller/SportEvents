@@ -66,6 +66,7 @@ input {
     background: #79cbc9;
     color: white;
     text-shadow: none;
+    margin-bottom: 20px;
 }
 
     .button:hover {
@@ -91,6 +92,7 @@ input {
     td{
         border-top: 1px solid #dcdcdc;
         padding: 4px;
+        height: 30px;
         
     }
     
@@ -146,9 +148,27 @@ h2 {
     padding-left: 60px;
 }
 
+.description-groups{
+    background: white;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+     border-radius: 3px; 
+    -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
+    padding: 10px;
+    width: 60%;
+}
 
+.description-groups p{
+    margin: 0 auto;
+}
 
+.description-groups h2{
+    margin: 0;
+    font-size: 30px;       
+}
 
-
-
-
+.date{
+    color: grey;
+}
