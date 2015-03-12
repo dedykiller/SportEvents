@@ -87,14 +87,44 @@ namespace SportEvents.Controllers
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            @event.UserInEvents = null;                            
-                            db.Events.Add(@event);                                                     
+                            Event ev = new Event();
+                            ev = @event;
+                            ev.TimeOfEvent = @event.TimeOfEvent.AddDays(7 * @event.Interval);
                             db.SaveChanges();
-                            eventId = @event.Id;
-                            EventsId.Add(eventId);   
-                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
+                            db.Events.Add(@event);
+                            
+                            foreach (User item in db.AllUsersInGroup(@event.GrpId))
+                            {
+                                UsersInEvent u = new UsersInEvent()
+                                    {
+                                        participation = participation.Unspoken,
+                                        UserId = item.Id,
+                                        EventId = @event.Id,
+                                        User = item,
+                                        Event = @event                                      
+                                        
+
+                                    };
+                                db.UserInEvents.Add(u);
+                                //ev.UserInEvents.Add(u);
+                            }
+                            
+                            db.SaveChanges();
+
+                            
+
+
+
+                            //@event.UserInEvents = null;                            
+                            //db.Events.Add(@event);                                                     
+                            //db.SaveChanges();
+                            //eventId = @event.Id;
+                            //EventsId.Add(eventId);   
+                            //@event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
+
+
                         }
-                        AddUsersToAllNewEvents(EventsId);   // TODO
+                        //AddUsersToAllNewEvents(EventsId);   // TODO
                     }
                     else
                     {
