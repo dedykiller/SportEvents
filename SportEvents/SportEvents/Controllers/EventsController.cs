@@ -78,6 +78,8 @@ namespace SportEvents.Controllers
                 @event.CreatorId = user.Id;
                 List<int> EventsId = new List<int>();
                 int eventId = 0;
+                List<User> users = new List<User>();
+                users = db.AllUsersInGroup(@event.GrpId);
                 
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
@@ -89,23 +91,26 @@ namespace SportEvents.Controllers
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
                             Event ev = new Event();
                             ev = @event;
-                            ev.TimeOfEvent = @event.TimeOfEvent.AddDays(7 * @event.Interval);
-                            db.SaveChanges();
-                            db.Events.Add(@event);
+
+                            ev = null;
                             
-                            foreach (User item in db.AllUsersInGroup(@event.GrpId))
+                            db.SaveChanges();
+                            db.Events.Add(ev);
+                            
+                            foreach (User item in users)
                             {
                                 UsersInEvent u = new UsersInEvent()
                                     {
                                         participation = participation.Unspoken,
                                         UserId = item.Id,
-                                        EventId = @event.Id,
+                                        EventId = ev.Id,
                                         User = item,
-                                        Event = @event                                      
+                                        Event = ev                                  
                                         
 
                                     };
                                 db.UserInEvents.Add(u);
+                                db.SaveChanges();
                                 //ev.UserInEvents.Add(u);
                             }
                             
