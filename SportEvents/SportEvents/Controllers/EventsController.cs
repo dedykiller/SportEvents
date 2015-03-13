@@ -76,8 +76,8 @@ namespace SportEvents.Controllers
             {
                 User user = (User)Session["UserSession"];
                 @event.CreatorId = user.Id;
-                List<int> EventsId = new List<int>();
-                int eventId = 0;
+               // List<int> EventsId = new List<int>();
+              //  int eventId = 0;
                 List<User> users = new List<User>();
                 users = db.AllUsersInGroup(@event.GrpId);
                 
@@ -86,46 +86,34 @@ namespace SportEvents.Controllers
                     
                     if (@event.Repeat != 0) 
                     {
+                      //  UsersInEvent uu = new UsersInEvent();
+                       // uu = null;
+                       // int evId = 0;
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            Event ev = new Event();
-                            ev = @event;
-
-                            ev = null;
-                            
+                            @event.UserInEvents = null;      
+                            db.Events.Add(@event);
                             db.SaveChanges();
-                            db.Events.Add(ev);
-                            
                             foreach (User item in users)
                             {
                                 UsersInEvent u = new UsersInEvent()
                                     {
-                                        participation = participation.Unspoken,
-                                        UserId = item.Id,
-                                        EventId = ev.Id,
+                                        participation = participation.Unspoken,                                        
                                         User = item,
-                                        Event = ev                                  
-                                        
-
-                                    };
+                                        Event = @event 
+                                    };                                                               
                                 db.UserInEvents.Add(u);
-                                db.SaveChanges();
-                                //ev.UserInEvents.Add(u);
-                            }
-                            
+                                
+                                
+                            }     
                             db.SaveChanges();
-
-                            
-
-
-
                             //@event.UserInEvents = null;                            
                             //db.Events.Add(@event);                                                     
                             //db.SaveChanges();
                             //eventId = @event.Id;
                             //EventsId.Add(eventId);   
-                            //@event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
+                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
 
 
                         }
@@ -133,13 +121,13 @@ namespace SportEvents.Controllers
                     }
                     else
                     {
-                        db.Events.Add(@event);                        
-                        db.SaveChanges();
-                        eventId = @event.Id;
-                        EventsId.Add(eventId);
+                        //db.Events.Add(@event);                        
+                        //db.SaveChanges();
+                        //eventId = @event.Id;
+                        //EventsId.Add(eventId);
                        // AddUsersToAllNewEvents(@event);
                        // Events.Add(@event);//
-                        AddUsersToAllNewEvents(EventsId); // TODO
+                       // AddUsersToAllNewEvents(EventsId); // TODO
                     }
                     TempData["notice"] = "Událost " + @event.Name + " byla vytvořena uživatelem " + user.Email;
                     

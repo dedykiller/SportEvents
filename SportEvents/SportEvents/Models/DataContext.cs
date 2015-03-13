@@ -41,7 +41,7 @@ namespace SportEvents.Models
                 .HasForeignKey(a => a.GrpId);
 
 
-            modelBuilder.Entity<UsersInEvent>().HasKey(x => new { x.UserId, x.EventId });
+            //modelBuilder.Entity<UsersInEvent>().HasKey(x => new { x.UserId, x.EventId });
 
 
                 

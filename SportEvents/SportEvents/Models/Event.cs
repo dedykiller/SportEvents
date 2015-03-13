@@ -35,6 +35,7 @@ namespace SportEvents.Models
         
         public int Interval { get; set; } // interval opakovani udalosti v tydnech
         public virtual Group Group { get; set; }
+       
         public virtual ICollection<UsersInEvent> UserInEvents { get; set; }
 
         

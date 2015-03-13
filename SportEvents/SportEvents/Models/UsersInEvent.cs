@@ -11,19 +11,19 @@ namespace SportEvents.Models
     {
         Unspoken = 0,
         No = -1,
-        Yes = 1,
-        
-        
+        Yes = 1,    
     }
+
     public class UsersInEvent
     {
-     //   [Key, Column(Order = 0)]
+        [Key, Column(Order=0)]
         public int UserId { get; set; }
-     //   [Key, Column(Order = 1)]
+        [Key, Column(Order = 1)]
         public int EventId { get; set; }        
+
         public participation participation { get; set; }
+
         public virtual User User { get; set; }
         public virtual Event Event { get; set; }
-
     }
 }
