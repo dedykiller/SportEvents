@@ -4,30 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <div>
-    <h4>Event</h4>
+    <h4>Skupina: @Html.DisplayFor(model => model.Group.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Group.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Group.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeOfEvent)
+            Datum a čas
         </dt>
 
         <dd>
@@ -35,15 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RepeatUntil)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RepeatUntil)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Place)
+            Místo
         </dt>
 
         <dd>
@@ -51,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Popis
         </dt>
 
         <dd>
@@ -59,32 +35,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            Cena
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Repeat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Repeat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Interval)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Interval)
-        </dd>
+        
+       
+        
+                
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Zpět", "Index")
 </p>

@@ -7,17 +7,15 @@ using System.Web;
 
 namespace SportEvents.Models
 {
-    public enum RepeatEvent
-    {
-        Ne,
-        Ano
-    }
+    
     // jen pro komit
     public class Event
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Vyplňte prosím název události")]
+        [MaxLength(25, ErrorMessage = "Délka názvu musí být maximálně 25 znaků")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         public DateTime TimeOfEvent { get; set; }
         
         public DateTime? RepeatUntil { get; set; }
@@ -29,10 +27,11 @@ namespace SportEvents.Models
         [RegularExpression("^[0-9][0-9]*$",
             ErrorMessage = "Cena události musí být kladné číslo.")]
 
-        public int Price { get; set; }
-        public RepeatEvent Repeat { get; set; } // opakovana udalost? ano x ne
+        [DataType(DataType.Currency)]
+        public decimal Price { get; set; }
+        public bool Repeat { get; set; } // opakovana udalost? ano x ne
 
-        
+        [Range(1, 2)]      
         public int Interval { get; set; } // interval opakovani udalosti v tydnech
         public virtual Group Group { get; set; }
        

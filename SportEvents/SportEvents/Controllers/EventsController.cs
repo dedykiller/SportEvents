@@ -55,6 +55,8 @@ namespace SportEvents.Controllers
             return View(@event);
         }
 
+        //public ActionResult Participation ([Bind(Include = "")])
+
         // GET: Events/Create
         public ActionResult Create()
         {
@@ -63,6 +65,7 @@ namespace SportEvents.Controllers
             ViewBag.GrpId = new SelectList(db.AllGroupsWhereIsUserCreator(user.Id), "Id","Name");
             return View();
         }
+
 
         // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -83,7 +86,7 @@ namespace SportEvents.Controllers
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
                     
-                    if (@event.Repeat != 0) 
+                    if (@event.Repeat) 
                     {
                       
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {

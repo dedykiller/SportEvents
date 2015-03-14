@@ -112,6 +112,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UsersInEventsController.cs" />
     <Compile Include="Models\Application\GroupsBO.cs" />
     <Compile Include="Models\Application\UsersBO.cs" />
     <Compile Include="Models\Application\UtilityMethods.cs" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\images\" />
+    <Folder Include="Views\UsersInEvents\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
