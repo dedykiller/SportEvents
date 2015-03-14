@@ -92,22 +92,29 @@ namespace SportEvents.Controllers
                       //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
                         // TODO: ukládat do databáze i RepeatUntil a interval
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            @event.UserInEvents = null;      
-                            db.Events.Add(@event);
+                            //@event.UserInEvents = null;    
+                            
+
+                            Event extraEvent = new Event();
+                            extraEvent = @event;
+
+                            db.Events.Add(extraEvent);
                             db.SaveChanges();
+
+                            
                             foreach (User item in users)
                             {
                                 UsersInEvent u = new UsersInEvent()
                                     {
                                         participation = participation.Unspoken,                                        
                                         User = item,
-                                        Event = @event 
+                                        Event = extraEvent 
                                     };                                                               
                                 db.UserInEvents.Add(u);
-                                
+                                db.SaveChanges();
                                 
                             }     
-                            db.SaveChanges();
+                            
                             //@event.UserInEvents = null;                            
                             //db.Events.Add(@event);                                                     
                             //db.SaveChanges();
