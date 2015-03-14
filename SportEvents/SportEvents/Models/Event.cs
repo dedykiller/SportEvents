@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Foolproof;
 
 namespace SportEvents.Models
 {
@@ -15,6 +16,7 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím název události")]
         [MaxLength(25, ErrorMessage = "Délka názvu musí být maximálně 25 znaků")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         public DateTime TimeOfEvent { get; set; }
         
