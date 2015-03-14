@@ -76,24 +76,18 @@ namespace SportEvents.Controllers
             {
                 User user = (User)Session["UserSession"];
                 @event.CreatorId = user.Id;
-               // List<int> EventsId = new List<int>();
-              //  int eventId = 0;
-                List<User> users = new List<User>();
-                users = db.AllUsersInGroup(@event.GrpId);
+              
+                List<int> eventsIds = new List<int>();
+              
                 
                 if (db.IsUserCreatorOfGroup(user.Id, @event.GrpId))
                 {
                     
                     if (@event.Repeat != 0) 
                     {
-                      //  UsersInEvent uu = new UsersInEvent();
-                       // uu = null;
-                       // int evId = 0;
-                      //  double differenceInWeeks = ((@event.RepeatUntil - @event.TimeOfEvent).TotalDays/7);
-                        // TODO: ukládat do databáze i RepeatUntil a interval
+                      
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            //@event.UserInEvents = null;    
-                            
+                            @event.UserInEvents = null;   
 
                             Event extraEvent = new Event();
                             extraEvent = @event;
@@ -101,41 +95,20 @@ namespace SportEvents.Controllers
                             db.Events.Add(extraEvent);
                             db.SaveChanges();
 
-                            
-                            foreach (User item in users)
-                            {
-                                UsersInEvent u = new UsersInEvent()
-                                    {
-                                        participation = participation.Unspoken,                                        
-                                        User = item,
-                                        Event = extraEvent 
-                                    };                                                               
-                                db.UserInEvents.Add(u);
-                                db.SaveChanges();
-                                
-                            }     
-                            
-                            //@event.UserInEvents = null;                            
-                            //db.Events.Add(@event);                                                     
-                            //db.SaveChanges();
-                            //eventId = @event.Id;
-                            //EventsId.Add(eventId);   
+                            eventsIds.Add(@event.Id);
+  
                             @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
 
 
-                        }
-                        //AddUsersToAllNewEvents(EventsId);   // TODO
+                        }                       
                     }
                     else
                     {
-                        //db.Events.Add(@event);                        
-                        //db.SaveChanges();
-                        //eventId = @event.Id;
-                        //EventsId.Add(eventId);
-                       // AddUsersToAllNewEvents(@event);
-                       // Events.Add(@event);//
-                       // AddUsersToAllNewEvents(EventsId); // TODO
+                        db.Events.Add(@event);                        
+                        db.SaveChanges();                        
+                        eventsIds.Add(@event.Id);                       
                     }
+                    db.AddAllUsersOfGroupToAllNewEvents(db.GetEventByIdToList(eventsIds), @event.GrpId);
                     TempData["notice"] = "Událost " + @event.Name + " byla vytvořena uživatelem " + user.Email;
                     
                     return RedirectToAction("Index");

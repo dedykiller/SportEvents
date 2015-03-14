@@ -187,6 +187,16 @@ namespace SportEvents.Models
             return user;
         }
 
+        public Event GetEventById(int eventId)
+        {
+            return Events.FirstOrDefault(x => x.Id == eventId);    
+        }
+        
+
+
+
+
+
         public bool IsUserInGroup(int userId, int groupId)
         {
 
@@ -195,6 +205,64 @@ namespace SportEvents.Models
                 return true;
             }
             return false;
+        }
+        public List<Event> GetEventByIdToList(List<int> listEventId)
+        {
+            List<Event> events = new List<Event>();
+            foreach (var item in listEventId)
+            {
+                events.Add(Events.FirstOrDefault(x => x.Id == item));
+            }
+            return events;
+        }
+
+        public void AddAllUsersOfGroupToAllNewEvents(List<Event> events, int groupId) 
+        {
+            List<User> users = new List<User>();
+            users = AllUsersInGroup(groupId);
+            //List<Event> events = new List<Event>();
+            
+
+            foreach (var ev in events)
+            {
+                foreach (User us in users)
+                {
+                    UsersInEvent u = new UsersInEvent()
+                    {
+                        participation = participation.Unspoken,
+                        User = us,
+                        UserId = us.Id,
+                        EventId = ev.Id,
+                        Event = ev
+                    };
+                    UserInEvents.Add(u);
+                    SaveChanges();
+            }
+            }
+        }
+
+        public void AddNewUserOfGroupToAllEvents(List<Event> events, int groupId, User user)
+        {
+            List<User> users = new List<User>();
+            users = AllUsersInGroup(groupId);
+            //List<Event> events = new List<Event>();
+
+
+            foreach (var ev in events)
+            {
+                
+                    UsersInEvent u = new UsersInEvent()
+                    {
+                        participation = participation.Unspoken,
+                        User = user,
+                        UserId = user.Id,
+                        EventId = ev.Id,
+                        Event = ev
+                    };
+                    UserInEvents.Add(u);
+                    SaveChanges();
+                
+            }
         }
 
         

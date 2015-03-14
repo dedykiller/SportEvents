@@ -49,7 +49,7 @@ namespace SportEvents.Models.Application
             userIngroup.UserID = user.Id;
             userIngroup.GroupID = group.Id;
             db.UsersInGroups.Add(userIngroup);
-            
+            db.AddNewUserOfGroupToAllEvents(db.AllEventsOfGroup(group.Id), group.Id, user);
             db.SaveChanges();
         }
 
