@@ -47,7 +47,9 @@ namespace SportEvents.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            User user = (User)Session["UserSession"];
             Event @event = db.Events.Find(id);
+           // @event.participation = db.GetParticipation(@event.Id, user.Id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -55,7 +57,16 @@ namespace SportEvents.Controllers
             return View(@event);
         }
 
-        //public ActionResult Participation ([Bind(Include = "")])
+        [HttpPost]
+        public ActionResult Details ([Bind(Include="participation,Id")]Event @event)
+        {
+            User user = (User)Session["UserSession"];
+            db.UpdateParticipation(@event.Id, user.Id, @event.participation);
+            @event = db.GetEventById(@event.Id);
+           
+            
+            return View(@event);
+        }
 
         // GET: Events/Create
         public ActionResult Create()

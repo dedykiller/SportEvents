@@ -57,9 +57,9 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, "Popis", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Description, "Popis")
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <div>
                 @Html.LabelFor(model => model.Interval, "Jak často se budou konat", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.RadioButtonFor(e => e.Interval, 1) Jednou týdně
+                    @Html.RadioButtonFor(e => e.Interval, 1, new { Checked = "checked"}) Jednou týdně
                     @Html.RadioButtonFor(e => e.Interval, 2) Co dva týdny
                 </div>
             </div>

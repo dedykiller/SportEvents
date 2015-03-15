@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +9,8 @@ using System.Web;
 namespace SportEvents.Models
 {
     
+   
+    
     // jen pro komit
     public class Event
     {
@@ -15,6 +18,7 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím název události")]
         [MaxLength(25, ErrorMessage = "Délka názvu musí být maximálně 25 znaků")]
         public string Name { get; set; }
+        
         [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         public DateTime TimeOfEvent { get; set; }
         
@@ -24,10 +28,10 @@ namespace SportEvents.Models
        
         public string Place { get; set; }
         public string Description { get; set; }
-        [RegularExpression("^[0-9][0-9]*$",
-            ErrorMessage = "Cena události musí být kladné číslo.")]
+        
 
         [DataType(DataType.Currency)]
+        [RegularExpression(@"^\d+.\d{0}$",ErrorMessage = "Cena musí být kladné číslo")]
         public decimal Price { get; set; }
         public bool Repeat { get; set; } // opakovana udalost? ano x ne
 
@@ -37,6 +41,8 @@ namespace SportEvents.Models
        
         public virtual ICollection<UsersInEvent> UserInEvents { get; set; }
 
+        [NotMapped]
+        public participation participation { get; set; }
         
 
         

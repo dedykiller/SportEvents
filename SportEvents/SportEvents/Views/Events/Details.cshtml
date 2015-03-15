@@ -41,14 +41,29 @@
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
-        
-       
-        
-                
 
-    </dl>
+        
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Zpět", "Index")
-</p>
+
+@using (Html.BeginForm("Details","Events", FormMethod.Post))
+       {
+    <dt>
+        @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
+        @Html.RadioButtonFor(model => model.participation, 1) Účastním se
+        
+    </dt>    
+            <input type="submit" value="Potvrď" class="btn btn-default" />
+       
+
+
+        }
+
+
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Zpět", "Index")
+           
+
+        </p>

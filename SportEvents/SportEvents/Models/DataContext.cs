@@ -48,6 +48,16 @@ namespace SportEvents.Models
                
         }
 
+        public void UpdateParticipation (int EventId, int UserId, participation participation) {
+            UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
+            UsersInEvent e = new UsersInEvent();
+            SaveChanges();            
+        }
+
+        public participation GetParticipation(int eventId, int userId)
+        {
+            return UserInEvents.Where(x => x.UserId == userId && x.EventId == eventId).Single().participation;
+        }
         
         public bool IsEmailInDatabase(string email)
         {
