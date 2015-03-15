@@ -1,124 +1,117 @@
 ﻿@model SportEvents.Models.Event
 
-
-    
-    
-
-    <h2>Nová událost</h2>
-
-    <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
-    <script src="~/Scripts/jquery.js"> </script>
-    <script src="~/Scripts/jquery.datetimepicker.js"></script>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.GrpId, "Vyber skupinu, ve které chceš vytvořit události", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("GrpId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.GrpId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, "Název události", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.TimeOfEvent, "Datum a čas události", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input id="datetimepicker" type="text" name="TimeOfEvent" />
-                    <script>
-                        jQuery('#datetimepicker').datetimepicker({
-                            format: 'd.m.Y H:i',
-                            lang: 'cs',
-                            minDate: '0',
-                            timepicker: true
-                        }); </script>
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Place, "Místo", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, "Popis")
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Price, "Cena", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Repeat, "Chceš vytvořit opakovanou událost?", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.RadioButtonFor(e => e.Repeat, true, new { Checked = "checked"}) Ano
-                    @Html.RadioButtonFor(e => e.Repeat, false) Ne
-                </div>
-            </div>
-
-            <div>
-                @Html.LabelFor(model => model.Interval, "Jak často se budou konat", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div>
-                    @Html.RadioButtonFor(e => e.Interval, 1, new { Checked = "checked"}) Jednou týdně
-                    @Html.RadioButtonFor(e => e.Interval, 2) Co dva týdny
-                </div>
-            </div>
+<h2>Nová událost</h2>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.RepeatUntil, "Kdy opakovaná událost končí?", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input id="datetimepicker" type="text" name="RepeatUntil" />
-                    <script>
-                        jQuery('#datetimepicker').datetimepicker({
-                            format: 'd.m.Y H:i',
-                            lang: 'cs',
-                            minDate: '0',
-                            timepicker: true
-                        }); </script>
-
-                </div>
-            </div>
-
-            
+<script src="@Url.Content("~/Scripts/jquery-ui-timepicker-addon.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/TimePickerSettings.js")" type="text/javascript"></script>
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Vytvoř" class="btn btn-default" />
-                </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".datetimepicker").datetimepicker({
+            dateFormat: 'dd.mm.yy ',
+            timeFormat: 'hh:mm',
+            addSliderAccess: true,
+            controlType: 'select',
+            sliderAccessArgs: { touchonly: false },
+            stepMinute: 5,
+            is24HourView: true,
+            hourMin: 0,
+            hourMax: 24,
+            minDate: "+1D",
+        });
+
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GrpId, "Vyber skupinu, ve které chceš vytvořit události", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GrpId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GrpId, "", new { @class = "text-danger" })
             </div>
         </div>
-    }
 
-    <div>
-        @Html.ActionLink("Vytvořit", "Index")
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Název události", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeOfEvent, "Datum a čas události", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TimeOfEvent, new {@class="datetimepicker", @readonly="readonly"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Place, "Místo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "Popis", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, "Cena", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Repeat, "Chceš vytvořit opakovanou událost?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(e => e.Repeat, true, new { Checked = "checked" }) Ano
+                @Html.RadioButtonFor(e => e.Repeat, false) Ne
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Interval, "Jak často se budou konat", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div>
+                @Html.RadioButtonFor(e => e.Interval, 1) Jednou týdně
+                @Html.RadioButtonFor(e => e.Interval, 2) Co dva týdny
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RepeatUntil, "Kdy opakovaná událost končí?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.RepeatUntil, new { @class = "datetimepicker", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Vytvoř" class="btn btn-default" />
+            </div>
+        </div>
     </div>
+}
 
-
-
-
-
-
+<div>
+    @Html.ActionLink("Vytvořit", "Index")
+</div>
