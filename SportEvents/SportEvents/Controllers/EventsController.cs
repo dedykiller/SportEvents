@@ -49,11 +49,16 @@ namespace SportEvents.Controllers
             }
             User user = (User)Session["UserSession"];
             Event @event = db.Events.Find(id);
-           // @event.participation = db.GetParticipation(@event.Id, user.Id);
+            @event.participation = db.GetParticipation(@event.Id, user.Id);
             if (@event == null)
             {
                 return HttpNotFound();
             }
+            
+            
+            @event.UserParticipationYes = db.UsersInEventParticipation(@event.Id, participation.Yes);
+            @event.UserParticipationNo = db.UsersInEventParticipation(@event.Id, participation.No);
+            @event.UserParticipationUnspoken = db.UsersInEventParticipation(@event.Id, participation.Unspoken);
             return View(@event);
         }
 
@@ -63,6 +68,11 @@ namespace SportEvents.Controllers
             User user = (User)Session["UserSession"];
             db.UpdateParticipation(@event.Id, user.Id, @event.participation);
             @event = db.GetEventById(@event.Id);
+            @event.UserParticipationYes = db.UsersInEventParticipation(@event.Id, participation.Yes);
+            @event.UserParticipationNo = db.UsersInEventParticipation(@event.Id, participation.No);
+            @event.UserParticipationUnspoken = db.UsersInEventParticipation(@event.Id, participation.Unspoken);
+
+            
            
             
             return View(@event);

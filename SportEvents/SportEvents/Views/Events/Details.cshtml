@@ -45,25 +45,119 @@
         
 
 </div>
+  
 
 @using (Html.BeginForm("Details","Events", FormMethod.Post))
        {
-    <dt>
-        @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
-        @Html.RadioButtonFor(model => model.participation, 1) Účastním se
-        
-    </dt>    
-            <input type="submit" value="Potvrď" class="btn btn-default" />
-       
+    if (Model.participation.ToString().Equals("Yes"))
+    {
+        <dt>
+            @Html.RadioButtonFor(model => model.participation, -1 ) Nezúčastním se
+            @Html.RadioButtonFor(model => model.participation, 1, new {Checked = "checked"}) Účastním se
+        </dt>
+    }
+    if (Model.participation.ToString().Equals("No"))
+      {
+        <dt>
+            @Html.RadioButtonFor(model => model.participation, -1, new { Checked = "checked" }) Nezúčastním se
+            @Html.RadioButtonFor(model => model.participation, 1) Účastním se
+        </dt>
+      }
+    if (Model.participation.ToString().Equals("Unspoken"))
+    {
+        <dt>
+            @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
+            @Html.RadioButtonFor(model => model.participation, 1) Účastním se
+        </dt>
+    }
 
 
+            <input type="submit" value="Potvrď" class="btn btn-default" /> 
         }
 
 
+<table class="table">
+    <tr>
+        Účastní se:
+        <th>
+            Firstname
+        </th>
+        <th>
+            Surname
+        </th>
 
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Zpět", "Index")
-           
+        <th></th>
+    </tr>
 
-        </p>
+    @foreach (var item in Model.UserParticipationYes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td> 
+        </tr>
+    }
+</table>
+
+<table class="table">
+    <tr>
+        Neúčastní se:
+        <th>
+            Firstname
+        </th>
+        <th>
+            Surname
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.UserParticipationNo)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+
+        </tr>
+    }
+</table>
+
+<table class="table">
+    <tr>
+        Nevyjádřili se:
+        <th>
+            Firstname
+        </th>
+        <th>
+            Surname
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.UserParticipationUnspoken)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+        </tr>
+    }
+</table>
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Zpět", "Index")
+
+    </p>

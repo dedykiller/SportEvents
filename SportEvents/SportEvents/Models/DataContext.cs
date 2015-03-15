@@ -201,7 +201,31 @@ namespace SportEvents.Models
         {
             return Events.FirstOrDefault(x => x.Id == eventId);    
         }
-        
+
+        public List<User> UsersInEventParticipation (int evendId, participation part)
+        {
+            //participation part = new participation();
+            
+            //part = participation.Yes;
+            List<User> users = new List<User>();
+            List<UsersInEvent> userInEvents = new List<UsersInEvent>();
+
+            userInEvents = UserInEvents.Where(x => x.EventId == evendId).ToList();
+            foreach (var item in userInEvents)
+            {
+                if (Users.Where(x => x.Id == item.UserId && item.participation == part).SingleOrDefault() != null)
+                {
+                    users.Add(Users.Where(x => x.Id == item.UserId && item.participation == part).SingleOrDefault());
+                }
+                
+            }
+            return users;
+        }
+
+        public participation UserParticipationStatusOfEvent(int eventId, int userId)
+        {
+            return UserInEvents.Where(x => x.UserId == userId && x.EventId == eventId).Single().participation;
+        }      
 
 
 

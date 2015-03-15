@@ -43,7 +43,15 @@ namespace SportEvents.Models
 
         [NotMapped]
         public participation participation { get; set; }
-        
+        [NotMapped]
+        public List<User> UserParticipationYes { get; set; }
+        [NotMapped]
+        public List<User> UserParticipationNo { get; set; }
+        [NotMapped]
+        public List<User> UserParticipationUnspoken { get; set; }
+        [NotMapped]
+        public bool IsLoggedUserInEvent { get; set; }
+
 
         
     }
