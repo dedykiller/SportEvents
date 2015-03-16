@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-                     
+
 <h2>Seznam všech skupin</h2>
     <hr />
 
@@ -53,27 +53,27 @@
         <th>
             <h3>Konec období</h3>
         </th>
-        <th></th>
     </tr>
 
-    @foreach (var item in Model) {
-        <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
-            </td>
-        </tr>
+@foreach (var item in Model) {
+    <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Creator) 
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
+        </td>
+        
+    </tr>
 }
 
 </table>
