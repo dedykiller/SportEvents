@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SportEvents.Models.Event>
+
+@{
+    ViewBag.Title = "Seznam událostí";
+}
+
+<h2>Seznam událostí</h2>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
+<p>
+    @Html.ActionLink("Nová událost", "Create")
+</p>
+
+<p>
+    @Html.ActionLink("Zpět na seznam skupin", "Index", "Groups")
+</p>
+    @ViewBag.Error
+<table class="table">
+    
+    <tr>
+        
+        <th>
+            Název skupiny
+        </th>
+        <th>
+            @Html.ActionLink("Název události", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>        
+            @Html.ActionLink("Datum a čas", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>        
+        <th>
+            Opakovaná událost do:
+        </th>
+        <th>
+            Místo
+        </th>
+        <th>
+            Popis
+        </th>
+        <th>
+            Cena
+        </th>
+        <th>
+            Opakovaná událost?
+        </th>
+        <th>
+            Interval opakování (týdny)
+        </th>
+        <th>
+            ID skupiny
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeOfEvent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RepeatUntil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repeat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Interval)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrpId)
+        </td>
+        <td>
+            @Html.ActionLink("editovat", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("detail", "Details", new { id=item.Id }) |
+            @Html.ActionLink("smazat", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

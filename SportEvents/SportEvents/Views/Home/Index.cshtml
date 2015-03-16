@@ -1,0 +1,46 @@
+﻿@model SportEvents.Models.Login
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Přihlášení</h2>
+    <hr />
+    <div id="zkouska">
+        <section id="left">
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+
+                @Html.LabelFor(model => model.Email)<br />
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)<br />
+
+                @Html.LabelFor(model => model.Password)<br />
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)<br />
+
+                @Html.ActionLink("Zapomněl jsi své heslo?", "", "")<br />
+
+                <input type="submit" value="Přihlásit" class="button" />
+            }
+        </section>
+        <section id="right">
+            <img src="~/Image/sport.png" />            
+        </section> 
+
+
+    </div> 
+    
+</body>
+</html>

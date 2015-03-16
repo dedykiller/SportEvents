@@ -1,5 +1,6 @@
 ﻿using SportEvents.Controllers.Utility;
 using SportEvents.Models;
+using SportEvents.Models.Application;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -11,12 +12,59 @@ namespace SportEvents.Controllers
     public class UsersController : Controller
     {
         private DataContext db = new DataContext();
+        private UsersBO usersBO = new UsersBO();
 
-        // GET: Users
-        public ActionResult Index()
+        // GET: Users/ListOfUsers
+        public ActionResult ListOfUsers()
         {
             return View(db.Users.ToList());
         }
+
+        // GET: Users/Registration
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+
+        // POST: Users/Registration
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (usersBO.IsEmailInDatabase(user.Email)) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
+                {
+                    ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
+                    return View();
+                }
+
+                usersBO.RegisterUser(user);
+
+                string smtpUserName = "sportevents1@seznam.cz";
+                string smtpPassword = "777003862";
+                string smtpHost = "smtp.seznam.cz";
+                int smtpPort = 25;
+
+                string emailTo = user.Email;
+                string subject = string.Format("Potvrzeni registrace");
+                string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
+
+                EmailService service = new EmailService();
+
+                bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
+
+                TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
+                return RedirectToAction("ListOfUsers");
+                
+            }
+
+            return View();
+
+        }
+
+        // TODO : 
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
@@ -33,55 +81,6 @@ namespace SportEvents.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                bool duplicated = false;
-                // ZaHASHujeme heslo
-                user.Password = UtilityMethods.CalculateHashMd5(user.Password);
-                // A pro dobro modelu taky porovnani hesla... (tohle mozna vyresit jinak)
-                user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
-                
-                user.RegistrationTime = DateTime.Now; // vytvoreni datumu registrace
-
-                var isDuplicatedQuery = db.Users.Select(x => x.Email == user.Email);
-                foreach (bool item in isDuplicatedQuery)
-                {
-                    if (item)
-                    {
-                        duplicated = true;
-                        break;
-                        
-                    }                    
-                }
-
-                if (duplicated)
-                {
-                    ViewBag.Error  = "Uživatel pod tímto emailem je již registrován";
-                    return View();
-                }
-                else
-                {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-
-            return View(user);
-        }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
@@ -99,8 +98,6 @@ namespace SportEvents.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,Password,FirstName,Surname,Telephone,RegistrationTime")] User user)
@@ -109,7 +106,7 @@ namespace SportEvents.Controllers
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ListOfUsers");
             }
             return View(user);
         }
@@ -137,7 +134,7 @@ namespace SportEvents.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ListOfUsers");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,57 @@
+﻿﻿@model SportEvents.Models.Group
+
+@{
+    ViewBag.Title = "Details";
+}
+		
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+
+    <hr />
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <input type="submit" value="Přidat se" class="button" />
+        }
+
+    </div>
+
+    <div class="description-groups">
+        <h2>
+            @Html.DisplayFor(model => model.Creator)
+        </h2>
+        <p class="date">
+            @Html.DisplayFor(model => model.StartOfPaymentPeriod) -
+            @Html.DisplayFor(model => model.EndOfPaymentPeriod)
+        </p>
+        <p>
+            @Html.DisplayFor(model => model.Description)
+        </p>
+    </div>
+
+    @*<table class="table">
+            <tr>
+                <th>Název skupiny</th>
+            </tr>
+            @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Name)
+                    </td>
+                </tr>
+            }
+        </table>*@
+
+
+
+
+
+
+</div>
+

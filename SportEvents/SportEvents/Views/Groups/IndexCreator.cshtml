@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SportEvents.Models.Group>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Seznam mých skupin</h2>
+    <hr />
+
+@if (Session["UserSession"] != null)
+{
+    <h3 style="text-align:center"> @TempData["notice"]</h3>
+    /*<p>
+        @Html.ActionLink("List of Events", "Index", "Events")
+    </p>*/
+    <p class="button-link">
+        @Html.ActionLink("Nová skupina", "Create")
+    </p>
+    <p class="button-link">
+        @Html.ActionLink("Sezam událostí", "Index", "Events")
+    </p>
+    <p class="button-link">
+        @Html.ActionLink("Všechny skupiny", "Index", "Groups")
+    </p>
+    <p class="button-link">
+        @Html.ActionLink("Skupiny, kterých jsem členem", "IndexMember", "Groups")
+    </p>
+    <p class="button-link">
+        @Html.ActionLink("Mnou vytvořené skupiny", "IndexCreator", "Groups")
+    </p>
+
+}
+
+
+<table class="table" >
+    <tr>
+        <th>
+            <h3>Název</h3>
+        </th>
+        <th>
+            <h3>Popis</h3>
+        </th>
+        <th>
+            <h3>ID vlastníka</h3>
+        </th>
+        <th>
+            <h3>Počet uživatelů</h3>
+        </th>
+        <th>
+            <h3>Začátek období</h3>
+        </th>
+        <th>
+            <h3>Konec období</h3>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Creator) 
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
+        </td>
+        <td>
+            @*@Html.ActionLink("Přidat se do skupiny", "AddUserToGroup", new { id = item.Id }) |*@
+            @Html.ActionLink("editovat", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("detail", "Details", new { id=item.Id }) |
+            @Html.ActionLink("smazat", "Delete", new { id=item.Id })
+
+        </td>
+    </tr>
+}
+
+</table>
