@@ -71,12 +71,13 @@ namespace SportEvents.Views
                         //Response.AddHeader("Content-Disposition", @"filename=""jpg_test.jpg""");
                         //Response.TransmitFile(@"~\Resources\images\jpg_test.jpg");
 
-                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten";
+                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
                     }
                 }
 
                 User user = (User)Session["UserSession"];
                 article.UserID = user.Id;
+                article.CreationTime = DateTime.Now;
                 if (filePathName != null)
                 {
                     article.Picture = ImagesPath + "/" + filePathName;

@@ -17,7 +17,7 @@
         @Html.ActionLink("Nová skupina", "Create")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Sezam událostí", "Index","Events")
+        @Html.ActionLink("Seznam událostí", "Index","Events")
     </p>
     <p class="button-link">
         @Html.ActionLink("Všechny skupiny", "Index", "Groups")
@@ -56,7 +56,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -75,13 +75,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
         </td>
-        @*<td>
-            @Html.ActionLink("Přidat se do skupiny", "AddUserToGroup", new { id = item.Id }) |
-            @Html.ActionLink("editovat", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("detail", "Details", new { id=item.Id }) |
-            @Html.ActionLink("smazat", "Delete", new { id=item.Id })
-
-        </td>*@
     </tr>
 }
 

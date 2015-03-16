@@ -1,75 +1,98 @@
-﻿@model SportEvents.Models.Group
+﻿@model SportEvents.ViewModels.GroupsEventsVM
+
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
+<h2>@Model.Group.Name</h2>
 
 <div>
-    <h4>Group</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    @{
+        if (ViewBag.IsUserInGroup == false)
+        {
+            @(Html.BeginForm())
+            {
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-        
-        <dt>
-            @Html.DisplayFor(model => model.CreateTime)
-        </dt>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Creator)
-        </dt>
-
-        <dt>
-            @Html.DisplayFor(model => model.Creator)
-        </dt>
-               
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.StartOfPaymentPeriod)
-        </dt>
-        
-        <dd>
-            @Html.DisplayFor(model => model.StartOfPaymentPeriod)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndOfPaymentPeriod)
-        </dt>
-        
-        <dd>
-            @Html.DisplayFor(model => model.EndOfPaymentPeriod)
-        </dd>
-
-        <dt>
-            <b>Události skupiny</b>
-        </dt>
-
-        
+                <div>
+                    <input type="submit" value="Přidat se do skupiny" class="button" />
+                </div>
+            }
+        }
 
 
+        <div class="description-groups">
+            <p class="date">
+                @Html.DisplayFor(model => Model.Group.StartOfPaymentPeriod) -
+                @Html.DisplayFor(model => Model.Group.EndOfPaymentPeriod)
+            </p>
+            <p>
+                @Html.DisplayFor(model => Model.Group.Description)
+            </p>
+        </div>
 
-    </dl>
+        if (Model.Events.Count() != 0)
+        {
+            <h3>Seznam událostí</h3>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Název události
+                    </th>
+                    <th>
+                        Čas
+                    </th>
+                    <th>
+                        Opakovaná událost do:
+                    </th>
+                    <th>
+                        Místo
+                    </th>
+                    <th>
+                        Cena
+                    </th>
+                    <th>
+                        Opakovaná událost?
+                    </th>
+                    <th>
+                        Interval opakování (týdny)
+                    </th>
+                    <th>
+                        ID skupiny
+                    </th>
+                </tr>
+                @foreach (var item in Model.Events)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeOfEvent)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RepeatUntil)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Place)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Repeat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Interval)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GrpId)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

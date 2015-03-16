@@ -55,23 +55,27 @@ namespace SportEvents.Models.Application
 
         public void AddUserToGroup(Group group, User user)
         {
-            if (db.IsUserInGroup(user.Id, group.Id) == false)   
-            {
-                group.NumberOfUsersInGroup += 1;
-                user = db.GetUserByEmail(user.Email);
+
+            group.NumberOfUsersInGroup += 1;
+            user = db.GetUserByEmail(user.Email);
 
                 
            
-                UsersInGroup userIngroup = new UsersInGroup();
-                userIngroup.UserID = user.Id;
-                userIngroup.GroupID = group.Id;
-                db.UsersInGroups.Add(userIngroup);
-                AddUserToAllEventsOfGroup(group.Id, user);
-                db.SaveChanges();
-                
-            }
+            UsersInGroup userIngroup = new UsersInGroup();
+            userIngroup.UserID = user.Id;
+            userIngroup.GroupID = group.Id;
+            db.UsersInGroups.Add(userIngroup);
+            AddUserToAllEventsOfGroup(group.Id, user);
+            db.SaveChanges();
+
             // TODO : dodělat výpis zda byl uživatel nebo nebyl přidán do skupiny
             
+        }
+
+        public List<Event> AllEventsOfGroup(int groupId)
+        {
+
+            return db.AllEventsOfGroup(groupId);
         }
 
         public void AddUsersToAllNewEvents(Event e)
@@ -93,6 +97,11 @@ namespace SportEvents.Models.Application
                 db.AddUserToEvent(user, item);
             }
             
+        }
+
+        public bool IsUserInGroup(int userId, int groupId)
+        {
+            return db.IsUserInGroup(userId, groupId);
         }
 
       //  public void AddUserToEvent (int groupId, User user)
