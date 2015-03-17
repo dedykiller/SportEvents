@@ -2,15 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
-}
 
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <h2>Seznam všech skupin</h2>
     <hr />
 
-@if (Session["UserSession"] != null)
+if (Session["UserSession"] != null)
 {
    
-    <h3 style="text-align:center"> @TempData["notice"]</h3>
+    
      /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/
@@ -67,3 +67,4 @@
 }
 
 </table>
+}

@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <h2>Seznam skupin, ve kterých jsem členem</h2>
     <hr />
 
 @if (Session["UserSession"] != null)
 {
-    <h3 style="text-align:center"> @TempData["notice"]</h3>
+    
      /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/

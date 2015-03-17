@@ -20,7 +20,10 @@
                 <nav>
                     <ul id="navbar-nav">
                         <li>@Html.ActionLink("Domů", "Index", "Home")</li>
+                        @if (Session["UserSession"] != null)
+                        {
                         <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
+                        }
                     </ul>
                     <ul id="navbar-login">
                         @if (Session["UserSession"] != null)

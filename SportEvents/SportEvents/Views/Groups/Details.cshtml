@@ -12,7 +12,7 @@
     @{
         if (ViewBag.IsUserInGroup == false)
         {
-            @(Html.BeginForm())
+            using(Html.BeginForm())
             {
 
                 <div>
