@@ -52,19 +52,19 @@
                 </tr>
                 @foreach (var item in Model.Events)
                 {
-                    <tr>
+                    <tr onclick="location.href = '@(Url.Action("Details", "Events", new { id = item.Id }))'">
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TimeOfEvent)
-                        </td>                        
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Place)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
-                        </td>                     
+                        </td>
                     </tr>
                 }
             </table>
