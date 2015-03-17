@@ -64,6 +64,84 @@ namespace SportEvents.Controllers
 
         }
 
+        //public ActionResult EditAccount()
+        //{
+        //    //load information about login user to edit form
+        //    User user = (User)Session["UserSession"];
+        //    User LogginUser = db.Users.Single(p => p.Id == user.Id);
+
+        //    if (LogginUser == null)
+        //        return HttpNotFound();
+
+        //    return View(LogginUser);
+        //}
+
+        //// POST: /Product/EditAccount
+        //[HttpPost]
+
+        //public ActionResult EditAccount(User user)
+        //{
+
+        //    User changedUser = db.Users.Single(p => p.Id == user.Id);
+
+        //    //record changed values
+        //    changedUser.Email = user.Email;
+        //    changedUser.RegistrationTime = DateTime.Now;
+        //    changedUser.Password = user.Password;
+        //    changedUser.PasswordComparison = user.Password;
+        //    changedUser.FirstName = user.FirstName;
+        //    changedUser.Surname = user.Surname;
+        //    changedUser.Telephone = user.Telephone;
+
+
+        //    user = changedUser;
+        //    db.SaveChanges();
+        //    TempData["chUserValues"] = "Vaše údaje byly změněny";
+        //    return RedirectToAction("ListOfUsers");
+        //}
+
+        //// GET: Users/ChangePassword
+        //public ActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
+
+
+        //// POST: Users/ChangePassword
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ChangePassword(User user)
+        //{
+        //    User userP = (User)Session["UserSession"];
+        //    User changedPassword = db.Users.Single(p => p.Id == userP.Id);
+        //    string originPassword = changedPassword.Password;
+
+        //    changedPassword.Password = user.Password;
+        //    changedPassword.PasswordComparison = user.Password;
+
+        //    user = changedPassword;
+
+        //    if (user.Password != originPassword)
+        //    {
+        //        user.Password = UtilityMethods.CalculateHashMd5(user.Password);
+        //        user.PasswordComparison = UtilityMethods.CalculateHashMd5(user.PasswordComparison);
+        //    }
+        //    db.SaveChanges();
+
+        //    TempData["chPassword"] = "Vaše heslo bylo změněno";
+        //    return RedirectToAction("ListOfUsers");
+
+        //}
+
+
+
+
+
+
+
+
+
+
         // TODO : 
 
         // GET: Users/Details/5
