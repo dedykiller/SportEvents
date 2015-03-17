@@ -6,13 +6,13 @@
 }
 
 <h3 style="text-align:center"> @TempData["notice"]</h3>
-<a class="return" onclick="history.back()"> @Model.Group.Name </a>
-<hr />
+<h2>Název skupiny: @Model.Group.Name</h2>
+
 <div>
     @{
         if (ViewBag.IsUserInGroup == false)
         {
-            @(Html.BeginForm())
+            using(Html.BeginForm())
             {
 
                 <div>
@@ -23,6 +23,7 @@
 
 
         <div class="description-groups">
+            
             <p>
                 @Html.DisplayFor(model => Model.Group.Description)
             </p>
@@ -38,30 +39,20 @@
                         Název události
                     </th>
                     <th>
-                        Čas
-                    </th>
-                    <th>
-                        Opakovaná událost do:
-                    </th>
+                        Datum a čas
+                    </th>                    
                     <th>
                         Místo
                     </th>
                     <th>
                         Cena
-                    </th>
-                    <th>
-                        Opakovaná událost?
-                    </th>
-                    <th>
-                        Interval opakování (týdny)
-                    </th>
-                    <th>
-                        ID skupiny
-                    </th>
+                    </th>                    
+                    
+                    
                 </tr>
                 @foreach (var item in Model.Events)
                 {
-                    <tr>
+                    <tr onclick="location.href = '@(Url.Action("Details", "Events", new { id = item.Id }))'">
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
@@ -69,22 +60,10 @@
                             @Html.DisplayFor(modelItem => item.TimeOfEvent)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.RepeatUntil)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Place)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Repeat)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Interval)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GrpId)
                         </td>
                     </tr>
                 }
