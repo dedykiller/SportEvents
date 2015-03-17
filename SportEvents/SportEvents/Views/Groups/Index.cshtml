@@ -47,12 +47,7 @@
         <th>
             <h3>Počet uživatelů</h3>
         </th>
-        <th>
-            <h3>Začátek období</h3>
-        </th>
-        <th>
-            <h3>Konec období</h3>
-        </th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -66,12 +61,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
-        </td>
+        
         
     </tr>
 }
