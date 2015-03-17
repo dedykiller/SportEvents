@@ -1,10 +1,14 @@
 ﻿﻿@model SportEvents.Models.Group
 
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
+<a class="return" onclick="history.back()">
+    @Html.DisplayFor(model => model.Name)
+</a>
+
 <div>
     <hr />
     <div>

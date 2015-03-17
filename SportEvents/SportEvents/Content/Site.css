@@ -172,3 +172,13 @@ h2 {
 .date{
     color: grey;
 }
+
+.return{
+    background-image: url('../Image/sipka.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding-left: 50px;
+    font-size: 40px;
+    font-weight: 100;
+    margin-top: 30px;
+}
