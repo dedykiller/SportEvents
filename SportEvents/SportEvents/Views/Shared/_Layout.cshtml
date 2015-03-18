@@ -29,7 +29,7 @@
                         @if (Session["UserSession"] != null)
                         {
                             SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-                            <li>@Html.ActionLink(user.Email, "ListOfUsers", "Users")</li>
+                            <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
                             <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
                         }
                         else

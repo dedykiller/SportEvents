@@ -30,7 +30,7 @@
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)<br />
 
-                @Html.ActionLink("Zapomněl jsi své heslo?", "", "")<br />
+                @Html.ActionLink("Zapomněl jsi své heslo?", "ForgotPassword", "Users")<br />
 
                 <input type="submit" value="Přihlásit" class="button" />
             }

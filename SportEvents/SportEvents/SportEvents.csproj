@@ -131,6 +131,8 @@
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Application\EmailService.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\ForgotPassword.cs" />
+    <Compile Include="Models\GeneratePasswd.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Models\Login.cs" />
