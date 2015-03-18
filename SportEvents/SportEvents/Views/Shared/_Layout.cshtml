@@ -20,13 +20,16 @@
                 <nav>
                     <ul id="navbar-nav">
                         <li>@Html.ActionLink("Domů", "Index", "Home")</li>
+                        @if (Session["UserSession"] != null)
+                        {
                         <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
+                        }
                     </ul>
                     <ul id="navbar-login">
                         @if (Session["UserSession"] != null)
                         {
                             SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-                            <li>@Html.ActionLink(user.Email, "ListOfUsers", "Users")</li>
+                            <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
                             <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
                         }
                         else

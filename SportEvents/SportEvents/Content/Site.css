@@ -55,7 +55,7 @@ input {
     text-shadow: none;
 }
 
-.textarea{
+.textarea {
     font-size: 15px;
     text-shadow: none;
 }
@@ -73,49 +73,47 @@ input {
         background: #67bfbc;
     }
 
-    /*table*/
+/*table*/
 
-    table{
-        width: 100%;
-       /*background: #434242;*/
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px; 
-         -moz-box-shadow: 3px 3px 14px #3b3b3b;
+table {
+    width: 100%;
+    /*background: #434242;*/
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 14px #3b3b3b;
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
     text-align: center;
     border-collapse: collapse;
     background: white;
+}
+
+td {
+    border-top: 1px solid #dcdcdc;
+    padding: 4px;
+    height: 30px;
+}
+
+
+tr:hover td {
+    background: #eaeaea !important;
+    cursor: pointer;
+}
+
+    tr:hover td:first-child {
+        background: #eaeaea !important;
+        cursor: pointer;
     }
 
-    td{
-        border-top: 1px solid #dcdcdc;
-        padding: 4px;
-        height: 30px;
-        
+    tr:hover td:last-child {
+        background: #eaeaea !important;
+        cursor: pointer;
     }
-    
 
-tr:hover td {  
-    background: #eaeaea !important;
-    cursor: pointer;
-}
-tr:hover td:first-child {
-   
-    background: #eaeaea !important;
-    cursor: pointer;
-}
-tr:hover td:last-child {
-    background: #eaeaea !important;
-    cursor: pointer;
-}
-
-th{
+th {
     color: white;
     background: #434242;
-
-
 }
 
 /*písma*/
@@ -129,30 +127,30 @@ h2 {
 
 /*rozvržení body přihlášení*/
 
-#right{
+#right {
     float: left;
     width: 60%;
     height: 300px;
 }
 
-#left{
+#left {
     float: left;
     width: 40%;
     height: 300px;
 }
 
-#right img{
+#right img {
     width: 500px;
     height: 250px;
     padding-top: 50px;
     padding-left: 60px;
 }
 
-.description-groups{
+.description-groups {
     background: white;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-     border-radius: 3px; 
+    border-radius: 3px;
     -moz-box-shadow: 3px 3px 14px #3b3b3b;
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
@@ -160,20 +158,20 @@ h2 {
     width: 60%;
 }
 
-.description-groups p{
-    margin: 0 auto;
-}
+    .description-groups p {
+        margin: 0 auto;
+    }
 
-.description-groups h2{
-    margin: 0;
-    font-size: 30px;       
-}
+    .description-groups h2 {
+        margin: 0;
+        font-size: 30px;
+    }
 
-.date{
+.date {
     color: grey;
 }
 
-.return{
+.return {
     background-image: url('../Image/sipka.png');
     background-repeat: no-repeat;
     cursor: pointer;

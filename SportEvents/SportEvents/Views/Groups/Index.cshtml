@@ -2,23 +2,20 @@
 
 @{
     ViewBag.Title = "Index";
-}
 
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <h2>Seznam všech skupin</h2>
     <hr />
 
-@if (Session["UserSession"] != null)
+if (Session["UserSession"] != null)
 {
    
-    <h3 style="text-align:center"> @TempData["notice"]</h3>
+    
      /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/
     <p class="button-link-first">
         @Html.ActionLink("Nová skupina", "Create")
-    </p>
-    <p class="button-link">
-        @Html.ActionLink("Seznam událostí", "Index","Events")
     </p>
     <p class="button-link">
         @Html.ActionLink("Všechny skupiny", "Index", "Groups")
@@ -47,12 +44,7 @@
         <th>
             <h3>Počet uživatelů</h3>
         </th>
-        <th>
-            <h3>Začátek období</h3>
-        </th>
-        <th>
-            <h3>Konec období</h3>
-        </th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -66,14 +58,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
-        </td>
+        
         
     </tr>
 }
 
 </table>
+}

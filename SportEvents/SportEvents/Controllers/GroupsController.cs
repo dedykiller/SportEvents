@@ -1,4 +1,5 @@
 ﻿using SportEvents.Models.Application;
+using SportEvents.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -42,9 +43,25 @@ namespace SportEvents.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            User user = (User)Session["UserSession"];
             Group group = groupsBO.GetGroupById(id);
 
-            return View(group);
+            GroupsEventsVM vm = new GroupsEventsVM();
+            vm.Group = group;
+
+            if(groupsBO.IsUserInGroup(user.Id, group.Id))
+            {
+                vm.Events = groupsBO.AllEventsOfGroup(group.Id);
+                ViewBag.IsUserInGroup = (bool) true;
+            }
+            else
+            {
+                List<Event> Events = new List<Event>();
+                vm.Events = Events;
+                ViewBag.IsUserInGroup = (bool)false;
+            }
+           
+            return View(vm);
         }
 
         // GET: /Groups/Create
@@ -57,7 +74,6 @@ namespace SportEvents.Models
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,EndOfPaymentPeriod")] Group group)
         {
             if (ModelState.IsValid)
@@ -93,25 +109,31 @@ namespace SportEvents.Models
         // POST: /Groups/AddUserToGroup/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("AddUserToGroup")]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddUserToGroup(int id)
+        [HttpPost, ActionName("Details")]
+        public ActionResult Details(int id)
         {
             if (ModelState.IsValid)
             {
                 if (Session["UserSession"] != null)
                 {
+                   
                     User user = (User)Session["UserSession"];
                     Group group = groupsBO.GetGroupById(id);
-                    
-                    
-                    groupsBO.AddUserToGroup(group, user);
-                    
-                    
+
+                    if (groupsBO.IsUserInGroup(user.Id, group.Id))
+                    {
+                        TempData["notice"] = "Uživatel " + user.FirstName + " už je členem skupiny " + group.Name;
+                    }else
+                    {
+                        groupsBO.AddUserToGroup(group, user);
+                        TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do skupiny " + group.Name;
+                    }
+
                     return RedirectToAction("Index");  
                 }
             }
 
+            TempData["notice"] = "Uživatel není přihlášený";
             return View();
         }
 
