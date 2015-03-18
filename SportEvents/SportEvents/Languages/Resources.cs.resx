@@ -118,6 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addPerson" xml:space="preserve">
-    <value>přidat osobu</value>
+    <value>Přidat osobu</value>
+  </data>
+  <data name="emailLogin" xml:space="preserve">
+    <value>E-mail (přihlášení)</value>
+  </data>
+  <data name="forgot" xml:space="preserve">
+    <value>Zapomněl jsi své heslo?</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Příhlášení</value>
+  </data>
+  <data name="emailLog" xml:space="preserve">
+    <value>Email(Přihlášení)</value>
+  </data>
+  <data name="home" xml:space="preserve">
+    <value>Domů</value>
+  </data>
+  <data name="log_In" xml:space="preserve">
+    <value>Přihlásit</value>
+  </data>
+  <data name="reg" xml:space="preserve">
+    <value>Registrace</value>
   </data>
 </root>

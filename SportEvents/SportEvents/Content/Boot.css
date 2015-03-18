@@ -75,6 +75,9 @@ nav {
     border-bottom: 1px solid white;
 }
 
+.flags{
+    float: left;
+}
 
 /*body*/
 

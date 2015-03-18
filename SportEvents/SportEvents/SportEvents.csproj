@@ -92,7 +92,9 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\sportevents.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Image\ceska_republika.png" />
     <Content Include="Image\sport.png" />
+    <Content Include="Image\vlajka_anglie.gif" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

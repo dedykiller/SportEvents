@@ -19,9 +19,23 @@
                 </div>
                 <nav>
                     <ul id="navbar-nav">
-                        <li>@Html.ActionLink("Domů", "Index", "Home")</li>
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
                     </ul>
                     <ul id="navbar-login">
+                        @using (Html.BeginForm("SetCulture", "Home"))
+                        {
+
+                            <div class="flags">
+                                <label for="en-us">
+                                    <input name="culture" id="en-us" value="en-us" type="radio" /><img src="~/Image/vlajka_anglie.gif">
+                                </label>
+
+                                <label for="es">
+                                    <input name="culture" id="cs" value="cs" type="radio" /><img src="~/Image/ceska_republika.png">
+                                </label>
+                            </div>
+
+                        }
                         @if (Session["UserSession"] != null)
                         {
                             SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
@@ -30,12 +44,15 @@
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Přihlásit", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Registrace", "Register", "Users")</li>
+                            <li>@Html.ActionLink(@SportEvents.Languages.Resources.log_In, "Index", "Home")</li>
+                            <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>
                         }
                     </ul>
+                    
                 </nav>
-            </div>
+
+               
+        </div>
         </header>
         <main>
             @RenderBody()

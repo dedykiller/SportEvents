@@ -13,41 +13,10 @@
     <title>Login</title>
 </head>
 <body>
-    <h2>Přihlášení</h2>
+    <h2>@SportEvents.Languages.Resources.Login</h2>
     <h2>@SportEvents.Languages.Resources.addPerson</h2>
 
-@using(Html.BeginForm("SetCulture", "Home"))
-{
-    <fieldset>
-        <legend></legend>
 
-        <div class="control-group">
-            <div class="controls">
-                <label for="en-us">
-                    <input name="culture" id="en-us" value="en-us" type="radio"/> English
-                </label>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="es">
-                    <input name="culture" id="cs" value="cs" type="radio" /> Español
-                </label>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="ar">
-                    <input name="culture" id="ar" value="ar" type="radio" /> العربية
-                </label>
-            </div>
-        </div>
-
-
-    </fieldset>
-}
 
 
     <script type="text/javascript">
@@ -75,9 +44,9 @@
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)<br />
 
-                @Html.ActionLink("Zapomněl jsi své heslo?", "", "")<br />
+                @Html.ActionLink(@SportEvents.Languages.Resources.forgot, "", "")<br />
 
-                <input type="submit" value="Přihlásit" class="button" />
+                <input type="submit" value="@SportEvents.Languages.Resources.log_In" class="button" />
             }
         </section>
         <section id="right">

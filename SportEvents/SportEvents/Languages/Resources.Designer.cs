@@ -61,11 +61,74 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to addPerson.
+        ///   Looks up a localized string similar to Add person.
         /// </summary>
         public static string addPerson {
             get {
                 return ResourceManager.GetString("addPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email(Login).
+        /// </summary>
+        public static string emailLog {
+            get {
+                return ResourceManager.GetString("emailLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail(login).
+        /// </summary>
+        public static string emailLogin {
+            get {
+                return ResourceManager.GetString("emailLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Did you forget your password?.
+        /// </summary>
+        public static string forgot {
+            get {
+                return ResourceManager.GetString("forgot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string home {
+            get {
+                return ResourceManager.GetString("home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        public static string log_In {
+            get {
+                return ResourceManager.GetString("log_In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string reg {
+            get {
+                return ResourceManager.GetString("reg", resourceCulture);
             }
         }
     }

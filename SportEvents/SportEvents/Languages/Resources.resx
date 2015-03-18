@@ -118,6 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addPerson" xml:space="preserve">
-    <value>addPerson</value>
+    <value>Add person</value>
+  </data>
+  <data name="emailLogin" xml:space="preserve">
+    <value>E-mail(login)</value>
+  </data>
+  <data name="forgot" xml:space="preserve">
+    <value>Did you forget your password?</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="emailLog" xml:space="preserve">
+    <value>Email(Login)</value>
+  </data>
+  <data name="home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="log_In" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="reg" xml:space="preserve">
+    <value>Registration</value>
   </data>
 </root>
