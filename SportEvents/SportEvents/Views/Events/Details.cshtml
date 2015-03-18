@@ -65,7 +65,9 @@
       }
     if (Model.participation.ToString().Equals("Unspoken"))
     {
+        
         <dt>
+           
             @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
             @Html.RadioButtonFor(model => model.participation, 1) Účastním se
         </dt>
@@ -80,10 +82,10 @@
     <tr>
         Účastní se:
         <th>
-            Firstname
+            Křestní jméno
         </th>
         <th>
-            Surname
+            Příjmení
         </th>
 
         <th></th>
@@ -106,10 +108,10 @@
     <tr>
         Neúčastní se:
         <th>
-            Firstname
+            Křestní jméno
         </th>
         <th>
-            Surname
+            Příjmení
         </th>
 
         <th></th>
@@ -133,10 +135,10 @@
     <tr>
         Nevyjádřili se:
         <th>
-            Firstname
+            Křestní jméno
         </th>
         <th>
-            Surname
+            Příjmení
         </th>
 
         <th></th>
@@ -157,7 +159,7 @@
 
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Zpět", "Index")
+        
+        
 
     </p>
