@@ -176,6 +176,7 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Users\EditAccount.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Users\ForgotPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
