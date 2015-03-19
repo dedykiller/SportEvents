@@ -37,6 +37,7 @@ namespace SportEvents.Models
       //  public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public int NumberOfUsersInGroup { get; set; }
+        public virtual ICollection<PaymentPeriod> PaymentPeriods { get; set; }
         
         //public Group()
         //{
