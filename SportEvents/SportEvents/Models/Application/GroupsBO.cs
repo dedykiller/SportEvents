@@ -42,7 +42,7 @@ namespace SportEvents.Models.Application
             group.Creator = user.Id;
             group.CreateTime = DateTime.Now;            
             UsersInGroup userIngroup = new UsersInGroup(); 
-            group.StartOfPaymentPeriod = DateTime.Now;            
+            //group.StartOfPaymentPeriod = DateTime.Now;            
             group.NumberOfUsersInGroup += 1;
             db.Groups.Add(group);
             db.SaveChanges();
@@ -50,7 +50,18 @@ namespace SportEvents.Models.Application
             userIngroup.GroupID = group.Id;
             db.UsersInGroups.Add(userIngroup);
             db.AddNewUserOfGroupToAllEvents(db.AllEventsOfGroup(group.Id), group.Id, user);
+            db.PaymentPeriods.Add(new PaymentPeriod
+            {
+                Group = group,
+                Start = DateTime.Now,
+                End = group.EndOfPaymentPeriod
+            });
             db.SaveChanges();
+        }
+
+        public void CreatePaymentPeriod(Group group, DateTime start, DateTime end)
+        {
+            
         }
 
         public void AddUserToGroup(Group group, User user)

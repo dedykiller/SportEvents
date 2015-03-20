@@ -27,9 +27,11 @@ namespace SportEvents.Models
         public string Description { get; set; }
         public DateTime CreateTime { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime StartOfPaymentPeriod { get; set; }
+        //[NotMapped]
+        //[DataType(DataType.Date)]
+        //public DateTime StartOfPaymentPeriod { get; set; }
         
+        [NotMapped]
         [DataType(DataType.Date)]
         public DateTime EndOfPaymentPeriod { get; set; }
                 
