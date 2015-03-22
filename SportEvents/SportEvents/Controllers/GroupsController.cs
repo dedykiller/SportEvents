@@ -8,18 +8,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SportEvents.Controllers.Utility;
+using Hangfire;
+using System.Diagnostics;
 
 namespace SportEvents.Models
 {
     
     public class GroupsController : Controller
-    {
-        
+    {        
         GroupsBO groupsBO = new GroupsBO();
 
         // GET: /Groups/
         public ActionResult Index()
         {
+            //RecurringJob.AddOrUpdate(() => Debug.WriteLine("pico pico pico" + DateTime.Now), Cron.Minutely);
+            RecurringJob.AddOrUpdate(()=> UtilityMethods.CreateNewPaymentPeriodByCron)
+
             return View(groupsBO.Index());
         }
 
@@ -195,6 +200,7 @@ namespace SportEvents.Models
                 groupsBO.Dispose();
             }
             base.Dispose(disposing);
+            
         }
     }
 }

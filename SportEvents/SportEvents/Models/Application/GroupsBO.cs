@@ -57,6 +57,7 @@ namespace SportEvents.Models.Application
                 End = group.EndOfPaymentPeriod
             });
             db.SaveChanges();
+            
         }
 
         public void CreatePaymentPeriod(Group group, DateTime start, DateTime end)

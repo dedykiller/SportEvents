@@ -7,6 +7,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Hangfire;
+using Microsoft.Owin;
+using Hangfire.SqlServer;
+using Owin;
+using SportEvents.Controllers.Utility;
+using System.Diagnostics;
+
 namespace SportEvents
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -15,6 +22,8 @@ namespace SportEvents
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //RecurringJob.AddOrUpdate(() => UtilityMethods.CreateNewPaymentPeriodByCron, Cron.Minutely);
         }
 
         protected void Application_PreRequestHandlerExecute()
