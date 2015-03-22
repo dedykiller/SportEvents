@@ -1,4 +1,23 @@
-﻿(function ($) {
+﻿// Time picker nasvatveni + spousteci kod
+
+// Spousteci kod
+$(document).ready(function () {
+    $(".datetimepicker").datetimepicker({
+        dateFormat: 'dd.mm.yy ',
+        timeFormat: 'hh:mm',
+        addSliderAccess: true,
+        controlType: 'select',
+        sliderAccessArgs: { touchonly: false },
+        stepMinute: 5,
+        is24HourView: true,
+        hourMin: 0,
+        hourMax: 24,
+        minDate: "+1D",
+    });
+});
+
+// Nastaveni
+(function ($) {
     $.timepicker.regional['cs'] = {
         timeOnlyTitle: 'Vyberte čas',
         timeText: 'Čas',
@@ -16,10 +35,6 @@
     };
     $.timepicker.setDefaults($.timepicker.regional['cs']);
 })(jQuery);
-
-
-
-
 
 function DateTimeNow() {
     var myDate = new Date();

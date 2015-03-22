@@ -35,7 +35,7 @@ namespace SportEvents.Models
         public decimal Price { get; set; }
         public bool Repeat { get; set; } // opakovana udalost? ano x ne
 
-        [Range(1, 2)]      
+        [Range(1, 2)]
         public int Interval { get; set; } // interval opakovani udalosti v tydnech
         public virtual Group Group { get; set; }
        

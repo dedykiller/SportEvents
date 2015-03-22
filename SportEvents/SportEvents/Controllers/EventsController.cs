@@ -95,7 +95,7 @@ namespace SportEvents.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval,CreatorId")] Event @event)
         {
-            
+
             if (ModelState.IsValid)
             {
                 User user = (User)Session["UserSession"];

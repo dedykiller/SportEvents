@@ -23,7 +23,7 @@ namespace SportEvents.Models
         public ActionResult Index()
         {
             //RecurringJob.AddOrUpdate(() => Debug.WriteLine("pico pico pico" + DateTime.Now), Cron.Minutely);
-            RecurringJob.AddOrUpdate(()=> UtilityMethods.CreateNewPaymentPeriodByCron)
+//            RecurringJob.AddOrUpdate(() => UtilityMethods.CreateNewPaymentPeriodByCron);
 
             return View(groupsBO.Index());
         }
