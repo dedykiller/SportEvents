@@ -69,11 +69,6 @@ namespace SportEvents.Views
                         file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
                         var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
                         file.SaveAs(path);
-
-                        //Response.ContentType = "application/jpeg";
-                        //Response.AddHeader("Content-Disposition", @"filename=""jpg_test.jpg""");
-                        //Response.TransmitFile(@"~\Resources\images\jpg_test.jpg");
-
                         TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
                     }
                 }
