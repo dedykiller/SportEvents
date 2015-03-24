@@ -27,9 +27,11 @@ namespace SportEvents.Models
         public string Description { get; set; }
         public DateTime CreateTime { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime StartOfPaymentPeriod { get; set; }
+        //[NotMapped]
+        //[DataType(DataType.Date)]
+        //public DateTime StartOfPaymentPeriod { get; set; }
         
+        [NotMapped]
         [DataType(DataType.Date)]
         public DateTime EndOfPaymentPeriod { get; set; }
                 
@@ -37,6 +39,7 @@ namespace SportEvents.Models
       //  public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public int NumberOfUsersInGroup { get; set; }
+        public virtual ICollection<PaymentPeriod> PaymentPeriods { get; set; }
         
         //public Group()
         //{

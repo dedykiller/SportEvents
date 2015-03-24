@@ -9,11 +9,11 @@
 
 @if (Session["UserSession"] != null)
 {
-    
+
     /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/
-    <p class="button-link">
+    <p class="button-link-first">
         @Html.ActionLink("Nová skupina", "Create")
     </p>
     <p class="button-link-first">
@@ -43,13 +43,7 @@
         <th>
             <h3>Počet uživatelů</h3>
         </th>
-        <th>
-            <h3>Začátek období</h3>
-        </th>
-        <th>
-            <h3>Konec období</h3>
-        </th>
-        <th></th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -60,18 +54,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creator) 
-        </td>        
+               
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartOfPaymentPeriod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndOfPaymentPeriod)
-        </td>
+        
     </tr>
 }
 

@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("KuznikRoprDB") 
+            : base("dedekDB") 
         {
         }
 
@@ -21,6 +21,9 @@ namespace SportEvents.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<UsersInEvent> UserInEvents { get; set; }
+        public DbSet<PaymentPeriod> PaymentPeriods { get; set; }
+
+      //  public DbSet<UsersInEvent> UsersInEvents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -47,10 +50,20 @@ namespace SportEvents.Models
                
         }
 
+        public List<Article> GetAllArticlesOfGroup(int GroupId)
+        {
+            return Articles.Where(x => x.GroupID == GroupId).ToList();
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();
             SaveChanges();            
+        }
+
+        public void nanana()
+        {
+
         }
 
         public participation GetParticipation(int eventId, int userId)
@@ -111,6 +124,12 @@ namespace SportEvents.Models
             listOfGroups = Groups.Where(x => x.Creator == User_Id).ToList();
 
             return listOfGroups;
+        }
+
+        public bool HasUserAnyGroupWhereIsCreator (int userId)
+        {
+            if (Groups.Any(x => x.Creator == userId)) return true;
+            else return false;
         }
 
         public List<User> AllUsersInGroup(int GroupId)
@@ -296,16 +315,6 @@ namespace SportEvents.Models
                     SaveChanges();
                 
             }
-        }
-
-        public List<Article> GetAllArticlesOfGroup(int groupId)
-        {
-            return Articles.Where(x => x.GroupID == groupId).ToList();
-        }
-
-        public List<Article> getAllArticles()
-        {
-            return this.Articles.ToList();
         }
 
 
