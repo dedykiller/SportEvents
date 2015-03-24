@@ -6,6 +6,7 @@
 }
 <h3 style="text-align:center"> @TempData["upload"]</h3>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
+<h3 style="text-align:center"> @TempData["email"]</h3>
 
 <body>
 
@@ -103,8 +104,9 @@
                             </td>
                             <td>
                                 <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
-                                <h6>Autor: @Html.DisplayFor(modelItem => item.UserID)</h6>
-                                <h6>Skupina: <span>@Html.DisplayFor(modelItem => item.GroupID)</span></h6>
+                                <h6><span>@Html.DisplayFor(modelItem => item.CreationTime)</span></h6>
+                                <h6>Autor: @Html.DisplayFor(modelItem => item.CreatorFullName)</h6>
+                                
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID })
                                 @Html.ActionLink("Details ", "Details", new { id = item.ID })
                                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })

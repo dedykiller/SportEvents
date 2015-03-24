@@ -10,7 +10,13 @@ namespace SportEvents.Models
 {
     public class EmailService
     {
-        public bool Send(string smtpUserName, string smtpPassword, string smtpHost, int smtpPort, string emailTo, string subject, string body)
+        private const string smtpUserName = "sportevents1@seznam.cz";
+        private const string smtpPassword = "777003862";
+        private const string smtpHost = "smtp.seznam.cz";
+        private const int smtpPort = 25;
+
+
+        public bool Send(string emailTo, string subject, string body)
         {
             try
             {
