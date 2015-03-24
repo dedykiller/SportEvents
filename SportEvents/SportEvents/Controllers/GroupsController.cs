@@ -1,4 +1,5 @@
-﻿using SportEvents.Models.Application;
+﻿using SportEvents.Controllers;
+using SportEvents.Models.Application;
 using SportEvents.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,7 @@ using System.Web.Mvc;
 
 namespace SportEvents.Models
 {
-    
-    public class GroupsController : Controller
+    public class GroupsController : BaseController
     {
         
         GroupsBO groupsBO = new GroupsBO();
@@ -59,8 +59,8 @@ namespace SportEvents.Models
                 List<Event> Events = new List<Event>();
                 vm.Events = Events;
                 ViewBag.IsUserInGroup = (bool)false;
-            }
-           
+        }
+
             return View(vm);
         }
 
@@ -125,7 +125,7 @@ namespace SportEvents.Models
                         TempData["notice"] = "Uživatel " + user.FirstName + " už je členem skupiny " + group.Name;
                     }else
                     {
-                        groupsBO.AddUserToGroup(group, user);
+                    groupsBO.AddUserToGroup(group, user);
                         TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do skupiny " + group.Name;
                     }
 
@@ -158,7 +158,7 @@ namespace SportEvents.Models
         {
             if (ModelState.IsValid)
             {
-                groupsBO.EditGroup(group);                
+                groupsBO.EditGroup(group);
                 return RedirectToAction("Index");
             }
             return View(group);

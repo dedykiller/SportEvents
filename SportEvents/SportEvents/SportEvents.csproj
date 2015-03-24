@@ -97,7 +97,9 @@
     <None Include="Properties\PublishProfiles\VojtaPub.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Image\sipka.png" />
+    <Content Include="Image\ceska_republika.png" />
     <Content Include="Image\sport.png" />
+    <Content Include="Image\vlajka_anglie.gif" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -118,9 +120,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Languages\CultureHelper.cs" />
+    <Compile Include="Languages\Resources.cs.Designer.cs">
+      <DependentUpon>Resources.cs.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Models\Application\GroupsBO.cs" />
     <Compile Include="Models\Application\UsersBO.cs" />
     <Compile Include="Models\Application\UtilityMethods.cs" />
@@ -141,6 +150,11 @@
     <Compile Include="Models\UsersInEvent.cs" />
     <Compile Include="Models\UsersInGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Languages\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="ViewModels\GroupsEventsVM.cs" />
   </ItemGroup>
@@ -188,6 +202,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Resources\images\" />
     <Folder Include="Views\UsersInEvents\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Languages\Resources.cs.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.cs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

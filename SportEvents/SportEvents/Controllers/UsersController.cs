@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace SportEvents.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private DataContext db = new DataContext();
         private UsersBO usersBO = new UsersBO();

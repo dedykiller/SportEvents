@@ -13,7 +13,21 @@
     <title>Login</title>
 </head>
 <body>
-    <h2>Přihlášení</h2>
+    <h2>@SportEvents.Languages.Resources.Login</h2>
+    <h2>@SportEvents.Languages.Resources.addPerson</h2>
+
+
+
+
+    <script type="text/javascript">
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
+    </script>
+
     <hr />
     <div id="zkouska">
         <section id="left">
@@ -30,9 +44,9 @@
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)<br />
 
-                @Html.ActionLink("Zapomněl jsi své heslo?", "ForgotPassword", "Users")<br />
+                @Html.ActionLink(@SportEvents.Languages.Resources.forgot, "", "")<br />
 
-                <input type="submit" value="Přihlásit" class="button" />
+                <input type="submit" value="@SportEvents.Languages.Resources.log_In" class="button" />
             }
         </section>
         <section id="right">
