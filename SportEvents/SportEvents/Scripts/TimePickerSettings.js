@@ -27,7 +27,7 @@ $(document).ready(function () {
         millisecText: 'Milisekundy',
         timezoneText: 'Časové pásmo',
         currentText: 'Nyní',
-        closeText: 'Zavřít',
+        closeText: 'Ok',
         timeFormat: 'H:mm',
         amNames: ['dop.', 'AM', 'A'],
         pmNames: ['odp.', 'PM', 'P'],
@@ -46,7 +46,7 @@ function DateTimeNow() {
 
 jQuery(function ($) {
     $.datepicker.regional['cs'] = {
-        closeText: 'Zavřít',
+        closeText: 'Ok',
         prevText: '&#x3c;Dříve',
         nextText: 'Později&#x3e;',
         currentText: 'Nyní',
