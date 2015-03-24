@@ -4,47 +4,27 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<a class="return" onclick="history.back()">
+    @Model.Title
+</a>
+<hr />
 
-<div>
-    <h4>Article</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GroupID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GroupID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="button-link-first">
+    @Html.ActionLink("Editace", "Edit", new { id = Model.ID })
 </p>
+
+<div class="description-groups">
+    <div id="article-img">
+        <img src="@Url.Content(Model.Picture)" alt="images" width="200" height="200">
+    </div>
+    <div id="article-content">
+      <b>@Html.DisplayFor(model => model.CreatorFullName)</b><br />
+       <b>@Html.DisplayFor(model => model.CreationTime)</b><br /><br />
+       <p>@Html.DisplayFor(model => model.Body)</p>
+        
+    </div>
+
+</div>
+

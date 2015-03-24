@@ -4,14 +4,26 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>Editace vašeho účtu</h2>
+<a class="return" onclick="history.back()">
+    Můj Profil
+</a>
+
+<hr />
+
+<p class="button-link">
+    @Html.ActionLink("Změnit údaje", "EditAccount")
+</p>
+<p class="button-link">
+    @Html.ActionLink("Změnit heslo", "ChangePassword")
+</p>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <hr />
+
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
@@ -66,19 +78,13 @@
 
 
 
-        
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Uložit" class="btn btn-default" />
+                <input type="submit" value="Uložit" class="button" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Hlavní stránka", "Index","Groups")
-</div>
-<div>
-    @Html.ActionLink("Změnit heslo?", "ChangePassword")
-</div>

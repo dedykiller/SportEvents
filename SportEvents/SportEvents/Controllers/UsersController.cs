@@ -42,10 +42,6 @@ namespace SportEvents.Controllers
 
                 usersBO.RegisterUser(user);
 
-                string smtpUserName = "sportevents1@seznam.cz";
-                string smtpPassword = "777003862";
-                string smtpHost = "smtp.seznam.cz";
-                int smtpPort = 25;
 
                 string emailTo = user.Email;
                 string subject = string.Format("Potvrzeni registrace");
@@ -53,7 +49,7 @@ namespace SportEvents.Controllers
 
                 EmailService service = new EmailService();
 
-                bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
+                bool kq = service.Send(emailTo, subject, body);
 
                 TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
                 return RedirectToAction("ListOfUsers");
@@ -97,7 +93,7 @@ namespace SportEvents.Controllers
             user = changedUser;
             db.SaveChanges();
             TempData["chUserValues"] = "Vaše údaje byly změněny";
-            return RedirectToAction("ListOfUsers");
+            return RedirectToAction("EditAccount");
         }
 
         // GET: Users/ChangePassword
@@ -129,7 +125,7 @@ namespace SportEvents.Controllers
             db.SaveChanges();
 
             TempData["chPassword"] = "Vaše heslo bylo změněno";
-            return RedirectToAction("ListOfUsers");
+            return RedirectToAction("ChangePassword");
 
         }
 
@@ -165,10 +161,6 @@ namespace SportEvents.Controllers
                     db.SaveChanges();
 
                     //odeslani emailu
-                    string smtpUserName = "sportevents1@seznam.cz";
-                    string smtpPassword = "777003862";
-                    string smtpHost = "smtp.seznam.cz";
-                    int smtpPort = 25;
 
                     string emailTo = user.Email;
                     string subject = string.Format("Potvrzeni registrace");
@@ -176,7 +168,7 @@ namespace SportEvents.Controllers
 
                     EmailService service = new EmailService();
 
-                    bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
+                    bool kq = service.Send(emailTo, subject, body);
 
                     TempData["notice"] = "Uživateli " + user.Email + " byl odeslán email s dočasným heslem: " + kq;
                     //return RedirectToAction("index", "Home");

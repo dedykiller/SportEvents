@@ -14,7 +14,7 @@ namespace SportEvents.Views
     public class ArticleController : Controller
     {
         private DataContext db = new DataContext();
-        private const string ImagesPath = "~/Resources/images";
+        private const string ImagesPath = "~/Image";
 
         // GET: /Article/
         public ActionResult Index()
@@ -38,9 +38,12 @@ namespace SportEvents.Views
         }
 
         // GET: /Article/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            Article article = new Article();
+            article.GroupID = id;
+
+            return View(article);
         }
 
         // POST: /Article/Create
@@ -48,7 +51,7 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Body")] Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Body,GroupID")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -66,18 +69,15 @@ namespace SportEvents.Views
                         file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
                         var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
                         file.SaveAs(path);
-
-                        //Response.ContentType = "application/jpeg";
-                        //Response.AddHeader("Content-Disposition", @"filename=""jpg_test.jpg""");
-                        //Response.TransmitFile(@"~\Resources\images\jpg_test.jpg");
-
                         TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
                     }
                 }
 
                 User user = (User)Session["UserSession"];
                 article.UserID = user.Id;
+                article.CreatorFullName = user.FirstName + " " + user.Surname;
                 article.CreationTime = DateTime.Now;
+
                 if (filePathName != null)
                 {
                     article.Picture = ImagesPath + "/" + filePathName;
@@ -89,9 +89,25 @@ namespace SportEvents.Views
                 db.Articles.Add(article);
                 db.SaveChanges();
 
-                TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek : " + article.Title;
+                Group g = db.Groups.Find(article.GroupID);
+                string subject = string.Format("Upozornění na nový článek");
+                string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name);
 
-                return RedirectToAction("Index");
+                List<User> users = db.AllUsersInGroup(g.Id);
+                bool kq = false;
+
+                foreach (User item in users)
+                {
+                    string emailTo = item.Email;
+                    EmailService service = new EmailService();
+                    kq = service.Send(emailTo, subject, body);
+                }
+
+
+                TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
+
+                return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
 
 
@@ -119,13 +135,46 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Title,Body")] Article article)
+        public ActionResult Edit([Bind(Include="ID,Title,Body,GroupID")] Article article)
         {
             if (ModelState.IsValid)
             {
+                string filePathName = null;
+
+                if (Request != null)
+                {
+                    HttpPostedFileBase file = Request.Files["UploadedFile"];
+
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        string fileContentType = file.ContentType;
+                        filePathName = Path.GetFileName(file.FileName);
+                        byte[] fileBytes = new byte[file.ContentLength];
+                        file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                        var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
+                        file.SaveAs(path);
+                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
+                    }
+                }
+
+                if (filePathName != null)
+                {
+                    article.Picture = ImagesPath + "/" + filePathName;
+                }
+                else
+                {
+                    article.Picture = ImagesPath + "/no_image.png";
+                }
+
+                article.CreationTime = DateTime.Now;
+                User u = (User)Session["UserSession"];
+                article.CreatorFullName = u.FirstName + " " + u.Surname;
+                article.UserID = u.Id;
                 db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " úspěšně editoval článek : " + article.Title;
+                return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
             return View(article);
         }

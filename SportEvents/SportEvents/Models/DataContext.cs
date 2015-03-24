@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("masterDB") 
+            : base("KuznikRoprDB") 
         {
         }
 
@@ -21,7 +21,6 @@ namespace SportEvents.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<UsersInEvent> UserInEvents { get; set; }
-      //  public DbSet<UsersInEvent> UsersInEvents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -297,6 +296,16 @@ namespace SportEvents.Models
                     SaveChanges();
                 
             }
+        }
+
+        public List<Article> GetAllArticlesOfGroup(int groupId)
+        {
+            return Articles.Where(x => x.GroupID == groupId).ToList();
+        }
+
+        public List<Article> getAllArticles()
+        {
+            return this.Articles.ToList();
         }
 
 

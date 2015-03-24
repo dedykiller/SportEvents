@@ -6,48 +6,47 @@
 
 <h3 style="text-align:center"> @TempData["upload"]</h3>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
-<p>
-    @Html.ActionLink("Vytvoř nový článek", "Create")
+
+<a class="return" onclick="history.back()">
+    Seznam článků
+</a>
+    <hr />
+<p class="button-link-first">
+    @Html.ActionLink("Nový článek", "Create", "Article")
 </p>
 
+<section id="left-article">
+    <table id="table-article">
+        <tr>
+            <th>
+                <h3>Seznam článků</h3>
+            </th>
+            <th>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GroupID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Picture)
-        </th>
-        <th></th>
-    </tr>
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GroupID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            <img src="@Url.Content(item.Picture)" alt="images" width="200" height="200">
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+<tr>
+                <td>
+                    <img src="@Url.Content(item.Picture)" alt="images" width="150" height="100">
+                </td>
+                <td>
+                    <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
+                    <h6>Autor: @Html.DisplayFor(modelItem => item.UserID)</h6>
+                    <h6>Skupina: <span>@Html.DisplayFor(modelItem => item.GroupID)</span></h6>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    @Html.ActionLink("Details ", "Details", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+
+</section>
+   
+
+
+
