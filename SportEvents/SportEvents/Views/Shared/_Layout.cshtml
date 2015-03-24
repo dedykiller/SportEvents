@@ -19,12 +19,12 @@
                 </div>
                 <nav>
                     <ul id="navbar-nav">
-                        <li>@Html.ActionLink("Domů", "Index", "Home")</li>
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
                         @if (Session["UserSession"] != null)
                         {
                         <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
                         }
-                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
+                        
                     </ul>
                     <ul id="navbar-login">
                         @using (Html.BeginForm("SetCulture", "Home"))
