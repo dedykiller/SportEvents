@@ -1,73 +1,78 @@
 ﻿
-    <!DOCTYPE HTML>
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - My ASP.NET Application</title>
-        <link href="~/Content/Site.css" rel="stylesheet" />
-        <link href="~/Content/Boot.css" rel="stylesheet" />
-        <script src="~/Scripts/modernizr-2.6.2.js"></script>
-        <script src="~/Scripts/jquery-1.10.2.js"></script>
-        <script src="~/Scripts/jquery-effects.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,800italic,400,300,600,700' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-        <header>
-            <div id="header-container">
-                <div class="header-brand">
-                    @Html.ActionLink("Sport Events", "Index", "Home", null, new { @class = "navbar-brand" })
-                </div>
-                <nav>
-                    <ul id="navbar-nav">
-                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
-                        @if (Session["UserSession"] != null)
-                        {
-                        <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
-                        }
-                        
-                    </ul>
-                    <ul id="navbar-login">
-                        @using (Html.BeginForm("SetCulture", "Home"))
-                        {
-
-                            <div class="flags">
-                                <label for="en-us">
-                                    <input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" />
-               
-                                </label>
-
-                                <label for="es">
-                                    <input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" />
-                                </label>
-                            </div>
-
-                        }
-                        @if (Session["UserSession"] != null)
-                        {
-                            SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-                            <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
-                            <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink(@SportEvents.Languages.Resources.log_In, "Index", "Home")</li>
-                            <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>
-                        }
-                    </ul>
-                    
-                </nav>
-
-               
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Boot.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-effects.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,800italic,400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <div id="header-container">
+            <div class="header-brand">
+                @Html.ActionLink("Sport Events", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
-        </header>
-        <main>
-            @RenderBody()
-            
-            <footer>
-                <hr />
-                <p>&copy; @DateTime.Now.Year - Sport Events</p>
-            </footer>
-        </main>
-    </body>
+            <nav>
+                <ul id="navbar-nav">
+                    <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
+                    @if (Session["UserSession"] != null)
+                    {
+                        <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
+                    }
+
+                </ul>
+                <ul id="navbar-login">
+
+
+                    @*<div class="flags">
+                            <label for="en-us">
+
+
+                            </label>
+
+                            <label for="es">
+
+                            </label>
+                        </div>*@
+
+
+                    @if (Session["UserSession"] != null)
+                    {
+                        SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+                        <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
+                        <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.log_In, "Index", "Home")</li>
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>
+                        using (Html.BeginForm("SetCulture", "Home"))
+                        {
+                            <li><input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" /></li>
+                            <li><input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" /></li>
+                        }
+                    }
+                </ul>
+
+            </nav>
+
+
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+
+        <footer>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Sport Events</p>
+        </footer>
+    </main>
+</body>
 </html>
