@@ -78,9 +78,11 @@
         }
 
 
+
+
 <table class="table">
     <tr>
-        Účastní se:
+        Seznam lidí:
         <th>
             Křestní jméno
         </th>
@@ -88,30 +90,8 @@
             Příjmení
         </th>
 
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.UserParticipationYes)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td> 
-        </tr>
-    }
-</table>
-
-<table class="table">
-    <tr>
-        Neúčastní se:
         <th>
-            Křestní jméno
-        </th>
-        <th>
-            Příjmení
+            účast
         </th>
 
         <th></th>
@@ -126,23 +106,29 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
+            
+            <td>
 
+                <img src="~/Image/dialog-no.png" />
+            </td>
         </tr>
     }
-</table>
 
-<table class="table">
-    <tr>
-        Nevyjádřili se:
-        <th>
-            Křestní jméno
-        </th>
-        <th>
-            Příjmení
-        </th>
+    @foreach (var item in Model.UserParticipationYes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
 
-        <th></th>
-    </tr>
+                <img src="~/Image/Button-Ok-icon.png" />
+            </td>
+        </tr>
+    }
 
     @foreach (var item in Model.UserParticipationUnspoken)
     {
@@ -153,9 +139,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
+            <td>
+                <img src="~/Image/question-mark.png" />
+            </td>
         </tr>
     }
+
 </table>
+
 
 
     <p>

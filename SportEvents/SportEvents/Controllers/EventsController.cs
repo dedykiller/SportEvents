@@ -134,8 +134,8 @@ namespace SportEvents.Controllers
                     }
                     db.AddAllUsersOfGroupToAllNewEvents(db.GetEventByIdToList(eventsIds), @event.GrpId);
                     TempData["notice"] = "Událost " + @event.Name + " byla vytvořena uživatelem " + user.Email;
-                    
-                    return RedirectToAction("Index");
+
+                    return RedirectToAction("Details", "Groups", new {id = @event.GrpId});
                     
                 }                    
                 else
