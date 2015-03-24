@@ -50,6 +50,11 @@ namespace SportEvents.Models
                
         }
 
+        public List<Article> GetAllArticlesOfGroup(int GroupId)
+        {
+            return Articles.Where(x => x.GroupID == GroupId).ToList();
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();
@@ -114,6 +119,12 @@ namespace SportEvents.Models
             listOfGroups = Groups.Where(x => x.Creator == User_Id).ToList();
 
             return listOfGroups;
+        }
+
+        public bool HasUserAnyGroupWhereIsCreator (int userId)
+        {
+            if (Groups.Any(x => x.Creator == userId)) return true;
+            else return false;
         }
 
         public List<User> AllUsersInGroup(int GroupId)
