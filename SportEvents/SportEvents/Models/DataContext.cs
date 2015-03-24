@@ -61,6 +61,11 @@ namespace SportEvents.Models
             SaveChanges();            
         }
 
+        public void nanana()
+        {
+
+        }
+
         public participation GetParticipation(int eventId, int userId)
         {
             return UserInEvents.Where(x => x.UserId == userId && x.EventId == eventId).Single().participation;
