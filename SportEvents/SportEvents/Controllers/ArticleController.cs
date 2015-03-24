@@ -14,7 +14,7 @@ namespace SportEvents.Views
     public class ArticleController : Controller
     {
         private DataContext db = new DataContext();
-        private const string ImagesPath = "~/Resources/images";
+        private const string ImagesPath = "~/Image";
 
         // GET: /Article/
         public ActionResult Index()
@@ -75,7 +75,9 @@ namespace SportEvents.Views
 
                 User user = (User)Session["UserSession"];
                 article.UserID = user.Id;
+                article.CreatorFullName = user.FirstName + " " + user.Surname;
                 article.CreationTime = DateTime.Now;
+
                 if (filePathName != null)
                 {
                     article.Picture = ImagesPath + "/" + filePathName;
@@ -87,7 +89,7 @@ namespace SportEvents.Views
                 db.Articles.Add(article);
                 db.SaveChanges();
 
-                TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek : " + article.Title;
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
@@ -121,12 +123,41 @@ namespace SportEvents.Views
         {
             if (ModelState.IsValid)
             {
+                string filePathName = null;
+
+                if (Request != null)
+                {
+                    HttpPostedFileBase file = Request.Files["UploadedFile"];
+
+                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    {
+                        string fileContentType = file.ContentType;
+                        filePathName = Path.GetFileName(file.FileName);
+                        byte[] fileBytes = new byte[file.ContentLength];
+                        file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                        var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
+                        file.SaveAs(path);
+                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
+                    }
+                }
+
+                if (filePathName != null)
+                {
+                    article.Picture = ImagesPath + "/" + filePathName;
+                }
+                else
+                {
+                    article.Picture = ImagesPath + "/no_image.png";
+                }
+
                 article.CreationTime = DateTime.Now;
                 User u = (User)Session["UserSession"];
+                article.CreatorFullName = u.FirstName + " " + u.Surname;
                 article.UserID = u.Id;
-                article.Picture = ImagesPath + "/no_image.png";
                 db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " úspěšně editoval článek : " + article.Title;
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
             return View(article);

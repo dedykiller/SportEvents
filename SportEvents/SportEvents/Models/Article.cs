@@ -16,6 +16,7 @@ namespace SportEvents.Models
         public string Body { get; set; }
         public string Picture { get; set; }
         public DateTime CreationTime { get; set; }
+        public string CreatorFullName{ get; set; }
 
     }
 }

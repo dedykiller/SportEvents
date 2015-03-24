@@ -96,6 +96,7 @@
     <None Include="Properties\PublishProfiles\sportevents.pubxml" />
     <None Include="Properties\PublishProfiles\VojtaPub.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Image\no_image.png" />
     <Content Include="Image\sipka.png" />
     <Content Include="Image\sport.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -186,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\images\" />
     <Folder Include="Views\UsersInEvents\" />
   </ItemGroup>
   <PropertyGroup>
