@@ -8,17 +8,17 @@
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 
 <body>
-    
-        <a class="return" onclick="history.back()">
-            @Model.Group.Name
-        </a>
+
+    <a class="return" onclick="history.back()">
+        @Model.Group.Name
+    </a>
     <hr />
     @if (ViewBag.IsUserInGroup == true)
-{
-    <div class="button-link-first">
-        @Html.ActionLink("Nový článek", "Create", "Article", new { id = Model.Group.Id }, null)
-    </div>
-}
+    {
+        <div class="button-link-first">
+            @Html.ActionLink("Nový článek", "Create", "Article", new { id = Model.Group.Id }, null)
+        </div>
+    }
 
     <div id="container">
         <section id="left">
@@ -39,22 +39,23 @@
             </div>
             @if (Model.Events.Count() != 0)
             {
-                <h3>Seznam událostí</h3>
+               
 
                 <table class="table">
                     <tr>
                         <th>
-                            Název události
+                            <h3>Seznam událostí</h3>
                         </th>
                         <th>
-                            Datum a čas
+
                         </th>
                         <th>
-                            Místo
+
                         </th>
                         <th>
-                            Cena
+
                         </th>
+
 
                     </tr>
                     @foreach (var item in Model.Events)
@@ -78,10 +79,10 @@
             }
         </section>
         <section id="right">
-           
+
             @if (Model.Articles.Count() != 0)
             {
-                
+
 
                 <table id="table-article">
                     <tr>
@@ -89,32 +90,32 @@
                             <h3>Seznam článků</h3>
                         </th>
                         <th>
-                            
+
                         </th>
-                       
+
 
                     </tr>
-@foreach (var item in Model.Articles)
-        {
-            <tr>
-                <td>
-                    <img src="@Url.Content(item.Picture)" alt="images">
-                </td>
-                <td>
-                    <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
-                    <h6>Autor: @Html.DisplayFor(modelItem => item.UserID)</h6>
-                    <h6>Skupina: <span>@Html.DisplayFor(modelItem => item.GroupID)</span></h6>
-                    @Html.ActionLink("Edit" , "Edit", new { id = item.ID }) 
-                    @Html.ActionLink("Details ", "Details", new { id = item.ID }) 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
+                    @foreach (var item in Model.Articles)
+                    {
+                       <tr onclick="location.href = '@(Url.Action("Details", "Article", new { id = item.ID }))'">
+                            <td>
+                                <img src="@Url.Content(item.Picture)" alt="images">
+                            </td>
+                            <td>
+                                <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
+                                <h6>Autor: @Html.DisplayFor(modelItem => item.UserID)</h6>
+                                <h6>Skupina: <span>@Html.DisplayFor(modelItem => item.GroupID)</span></h6>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                @Html.ActionLink("Details ", "Details", new { id = item.ID })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
 
-    </table>
+                </table>
             }
 
-        </section>      
-     </div>
-    
+        </section>
+    </div>
+
 </body>
