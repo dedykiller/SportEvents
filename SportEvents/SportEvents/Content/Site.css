@@ -3,38 +3,29 @@ select,
 textarea {
     max-width: 280px;
 }
-
 .field-validation-error {
     color: #ba0000;
 }
-
 .field-validation-valid {
     display: none;
 }
-
 input.input-validation-error {
     border: 1px solid #ba0000;
 }
-
 input[type="checkbox"].input-validation-error {
     border: 0 none;
 }
-
 .validation-summary-errors {
     color: #ba0000;
 }
-
 .validation-summary-valid {
     display: none;
 }
-
 /*form*/
-
 form {
     margin: 30px 0 0 30px;
     clear: both;
 }
-
 input {
     background: white;
     padding: 10px 15px 10px 15px;
@@ -50,36 +41,27 @@ input {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
 }
-
 .label {
     font-size: 15px;
     text-shadow: none;
 }
-
 .textarea {
     font-size: 15px;
     text-shadow: none;
 }
-
-
-
 .button {
     background: #79cbc9;
     color: white;
     text-shadow: none;
     margin-bottom: 20px;
 }
-
     .button:hover {
         background: #67bfbc;
     }
-
  #left form{
      margin-left: 0;
  }
-
 /*table*/
-
 .table {
     width: 100%;
     /*background: #434242;*/
@@ -93,64 +75,49 @@ input {
     border-collapse: collapse;
     background: white;
 }
-
 td {
     border-top: 1px solid #dcdcdc;
     padding: 4px;
     height: 30px;
 }
-
-
 tr:hover td {
     background: #eaeaea !important;
     cursor: pointer;
 }
-
     tr:hover td:first-child {
         background: #eaeaea !important;
         cursor: pointer;
     }
-
     tr:hover td:last-child {
         background: #eaeaea !important;
         cursor: pointer;
     }
-
 th {
     color: white;
     background: #434242;
 }
-
 /*písma*/
-
-
-
 h2 {
     font-size: 40px;
     font-weight: 100;
 }
-
 /*rozvržení body přihlášení*/
-
 #right {
     float: left;
     width: 60%;
     margin-bottom: 30px;
 }
-
 #left {
     float: left;
     width: 40%;
     margin-bottom: 30px;
 }
-
 #right img {
     width: 500px;
     height: 250px;
     padding-top: 50px;
     padding-left: 60px;
 }
-
 .description-groups {
     background: white;
     -moz-border-radius: 3px;
@@ -162,20 +129,16 @@ h2 {
     padding: 10px;
     width: 85%;
 }
-
     .description-groups p {
         margin: 0 auto;
     }
-
     .description-groups h2 {
         margin: 0;
         font-size: 30px;
     }
-
 .date {
     color: grey;
 }
-
 .return {
     background-image: url('../Image/sipka.png');
     background-repeat: no-repeat;
@@ -186,12 +149,10 @@ h2 {
     margin-top: 30px;
     color: #333333;#
 }
-
 #container{
     width:100%;
     clear: both;
 }
-
 #table-article{
     width: 90%;
     border-collapse: collapse;
@@ -201,53 +162,42 @@ h2 {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
 }
-
 #table-article h5{
     font-size: 18px;
     margin: 5px;
     color: #3F9AB7;
     
 }
-
 #table-article h6{
     margin: 2px 0 2px 5px;
     color: black;
     font-size: 13px;
 }
-
 #table-article img{
     width: 150px; 
     height: 100px;
     padding: 0; 
 }
-
 #table-article td:first-child{
     width: 160px;
 }
-
-
 #table-article td {
     border-top: 1px solid #dcdcdc;
     padding: 4px;
     vertical-align: top;
 }
-
-
 tr:hover td {
     background: #eaeaea !important;
     cursor: pointer;
 }
-
  tr:hover td:first-child {
         background: #eaeaea !important;
         cursor: pointer;
     }
-
     tr:hover td:last-child {
         background: #eaeaea !important;
         cursor: pointer;
     }
-
     #table-article a{        
         padding: 4px;
         background: #FDFEFE;
@@ -257,14 +207,12 @@ tr:hover td {
         margin: 6px 2px 0 0;
         float: right;
     }
-
     #left-article{
         float: left;
         clear: both;
         width: 60%;
         margin-bottom: 30px;
     }
-
     #left table{
         width: 90%;
         margin-top: 30px;
