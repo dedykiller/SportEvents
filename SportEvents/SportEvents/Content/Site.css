@@ -32,6 +32,7 @@ input[type="checkbox"].input-validation-error {
 
 form {
     margin: 30px 0 0 30px;
+    clear: both;
 }
 
 input {
@@ -73,9 +74,13 @@ input {
         background: #67bfbc;
     }
 
+ #left form{
+     margin-left: 0;
+ }
+
 /*table*/
 
-table {
+.table {
     width: 100%;
     /*background: #434242;*/
     -moz-border-radius: 5px;
@@ -130,13 +135,13 @@ h2 {
 #right {
     float: left;
     width: 60%;
-    height: 300px;
+    margin-bottom: 30px;
 }
 
 #left {
     float: left;
     width: 40%;
-    height: 300px;
+    margin-bottom: 30px;
 }
 
 #right img {
@@ -155,7 +160,7 @@ h2 {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
     padding: 10px;
-    width: 60%;
+    width: 85%;
 }
 
     .description-groups p {
@@ -179,4 +184,83 @@ h2 {
     font-size: 40px;
     font-weight: 100;
     margin-top: 30px;
+    color: #333333;#
 }
+
+#container{
+    width:100%;
+    clear: both;
+}
+
+#table-article{
+    width: 90%;
+    border-collapse: collapse;
+    clear: both;
+    background: white;
+     -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
+}
+
+#table-article h5{
+    font-size: 18px;
+    margin: 5px;
+    color: #3F9AB7;
+    
+}
+
+#table-article h6{
+    margin: 2px 0 2px 5px;
+    color: black;
+    font-size: 13px;
+}
+
+#table-article img{
+    width: 150px; 
+    height: 100px;
+    padding: 0; 
+}
+
+#table-article td:first-child{
+    width: 160px;
+}
+
+
+#table-article td {
+    border-top: 1px solid #dcdcdc;
+    padding: 4px;
+    vertical-align: top;
+}
+
+
+tr:hover td {
+    background: #eaeaea !important;
+    cursor: pointer;
+}
+
+ tr:hover td:first-child {
+        background: #eaeaea !important;
+        cursor: pointer;
+    }
+
+    tr:hover td:last-child {
+        background: #eaeaea !important;
+        cursor: pointer;
+    }
+
+    #table-article a{        
+        padding: 4px;
+        background: #FDFEFE;
+        color: #4E5665;
+        border: 1px solid #4E5665;
+        font-weight: bold;
+        margin: 6px 2px 0 0;
+        float: right;
+    }
+
+    #left-article{
+        float: left;
+        clear: both;
+        width: 60%;
+        margin-bottom: 30px;
+    }

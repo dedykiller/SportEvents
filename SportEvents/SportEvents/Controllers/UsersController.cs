@@ -97,7 +97,7 @@ namespace SportEvents.Controllers
             user = changedUser;
             db.SaveChanges();
             TempData["chUserValues"] = "Vaše údaje byly změněny";
-            return RedirectToAction("ListOfUsers");
+            return RedirectToAction("EditAccount");
         }
 
         // GET: Users/ChangePassword
@@ -129,7 +129,7 @@ namespace SportEvents.Controllers
             db.SaveChanges();
 
             TempData["chPassword"] = "Vaše heslo bylo změněno";
-            return RedirectToAction("ListOfUsers");
+            return RedirectToAction("ChangePassword");
 
         }
 
