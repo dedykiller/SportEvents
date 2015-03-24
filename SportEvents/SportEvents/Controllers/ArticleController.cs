@@ -38,9 +38,12 @@ namespace SportEvents.Views
         }
 
         // GET: /Article/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            Article article = new Article();
+            article.GroupID = id;
+
+            return View(article);
         }
 
         // POST: /Article/Create
@@ -48,7 +51,7 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Body")] Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Body,GroupID")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +94,7 @@ namespace SportEvents.Views
 
                 TempData["notice"] = "Uživatel " + user.FirstName + " vložil článek : " + article.Title;
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
 
 
@@ -119,13 +122,17 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Title,Body")] Article article)
+        public ActionResult Edit([Bind(Include="ID,Title,Body,GroupID")] Article article)
         {
             if (ModelState.IsValid)
             {
+                article.CreationTime = DateTime.Now;
+                User u = (User)Session["UserSession"];
+                article.UserID = u.Id;
+                article.Picture = ImagesPath + "/no_image.png";
                 db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
             return View(article);
         }

@@ -13,6 +13,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.GroupID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, "Titulek",  new { @class = "control-label col-md-2" })
@@ -43,6 +44,6 @@
         </div>
 }
 
-<div>
+<div class="button-link">
     @Html.ActionLink("Back to List", "Index")
 </div>

@@ -299,6 +299,16 @@ namespace SportEvents.Models
             }
         }
 
+        public List<Article> GetAllArticlesOfGroup(int groupId)
+        {
+            return Articles.Where(x => x.GroupID == groupId).ToList();
+        }
+
+        public List<Article> getAllArticles()
+        {
+            return this.Articles.ToList();
+        }
+
 
         
     }

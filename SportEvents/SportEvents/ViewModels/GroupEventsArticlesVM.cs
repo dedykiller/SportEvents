@@ -6,9 +6,10 @@ using System.Web;
 
 namespace SportEvents.ViewModels
 {
-    public class GroupsEventsVM
+    public class GroupEventsArticlesVM
     {
         public Group Group { get; set; }
         public List<Event> Events { get; set; }
+        public List<Article> Articles { get; set; }
     }
 }

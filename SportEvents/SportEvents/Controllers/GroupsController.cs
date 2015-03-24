@@ -46,18 +46,21 @@ namespace SportEvents.Models
             User user = (User)Session["UserSession"];
             Group group = groupsBO.GetGroupById(id);
 
-            GroupsEventsVM vm = new GroupsEventsVM();
+            GroupEventsArticlesVM vm = new GroupEventsArticlesVM();
             vm.Group = group;
 
             if(groupsBO.IsUserInGroup(user.Id, group.Id))
             {
                 vm.Events = groupsBO.AllEventsOfGroup(group.Id);
                 ViewBag.IsUserInGroup = (bool) true;
+                vm.Articles = groupsBO.GetAllArticlesOfGroup(group.Id);
             }
             else
             {
                 List<Event> Events = new List<Event>();
                 vm.Events = Events;
+                List<Article> Articles = new List<Article>();
+                vm.Articles = Articles;
                 ViewBag.IsUserInGroup = (bool)false;
             }
            

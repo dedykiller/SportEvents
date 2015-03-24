@@ -1,77 +1,129 @@
-﻿@model SportEvents.ViewModels.GroupsEventsVM
+﻿@model SportEvents.ViewModels.GroupEventsArticlesVM
 
 
 @{
     ViewBag.Title = "Details";
 }
-
+<h3 style="text-align:center"> @TempData["upload"]</h3>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
-<h2>Název skupiny: @Model.Group.Name</h2>
 
-<div>
-    @{
-        if (ViewBag.IsUserInGroup == false)
-        {
-            using(Html.BeginForm())
-            {
+<body>
+    <div>
 
-                <div>
-                    <input type="submit" value="Přidat se do skupiny" class="button" />
-                </div>
-            }
-        }
+        <h2>Název skupiny: @Model.Group.Name</h2>
 
+        @{
+            <section id="left">
 
-        <div class="description-groups">
-            
-            <p>
-                @Html.DisplayFor(model => Model.Group.Description)
-            </p>
-        </div>
-
-        if (Model.Events.Count() != 0)
-        {
-            <h3>Seznam událostí</h3>
-
-            <table class="table">
-                <tr>
-                    <th>
-                        Název události
-                    </th>
-                    <th>
-                        Datum a čas
-                    </th>                    
-                    <th>
-                        Místo
-                    </th>
-                    <th>
-                        Cena
-                    </th>                    
-                    
-                    
-                </tr>
-                @foreach (var item in Model.Events)
+                @if (ViewBag.IsUserInGroup == false)
                 {
-                    <tr onclick="location.href = '@(Url.Action("Details", "Events", new { id = item.Id }))'">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TimeOfEvent)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Place)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                    </tr>
-                }
-            </table>
-        }
-    }
-</div>
+                    using (Html.BeginForm("Details", "Groups", FormMethod.Post))
+                    {
 
-<p>    
-    @Html.ActionLink("Zpět", "Index")
-</p>
+                        <div class="button-link">
+                            <input type="submit" value="Přidat se do skupiny" class="button" />
+                        </div>
+                    }
+                }
+
+                <div class="description-groups">
+
+                    <p>
+                        @Html.DisplayFor(model => Model.Group.Description)
+                    </p>
+                </div>
+
+                @if (Model.Events.Count() != 0)
+                {
+                    <h3>Seznam událostí</h3>
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Název události
+                            </th>
+                            <th>
+                                Datum a čas
+                            </th>
+                            <th>
+                                Místo
+                            </th>
+                            <th>
+                                Cena
+                            </th>
+
+
+                        </tr>
+                        @foreach (var item in Model.Events)
+                        {
+                            <tr onclick="location.href = '@(Url.Action("Details", "Events", new { id = item.Id }))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TimeOfEvent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Place)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+
+                <p class="button-link">
+                    @Html.ActionLink("Zpět", "Index")
+                </p>
+            </section>
+
+            <section id="right" class="button-link">
+                @if (ViewBag.IsUserInGroup == true)
+                {
+                 <div class="button-link">
+                    @Html.ActionLink("Vytvoř nový článek", "Create", "Article", new { id = Model.Group.Id }, null)
+                </div>
+                }
+                <hr />
+
+                @if (Model.Articles.Count() != 0)
+                {
+                    <h3>Seznam článků</h3>
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                User ID
+                            </th>
+                            <th>
+                                Group ID
+                            </th>
+                            <th>
+                                Název článku
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.Articles)
+                        {
+                            <tr onclick="location.href = '@(Url.Action("Details", "Article", new { id = item.ID }))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GroupID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                }
+
+
+            </section>
+        }
+    </div>
+</body>
