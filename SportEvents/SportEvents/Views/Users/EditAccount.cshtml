@@ -4,14 +4,13 @@
     ViewBag.Title = "EditAccount";
 }
 
-<h2>EditAccount</h2>
+<h2>Editace vašeho účtu</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
@@ -71,14 +70,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Uložit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index","Groups")
+    @Html.ActionLink("Hlavní stránka", "Index","Groups")
 </div>
 <div>
     @Html.ActionLink("Změnit heslo?", "ChangePassword")
