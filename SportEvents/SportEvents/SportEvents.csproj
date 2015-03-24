@@ -195,7 +195,6 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="ViewModels\GroupEventsArticlesVM.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\GroupsEventsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
