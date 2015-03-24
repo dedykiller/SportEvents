@@ -3,15 +3,17 @@
 @{
     ViewBag.Title = "Vytvoř nový článek";
 }
-
-<h3>Vytvoř nový článek</h3>
+<a class="return" onclick="history.back()">
+    Vytvoř nový článek
+</a>
+<hr />
 
 @using (Html.BeginForm("Create", "Article", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
+      
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.GroupID)
 
@@ -37,13 +39,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" name="Submit" value="Vytvoř nový článek" class="button-link" />
+                    <input type="submit" name="Submit" value="Vytvořit" class="button" />
                 </div>
             </div>
 
         </div>
 }
 
-<div class="button-link">
-    @Html.ActionLink("Back to List", "Index")
-</div>
