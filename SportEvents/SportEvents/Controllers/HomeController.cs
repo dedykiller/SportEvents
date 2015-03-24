@@ -36,6 +36,7 @@ namespace SportEvents.Controllers
                 }
                 else
                 {
+                    TempData["notice"] = "Neexistující uživatel nebo chybné heslo.";
                     ViewBag.Error = "Neexistující uživatel nebo chybné heslo";
                     return View();
                 }

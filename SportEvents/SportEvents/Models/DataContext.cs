@@ -121,6 +121,12 @@ namespace SportEvents.Models
             return listOfGroups;
         }
 
+        public bool HasUserAnyGroupWhereIsCreator (int userId)
+        {
+            if (Groups.Any(x => x.Creator == userId)) return true;
+            else return false;
+        }
+
         public List<User> AllUsersInGroup(int GroupId)
         {
            

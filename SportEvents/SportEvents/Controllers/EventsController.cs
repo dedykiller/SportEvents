@@ -81,10 +81,19 @@ namespace SportEvents.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
+            
             User user = (User)Session["UserSession"];
+            if (db.HasUserAnyGroupWhereIsCreator(user.Id))
+            {
+                ViewBag.GrpId = new SelectList(db.AllGroupsWhereIsUserCreator(user.Id), "Id","Name");
+                return View();
+            }
             //ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name");
-            ViewBag.GrpId = new SelectList(db.AllGroupsWhereIsUserCreator(user.Id), "Id","Name");
-            return View();
+            else
+            {
+                TempData["notice"] = "Uživatel " + user.Email + " není zakladatelem žádné skupiny. Nejdříve musíte vytvořit skupinu." ;
+                return RedirectToAction("Index", "Groups");
+            }
         }
 
 
@@ -95,6 +104,7 @@ namespace SportEvents.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,TimeOfEvent,RepeatUntil,GrpId,Place,Description,Price,Repeat,Interval,CreatorId")] Event @event)
         {
+            
 
             if (ModelState.IsValid)
             {
