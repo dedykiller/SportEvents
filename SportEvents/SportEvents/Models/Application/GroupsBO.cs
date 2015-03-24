@@ -138,10 +138,6 @@ namespace SportEvents.Models.Application
             db.Dispose();
         }
 
-        public List<Article> getAllArticles()
-        {
-            return db.getAllArticles();
-        }
 
         public List<Article> GetAllArticlesOfGroup(int groupId)
         {

@@ -43,10 +43,6 @@ namespace SportEventsTests
         [TestMethod]
         public void RegisterEmailNotification()
         {
-            string smtpUserName = "sportevents1@seznam.cz";
-            string smtpPassword = "777003862";
-            string smtpHost = "smtp.seznam.cz";
-            int smtpPort = 25;
 
             string emailTo = "KuznikJan@seznam.cz";
             string subject = string.Format("Potvrzení registrace");
@@ -54,7 +50,7 @@ namespace SportEventsTests
 
             EmailService service = new EmailService();
 
-            Assert.IsTrue(service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body));
+            Assert.IsTrue(service.Send(emailTo, subject, body));
         }
     }
 }
