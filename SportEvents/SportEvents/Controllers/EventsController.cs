@@ -121,8 +121,8 @@ namespace SportEvents.Controllers
                     {
                       
                         for (DateTime dT = @event.TimeOfEvent ; dT <= @event.RepeatUntil; dT = dT.AddDays(7*@event.Interval)) {
-                            @event.UserInEvents = null;   
-
+                            @event.UserInEvents = null;
+                            @event.TimeOfEvent = dT;
                             Event extraEvent = new Event();
                             extraEvent = @event;
 
@@ -131,7 +131,7 @@ namespace SportEvents.Controllers
 
                             eventsIds.Add(@event.Id);
   
-                            @event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
+                            //@event.TimeOfEvent = @event.TimeOfEvent.AddDays(7*@event.Interval); 
 
 
                         }                       
