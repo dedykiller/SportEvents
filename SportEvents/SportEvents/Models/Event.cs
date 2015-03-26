@@ -30,10 +30,11 @@ namespace SportEvents.Models
         public string Place { get; set; }
         public string Description { get; set; }
         
-
+         
         [DataType(DataType.Currency)]
-       // [DisplayFormat(DataFormatString = "{0:#}")]
-        [RegularExpression(@"^\d+.\d{0}$",ErrorMessage = "Cena musí být kladné číslo")]
+        [Range(0, 99999999, ErrorMessage = "Cena události musí být kladné číslo nebo 0.")]
+        [DisplayFormat(DataFormatString = "{0:#} Kč")]
+      //  [RegularExpression(@" 0+\.[0-9]*[1-9][0-9]*$",ErrorMessage = "Cena musí být kladné číslo")]
         public decimal Price { get; set; }
         public bool Repeat { get; set; } // opakovana udalost? ano x ne
 
