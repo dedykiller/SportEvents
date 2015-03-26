@@ -23,19 +23,19 @@ namespace SportEvents
              */
 
 
-            app.UseHangfire(config =>
-            {
-                // Basic setup required to process background jobs.
-                config.UseSqlServerStorage("dedekDB");
-                config.UseServer();
+            //app.UseHangfire(config =>
+            //{
+            //    // Basic setup required to process background jobs.
+            //    config.UseSqlServerStorage("dedekDB");
+            //    config.UseServer();
 
-                var options = new SqlServerStorageOptions
-                {
-                    QueuePollInterval = TimeSpan.FromSeconds(15) // Default value
-                };
+            //    var options = new SqlServerStorageOptions
+            //    {
+            //        QueuePollInterval = TimeSpan.FromSeconds(15) // Default value
+            //    };
 
-                var storage = new SqlServerStorage("dedekDB", options);
-            });
+            //    var storage = new SqlServerStorage("dedekDB", options);
+            //});
         }
     }
 }
