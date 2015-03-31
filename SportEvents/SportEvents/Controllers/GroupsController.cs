@@ -63,9 +63,29 @@ namespace SportEvents.Models
                 vm.Articles = Articles;
                 ViewBag.IsUserInGroup = (bool)false;
         }
+            if (group.Creator== user.Id)
+            {
+                ViewBag.IsUserCreator = (bool)true;
+            }
+            else
+            {
+                ViewBag.IsUserCreator = (bool)false;
+
+            }
+            
 
             return View(vm);
         }
+
+        //public ActionResult ChangeTypeOfPaymentForPeriod ()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult ChangeTypeOfPaymentForPeriod(string ahoj)
+        //{
+        //    return View();
+        //}
 
         // GET: /Groups/Create
         public ActionResult Create()

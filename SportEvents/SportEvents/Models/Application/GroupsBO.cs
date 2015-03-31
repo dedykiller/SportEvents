@@ -40,7 +40,7 @@ namespace SportEvents.Models.Application
         {
             user = db.GetUserByEmail(user.Email);
             group.Creator = user.Id;
-            group.CreateTime = DateTime.Now;            
+            group.CreateTime = DateTime.Today;            
             UsersInGroup userIngroup = new UsersInGroup(); 
             //group.StartOfPaymentPeriod = DateTime.Now;            
             group.NumberOfUsersInGroup += 1;
@@ -52,17 +52,46 @@ namespace SportEvents.Models.Application
             db.AddNewUserOfGroupToAllEvents(db.AllEventsOfGroup(group.Id), group.Id, user);
             db.PaymentPeriods.Add(new PaymentPeriod
             {
-                Group = group,
-                Start = DateTime.Now,
+                GroupId = group.Id,
+                Start = DateTime.Today,
                 End = group.EndOfPaymentPeriod
             });
             db.SaveChanges();
+          //  SetDefaultTypeOfPaymentForUser(user, group);
             
+        }
+
+        public void ChangeTypeOfPayment (User User, Group Group,TypeOfPaymentInPeriod TypeOfPaymentPeriod)
+        {
+            PaymentPeriod PaymentPeriod = new PaymentPeriod();
+            PaymentPeriod = db.PaymentPeriods.Where(x => x.GroupId == Group.Id && x.Start < DateTime.Now && x.End > DateTime.Now).Single();
+
+            db.TypeOfPaymentForUserInPeriods.Where(x => x.PaymentPeriodId == PaymentPeriod.Id && User.Id == x.User.Id).Single().UserTypeOfPaymentInPeriod = TypeOfPaymentPeriod;
+            db.SaveChanges();
+
         }
 
         public void CreatePaymentPeriod(Group group, DateTime start, DateTime end)
         {
             
+        }
+
+        public void SetDefaultTypeOfPaymentForUser(User User, Group Group)
+        {
+            PaymentPeriod PaymentPeriod = new PaymentPeriod();
+            PaymentPeriod = db.PaymentPeriods.Where(x => x.GroupId == Group.Id && x.Start < DateTime.Now && x.End > DateTime.Now).Single();
+
+            TypeOfPaymentForUserInPeriod TypeOfPaymentForUserInPeriod = new TypeOfPaymentForUserInPeriod();
+            TypeOfPaymentForUserInPeriod.User = User;
+            TypeOfPaymentForUserInPeriod.PaymentPeriod = PaymentPeriod;
+            TypeOfPaymentForUserInPeriod.UserId = User.Id;
+            TypeOfPaymentForUserInPeriod.PaymentPeriodId = PaymentPeriod.Id;
+            TypeOfPaymentForUserInPeriod.UserTypeOfPaymentInPeriod = TypeOfPaymentInPeriod.Cash;
+
+            db.TypeOfPaymentForUserInPeriods.Add(TypeOfPaymentForUserInPeriod);
+            db.SaveChanges();
+            
+
         }
 
         public void AddUserToGroup(Group group, User user)
@@ -78,6 +107,7 @@ namespace SportEvents.Models.Application
             userIngroup.GroupID = group.Id;
             db.UsersInGroups.Add(userIngroup);
             AddUserToAllEventsOfGroup(group.Id, user);
+            SetDefaultTypeOfPaymentForUser(user, group);
             db.SaveChanges();
 
             // TODO : dodělat výpis zda byl uživatel nebo nebyl přidán do skupiny

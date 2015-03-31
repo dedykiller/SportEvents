@@ -159,6 +159,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentPeriodController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Languages\CultureHelper.cs" />
     <Compile Include="Languages\Resources.cs.Designer.cs">
@@ -182,6 +183,7 @@
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\PaymentPeriod.cs" />
+    <Compile Include="Models\TypeOfPaymentForUserInPeriod.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\UsersInEvent.cs" />
@@ -229,6 +231,8 @@
     <Content Include="Views\Users\EditAccount.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Users\ForgotPassword.cshtml" />
+    <Content Include="Views\Groups\ChangeTypeOfPaymentForPeriod.cshtml" />
+    <Content Include="Views\PaymentPeriod\CreateNextPaymentPeriod.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -50,7 +50,7 @@ namespace SportEvents.Controllers.Utility
                 {
                     Start = item.End.AddDays(1),
                     End = item.End.AddYears(10),
-                    Group = item.Group
+                    GroupId = item.GroupId
 
                 });
                 db.SaveChanges();

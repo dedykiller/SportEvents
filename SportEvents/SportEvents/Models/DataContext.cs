@@ -22,6 +22,7 @@ namespace SportEvents.Models
         public DbSet<Article> Articles { get; set; }
         public DbSet<UsersInEvent> UserInEvents { get; set; }
         public DbSet<PaymentPeriod> PaymentPeriods { get; set; }
+        public DbSet<TypeOfPaymentForUserInPeriod> TypeOfPaymentForUserInPeriods { get; set; }
 
       //  public DbSet<UsersInEvent> UsersInEvents { get; set; }
 
@@ -55,15 +56,20 @@ namespace SportEvents.Models
             return Articles.Where(x => x.GroupID == GroupId).ToList();
         }
 
+        public PaymentPeriod GetActualPaymentPeriod(int GroupId)
+        {
+            return PaymentPeriods.Where(x => x.Start <= DateTime.Today && x.End >= DateTime.Today && x.GroupId == GroupId).Single();
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();
             SaveChanges();            
         }
-
-        public void nanana()
-        {
-
+        //Je už definované následující účtovací období po skončení aktuálního? Podle toho vrat ano, ne
+        public bool IsAlreadyDefinedNextPaymentPeriodInThisGroup(int groupId)
+        {            
+            return PaymentPeriods.Any(x => x.Start > DateTime.Now && x.GroupId == groupId);            
         }
 
         public participation GetParticipation(int eventId, int userId)
@@ -315,6 +321,11 @@ namespace SportEvents.Models
                     SaveChanges();
                 
             }
+        }
+
+        public Group GetGroupById(int groupId)
+        {
+            return Groups.Where(x => x.Id == groupId).Single();
         }
 
 

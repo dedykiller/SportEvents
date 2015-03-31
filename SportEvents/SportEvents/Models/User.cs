@@ -50,6 +50,7 @@ namespace SportEvents.Models
         [DisplayName("Skupiny")]
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<UsersInEvent> UserInEvents { get; set; }
+        public virtual ICollection<TypeOfPaymentForUserInPeriod> TypeOfPaymentsForUsersInPeriods { get; set; }
 
         public User()
         {

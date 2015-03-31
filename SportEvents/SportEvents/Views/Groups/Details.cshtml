@@ -19,7 +19,16 @@
         <div class="button-link-first">
             @Html.ActionLink("Nový článek", "Create", "Article", new { id = Model.Group.Id }, null)
         </div>
+        
     }
+    
+    @if (ViewBag.IsUserCreator == true)
+    {
+        <div class="button-link-first">
+            @Html.ActionLink("Nové účtovací období", "CreateNextPaymentPeriod", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+        </div>
+    }
+
 
     <div id="container">
         <section id="left">
