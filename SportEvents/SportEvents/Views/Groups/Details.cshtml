@@ -34,6 +34,7 @@
         <section id="left">
             @if (ViewBag.IsUserInGroup == false)
             {
+                
                 using (Html.BeginForm("Details", "Groups", FormMethod.Post))
                 {
 
@@ -92,6 +93,7 @@
 
             @if (Model.Articles.Count() != 0)
             {
+                
 
 
                 <table id="table-article">
@@ -115,10 +117,17 @@
                                 <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
                                 <h6><span>@Html.DisplayFor(modelItem => item.CreationTime)</span></h6>
                                 <h6>Autor: @Html.DisplayFor(modelItem => item.CreatorFullName)</h6>
+
+                                @if (Session["UserSession"] != null)
+                                {
+                                    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+                                    if (user.Id == item.UserID)
+                                    {
+                                        @Html.ActionLink("Editovat", "Edit", "Article", new { id = item.ID }, null)
+                                        @Html.ActionLink("Smazat", "Delete", "Article", new { id = item.ID }, null)
+                                    }
+                                }
                                 
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                                @Html.ActionLink("Details ", "Details", new { id = item.ID })
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                             </td>
                         </tr>
                     }

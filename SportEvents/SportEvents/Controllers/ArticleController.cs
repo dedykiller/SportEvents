@@ -61,7 +61,8 @@ namespace SportEvents.Views
                 {
                     HttpPostedFileBase file = Request.Files["UploadedFile"];
 
-                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                    if ((file != null) && (file.ContentLength > 0) && ((file.ContentType == "image/png") || (file.ContentType == "image/jpg")) &&
+                        (file.ContentLength < 100000) && !string.IsNullOrEmpty(file.FileName))
                     {
                         string fileContentType = file.ContentType;
                         filePathName = Path.GetFileName(file.FileName);
@@ -202,7 +203,7 @@ namespace SportEvents.Views
             Article article = db.Articles.Find(id);
             db.Articles.Remove(article);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Groups", new { id = article.GroupID });
         }
 
         protected override void Dispose(bool disposing)
