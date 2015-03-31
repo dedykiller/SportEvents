@@ -42,7 +42,7 @@
                 @Html.EditorFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.Password)<br />
 
-                @Html.ActionLink(@SportEvents.Languages.Resources.forgot, "", "")<br />
+                @Html.ActionLink(@SportEvents.Languages.Resources.forgot, "ForgotPassword", "Users")<br />
 
                 <input type="submit" value="@SportEvents.Languages.Resources.log_In" class="button" />
             }
