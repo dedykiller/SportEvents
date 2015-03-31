@@ -30,17 +30,6 @@
                 <ul id="navbar-login">
 
 
-                    @*<div class="flags">
-                            <label for="en-us">
-
-
-                            </label>
-
-                            <label for="es">
-
-                            </label>
-                        </div>*@
-
 
                     @if (Session["UserSession"] != null)
                     {
@@ -55,8 +44,10 @@
                         <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>
                         using (Html.BeginForm("SetCulture", "Home"))
                         {
-                            <li><input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" /></li>
-                            <li><input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" /></li>
+                            <div id="flags">
+                                <li><input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" /></li>
+                                <li><input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" /></li>
+                            </div>
                         }
                     }
                 </ul>

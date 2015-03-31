@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addPerson" xml:space="preserve">
-    <value>Přidat osobu</value>
-  </data>
   <data name="emailLogin" xml:space="preserve">
     <value>E-mail (přihlášení)</value>
   </data>
@@ -140,5 +137,20 @@
   </data>
   <data name="reg" xml:space="preserve">
     <value>Registrace</value>
+  </data>
+  <data name="backList" xml:space="preserve">
+    <value>Zpět na hlavní stránku</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Vytvořit</value>
+  </data>
+  <data name="fillEmail" xml:space="preserve">
+    <value>Vyplňte prosím email sloužící jako login.</value>
+  </data>
+  <data name="lostPassword" xml:space="preserve">
+    <value>Zapomenuté heslo</value>
+  </data>
+  <data name="regForm" xml:space="preserve">
+    <value>Registrační formulář</value>
   </data>
 </root>
