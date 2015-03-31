@@ -63,7 +63,7 @@ namespace SportEvents.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details([Bind(Include = "participation,Id")]Event @event)
+        public ActionResult Details ([Bind(Include ="participation,Id")]Event @event)
         {
             User user = (User)Session["UserSession"];
             db.UpdateParticipation(@event.Id, user.Id, @event.participation);
