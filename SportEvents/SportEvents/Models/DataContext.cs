@@ -68,8 +68,17 @@ namespace SportEvents.Models
         }
         //Je už definované následující účtovací období po skončení aktuálního? Podle toho vrat ano, ne
         public bool IsAlreadyDefinedNextPaymentPeriodInThisGroup(int groupId)
-        {            
-            return PaymentPeriods.Any(x => x.Start > DateTime.Now && x.GroupId == groupId);            
+        {
+            PaymentPeriod PaymentPeriod = new PaymentPeriod();
+            if (PaymentPeriods.FirstOrDefault(x=> x.Start > DateTime.Today && groupId == x.GroupId)  == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
         }
 
         public participation GetParticipation(int eventId, int userId)
