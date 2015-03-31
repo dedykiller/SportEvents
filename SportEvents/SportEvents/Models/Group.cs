@@ -17,7 +17,7 @@ namespace SportEvents.Models
         }
         public int Id { get; set; }
         public int Creator { get; set; }
-
+        public string CreatorFullName { get; set; }
         [DisplayName("Zadej název skupiny")]
         [Required(ErrorMessage = "Vyplňte prosím název skupiny")]
         public string Name { get; set; }

@@ -132,7 +132,7 @@ namespace SportEvents.Models
                         TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do skupiny " + group.Name;
                     }
 
-                    return RedirectToAction("Index");  
+                    return RedirectToAction("Details", "Groups", new { id = group.Id });
                 }
             }
 

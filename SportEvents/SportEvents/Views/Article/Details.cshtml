@@ -11,9 +11,19 @@
 
 
 
-<p class="button-link-first">
-    @Html.ActionLink("Editace", "Edit", new { id = Model.ID })
-</p>
+
+
+@if (Session["UserSession"] != null)
+{
+    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+    if (user.Id == Model.UserID)
+    {
+        <p class="button-link-first">
+            @Html.ActionLink("Editovat", "Edit", new { id = Model.ID })
+            @Html.ActionLink("Smazat", "Delete", new { id = Model.ID })
+        </p>
+    }
+}
 
 <div class="description-groups">
     <div id="article-img">

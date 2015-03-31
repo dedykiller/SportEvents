@@ -39,7 +39,7 @@ if (Session["UserSession"] != null)
             <h3>Název</h3>
         </th>
         <th>
-            <h3>ID vlastníka</h3>
+            <h3>Majitel skupiny</h3>
         </th>
         <th>
             <h3>Počet uživatelů</h3>
@@ -53,7 +53,7 @@ if (Session["UserSession"] != null)
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Creator) 
+            @Html.DisplayFor(modelItem => item.CreatorFullName)
         </td>        
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
