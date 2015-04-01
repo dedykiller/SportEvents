@@ -19,12 +19,13 @@ header {
     width: 85%;
     margin: 0 auto;
     height: 70px;
+    max-width: 1200px;
 }
-.header-brand a {
+.header-brand h1 {
     float: left;
     padding: 25px 15px;
     font-size: 18px;
-    line-height: 20px;
+    line-height: 2px;
     color: white;
 }
 nav {
