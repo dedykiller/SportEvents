@@ -20,6 +20,10 @@ header {
     margin: 0 auto;
     height: 70px;
 }
+
+.header-brand{
+        width: 20%;
+}
 .header-brand a {
     float: left;
     padding: 25px 15px;
@@ -38,9 +42,11 @@ nav {
     }
 #navbar-nav {
     float: left;
+
 }
 #navbar-login {
     float: right;
+        width: 400px;
 }
     #navbar-login li a:hover {
         color: white;
@@ -110,4 +116,9 @@ footer{
 }
 .button-link a:hover, .button-link-first a:hover{
     background: #52a9a6;
+}
+
+ul form{
+    margin: 0px !important;
+    clear:none !important;
 }

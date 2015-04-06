@@ -1,8 +1,4 @@
-﻿input,
-select,
-textarea {
-    max-width: 280px;
-}
+﻿
 
 .field-validation-error {
     color: #ba0000;
@@ -33,7 +29,7 @@ form {
     clear: both;
 }
 
-input {
+input, textarea {
     background: white;
     padding: 10px 15px 10px 15px;
     font-size: 15px;
@@ -48,6 +44,11 @@ input {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
 }
+
+    input#Name, textarea#Description, input#Title, textarea#Body {
+        width: 600px;
+    }
+
 
 .label {
     font-size: 15px;
@@ -73,6 +74,8 @@ input {
 #left form {
     margin-left: 0;
 }
+
+
 /*table*/
 .table {
     width: 100%;
@@ -256,10 +259,10 @@ tr:hover td {
     margin-top: 30px;
 }
 
-#article-img{
-
-}
-
-#article-content{
- 
+.flags input {
+    padding: 0px !important;
+    border: 0px !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    width: 28px;
 }

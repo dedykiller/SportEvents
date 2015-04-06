@@ -20,7 +20,7 @@
 
         <div class="form-group">
             Zadej název skupiny
-            <div class="col-md-10">
+            <div>
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
@@ -29,7 +29,8 @@
         <div class="form-group">
             Zadej popis skupiny
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, 20, 50, new { @class = "form-control col-md-2" })
+                
                 @Html.ValidationMessageFor(model => model.Description)
 
             </div>

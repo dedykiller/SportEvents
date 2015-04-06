@@ -28,36 +28,23 @@
 
                 </ul>
                 <ul id="navbar-login">
-
-
-                    @*<div class="flags">
-                            <label for="en-us">
-
-
-                            </label>
-
-                            <label for="es">
-
-                            </label>
-                        </div>*@
-
+                    
 
                     @if (Session["UserSession"] != null)
                     {
                         SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
                         <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
                         <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
-
                     }
                     else
                     {
                         <li>@Html.ActionLink(@SportEvents.Languages.Resources.log_In, "Index", "Home")</li>
-                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>
-                        using (Html.BeginForm("SetCulture", "Home"))
-                        {
-                            <li><input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" /></li>
-                            <li><input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" /></li>
-                        }
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.reg, "Register", "Users")</li>                        
+                    }
+                    @using (Html.BeginForm("SetCulture", "Home"))
+                    {
+                        <li class="flags"><input name="culture" id="en-us" value="en-us" type="image" src="~/Image/vlajka_anglie.gif" /></li>
+                        <li class="flags"><input name="culture" id="cs" value="cs" type="image" src="~/Image/ceska_republika.png" /></li>
                     }
                 </ul>
 
