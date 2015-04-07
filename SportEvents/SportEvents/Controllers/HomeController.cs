@@ -15,6 +15,7 @@ namespace SportEvents.Controllers
     public class HomeController : BaseController
     {
         private UsersBO usersBO = new UsersBO();
+        private DataContext db = new DataContext();
 
         // GET: /Home/Index
         public ActionResult Index()
@@ -74,6 +75,8 @@ namespace SportEvents.Controllers
             Response.Cookies.Add(cookie);
 
             return RedirectToAction("Index");
-        }    
+        }
+
+        
 	}
 }

@@ -1,9 +1,9 @@
-﻿using Hangfire;
-using Microsoft.Owin;
-using Hangfire.SqlServer;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using Owin;
-using System;
-
+using Microsoft.Owin;
 [assembly: OwinStartup(typeof(SportEvents.Startup))]
 
 namespace SportEvents
@@ -12,30 +12,11 @@ namespace SportEvents
     {
         public void Configuration(IAppBuilder app)
         {
-            
+            // Any connection or hub wire up and configuration should go here
+            app.MapSignalR();
 
-            /*
-             * Mel si to blbe buzno.
-             * Uz sem to spravil.
-             * 
-             * PM> Install-Package Hangfire - mel si neco jineho
-             * Konfigurace cajk, akorat si mel spatny namespace
-             */
-
-
-            //app.UseHangfire(config =>
-            //{
-            //    // Basic setup required to process background jobs.
-            //    config.UseSqlServerStorage("dedekDB");
-            //    config.UseServer();
-
-            //    var options = new SqlServerStorageOptions
-            //    {
-            //        QueuePollInterval = TimeSpan.FromSeconds(15) // Default value
-            //    };
-
-            //    var storage = new SqlServerStorage("dedekDB", options);
-            //});
         }
+
+      
     }
 }
