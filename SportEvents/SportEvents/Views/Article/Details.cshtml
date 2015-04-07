@@ -38,19 +38,6 @@
 
 </div>
 
-
-@if (Session["UserSession"] != null)
-{
-    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-    String nameU = user.FirstName;
-    if (user.Id == Model.UserID)
-    {
-        <p class="button-link-first">
-            @Html.ActionLink("Editovat", "Edit", new { id = Model.ID })
-            @Html.ActionLink("Smazat", "Delete", new { id = Model.ID })
-        </p>
-    }
-}
 <div class="container">
     <h4>Přidat komentář</h4>
     <form>
