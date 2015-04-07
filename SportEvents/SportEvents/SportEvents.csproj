@@ -231,7 +231,6 @@
     <Content Include="Views\Users\EditAccount.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Users\ForgotPassword.cshtml" />
-    <Content Include="Views\Groups\ChangeTypeOfPaymentForPeriod.cshtml" />
     <Content Include="Views\PaymentPeriod\CreateNextPaymentPeriod.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -265,7 +264,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3922</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
