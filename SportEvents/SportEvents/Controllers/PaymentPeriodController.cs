@@ -18,17 +18,14 @@ namespace SportEvents.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //int x = groupId.GetValueOrDefault();
-            //PaymentPeriod @PaymentPeriod = db.GetActualPaymentPeriod(x);
+            
             PaymentPeriod PaymentPeriod = new PaymentPeriod();
             // nelze převést int do int?, tak si vypomáhám tímhle
             int x = groupId.GetValueOrDefault();
+            // začátek nového období je den po konci aktuálního
             PaymentPeriod.Start = db.GetActualPaymentPeriod(x).End.AddDays(1);
             PaymentPeriod.GroupId = x;
-           // @PaymentPeriod.End = DateTime.Now;
-            PaymentPeriod.GroupName = db.GetGroupById(x).Name;
-            //ViewBag.ActualPeriod.Start = db.GetActualPaymentPeriod(x).Start;
-            //ViewBag.ActualPeriod.End = db.GetActualPaymentPeriod(x).End;
+            PaymentPeriod.GroupName = db.GetGroupById(x).Name;            
             return View(PaymentPeriod);
         }
 
@@ -38,19 +35,36 @@ namespace SportEvents.Controllers
         {
             User user = (User)Session["UserSession"];
             int a = PaymentPeriod.GroupId;
-            if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(PaymentPeriod.GroupId )== false)
+
+
+            // je další zúčtovací období definováno?
+            if (PaymentPeriod.End > PaymentPeriod.Start)
             {
-                db.PaymentPeriods.Add(PaymentPeriod);
-                db.SaveChanges();
-                TempData["notice"] = "Následující účtovacé období od " +PaymentPeriod.Start + " do: "+ PaymentPeriod.End.Date +  " bylo vytvořeno uživatelem " + user.Email;
-                return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
                 
+            
+                if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(PaymentPeriod.GroupId )== false)
+                {
+                    // jestli není, tak ho vytvoří a vypíše hlášku
+                    db.PaymentPeriods.Add(PaymentPeriod);
+                    db.SaveChanges();
+                    TempData["notice"] = "Následující účtovacé období od " +PaymentPeriod.Start + " do: "+ PaymentPeriod.End.Date +  " bylo vytvořeno uživatelem " + user.Email;
+                    return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
+                
+                }
+                else
+                {
+                    // jestli je, tak jen vypiš hlášku
+                
+                    TempData["notice"] = "Následující účtovacé období již máte definováno, můžete ho vytvořit až po uplynutí aktuálního účtovacího období";
+                    return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
+                }
+
             }
             else
             {
-                
-                TempData["notice"] = "Následující účtovacé období již máte definováno, můžete ho vytvořit až po uplynutí aktuálního účtovacího období";
-                return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
+                TempData["notice"] = "Další zúčtovací období musí končit později než začíná.";
+                return View(PaymentPeriod);
+
             }
             
             
