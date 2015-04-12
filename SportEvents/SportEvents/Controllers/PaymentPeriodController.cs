@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SportEvents.ViewModels;
 
 namespace SportEvents.Controllers
 {
@@ -37,11 +38,11 @@ namespace SportEvents.Controllers
             int a = PaymentPeriod.GroupId;
 
 
-            // je další zúčtovací období definováno?
+            
             if (PaymentPeriod.End > PaymentPeriod.Start)
             {
-                
-            
+
+                // je další zúčtovací období definováno?
                 if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(PaymentPeriod.GroupId )== false)
                 {
                     // jestli není, tak ho vytvoří a vypíše hlášku
@@ -69,5 +70,22 @@ namespace SportEvents.Controllers
             
             
         }
+
+        public ActionResult Index (int groupId) 
+        {
+            PaymentPeriodCollectionVM vm = new PaymentPeriodCollectionVM();
+            vm.PaymentPeriods = db.GetAllPaymentPeriodsOfGroup(groupId);
+
+
+            return View(vm);
+        }
+
+        public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
+        {
+
+            return View();
+        }
+
+
     }
 }

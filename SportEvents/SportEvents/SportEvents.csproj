@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="ViewModels\GroupEventsArticlesVM.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PaymentPeriodCollectionVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -232,6 +233,7 @@
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\PaymentPeriod\CreateNextPaymentPeriod.cshtml" />
+    <Content Include="Views\PaymentPeriod\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

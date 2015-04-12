@@ -96,6 +96,11 @@ namespace SportEvents.Models
             return false;
         }
 
+        public List<PaymentPeriod> GetAllPaymentPeriodsOfGroup (int groupId)
+        {
+            return PaymentPeriods.Where(x => x.GroupId == groupId).ToList();
+        }
+
         public List<Event> SelectEventsById(List<int> eventsIds)
         {
             List<Event> events = new List<Event>();
