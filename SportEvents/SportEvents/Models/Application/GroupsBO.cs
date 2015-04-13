@@ -80,7 +80,7 @@ namespace SportEvents.Models.Application
         public void SetDefaultTypeOfPaymentForUser(User User, Group Group)
         {
             PaymentPeriod PaymentPeriod = new PaymentPeriod();
-            PaymentPeriod = db.PaymentPeriods.Where(x => x.GroupId == Group.Id && x.Start < DateTime.Now && x.End > DateTime.Now).Single();
+            PaymentPeriod = db.PaymentPeriods.Where(x => x.GroupId == Group.Id && x.Start <= DateTime.Today && x.End >= DateTime.Today).Single();
 
             TypeOfPaymentForUserInPeriod TypeOfPaymentForUserInPeriod = new TypeOfPaymentForUserInPeriod();
             TypeOfPaymentForUserInPeriod.User = User;

@@ -131,12 +131,7 @@ h2 {
     margin-bottom: 30px;
 }
 
-#right img {
-    width: 500px;
-    height: 250px;
-    padding-top: 50px;
-    padding-left: 60px;
-}
+
 
 .description-groups {
     background: white;
@@ -173,12 +168,13 @@ h2 {
     font-weight: 100;
     margin-top: 30px;
     color: #333333;
-    #;
+    ;
 }
 
 #container {
-    width: 100%;
+    width: 95%;
     clear: both;
+    margin: 0 auto;
 }
 
 #table-article {
@@ -256,10 +252,11 @@ tr:hover td {
     margin-top: 30px;
 }
 
-#article-img{
-
+.description-groups p{
+    border-bottom: 1px solid #e4e5e6;
+    padding: 5px;
 }
 
-#article-content{
- 
+.description-groups p:last-child{
+    border-bottom: none;
 }
