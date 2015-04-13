@@ -1,11 +1,11 @@
-﻿@model SportEvents.Models.Article
+﻿@model SportEvents.ViewModels.ArticleCommentsVM
 
 @{
     ViewBag.Title = "Details";
 }
 
 <a class="return" onclick="history.back()">
-    @Model.Title
+    @Model.Article.Title
 </a>
 <hr />
 
@@ -16,25 +16,55 @@
 @if (Session["UserSession"] != null)
 {
     SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-    if (user.Id == Model.UserID)
+    if (user.Id == Model.Article.UserID)
     {
         <p class="button-link-first">
-            @Html.ActionLink("Editovat", "Edit", new { id = Model.ID })
-            @Html.ActionLink("Smazat", "Delete", new { id = Model.ID })
+            @Html.ActionLink("Editovat", "Edit", new { id = Model.Article.ID })
+            @Html.ActionLink("Smazat", "Delete", new { id = Model.Article.ID })
         </p>
     }
 }
 
 <div class="description-groups">
     <div id="article-img">
-        <img src="@Url.Content(Model.Picture)" alt="images" width="200" height="200">
+        <img src="@Url.Content(Model.Article.Picture)" alt="images" width="200" height="200">
     </div>
     <div id="article-content">
-      <b>@Html.DisplayFor(model => model.CreatorFullName)</b><br />
-       <b>@Html.DisplayFor(model => model.CreationTime)</b><br /><br />
-       <p>@Html.DisplayFor(model => model.Body)</p>
-        
+      <b>@Html.DisplayFor(model => model.Article.CreatorFullName)</b><br />
+       <b>@Html.DisplayFor(model => model.Article.CreationTime)</b><br /><br />
+       <p>@Html.DisplayFor(model => model.Article.Body)</p>     
     </div>
-
 </div>
+
+<div>
+    @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
+
+            <input type="hidden" value="@Model.Article.ID" name="ArticleID" />
+            <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" name="Submit" value="Vytvořit komentář" class="button" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@foreach (var item in Model.Comments)
+{
+    <p><b><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</p>
+    <h5>@Html.DisplayFor(modelItem => item.Text)</h5>
+           
+}
+
+
+
 

@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("masterDB") 
+            : base("KuznikRoprDB") 
         {
         }
 
@@ -20,11 +20,11 @@ namespace SportEvents.Models
         public DbSet<UsersInGroup> UsersInGroups { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<UsersInEvent> UserInEvents { get; set; }
         public DbSet<PaymentPeriod> PaymentPeriods { get; set; }
         public DbSet<TypeOfPaymentForUserInPeriod> TypeOfPaymentForUserInPeriods { get; set; }
 
-      //  public DbSet<UsersInEvent> UsersInEvents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -338,6 +338,9 @@ namespace SportEvents.Models
         }
 
 
-        
+        public List<Comment> getAllCommentsOfArticle(int? ArticleID)
+        {
+            return Comments.Where(x => x.ArticleID == ArticleID).ToList();
+        }
     }
 }

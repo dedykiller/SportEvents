@@ -62,7 +62,7 @@ namespace SportEvents.Models
                 List<Article> Articles = new List<Article>();
                 vm.Articles = Articles;
                 ViewBag.IsUserInGroup = (bool)false;
-        }
+            }
             if (group.Creator== user.Id)
             {
                 ViewBag.IsUserCreator = (bool)true;

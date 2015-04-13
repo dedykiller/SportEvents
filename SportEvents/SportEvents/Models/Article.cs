@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,12 @@ namespace SportEvents.Models
         public string Picture { get; set; }
         public DateTime CreationTime { get; set; }
         public string CreatorFullName{ get; set; }
+        [NotMapped]
+        public virtual ICollection<Comment> Comments{ get; set; }
 
+        public Article()
+        {
+            Comments = new HashSet<Comment>();
+        }
     }
 }

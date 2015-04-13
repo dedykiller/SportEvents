@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SportEvents.Models;
 using System.IO;
+using SportEvents.ViewModels;
 
 namespace SportEvents.Views
 {
@@ -30,11 +31,13 @@ namespace SportEvents.Views
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
+
+            ArticleCommentsVM vm = new ArticleCommentsVM();
+            vm.Article = article;
+            vm.Comments = db.getAllCommentsOfArticle(id);
+            //vm.Comments = db.Comments.ToList(); všechny komentáře, ne pouze pro daný článek
+
+            return View(vm);
         }
 
         // GET: /Article/Create
