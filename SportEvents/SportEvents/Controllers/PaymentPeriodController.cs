@@ -82,8 +82,17 @@ namespace SportEvents.Controllers
 
         public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
         {
+            ListOfPaymentsForUserInPaymentPeriodVM vm = new ListOfPaymentsForUserInPaymentPeriodVM();
+            vm.Events = db.GetAllEventsOfPaymentPeriod(PaymentPeriodId);
+            List<User> AllUsersInGroup = db.AllUsersInGroup(groupId);
+            List<User> AllUsersPayingCash = db.GetAllUsersPayingByCash(AllUsersInGroup, PaymentPeriodId);
+            vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(AllUsersPayingCash, vm.Events, PaymentPeriodId);
+            
+            //vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(db.GetAllUsersPayingByCash(db.AllUsersInGroup(groupId), PaymentPeriodId),vm.Events, PaymentPeriodId);
 
-            return View();
+
+            
+            return View(vm);
         }
 
 

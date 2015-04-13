@@ -27,7 +27,7 @@
             </tr>
             @foreach (var item in Model.PaymentPeriods)
             {
-                <tr onclick="location.href = '@(Url.Action("Details", "Events", new { id = item.Id }))'">
+                <tr onclick="location.href = '@(Url.Action("ListOfPayments", "PaymentPeriod", new { PaymentPeriodId = item.Id, groupId = item.GroupId }))'">
                     <td>
                         @Html.DisplayFor(modelItem => item.Start)
                     </td>

@@ -137,6 +137,15 @@ namespace SportEvents.Models
             return listOfEvents;
         }
 
+        public List<Event> GetAllEventsOfPaymentPeriod (int periodId) 
+        {
+            int groupId = PaymentPeriods.Where(x => x.Id == periodId).Single().GroupId;
+            PaymentPeriod PP = PaymentPeriods.Where(x => x.Id == periodId).Single();
+            //List<PaymentPeriod> AllPaymentsPeriod = GetAllPaymentPeriodsOfGroup(groupId);
+            return Events.Where(x => x.GrpId == groupId && PP.Start <= x.TimeOfEvent && PP.End >= x.TimeOfEvent).ToList();
+                       
+        }
+
         public List<Group> AllGroupsWhereIsUserCreator(int User_Id)
         {
 
@@ -171,14 +180,49 @@ namespace SportEvents.Models
 
             return list;
         }
+        
+        public List<User> GetAllUsersPayingByCash(List<User> UsersOfGroup, int paymentPeriodId) 
+        {
+            List<TypeOfPaymentForUserInPeriod> TypeOfPaymentForUserInPeriod = new List<TypeOfPaymentForUserInPeriod>();
+            List<User> UsersPayingByCash = new List<User>();
+            foreach (var item in UsersOfGroup)
+	        {
+                TypeOfPaymentForUserInPeriod.Add(TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
+                    x.UserTypeOfPaymentInPeriod == TypeOfPaymentInPeriod.Cash && x.PaymentPeriodId == paymentPeriodId).Single());
+	        }
+
+            foreach (var item in TypeOfPaymentForUserInPeriod)
+	        {
+                
+                UsersPayingByCash.Add(Users.Where(x => x.Id == item.UserId).Single());
+	        }
+
+            return UsersPayingByCash;                      
+        
+        }
+        // TODO : dodelat
+        public List<User> GetAllChargedUsersPayingByCash (List<User> UsersPayingByCash, List<Event> EventsOfPeriod, int PaymentPeriodId) 
+        {
+            List<User> AllChargedUsersPayingByCash = new List<User>();
+            List<UsersInEvent> UsInEvents = new List<UsersInEvent>();
+            foreach (var item in EventsOfPeriod)
+            {
+                UsInEvents.Add(UserInEvents.Where(x => x.EventId == item.Id && x.participation == participation.Yes &&
+                    x.participation == participation.Unspoken).SingleOrDefault());        
+            }
+
+            
+            foreach (var item in UserInEvents)
+            {
+                AllChargedUsersPayingByCash.Add(UsersPayingByCash.Where(x => x.Id == item.UserId).SingleOrDefault());
+            }
+
+            return AllChargedUsersPayingByCash;
+            
+        }
 
         public void AddUserToEvent(User User, Event Event)
-        {            
-        //    User u = Users.First(x => x.Id == User.Id);
-        //   // u.UserInEvents.Add(Event);
-        //    Event e = Events.First(x => x.Id == Event.Id);
-        //   // e.UserInEvents.Add(User);
-
+        {       
             UsersInEvent UIE = new UsersInEvent();
             UIE.User = User;
             UIE.Event = Event;

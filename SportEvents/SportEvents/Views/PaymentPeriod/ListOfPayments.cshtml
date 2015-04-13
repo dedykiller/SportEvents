@@ -1,0 +1,54 @@
+﻿@model SportEvents.ViewModels.ListOfPaymentsForUserInPaymentPeriodVM
+
+@{
+    ViewBag.Title = "ListOfPayments";
+}
+
+<h2>ListOfPayments</h2>
+
+@foreach (var item in Model.ChargedUsersPayingByCash)
+{
+    
+    @Html.DisplayFor(modelItem => item.FirstName)
+    @Html.DisplayFor(modelItem => item.Surname)
+    <table class="table">
+        <tr>
+            <th>
+                Cena události
+            </th>
+
+            <th>
+                Název 
+            </th>
+            
+            <th>
+                Datum a čas
+            </th>
+        </tr>
+
+        @foreach (var item2 in Model.Events)
+	{
+		 <tr>
+             <td>
+                 @Html.DisplayFor(modelItem => item2.Price)
+             </td>
+
+           <td>
+               @Html.DisplayFor(modelItem => item2.Name)
+           </td>
+
+           <td>
+               @Html.DisplayFor(modelItem => item2.TimeOfEvent)
+           </td>
+
+         </tr>
+	}
+
+    </table>
+}
+
+
+
+
+
+
