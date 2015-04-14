@@ -54,27 +54,37 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Body,GroupID")] Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Body,GroupID")] Article article, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
                 string filePathName = null;
 
-                if (Request != null)
+                if (uploadFile.ContentLength > 204800) // 200 kb limit pro obrázek
                 {
-                    HttpPostedFileBase file = Request.Files["UploadedFile"];
+                    ModelState.AddModelError("uploadFile", "Maximální velikost souboru je 200 Kb");
+                    return View(article);
+                }
 
-                    if ((file != null) && (file.ContentLength > 0) && ((file.ContentType == "image/png") || (file.ContentType == "image/jpg")) &&
-                        (file.ContentLength < 100000) && !string.IsNullOrEmpty(file.FileName))
-                    {
-                        string fileContentType = file.ContentType;
-                        filePathName = Path.GetFileName(file.FileName);
-                        byte[] fileBytes = new byte[file.ContentLength];
-                        file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                        var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
-                        file.SaveAs(path);
-                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
-                    }
+                var supportedTypes = new[] { "jpg", "jpeg", "png" };
+
+                var fileExt = System.IO.Path.GetExtension(uploadFile.FileName).Substring(1);
+
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("uploadFile", "Špatný formát obrázku. Pouze formáty jpg, jpeg a png jsou podporovány.");
+                    return View(article);
+                }
+
+                if (uploadFile != null && uploadFile.ContentLength > 0)
+                {
+                    string fileContentType = uploadFile.ContentType;
+                    filePathName = Path.GetFileName(uploadFile.FileName);
+                    byte[] fileBytes = new byte[uploadFile.ContentLength];
+                    uploadFile.InputStream.Read(fileBytes, 0, Convert.ToInt32(uploadFile.ContentLength));
+                    var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
+                    uploadFile.SaveAs(path);
+                    TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
                 }
 
                 User user = (User)Session["UserSession"];
@@ -93,22 +103,22 @@ namespace SportEvents.Views
                 db.Articles.Add(article);
                 db.SaveChanges();
 
-                Group g = db.Groups.Find(article.GroupID);
-                string subject = string.Format("Upozornění na nový článek");
-                string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name);
+                //Group g = db.Groups.Find(article.GroupID);
+                //string subject = string.Format("Upozornění na nový článek");
+                //string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name);
 
-                List<User> users = db.AllUsersInGroup(g.Id);
-                bool kq = false;
+                //List<User> users = db.AllUsersInGroup(g.Id);
+                //bool kq = false;
 
-                foreach (User item in users)
-                {
-                    string emailTo = item.Email;
-                    EmailService service = new EmailService();
-                    kq = service.Send(emailTo, subject, body);
-                }
+                //foreach (User item in users)
+                //{
+                //    string emailTo = item.Email;
+                //    EmailService service = new EmailService();
+                //    kq = service.Send(emailTo, subject, body);
+                //}
 
 
-                TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
+                //TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
                 TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
@@ -139,27 +149,43 @@ namespace SportEvents.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Title,Body,GroupID")] Article article)
+        public ActionResult Edit([Bind(Include="ID,Title,Body,GroupID")] Article article, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
                 string filePathName = null;
 
-                if (Request != null)
+                if (uploadFile.ContentLength > 204800) // 200 kb limit pro obrázek
                 {
-                    HttpPostedFileBase file = Request.Files["UploadedFile"];
-
-                    if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
-                    {
-                        string fileContentType = file.ContentType;
-                        filePathName = Path.GetFileName(file.FileName);
-                        byte[] fileBytes = new byte[file.ContentLength];
-                        file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                        var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
-                        file.SaveAs(path);
-                        TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
-                    }
+                    ModelState.AddModelError("uploadFile", "Maximální velikost souboru je 200 Kb");
+                    return View(article);
                 }
+
+                var supportedTypes = new[] { "jpg", "jpeg", "png" };
+
+                var fileExt = System.IO.Path.GetExtension(uploadFile.FileName).Substring(1);
+
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ModelState.AddModelError("uploadFile", "Špatný formát obrázku. Pouze formáty jpg, jpeg a png jsou podporovány.");
+                    return View(article);
+                }
+
+                if (uploadFile != null && uploadFile.ContentLength > 0)
+                {
+                    string fileContentType = uploadFile.ContentType;
+                    filePathName = Path.GetFileName(uploadFile.FileName);
+                    byte[] fileBytes = new byte[uploadFile.ContentLength];
+                    uploadFile.InputStream.Read(fileBytes, 0, Convert.ToInt32(uploadFile.ContentLength));
+                    var path = Path.Combine(Server.MapPath(ImagesPath), filePathName);
+                    uploadFile.SaveAs(path);
+                    TempData["upload"] = "Soubor " + filePathName + " typu " + fileContentType + " byl načten a uložen";
+                }
+
+                User user = (User)Session["UserSession"];
+                article.UserID = user.Id;
+                article.CreatorFullName = user.FirstName + " " + user.Surname;
+                article.CreationTime = DateTime.Now;
 
                 if (filePathName != null)
                 {
@@ -169,11 +195,6 @@ namespace SportEvents.Views
                 {
                     article.Picture = ImagesPath + "/no_image.png";
                 }
-
-                article.CreationTime = DateTime.Now;
-                User u = (User)Session["UserSession"];
-                article.CreatorFullName = u.FirstName + " " + u.Surname;
-                article.UserID = u.Id;
                 db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
 
