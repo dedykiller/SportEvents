@@ -88,6 +88,18 @@ namespace SportEvents.Controllers
             List<User> AllUsersPayingCash = db.GetAllUsersPayingByCash(AllUsersInGroup, PaymentPeriodId);
             vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(AllUsersPayingCash, vm.Events, PaymentPeriodId);
             
+            foreach (var item in vm.ChargedUsersPayingByCash)
+            {
+                item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
+            }
+
+            //foreach (var item in vm.Events)
+            //{
+            //    item.UserParticipationYes = db.UsersInEventParticipation(item.Id, participation.Yes);
+            //    item.UserParticipationUnspoken = db.UsersInEventParticipation(item.Id, participation.Unspoken);
+            //    item.UserParticipationNo = db.UsersInEventParticipation(item.Id, participation.No);
+            //}
+            
             //vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(db.GetAllUsersPayingByCash(db.AllUsersInGroup(groupId), PaymentPeriodId),vm.Events, PaymentPeriodId);
 
 

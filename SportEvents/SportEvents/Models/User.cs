@@ -45,7 +45,9 @@ namespace SportEvents.Models
         public string Telephone { get; set; }
 
         [DisplayName("Datum a čas registrace")]
-        public DateTime RegistrationTime { get; set; }
+        public DateTime RegistrationTime { get; set; }        
+        [NotMapped]
+        public List<Event> EventsParticipationYes { get; set; }
 
         [DisplayName("Skupiny")]
         public virtual ICollection<Group> Groups { get; set; }
