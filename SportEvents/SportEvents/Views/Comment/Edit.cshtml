@@ -15,44 +15,14 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserID)
-                @Html.ValidationMessageFor(model => model.UserID)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ArticleID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ArticleID)
-                @Html.ValidationMessageFor(model => model.ArticleID)
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.ArticleID)
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Text, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Text)
                 @Html.ValidationMessageFor(model => model.Text)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreationTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreationTime)
-                @Html.ValidationMessageFor(model => model.CreationTime)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatorFullName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorFullName)
-                @Html.ValidationMessageFor(model => model.CreatorFullName)
             </div>
         </div>
 

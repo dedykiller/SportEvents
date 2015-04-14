@@ -60,9 +60,22 @@
 
 @foreach (var item in Model.Comments)
 {
-    <p><b><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</p>
-    <h5>@Html.DisplayFor(modelItem => item.Text)</h5>
-           
+    
+
+    if (Session["UserSession"] != null)
+    {
+        SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+        if (user.Id == item.UserID)
+        {
+            <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) @Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</p> 
+        }
+        else
+        {
+             <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</p>
+        }
+        <h5>@Html.DisplayFor(modelItem => item.Text)</h5>
+    }
+
 }
 
 

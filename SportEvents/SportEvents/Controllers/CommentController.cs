@@ -82,13 +82,18 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,UserID,ArticleID,Text,CreationTime,CreatorFullName")] Comment comment)
+        public ActionResult Edit([Bind(Include = "ID,ArticleID,Text")]  Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.CreationTime = DateTime.Now;
+                User user = (User)Session["UserSession"];
+                comment.UserID = user.Id;
+                comment.CreatorFullName = user.FirstName + " " + user.Surname;
+                db.Comments.Add(comment);
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
             }
             return View(comment);
         }
@@ -116,7 +121,7 @@ namespace SportEvents.Controllers
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
         }
 
         protected override void Dispose(bool disposing)

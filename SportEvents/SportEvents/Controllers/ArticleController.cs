@@ -66,7 +66,7 @@ namespace SportEvents.Views
                     return View(article);
                 }
 
-                var supportedTypes = new[] { "jpg", "jpeg", "png" };
+                var supportedTypes = new[] { "jpg", "jpeg", "png", "JPG", "JPEG", "PNG" };
 
                 var fileExt = System.IO.Path.GetExtension(uploadFile.FileName).Substring(1);
 
@@ -161,7 +161,7 @@ namespace SportEvents.Views
                     return View(article);
                 }
 
-                var supportedTypes = new[] { "jpg", "jpeg", "png" };
+                var supportedTypes = new[] { "jpg", "jpeg", "png", "JPG", "JPEG", "PNG" };
 
                 var fileExt = System.IO.Path.GetExtension(uploadFile.FileName).Substring(1);
 
