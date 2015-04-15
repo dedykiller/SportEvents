@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-
-<h3>Editace článku @Model.Title</h3>
+<a class="return" onclick="history.back()">
+    Editace článku
+</a>
+<hr />
 
 @using (Html.BeginForm("Edit", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -37,12 +39,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" name="Submit" value="Ulož změny" class="button-link" />
+                <input type="submit" name="Submit" value="Ulož změny" class="button" />
             </div>
         </div>
     </div>
 }
-
-<div class="button-link">
-    @Html.ActionLink("Back to List", "Index")
-</div>

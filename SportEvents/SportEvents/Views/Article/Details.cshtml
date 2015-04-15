@@ -8,11 +8,6 @@
     @Model.Title
 </a>
 <hr />
-
-
-
-
-
 @if (Session["UserSession"] != null)
 {
     SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
@@ -22,19 +17,23 @@
             @Html.ActionLink("Editovat", "Edit", new { id = Model.ID })
             @Html.ActionLink("Smazat", "Delete", new { id = Model.ID })
         </p>
+    
+    <div class="description-groups">
+    
+    <b style="color:grey">@Html.DisplayFor(model => model.CreatorFullName)</b><br />
+    <b style="color:grey">@Html.DisplayFor(model => model.CreationTime)</b><br /><br />
+            <img src="@Url.Content(Model.Picture)" alt="images">
+        
+            
+            <p>@Html.DisplayFor(model => model.Body)</p>
+         
+</div>
     }
+
+}
+else
+{
+    //Response.Redirect("http://localhost:3922/?redirect=http://localhost:3922/Groups/Details/6");
 }
 
-<div class="description-groups">
-    <div id="article-img">
-        <img src="@Url.Content(Model.Picture)" alt="images" width="200" height="200">
-    </div>
-    <div id="article-content">
-      <b>@Html.DisplayFor(model => model.CreatorFullName)</b><br />
-       <b>@Html.DisplayFor(model => model.CreationTime)</b><br /><br />
-       <p>@Html.DisplayFor(model => model.Body)</p>
-        
-    </div>
-
-</div>
 

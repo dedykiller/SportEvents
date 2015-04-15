@@ -16,11 +16,11 @@
     <header>
         <div id="header-container">
             <div class="header-brand">
-                @Html.ActionLink("Sport Events", "Index", "Home", null, new { @class = "navbar-brand" })
+                <h1 class="header-brand">Sport Events</h1>
             </div>
             <nav>
                 <ul id="navbar-nav">
-                    <li>@Html.ActionLink(@SportEvents.Languages.Resources.home, "Index", "Home")</li>
+                    
                     @if (Session["UserSession"] != null)
                     {
                         <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
@@ -28,8 +28,6 @@
 
                 </ul>
                 <ul id="navbar-login">
-                    
-
                     @if (Session["UserSession"] != null)
                     {
                         SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
