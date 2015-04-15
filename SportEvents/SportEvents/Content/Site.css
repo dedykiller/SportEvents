@@ -260,3 +260,20 @@ tr:hover td {
 .description-groups p:last-child{
     border-bottom: none;
 }
+
+.comments{
+   background: white;   
+   padding: 5px;
+}
+
+.comments p{
+    
+    background: grey;
+    border-bottom: 1px solid black;
+}
+
+.comments h5{
+    padding:0px;
+    margin: 0;
+    
+}

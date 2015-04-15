@@ -41,7 +41,7 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+        <div>
 
             @Html.ValidationSummary(true)
             @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
@@ -57,26 +57,28 @@
         </div>
     }
 </div>
-
-@foreach (var item in Model.Comments)
-{
-    
-
-    if (Session["UserSession"] != null)
+<div class="comments">
+    @foreach (var item in Model.Comments)
     {
-        SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-        if (user.Id == item.UserID)
+
+
+        if (Session["UserSession"] != null)
         {
-            <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) @Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</p> 
+            SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+            if (user.Id == item.UserID)
+            {
+                <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) @Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</p>
+            }
+            else
+            {
+                <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</p>
+            }
+            <h5>@Html.DisplayFor(modelItem => item.Text)</h5>
         }
-        else
-        {
-             <p><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</p>
-        }
-        <h5>@Html.DisplayFor(modelItem => item.Text)</h5>
+
     }
 
-}
+</div>
 
 
 
