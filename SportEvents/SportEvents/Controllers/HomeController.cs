@@ -35,11 +35,11 @@ namespace SportEvents.Controllers
                     Session["UserSession"] = user;
                     TempData["notice"] = "Uživatel " + login.Email + " byl úspěšně přihlášen";
 
-                    if (!String.IsNullOrEmpty(Request.QueryString["redirect"]))
-                    {
-                        string url = Page.ResolveCUrl("redirect");
-                        Response.Redirect(url);
-                    }
+                    //if (!String.IsNullOrEmpty(Request.QueryString["redirect"]))
+                    //{
+                    //    string url = ResolveClientUrl(Redirect);
+                    //    Response.Redirect(url);
+                    //}
                     return RedirectToAction("index", "Groups");
                 }
                 else
