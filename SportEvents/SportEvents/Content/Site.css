@@ -133,7 +133,7 @@ h2 {
 
 
 
-.description-groups {
+.description-groups, .comments {
     background: white;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -268,12 +268,16 @@ tr:hover td {
 
 .comments p{
     
-    background: grey;
-    border-bottom: 1px solid black;
+    
+   
 }
 
-.comments h5{
+.comments h4{
     padding:0px;
-    margin: 0;
-    
+    margin: 0;   
+     border-bottom: 1px solid #dadada; 
+}
+
+.comments span{
+    float: right;
 }
