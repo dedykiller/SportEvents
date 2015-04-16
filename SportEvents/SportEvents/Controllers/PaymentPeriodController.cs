@@ -79,19 +79,44 @@ namespace SportEvents.Controllers
 
             return View(vm);
         }
-
+        // TODO : nefunguje pro after period a nefunguje pokud jen jeden uživatel má afterperiod volbu pro dané zúčtovací období
         public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
         {
             ListOfPaymentsForUserInPaymentPeriodVM vm = new ListOfPaymentsForUserInPaymentPeriodVM();
             vm.Events = db.GetAllEventsOfPaymentPeriod(PaymentPeriodId);
             List<User> AllUsersInGroup = db.AllUsersInGroup(groupId);
-            List<User> AllUsersPayingCash = db.GetAllUsersPayingByCash(AllUsersInGroup, PaymentPeriodId);
-            vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(AllUsersPayingCash, vm.Events, PaymentPeriodId);
+            List<User> AllUsersPayingCash = db.GetAllUsersPayingByCashOrAfterPeriod(AllUsersInGroup, PaymentPeriodId, TypeOfPaymentInPeriod.Cash);
+            List<User> AllUsersPayingAfterPeriod = db.GetAllUsersPayingByCashOrAfterPeriod(AllUsersInGroup, PaymentPeriodId, TypeOfPaymentInPeriod.AfterPeriod);
+            vm.ChargedUsersPayingByCash = db.GetAllChargedUsers(AllUsersPayingCash, vm.Events, PaymentPeriodId);
+            vm.ChargedUsersPayingAfterPeriod = db.GetAllChargedUsers(AllUsersPayingAfterPeriod, vm.Events, PaymentPeriodId);
             
             foreach (var item in vm.ChargedUsersPayingByCash)
             {
-                item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
+                if (item != null)
+                {
+                    item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
+                    item.sum = item.EventsParticipationYes.Select(x => x.Price).Sum();
+                    vm.SumCash += item.sum;
+                }
+               
             }
+
+
+            //if (vm.ChargedUsersPayingAfterPeriod.Any(x => x != null))
+            //{
+            //    foreach (var item in vm.ChargedUsersPayingAfterPeriod)
+            //    {
+            //        item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
+            //        item.sum = item.EventsParticipationYes.Select(x => x.Price).Sum();
+            //        vm.SumAfterPeriod += item.sum;
+            //    }
+            //}
+
+            
+
+            vm.SumPrices = vm.SumCash + vm.SumPrices;
+
+           
 
             //foreach (var item in vm.Events)
             //{

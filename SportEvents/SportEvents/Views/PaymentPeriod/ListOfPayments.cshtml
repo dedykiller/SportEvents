@@ -5,12 +5,15 @@
 }
 
 <h2>ListOfPayments</h2>
-
+<p>Celkem dlužná částka: </p>
+<p>Zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) Kč</p>
 @foreach (var item in Model.ChargedUsersPayingByCash)
 {
     
-    @Html.DisplayFor(modelItem => item.FirstName)
+    @Html.DisplayFor(modelItem => item.FirstName) 
     @Html.DisplayFor(modelItem => item.Surname)
+    <p> Tento uživatel celkem dluží:</p> @Html.DisplayFor(modelItem => item.sum)
+    
     <table class="table">
         <tr>
             <th>

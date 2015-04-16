@@ -181,33 +181,49 @@ namespace SportEvents.Models
             return list;
         }
         
-        public List<User> GetAllUsersPayingByCash(List<User> UsersOfGroup, int paymentPeriodId) 
+        public List<User> GetAllUsersPayingByCashOrAfterPeriod(List<User> UsersOfGroup, int paymentPeriodId, TypeOfPaymentInPeriod TOPIP) 
         {
             List<TypeOfPaymentForUserInPeriod> TypeOfPaymentForUserInPeriod = new List<TypeOfPaymentForUserInPeriod>();
-            List<User> UsersPayingByCash = new List<User>();
+            List<User> UsersPayingByCashOrAfterPeriod = new List<User>();
             foreach (var item in UsersOfGroup)
 	        {
-                TypeOfPaymentForUserInPeriod.Add(TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
-                    x.UserTypeOfPaymentInPeriod == TypeOfPaymentInPeriod.Cash && x.PaymentPeriodId == paymentPeriodId).Single());
+                if (TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
+                    x.UserTypeOfPaymentInPeriod == TOPIP && x.PaymentPeriodId == paymentPeriodId).SingleOrDefault() != null)
+                {
+                    TypeOfPaymentForUserInPeriod.Add(TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
+                    x.UserTypeOfPaymentInPeriod == TOPIP && x.PaymentPeriodId == paymentPeriodId).SingleOrDefault());
+                }
+                
 	        }
+
+            
+            
+
+
+            
+
+            //if (TypeOfPaymentForUserInPeriod.Any(x=> x == null))
+            //{
+            //    return UsersPayingByCashOrAfterPeriod; 
+            //}
 
             foreach (var item in TypeOfPaymentForUserInPeriod)
 	        {
                 
-                UsersPayingByCash.Add(Users.Where(x => x.Id == item.UserId).Single());
+                UsersPayingByCashOrAfterPeriod.Add(Users.Where(x => x.Id == item.UserId).Single());
 	        }
 
-            return UsersPayingByCash;                      
+            return UsersPayingByCashOrAfterPeriod;                      
         
         }
-        // TODO : dodelat
-        public List<User> GetAllChargedUsersPayingByCash (List<User> UsersPayingByCash, List<Event> EventsOfPeriod, int PaymentPeriodId) 
+        // vyber mi z listu
+        public List<User> GetAllChargedUsers (List<User> PayingUsers, List<Event> EventsOfPeriod, int PaymentPeriodId) 
         {
-            List<User> AllChargedUsersPayingByCash = new List<User>();
+            List<User> AllChargedUsers = new List<User>();
             List<UsersInEvent> UsInEvents = new List<UsersInEvent>();
             foreach (var eve in EventsOfPeriod)
             {
-                foreach (var us in UsersPayingByCash)
+                foreach (var us in PayingUsers)
                 {
                     UsInEvents.Add(UserInEvents.Where(x => x.EventId == eve.Id && x.UserId == us.Id && (x.participation == participation.Yes ||
                     x.participation == participation.Unspoken)).SingleOrDefault());
@@ -218,11 +234,11 @@ namespace SportEvents.Models
             
             foreach (var item in UserInEvents)
             {
-                AllChargedUsersPayingByCash.Add(UsersPayingByCash.Where(x => x.Id == item.UserId).SingleOrDefault());
+                AllChargedUsers.Add(PayingUsers.Where(x => x.Id == item.UserId).SingleOrDefault());
             }
-            AllChargedUsersPayingByCash = AllChargedUsersPayingByCash.Distinct().ToList();
+            AllChargedUsers = AllChargedUsers.Distinct().ToList();
 
-            return AllChargedUsersPayingByCash;
+            return AllChargedUsers;
             
         }
 
@@ -296,7 +312,7 @@ namespace SportEvents.Models
             {
                 UsersInEvent UsInEv = new UsersInEvent();
 
-                UsInEv = UserInEvents.Where(x => x.EventId == item.Id && x.UserId == userId && x.participation == part).SingleOrDefault();
+                UsInEv = UserInEvents.Where(x => x.EventId == item.Id && x.UserId == userId && (x.participation == part || x.participation == participation.Unspoken)).SingleOrDefault();
                 if (UsInEv != null)
                 {
                     UIN.Add(UsInEv);

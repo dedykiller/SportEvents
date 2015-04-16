@@ -13,8 +13,8 @@ namespace SportEvents.ViewModels
         public List<User> ChargedUsersPayingAfterPeriod { get; set; }
         
         public List<Event> Events { get; set; }
-        public int SumPrices { get; set; }
-        public int SumCash { get; set; }
-        public int SumAfterPeriod { get; set; }
+        public decimal SumPrices { get; set; }
+        public decimal SumCash { get; set; }
+        public decimal SumAfterPeriod { get; set; }
     }
 }

@@ -48,6 +48,8 @@ namespace SportEvents.Models
         public DateTime RegistrationTime { get; set; }        
         [NotMapped]
         public List<Event> EventsParticipationYes { get; set; }
+        [NotMapped]
+        public decimal sum { get; set; }
 
         [DisplayName("Skupiny")]
         public virtual ICollection<Group> Groups { get; set; }
