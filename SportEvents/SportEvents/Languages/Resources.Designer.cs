@@ -61,11 +61,38 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed characters are a-z, A-Z and 0-9 with a minimum length of 8 characters..
+        /// </summary>
+        public static string allowedCharacters {
+            get {
+                return ResourceManager.GetString("allowedCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to List.
         /// </summary>
         public static string backList {
             get {
                 return ResourceManager.GetString("backList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords do not match..
+        /// </summary>
+        public static string badPassword {
+            get {
+                return ResourceManager.GetString("badPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please complete the confirmation password..
+        /// </summary>
+        public static string completePassword {
+            get {
+                return ResourceManager.GetString("completePassword", resourceCulture);
             }
         }
         
@@ -97,11 +124,38 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please fill in the email used as a login..
+        ///   Looks up a localized string similar to Please fill in the e-mail used as a login..
         /// </summary>
         public static string fillEmail {
             get {
                 return ResourceManager.GetString("fillEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in your first name..
+        /// </summary>
+        public static string fillName {
+            get {
+                return ResourceManager.GetString("fillName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the password..
+        /// </summary>
+        public static string fillPassword {
+            get {
+                return ResourceManager.GetString("fillPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in your surname..
+        /// </summary>
+        public static string fillSurname {
+            get {
+                return ResourceManager.GetString("fillSurname", resourceCulture);
             }
         }
         
@@ -120,6 +174,24 @@ namespace SportEvents.Languages {
         public static string home {
             get {
                 return ResourceManager.GetString("home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid e-mail format..
+        /// </summary>
+        public static string invalidEmail {
+            get {
+                return ResourceManager.GetString("invalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number..
+        /// </summary>
+        public static string invalidePhone {
+            get {
+                return ResourceManager.GetString("invalidePhone", resourceCulture);
             }
         }
         
@@ -151,6 +223,51 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password confirmation..
+        /// </summary>
+        public static string passwordConfirm {
+            get {
+                return ResourceManager.GetString("passwordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number.
+        /// </summary>
+        public static string phone {
+            get {
+                return ResourceManager.GetString("phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the e-mail used as a login..
+        /// </summary>
+        public static string pleaseFillInEmail {
+            get {
+                return ResourceManager.GetString("pleaseFillInEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
         public static string reg {
@@ -165,6 +282,15 @@ namespace SportEvents.Languages {
         public static string regForm {
             get {
                 return ResourceManager.GetString("regForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string surname {
+            get {
+                return ResourceManager.GetString("surname", resourceCulture);
             }
         }
     }

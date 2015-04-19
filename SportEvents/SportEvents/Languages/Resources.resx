@@ -145,12 +145,54 @@
     <value>Create</value>
   </data>
   <data name="fillEmail" xml:space="preserve">
-    <value>Please fill in the email used as a login.</value>
+    <value>Please fill in the e-mail used as a login.</value>
   </data>
   <data name="lostPassword" xml:space="preserve">
     <value>Lost password</value>
   </data>
   <data name="regForm" xml:space="preserve">
     <value>Registration form</value>
+  </data>
+  <data name="allowedCharacters" xml:space="preserve">
+    <value>Allowed characters are a-z, A-Z and 0-9 with a minimum length of 8 characters.</value>
+  </data>
+  <data name="badPassword" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="completePassword" xml:space="preserve">
+    <value>Please complete the confirmation password.</value>
+  </data>
+  <data name="fillName" xml:space="preserve">
+    <value>Please fill in your first name.</value>
+  </data>
+  <data name="fillPassword" xml:space="preserve">
+    <value>Please fill in the password.</value>
+  </data>
+  <data name="fillSurname" xml:space="preserve">
+    <value>Please fill in your surname.</value>
+  </data>
+  <data name="invalidEmail" xml:space="preserve">
+    <value>Invalid e-mail format.</value>
+  </data>
+  <data name="invalidePhone" xml:space="preserve">
+    <value>Invalid phone number.</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>Password confirmation.</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="pleaseFillInEmail" xml:space="preserve">
+    <value>Please fill in the e-mail used as a login.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Surname</value>
   </data>
 </root>

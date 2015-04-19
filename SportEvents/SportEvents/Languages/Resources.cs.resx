@@ -145,12 +145,54 @@
     <value>Vytvořit</value>
   </data>
   <data name="fillEmail" xml:space="preserve">
-    <value>Vyplňte prosím email sloužící jako login.</value>
+    <value>Vyplňte prosím e-mail sloužící jako login.</value>
   </data>
   <data name="lostPassword" xml:space="preserve">
     <value>Zapomenuté heslo</value>
   </data>
   <data name="regForm" xml:space="preserve">
     <value>Registrační formulář</value>
+  </data>
+  <data name="allowedCharacters" xml:space="preserve">
+    <value>Povolené znaky jsou a-z, A-Z a 0-9 s minimální délkou 8 znaků.</value>
+  </data>
+  <data name="badPassword" xml:space="preserve">
+    <value>Hesla se neshodují.</value>
+  </data>
+  <data name="completePassword" xml:space="preserve">
+    <value>Vyplňte prosím potvrzovací heslo.</value>
+  </data>
+  <data name="fillName" xml:space="preserve">
+    <value>Vyplňte prosím křestní jméno.</value>
+  </data>
+  <data name="fillPassword" xml:space="preserve">
+    <value>Vyplňte prosím heslo.</value>
+  </data>
+  <data name="fillSurname" xml:space="preserve">
+    <value>Vyplňte prosím příjmení.</value>
+  </data>
+  <data name="invalidEmail" xml:space="preserve">
+    <value>Neplatný formát e-mailu.</value>
+  </data>
+  <data name="invalidePhone" xml:space="preserve">
+    <value>Neplatné telefonní číslo.</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>Potvrzení hesla.</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="pleaseFillInEmail" xml:space="preserve">
+    <value>Vyplňte prosím e-mail sloužící jako login.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Příjmení</value>
   </data>
 </root>

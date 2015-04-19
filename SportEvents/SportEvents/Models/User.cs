@@ -13,35 +13,37 @@ namespace SportEvents.Models
     {
         public int Id { get; set; }
 
-        [DisplayName("E-mail(login)")]
-        [Required(ErrorMessage = "Vyplňte prosím email sloužící jako login.")]
+        //[DisplayName("E-mail(login)")]
+        [Display(Name = "emailLog", ResourceType = typeof(SportEvents.Languages.Resources))] 
+        //[Required(ErrorMessage = "Vyplňte prosím email sloužící jako login.")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "pleaseFillInEmail", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         [RegularExpression("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-            ErrorMessage = "Neplatný formát e-mailu.")]
+            ErrorMessageResourceName = "invalidEmail", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Email { get; set; }
 
-        [DisplayName("Heslo")]
-        [Required(ErrorMessage = "Vyplňte prosím heslo.")]
-        [RegularExpression("^[a-zA-Z0-9]{8,}$", ErrorMessage = "Povolené znaky jsou a-z, A-Z a 0-9 s minimální délkou 8 znaků.")]
+        [Display(Name = "password", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fillPassword", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
+        [RegularExpression("^[a-zA-Z0-9]{8,}$", ErrorMessageResourceName = "allowedCharacters", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
             
         [NotMapped]
-        [DisplayName("Potvrzení hesla")]
-        [Required(ErrorMessage = "Vyplňte prosím potvrzovací heslo.")]
+        [Display(Name = "passwordConfirm", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "completePassword", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         [DataType(DataType.Password)]
-        [CompareAttribute("Password", ErrorMessage = "Hesla se neshodují.")]
+        [CompareAttribute("Password", ErrorMessageResourceName = "badPassword", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string PasswordComparison { get; set; }
 
-        [DisplayName("Jméno")]
-        [Required(ErrorMessage = "Vyplňte prosím křestní jméno.")] 
+        [Display(Name = "name", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fillName", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string FirstName { get; set; }
 
-        [DisplayName("Příjmení")]
-        [Required(ErrorMessage = "Vyplňte prosím příjmení.")] 
+        [Display(Name = "surname", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "fillSurname", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Surname { get; set; }
 
-        [DisplayName("Telefon")]
-        [RegularExpression ("^[+]?[()/0-9. -]{9,}$", ErrorMessage = "Neplatné telefonní číslo.")] 
+        [Display(Name = "phone", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [RegularExpression("^[+]?[()/0-9. -]{9,}$", ErrorMessageResourceName = "invalidePhone", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))] 
         public string Telephone { get; set; }
 
         [DisplayName("Datum a čas registrace")]
