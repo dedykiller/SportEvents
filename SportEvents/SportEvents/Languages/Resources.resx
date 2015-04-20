@@ -195,4 +195,52 @@
   <data name="surname" xml:space="preserve">
     <value>Surname</value>
   </data>
+  <data name="allGroups" xml:space="preserve">
+    <value>All groups</value>
+  </data>
+  <data name="backListGroup" xml:space="preserve">
+    <value>Back to the list of groups.</value>
+  </data>
+  <data name="createdGroup" xml:space="preserve">
+    <value>My created groups</value>
+  </data>
+  <data name="endPayPeriod" xml:space="preserve">
+    <value>Enter the end of the billing period.</value>
+  </data>
+  <data name="enterDescripGroup" xml:space="preserve">
+    <value>Enter a description for the group.</value>
+  </data>
+  <data name="enterTypePay" xml:space="preserve">
+    <value>Enter the type of payments for the following billing period</value>
+  </data>
+  <data name="fillGroupName" xml:space="preserve">
+    <value>Fill in the group name.</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="groupsIn" xml:space="preserve">
+    <value>The groups where I'm a member</value>
+  </data>
+  <data name="IDowner" xml:space="preserve">
+    <value>ID owner</value>
+  </data>
+  <data name="listAllGroups" xml:space="preserve">
+    <value>The list of all groups</value>
+  </data>
+  <data name="listArticle" xml:space="preserve">
+    <value>The list of articles</value>
+  </data>
+  <data name="numberOfUsers" xml:space="preserve">
+    <value>Number of users</value>
+  </data>
+  <data name="pleaseFillDescrip" xml:space="preserve">
+    <value>Please fill in the description of the group.</value>
+  </data>
+  <data name="pleaseFillName" xml:space="preserve">
+    <value>Please fill in the name of the group.</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

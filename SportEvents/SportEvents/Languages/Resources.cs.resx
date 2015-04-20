@@ -124,10 +124,10 @@
     <value>Zapomněl jsi své heslo?</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Příhlášení</value>
+    <value>Přihlášení</value>
   </data>
   <data name="emailLog" xml:space="preserve">
-    <value>Email(Přihlášení)</value>
+    <value>E-mail(přihlášení)</value>
   </data>
   <data name="home" xml:space="preserve">
     <value>Domů</value>
@@ -194,5 +194,53 @@
   </data>
   <data name="surname" xml:space="preserve">
     <value>Příjmení</value>
+  </data>
+  <data name="allGroups" xml:space="preserve">
+    <value>Všechny skupiny</value>
+  </data>
+  <data name="backListGroup" xml:space="preserve">
+    <value>Zpět na seznam skupin.</value>
+  </data>
+  <data name="createdGroup" xml:space="preserve">
+    <value>Mnou vytvořené skupiny</value>
+  </data>
+  <data name="endPayPeriod" xml:space="preserve">
+    <value>Zadejte konec zúčtovacího období.</value>
+  </data>
+  <data name="enterDescripGroup" xml:space="preserve">
+    <value>Zadejte popis skupiny.</value>
+  </data>
+  <data name="enterTypePay" xml:space="preserve">
+    <value>Zadej typ platby pro následující účtovací období</value>
+  </data>
+  <data name="fillGroupName" xml:space="preserve">
+    <value>Zadej název skupiny.</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="groupsIn" xml:space="preserve">
+    <value>Skupiny, ve kterých jsem členem</value>
+  </data>
+  <data name="IDowner" xml:space="preserve">
+    <value>ID vlastníka</value>
+  </data>
+  <data name="listAllGroups" xml:space="preserve">
+    <value>Seznam všech skupin</value>
+  </data>
+  <data name="listArticle" xml:space="preserve">
+    <value>Seznam článků</value>
+  </data>
+  <data name="numberOfUsers" xml:space="preserve">
+    <value>Počet uživatelů</value>
+  </data>
+  <data name="pleaseFillDescrip" xml:space="preserve">
+    <value>Vyplňte prosím popis skupiny.</value>
+  </data>
+  <data name="pleaseFillName" xml:space="preserve">
+    <value>Vyplňte prosím název skupiny.</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Název</value>
   </data>
 </root>
