@@ -1,0 +1,45 @@
+﻿@model SportEvents.ViewModels.PaymentPeriodCollectionVM
+
+@{
+    ViewBag.Title = "Seznam zúčtovacích období";
+}
+
+<h2>Seznam zúčtovacích období</h2>
+
+
+    <section id="left">
+        <table class="table">
+            <tr>
+                <th>
+                    <h3>Seznam zúčtovacích období</h3>
+                </th>
+                <th>
+                    
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+
+
+            </tr>
+            @foreach (var item in Model.PaymentPeriods)
+            {
+                <tr onclick="location.href = '@(Url.Action("ListOfPayments", "PaymentPeriod", new { PaymentPeriodId = item.Id, groupId = item.GroupId }))'">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.End)
+                    </td>
+
+                </tr>
+            }
+        </table>
+
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </section>

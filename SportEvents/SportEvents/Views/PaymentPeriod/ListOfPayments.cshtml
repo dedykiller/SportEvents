@@ -1,0 +1,57 @@
+﻿@model SportEvents.ViewModels.ListOfPaymentsForUserInPaymentPeriodVM
+
+@{
+    ViewBag.Title = "ListOfPayments";
+}
+
+<h2>ListOfPayments</h2>
+<p>Celkem dlužná částka: </p>
+<p>Zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) Kč</p>
+@foreach (var item in Model.ChargedUsersPayingByCash)
+{
+    
+    @Html.DisplayFor(modelItem => item.FirstName) 
+    @Html.DisplayFor(modelItem => item.Surname)
+    <p> Tento uživatel celkem dluží:</p> @Html.DisplayFor(modelItem => item.sum)
+    
+    <table class="table">
+        <tr>
+            <th>
+                Cena události
+            </th>
+
+            <th>
+                Název 
+            </th>
+            
+            <th>
+                Datum a čas
+            </th>
+        </tr>
+
+        @foreach (var item2 in item.EventsParticipationYes)
+	{
+		 <tr>
+             <td>
+                 @Html.DisplayFor(modelItem => item2.Price)
+             </td>
+
+           <td>
+               @Html.DisplayFor(modelItem => item2.Name)
+           </td>
+
+           <td>
+               @Html.DisplayFor(modelItem => item2.TimeOfEvent)
+           </td>
+
+         </tr>
+	}
+
+    </table>
+}
+
+
+
+
+
+
