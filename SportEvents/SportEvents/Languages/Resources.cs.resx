@@ -243,4 +243,16 @@
   <data name="title" xml:space="preserve">
     <value>Název</value>
   </data>
+  <data name="createGroup" xml:space="preserve">
+    <value>Vytvoř skupinu</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>Nová událost</value>
+  </data>
+  <data name="newGroup" xml:space="preserve">
+    <value>Nová skupina</value>
+  </data>
 </root>

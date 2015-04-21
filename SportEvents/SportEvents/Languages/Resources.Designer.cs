@@ -133,6 +133,24 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a group.
+        /// </summary>
+        public static string createGroup {
+            get {
+                return ResourceManager.GetString("createGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string description {
+            get {
+                return ResourceManager.GetString("description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email(Login).
         /// </summary>
         public static string emailLog {
@@ -336,6 +354,24 @@ namespace SportEvents.Languages {
         public static string name {
             get {
                 return ResourceManager.GetString("name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New event.
+        /// </summary>
+        public static string newEvent {
+            get {
+                return ResourceManager.GetString("newEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New group.
+        /// </summary>
+        public static string newGroup {
+            get {
+                return ResourceManager.GetString("newGroup", resourceCulture);
             }
         }
         

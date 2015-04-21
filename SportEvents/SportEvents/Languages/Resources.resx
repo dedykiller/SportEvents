@@ -243,4 +243,16 @@
   <data name="title" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="createGroup" xml:space="preserve">
+    <value>Create a group</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>New event</value>
+  </data>
+  <data name="newGroup" xml:space="preserve">
+    <value>New group</value>
+  </data>
 </root>
