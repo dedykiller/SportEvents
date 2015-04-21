@@ -131,6 +131,12 @@ h2 {
     margin-bottom: 30px;
 }
 
+#right img {
+    width: 500px;
+    height: 250px;
+    padding-top: 50px;
+    padding-left: 60px;
+}
 
 
 .description-groups {
@@ -168,7 +174,6 @@ h2 {
     font-weight: 100;
     margin-top: 30px;
     color: #333333;
-    ;
 }
 
 #container {
