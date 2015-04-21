@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addPerson" xml:space="preserve">
-    <value>Add person</value>
-  </data>
   <data name="emailLogin" xml:space="preserve">
     <value>E-mail(login)</value>
   </data>
@@ -140,5 +137,122 @@
   </data>
   <data name="reg" xml:space="preserve">
     <value>Registration</value>
+  </data>
+  <data name="backList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="fillEmail" xml:space="preserve">
+    <value>Please fill in the e-mail used as a login.</value>
+  </data>
+  <data name="lostPassword" xml:space="preserve">
+    <value>Lost password</value>
+  </data>
+  <data name="regForm" xml:space="preserve">
+    <value>Registration form</value>
+  </data>
+  <data name="allowedCharacters" xml:space="preserve">
+    <value>Allowed characters are a-z, A-Z and 0-9 with a minimum length of 8 characters.</value>
+  </data>
+  <data name="badPassword" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="completePassword" xml:space="preserve">
+    <value>Please complete the confirmation password.</value>
+  </data>
+  <data name="fillName" xml:space="preserve">
+    <value>Please fill in your first name.</value>
+  </data>
+  <data name="fillPassword" xml:space="preserve">
+    <value>Please fill in the password.</value>
+  </data>
+  <data name="fillSurname" xml:space="preserve">
+    <value>Please fill in your surname.</value>
+  </data>
+  <data name="invalidEmail" xml:space="preserve">
+    <value>Invalid e-mail format.</value>
+  </data>
+  <data name="invalidePhone" xml:space="preserve">
+    <value>Invalid phone number.</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>Password confirmation.</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="pleaseFillInEmail" xml:space="preserve">
+    <value>Please fill in the e-mail used as a login.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="allGroups" xml:space="preserve">
+    <value>All groups</value>
+  </data>
+  <data name="backListGroup" xml:space="preserve">
+    <value>Back to the list of groups.</value>
+  </data>
+  <data name="createdGroup" xml:space="preserve">
+    <value>My created groups</value>
+  </data>
+  <data name="endPayPeriod" xml:space="preserve">
+    <value>Enter the end of the billing period.</value>
+  </data>
+  <data name="enterDescripGroup" xml:space="preserve">
+    <value>Enter a description for the group.</value>
+  </data>
+  <data name="enterTypePay" xml:space="preserve">
+    <value>Enter the type of payments for the following billing period</value>
+  </data>
+  <data name="fillGroupName" xml:space="preserve">
+    <value>Fill in the group name.</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="groupsIn" xml:space="preserve">
+    <value>The groups where I'm a member</value>
+  </data>
+  <data name="IDowner" xml:space="preserve">
+    <value>ID owner</value>
+  </data>
+  <data name="listAllGroups" xml:space="preserve">
+    <value>The list of all groups</value>
+  </data>
+  <data name="listArticle" xml:space="preserve">
+    <value>The list of articles</value>
+  </data>
+  <data name="numberOfUsers" xml:space="preserve">
+    <value>Number of users</value>
+  </data>
+  <data name="pleaseFillDescrip" xml:space="preserve">
+    <value>Please fill in the description of the group.</value>
+  </data>
+  <data name="pleaseFillName" xml:space="preserve">
+    <value>Please fill in the name of the group.</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="createGroup" xml:space="preserve">
+    <value>Create a group</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>New event</value>
+  </data>
+  <data name="newGroup" xml:space="preserve">
+    <value>New group</value>
   </data>
 </root>
