@@ -44,7 +44,7 @@ namespace SportEvents.Models.Application
             UsersInGroup userIngroup = new UsersInGroup(); 
             //group.StartOfPaymentPeriod = DateTime.Now;            
             group.NumberOfUsersInGroup += 1;
-            //group.CreatorFullName = user.FirstName + " " + user.Surname;
+            group.CreatorFullName = user.FirstName + " " + user.Surname;
             db.Groups.Add(group);
             db.SaveChanges();
             userIngroup.UserID = user.Id;

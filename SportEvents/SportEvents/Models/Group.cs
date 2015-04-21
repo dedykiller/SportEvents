@@ -25,6 +25,7 @@ namespace SportEvents.Models
         [Display(Name = "enterDescripGroup", ResourceType = typeof(SportEvents.Languages.Resources))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "pleaseFillDescrip", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Description { get; set; }
+        public string CreatorFullName { get; set; }
         public DateTime CreateTime { get; set; }
 
         //[NotMapped]

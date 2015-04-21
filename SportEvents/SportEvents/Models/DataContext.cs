@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("TerkaDB") 
+            : base("KuznikRoprDB") 
         {
         }
 
