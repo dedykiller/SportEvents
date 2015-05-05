@@ -6,9 +6,9 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    
+
+   @using (Html.BeginForm("EditEventComment", "Comment", FormMethod.Post))
+  {  
     <div class="form-horizontal">
         <h4>Comment</h4>
         <hr />
