@@ -134,8 +134,8 @@ namespace SportEvents.Controllers
             //}
             
             //vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(db.GetAllUsersPayingByCash(db.AllUsersInGroup(groupId), PaymentPeriodId),vm.Events, PaymentPeriodId);
-
-
+            vm.PaymentPeriod = db.PaymentPeriods.Where(x => x.Id == PaymentPeriodId).Single();
+            vm.PaymentPeriod.GroupName = db.Groups.Where(x => x.Id == vm.PaymentPeriod.GroupId).Single().Name;
             
             return View(vm);
         }

@@ -3,10 +3,11 @@
 
 
 
-<h2>Seznam plateb</h2>
+<h2>Seznam plateb pro účtovací období @Html.DisplayFor(model => model.PaymentPeriod.Start) - 
+    @Html.DisplayFor(model => model.PaymentPeriod.End) skupiny @Html.DisplayFor(model => model.PaymentPeriod.GroupName)</h2>
 <p>Celkem dlužná částka: @Html.DisplayFor(model => model.SumPrices)  </p>
 
-    <p>Zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) </p>
+    <p>Celkem zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) </p>
     @foreach (var item in Model.ChargedUsersPayingByCash)
     {
 
@@ -14,7 +15,7 @@
         <p>
             Uživatel @Html.DisplayFor(modelItem => item.FirstName)
             @Html.DisplayFor(modelItem => item.Surname)
-            celkem dluží: @Html.DisplayFor(modelItem => item.sum)
+            zaplatil hotově na místě: @Html.DisplayFor(modelItem => item.sum)
         </p>
 
         <table class="table">
@@ -54,7 +55,7 @@
     
     
         <p></p>
-    <p>Zaplatí zpětně: @Html.DisplayFor(model => model.SumAfterPeriod) Kč</p>
+    <p>Celkem zaplatí zpětně: @Html.DisplayFor(model => model.SumAfterPeriod) Kč</p>
     @foreach (var item in Model.ChargedUsersPayingAfterPeriod)
     {
 
@@ -62,7 +63,7 @@
         <p>
             Uživatel @Html.DisplayFor(modelItem => item.FirstName)
             @Html.DisplayFor(modelItem => item.Surname)
-            celkem dluží: @Html.DisplayFor(modelItem => item.sum)
+            zaplatí zpětně: @Html.DisplayFor(modelItem => item.sum)
         </p>
 
         <table class="table">
