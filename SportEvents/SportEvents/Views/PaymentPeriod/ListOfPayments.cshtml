@@ -5,9 +5,13 @@
 
 <h2>Seznam plateb pro účtovací období @Html.DisplayFor(model => model.PaymentPeriod.Start) - 
     @Html.DisplayFor(model => model.PaymentPeriod.End) skupiny @Html.DisplayFor(model => model.PaymentPeriod.GroupName)</h2>
-<p>Celkem dlužná částka: @Html.DisplayFor(model => model.SumPrices)  </p>
-
+    
+   <b>
+    <p>Celkem dlužná částka: @Html.DisplayFor(model => model.SumPrices)  </p>
     <p>Celkem zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) </p>
+    <p>Celkem zaplatí zpětně: @Html.DisplayFor(model => model.SumAfterPeriod) </p>
+</b>
+<p></p>
     @foreach (var item in Model.ChargedUsersPayingByCash)
     {
 
@@ -55,7 +59,7 @@
     
     
         <p></p>
-    <p>Celkem zaplatí zpětně: @Html.DisplayFor(model => model.SumAfterPeriod) Kč</p>
+    
     @foreach (var item in Model.ChargedUsersPayingAfterPeriod)
     {
 

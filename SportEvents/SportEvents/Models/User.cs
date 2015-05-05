@@ -51,6 +51,8 @@ namespace SportEvents.Models
         [NotMapped]
         public List<Event> EventsParticipationYes { get; set; }
         [NotMapped]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:#} Kč")]
         public decimal sum { get; set; }
 
         [DisplayName("Skupiny")]
