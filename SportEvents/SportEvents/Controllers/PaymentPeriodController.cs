@@ -97,6 +97,18 @@ namespace SportEvents.Controllers
                
             }
 
+            foreach (var item in vm.ChargedUsersPayingAfterPeriod)
+            {
+                if (item != null)
+                {
+                    item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
+                    item.sum = item.EventsParticipationYes.Select(x => x.Price).Sum();
+                    vm.SumAfterPeriod += item.sum;
+                }
+
+            }
+            
+
 
             //if (vm.ChargedUsersPayingAfterPeriod.Any(x => x != null))
             //{
@@ -110,7 +122,7 @@ namespace SportEvents.Controllers
 
             
 
-            vm.SumPrices = vm.SumCash + vm.SumPrices;
+            vm.SumPrices = vm.SumCash + vm.SumAfterPeriod;
 
            
 
