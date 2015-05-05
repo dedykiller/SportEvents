@@ -36,12 +36,9 @@ namespace SportEvents.Controllers
         {
             User user = (User)Session["UserSession"];
             int a = PaymentPeriod.GroupId;
-
-
             
             if (PaymentPeriod.End > PaymentPeriod.Start)
             {
-
                 // je další zúčtovací období definováno?
                 if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(PaymentPeriod.GroupId )== false)
                 {
@@ -66,8 +63,7 @@ namespace SportEvents.Controllers
                 TempData["notice"] = "Další zúčtovací období musí končit později než začíná.";
                 return View(PaymentPeriod);
 
-            }
-            
+            }          
             
         }
 
