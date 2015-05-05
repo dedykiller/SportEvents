@@ -30,20 +30,24 @@
                     Datum a čas
                 </th>
             </tr>
-            @foreach (var item2 in item.EventsParticipationYes)
+            @if (item != null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.TimeOfEvent)
-                    </td>
-                </tr>
+                foreach (var item2 in item.EventsParticipationYes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.TimeOfEvent)
+                        </td>
+                    </tr>
+                }
             }
+            
         </table>
     }
    
@@ -74,20 +78,24 @@
                     Datum a čas
                 </th>
             </tr>
-            @foreach (var item2 in item.EventsParticipationYes)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.TimeOfEvent)
-                    </td>
-                </tr>
-            }
+            @if (item != null)
+	{
+                foreach (var item2 in item.EventsParticipationYes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item2.TimeOfEvent)
+                        </td>
+                    </tr>
+                }
+
+    }      
         </table>
     }
         
