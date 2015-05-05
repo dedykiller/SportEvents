@@ -197,6 +197,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="ViewModels\EventCommentsVM.cs" />
     <Compile Include="ViewModels\ArticleCommentsVM.cs" />
     <Compile Include="ViewModels\FileSize.cs" />
     <Compile Include="ViewModels\FileTypes.cs" />
@@ -246,6 +247,8 @@
     <Content Include="Views\Comment\Details.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\EditEventComment.cshtml" />
+    <Content Include="Views\Comment\DeleteEventComment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

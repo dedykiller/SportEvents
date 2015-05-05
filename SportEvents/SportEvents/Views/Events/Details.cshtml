@@ -1,42 +1,43 @@
-﻿@model SportEvents.Models.Event
+﻿@model SportEvents.ViewModels.EventCommentsVM
 
 @{
     ViewBag.Title = "Details";
 }
-<h2>@Html.DisplayFor(model => model.Name)</h2>
+<h2>@Html.DisplayFor(model => Model.Event.Name)</h2>
 <hr />
 <div id="container">
     <div id="left">
         <div class="description-groups">
-            <p><b>Datum a čas: </b>@Html.DisplayFor(model => model.TimeOfEvent)</p>
-            <p><b>Místo: </b>@Html.DisplayFor(model => model.Place)</p>
-            <p><b>Cena: </b>@Html.DisplayFor(model => model.Price)</p>
-            <p><b>Popis: </b><br />@Html.DisplayFor(model => model.Description)</p>
+            <p><b>Datum a čas: </b>@Html.DisplayFor(model => Model.Event.TimeOfEvent)</p>
+            <p><b>Místo: </b>@Html.DisplayFor(model => Model.Event.Place)</p>
+            <p><b>Cena: </b>@Html.DisplayFor(model => Model.Event.Price)</p>
+            <p><b>Popis: </b><br />@Html.DisplayFor(model => Model.Event.Description)</p>
         </div>
 
         @using (Html.BeginForm("Details", "Events", FormMethod.Post))
-        {
-            if (Model.participation.ToString().Equals("Yes"))
+        {  
+            @Html.HiddenFor(model => Model.Event.Id)
+            if (Model.Event.participation.ToString().Equals("Yes"))
             {
                 <dt>
-                    @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
-                    @Html.RadioButtonFor(model => model.participation, 1, new { Checked = "checked" }) Účastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, 1, new { Checked = "checked" }) Účastním se
                 </dt>
             }
-            if (Model.participation.ToString().Equals("No"))
+            if (Model.Event.participation.ToString().Equals("No"))
             {
                 <dt>
-                    @Html.RadioButtonFor(model => model.participation, -1, new { Checked = "checked" }) Nezúčastním se
-                    @Html.RadioButtonFor(model => model.participation, 1) Účastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, -1, new { Checked = "checked" }) Nezúčastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
                 </dt>
             }
-            if (Model.participation.ToString().Equals("Unspoken"))
+            if (Model.Event.participation.ToString().Equals("Unspoken"))
             {
 
                 <dt>
 
-                    @Html.RadioButtonFor(model => model.participation, -1) Nezúčastním se
-                    @Html.RadioButtonFor(model => model.participation, 1) Účastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
+                    @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
                 </dt>
             }
 
@@ -58,7 +59,7 @@
                 </th>
 
             </tr>
-            @foreach (var item in Model.UserParticipationNo)
+            @foreach (var item in Model.Event.UserParticipationNo)
             {
                 <tr>
                     <td>
@@ -73,7 +74,7 @@
                     </td>
                 </tr>
             }
-            @foreach (var item in Model.UserParticipationYes)
+            @foreach (var item in Model.Event.UserParticipationYes)
             {
                 <tr>
                     <td>
@@ -87,7 +88,7 @@
                     </td>
                 </tr>
             }
-            @foreach (var item in Model.UserParticipationUnspoken)
+            @foreach (var item in Model.Event.UserParticipationUnspoken)
             {
                 <tr>
                     <td>
@@ -103,4 +104,48 @@
             }
         </table>
     </div>
+</div>
+
+<div>
+    @using (Html.BeginForm("CreateEventComment", "Comment", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+
+            @Html.ValidationSummary(true)
+            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
+
+            <input type="hidden" value="@Model.Event.Id" name="ArticleID" />
+            <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" name="Submit" value="Vytvořit komentář" class="button" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="comments">
+    @foreach (var item in Model.Comments)
+    {
+
+
+        if (Session["UserSession"] != null)
+        {
+            SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+            if (user.Id == item.UserID)
+            {
+                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "EditEventComment", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "DeleteEventComment", "Comment", new { id = item.ID }, null)</span></h4>
+            }
+            else
+            {
+                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
+            }
+            <p>@Html.DisplayFor(modelItem => item.Text)</p>
+        }
+
+    }
+
 </div>

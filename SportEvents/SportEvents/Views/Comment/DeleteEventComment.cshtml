@@ -37,8 +37,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-
+@using (Html.BeginForm("DeleteEventComment", "Comment", FormMethod.Post))
+{
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")

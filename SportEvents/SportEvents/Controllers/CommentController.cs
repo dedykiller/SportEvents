@@ -62,8 +62,44 @@ namespace SportEvents.Controllers
             return View(comment);
         }
 
+        // POST: /Comment/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateEventComment([Bind(Include = "ArticleID,Text")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.CreationTime = DateTime.Now;
+                User user = (User)Session["UserSession"];
+                comment.UserID = user.Id;
+                comment.CreatorFullName = user.FirstName + " " + user.Surname;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
+            }
+
+            return View(comment);
+        }
+
         // GET: /Comment/Edit/5
         public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
+
+        // GET: /Comment/Edit/5
+        public ActionResult EditEventComment(int? id)
         {
             if (id == null)
             {
@@ -81,7 +117,6 @@ namespace SportEvents.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ArticleID,Text")]  Comment comment)
         {
             if (ModelState.IsValid)
@@ -94,6 +129,26 @@ namespace SportEvents.Controllers
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
+            }
+            return View(comment);
+        }
+
+        // POST: /Comment/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult EditEventComment([Bind(Include = "ID,ArticleID,Text")]  Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.CreationTime = DateTime.Now;
+                User user = (User)Session["UserSession"];
+                comment.UserID = user.Id;
+                comment.CreatorFullName = user.FirstName + " " + user.Surname;
+                db.Comments.Add(comment);
+                db.Entry(comment).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
             }
             return View(comment);
         }
@@ -113,15 +168,39 @@ namespace SportEvents.Controllers
             return View(comment);
         }
 
+        // GET: /Comment/Delete/5
+        public ActionResult DeleteEventComment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(comment);
+        }
+
         // POST: /Comment/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
+        }
+
+        // POST: /Comment/Delete/5
+        [HttpPost, ActionName("DeleteEventComment")]
+        public ActionResult DeleteEventComment(int id)
+        {
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
         }
 
         protected override void Dispose(bool disposing)

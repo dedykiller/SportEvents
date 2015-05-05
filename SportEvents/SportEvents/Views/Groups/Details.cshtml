@@ -26,6 +26,7 @@
     {
         <div class="button-link-first">
             @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+            @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)
         </div>
     }
 

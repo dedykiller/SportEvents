@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SportEvents.Models;
+using SportEvents.ViewModels;
 
 namespace SportEvents.Controllers
 {
@@ -59,7 +60,12 @@ namespace SportEvents.Controllers
             @event.UserParticipationYes = db.UsersInEventParticipation(@event.Id, participation.Yes);
             @event.UserParticipationNo = db.UsersInEventParticipation(@event.Id, participation.No);
             @event.UserParticipationUnspoken = db.UsersInEventParticipation(@event.Id, participation.Unspoken);
-            return View(@event);
+
+            EventCommentsVM vm = new EventCommentsVM();
+            vm.Event = @event;
+            vm.Comments = db.getAllCommentsOfArticle(id);
+            //vm.Comments = db.Comments.ToList(); všechny komentáře, ne pouze pro daný článek
+            return View(vm);
         }
 
         [HttpPost]
@@ -72,10 +78,12 @@ namespace SportEvents.Controllers
             @event.UserParticipationNo = db.UsersInEventParticipation(@event.Id, participation.No);
             @event.UserParticipationUnspoken = db.UsersInEventParticipation(@event.Id, participation.Unspoken);
 
-            
-           
-            
-            return View(@event);
+
+            EventCommentsVM vm = new EventCommentsVM();
+            vm.Event = @event;
+            vm.Comments = db.getAllCommentsOfArticle(@event.Id);
+
+            return View(vm);
         }
 
         // GET: Events/Create
