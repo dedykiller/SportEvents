@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("dedekDB") 
+            : base("masterDB") 
         {
         }
 
@@ -225,16 +225,8 @@ namespace SportEvents.Models
             {
                 foreach (var us in PayingUsers)
                 {
-                    UsersInEvent helper = new UsersInEvent();
-                    if (UserInEvents.Where(x => x.EventId == eve.Id && x.UserId == us.Id && (x.participation == participation.Yes ||
-                    x.participation == participation.Unspoken)).SingleOrDefault() != null)
-                    {
-                        UsInEvents.Add(UserInEvents.Where(x => x.EventId == eve.Id && x.UserId == us.Id && (x.participation == participation.Yes ||
+                    UsInEvents.Add(UserInEvents.Where(x => x.EventId == eve.Id && x.UserId == us.Id && (x.participation == participation.Yes ||
                     x.participation == participation.Unspoken)).SingleOrDefault());
-                        
-                    }
-
-                   
                 }
                         
             }
@@ -242,11 +234,7 @@ namespace SportEvents.Models
             
             foreach (var item in UserInEvents)
             {
-                if (PayingUsers.Where(x => x.Id == item.UserId).SingleOrDefault() != null)
-                {
-                    AllChargedUsers.Add(PayingUsers.Where(x => x.Id == item.UserId).SingleOrDefault());
-                }
-                
+                AllChargedUsers.Add(PayingUsers.Where(x => x.Id == item.UserId).SingleOrDefault());
             }
             AllChargedUsers = AllChargedUsers.Distinct().ToList();
 
