@@ -61,11 +61,92 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add person.
+        ///   Looks up a localized string similar to All groups.
         /// </summary>
-        public static string addPerson {
+        public static string allGroups {
             get {
-                return ResourceManager.GetString("addPerson", resourceCulture);
+                return ResourceManager.GetString("allGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowed characters are a-z, A-Z and 0-9 with a minimum length of 8 characters..
+        /// </summary>
+        public static string allowedCharacters {
+            get {
+                return ResourceManager.GetString("allowedCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string backList {
+            get {
+                return ResourceManager.GetString("backList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to the list of groups..
+        /// </summary>
+        public static string backListGroup {
+            get {
+                return ResourceManager.GetString("backListGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords do not match..
+        /// </summary>
+        public static string badPassword {
+            get {
+                return ResourceManager.GetString("badPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please complete the confirmation password..
+        /// </summary>
+        public static string completePassword {
+            get {
+                return ResourceManager.GetString("completePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string create {
+            get {
+                return ResourceManager.GetString("create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My created groups.
+        /// </summary>
+        public static string createdGroup {
+            get {
+                return ResourceManager.GetString("createdGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a group.
+        /// </summary>
+        public static string createGroup {
+            get {
+                return ResourceManager.GetString("createGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string description {
+            get {
+                return ResourceManager.GetString("description", resourceCulture);
             }
         }
         
@@ -88,6 +169,78 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the end of the billing period..
+        /// </summary>
+        public static string endPayPeriod {
+            get {
+                return ResourceManager.GetString("endPayPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a description for the group..
+        /// </summary>
+        public static string enterDescripGroup {
+            get {
+                return ResourceManager.GetString("enterDescripGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the type of payments for the following billing period.
+        /// </summary>
+        public static string enterTypePay {
+            get {
+                return ResourceManager.GetString("enterTypePay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the e-mail used as a login..
+        /// </summary>
+        public static string fillEmail {
+            get {
+                return ResourceManager.GetString("fillEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill in the group name..
+        /// </summary>
+        public static string fillGroupName {
+            get {
+                return ResourceManager.GetString("fillGroupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in your first name..
+        /// </summary>
+        public static string fillName {
+            get {
+                return ResourceManager.GetString("fillName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the password..
+        /// </summary>
+        public static string fillPassword {
+            get {
+                return ResourceManager.GetString("fillPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in your surname..
+        /// </summary>
+        public static string fillSurname {
+            get {
+                return ResourceManager.GetString("fillSurname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Did you forget your password?.
         /// </summary>
         public static string forgot {
@@ -97,11 +250,74 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        public static string group {
+            get {
+                return ResourceManager.GetString("group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The groups where I&apos;m a member.
+        /// </summary>
+        public static string groupsIn {
+            get {
+                return ResourceManager.GetString("groupsIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string home {
             get {
                 return ResourceManager.GetString("home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID owner.
+        /// </summary>
+        public static string IDowner {
+            get {
+                return ResourceManager.GetString("IDowner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid e-mail format..
+        /// </summary>
+        public static string invalidEmail {
+            get {
+                return ResourceManager.GetString("invalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number..
+        /// </summary>
+        public static string invalidePhone {
+            get {
+                return ResourceManager.GetString("invalidePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The list of all groups.
+        /// </summary>
+        public static string listAllGroups {
+            get {
+                return ResourceManager.GetString("listAllGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The list of articles.
+        /// </summary>
+        public static string listArticle {
+            get {
+                return ResourceManager.GetString("listArticle", resourceCulture);
             }
         }
         
@@ -124,11 +340,137 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lost password.
+        /// </summary>
+        public static string lostPassword {
+            get {
+                return ResourceManager.GetString("lostPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string name {
+            get {
+                return ResourceManager.GetString("name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New event.
+        /// </summary>
+        public static string newEvent {
+            get {
+                return ResourceManager.GetString("newEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New group.
+        /// </summary>
+        public static string newGroup {
+            get {
+                return ResourceManager.GetString("newGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of users.
+        /// </summary>
+        public static string numberOfUsers {
+            get {
+                return ResourceManager.GetString("numberOfUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password confirmation..
+        /// </summary>
+        public static string passwordConfirm {
+            get {
+                return ResourceManager.GetString("passwordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number.
+        /// </summary>
+        public static string phone {
+            get {
+                return ResourceManager.GetString("phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the description of the group..
+        /// </summary>
+        public static string pleaseFillDescrip {
+            get {
+                return ResourceManager.GetString("pleaseFillDescrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the e-mail used as a login..
+        /// </summary>
+        public static string pleaseFillInEmail {
+            get {
+                return ResourceManager.GetString("pleaseFillInEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in the name of the group..
+        /// </summary>
+        public static string pleaseFillName {
+            get {
+                return ResourceManager.GetString("pleaseFillName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
         public static string reg {
             get {
                 return ResourceManager.GetString("reg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration form.
+        /// </summary>
+        public static string regForm {
+            get {
+                return ResourceManager.GetString("regForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string surname {
+            get {
+                return ResourceManager.GetString("surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string title {
+            get {
+                return ResourceManager.GetString("title", resourceCulture);
             }
         }
     }

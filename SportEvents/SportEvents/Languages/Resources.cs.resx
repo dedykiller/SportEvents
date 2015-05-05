@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addPerson" xml:space="preserve">
-    <value>Přidat osobu</value>
-  </data>
   <data name="emailLogin" xml:space="preserve">
     <value>E-mail (přihlášení)</value>
   </data>
@@ -127,10 +124,10 @@
     <value>Zapomněl jsi své heslo?</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Příhlášení</value>
+    <value>Přihlášení</value>
   </data>
   <data name="emailLog" xml:space="preserve">
-    <value>Email(Přihlášení)</value>
+    <value>E-mail(přihlášení)</value>
   </data>
   <data name="home" xml:space="preserve">
     <value>Domů</value>
@@ -140,5 +137,122 @@
   </data>
   <data name="reg" xml:space="preserve">
     <value>Registrace</value>
+  </data>
+  <data name="backList" xml:space="preserve">
+    <value>Zpět na hlavní stránku</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Vytvořit</value>
+  </data>
+  <data name="fillEmail" xml:space="preserve">
+    <value>Vyplňte prosím e-mail sloužící jako login.</value>
+  </data>
+  <data name="lostPassword" xml:space="preserve">
+    <value>Zapomenuté heslo</value>
+  </data>
+  <data name="regForm" xml:space="preserve">
+    <value>Registrační formulář</value>
+  </data>
+  <data name="allowedCharacters" xml:space="preserve">
+    <value>Povolené znaky jsou a-z, A-Z a 0-9 s minimální délkou 8 znaků.</value>
+  </data>
+  <data name="badPassword" xml:space="preserve">
+    <value>Hesla se neshodují.</value>
+  </data>
+  <data name="completePassword" xml:space="preserve">
+    <value>Vyplňte prosím potvrzovací heslo.</value>
+  </data>
+  <data name="fillName" xml:space="preserve">
+    <value>Vyplňte prosím křestní jméno.</value>
+  </data>
+  <data name="fillPassword" xml:space="preserve">
+    <value>Vyplňte prosím heslo.</value>
+  </data>
+  <data name="fillSurname" xml:space="preserve">
+    <value>Vyplňte prosím příjmení.</value>
+  </data>
+  <data name="invalidEmail" xml:space="preserve">
+    <value>Neplatný formát e-mailu.</value>
+  </data>
+  <data name="invalidePhone" xml:space="preserve">
+    <value>Neplatné telefonní číslo.</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="passwordConfirm" xml:space="preserve">
+    <value>Potvrzení hesla.</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="pleaseFillInEmail" xml:space="preserve">
+    <value>Vyplňte prosím e-mail sloužící jako login.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Příjmení</value>
+  </data>
+  <data name="allGroups" xml:space="preserve">
+    <value>Všechny skupiny</value>
+  </data>
+  <data name="backListGroup" xml:space="preserve">
+    <value>Zpět na seznam skupin.</value>
+  </data>
+  <data name="createdGroup" xml:space="preserve">
+    <value>Mnou vytvořené skupiny</value>
+  </data>
+  <data name="endPayPeriod" xml:space="preserve">
+    <value>Zadejte konec zúčtovacího období.</value>
+  </data>
+  <data name="enterDescripGroup" xml:space="preserve">
+    <value>Zadejte popis skupiny.</value>
+  </data>
+  <data name="enterTypePay" xml:space="preserve">
+    <value>Zadej typ platby pro následující účtovací období</value>
+  </data>
+  <data name="fillGroupName" xml:space="preserve">
+    <value>Zadej název skupiny.</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="groupsIn" xml:space="preserve">
+    <value>Skupiny, ve kterých jsem členem</value>
+  </data>
+  <data name="IDowner" xml:space="preserve">
+    <value>ID vlastníka</value>
+  </data>
+  <data name="listAllGroups" xml:space="preserve">
+    <value>Seznam všech skupin</value>
+  </data>
+  <data name="listArticle" xml:space="preserve">
+    <value>Seznam článků</value>
+  </data>
+  <data name="numberOfUsers" xml:space="preserve">
+    <value>Počet uživatelů</value>
+  </data>
+  <data name="pleaseFillDescrip" xml:space="preserve">
+    <value>Vyplňte prosím popis skupiny.</value>
+  </data>
+  <data name="pleaseFillName" xml:space="preserve">
+    <value>Vyplňte prosím název skupiny.</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="createGroup" xml:space="preserve">
+    <value>Vytvoř skupinu</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>Nová událost</value>
+  </data>
+  <data name="newGroup" xml:space="preserve">
+    <value>Nová skupina</value>
   </data>
 </root>

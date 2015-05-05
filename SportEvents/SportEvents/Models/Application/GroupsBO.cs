@@ -57,8 +57,9 @@ namespace SportEvents.Models.Application
                 Start = DateTime.Today,
                 End = group.EndOfPaymentPeriod
             });
-            db.SaveChanges();
-          //  SetDefaultTypeOfPaymentForUser(user, group);
+            
+            db.SaveChanges();            
+            SetDefaultTypeOfPaymentForUser(user, group);
             
         }
 

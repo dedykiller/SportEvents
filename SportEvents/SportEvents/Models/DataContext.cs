@@ -96,6 +96,11 @@ namespace SportEvents.Models
             return false;
         }
 
+        public List<PaymentPeriod> GetAllPaymentPeriodsOfGroup (int groupId)
+        {
+            return PaymentPeriods.Where(x => x.GroupId == groupId).ToList();
+        }
+
         public List<Event> SelectEventsById(List<int> eventsIds)
         {
             List<Event> events = new List<Event>();
@@ -130,6 +135,15 @@ namespace SportEvents.Models
             listOfEvents = Events.Where(x => x.CreatorId == User_Id).ToList();
             
             return listOfEvents;
+        }
+        //TODO : zde budou chyby ohledně podmínek u dat. atributů, zkontrolovat a opravit
+        public List<Event> GetAllEventsOfPaymentPeriod (int periodId) 
+        {
+            int groupId = PaymentPeriods.Where(x => x.Id == periodId).Single().GroupId;
+            PaymentPeriod PP = PaymentPeriods.Where(x => x.Id == periodId).Single();
+            //List<PaymentPeriod> AllPaymentsPeriod = GetAllPaymentPeriodsOfGroup(groupId);
+            return Events.Where(x => x.GrpId == groupId && PP.Start <= x.TimeOfEvent && PP.End >= x.TimeOfEvent).ToList();
+                       
         }
 
         public List<Group> AllGroupsWhereIsUserCreator(int User_Id)
@@ -166,14 +180,70 @@ namespace SportEvents.Models
 
             return list;
         }
+        
+        public List<User> GetAllUsersPayingByCashOrAfterPeriod(List<User> UsersOfGroup, int paymentPeriodId, TypeOfPaymentInPeriod TOPIP) 
+        {
+            List<TypeOfPaymentForUserInPeriod> TypeOfPaymentForUserInPeriod = new List<TypeOfPaymentForUserInPeriod>();
+            List<User> UsersPayingByCashOrAfterPeriod = new List<User>();
+            foreach (var item in UsersOfGroup)
+	        {
+                if (TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
+                    x.UserTypeOfPaymentInPeriod == TOPIP && x.PaymentPeriodId == paymentPeriodId).SingleOrDefault() != null)
+                {
+                    TypeOfPaymentForUserInPeriod.Add(TypeOfPaymentForUserInPeriods.Where(x => x.UserId == item.Id &&
+                    x.UserTypeOfPaymentInPeriod == TOPIP && x.PaymentPeriodId == paymentPeriodId).SingleOrDefault());
+                }
+                
+	        }
+
+            
+            
+
+
+            
+
+            //if (TypeOfPaymentForUserInPeriod.Any(x=> x == null))
+            //{
+            //    return UsersPayingByCashOrAfterPeriod; 
+            //}
+
+            foreach (var item in TypeOfPaymentForUserInPeriod)
+	        {
+                
+                UsersPayingByCashOrAfterPeriod.Add(Users.Where(x => x.Id == item.UserId).Single());
+	        }
+
+            return UsersPayingByCashOrAfterPeriod;                      
+        
+        }
+        // vyber mi z listu
+        public List<User> GetAllChargedUsers (List<User> PayingUsers, List<Event> EventsOfPeriod, int PaymentPeriodId) 
+        {
+            List<User> AllChargedUsers = new List<User>();
+            List<UsersInEvent> UsInEvents = new List<UsersInEvent>();
+            foreach (var eve in EventsOfPeriod)
+            {
+                foreach (var us in PayingUsers)
+                {
+                    UsInEvents.Add(UserInEvents.Where(x => x.EventId == eve.Id && x.UserId == us.Id && (x.participation == participation.Yes ||
+                    x.participation == participation.Unspoken)).SingleOrDefault());
+                }
+                        
+            }
+
+            
+            foreach (var item in UserInEvents)
+            {
+                AllChargedUsers.Add(PayingUsers.Where(x => x.Id == item.UserId).SingleOrDefault());
+            }
+            AllChargedUsers = AllChargedUsers.Distinct().ToList();
+
+            return AllChargedUsers;
+            
+        }
 
         public void AddUserToEvent(User User, Event Event)
-        {            
-        //    User u = Users.First(x => x.Id == User.Id);
-        //   // u.UserInEvents.Add(Event);
-        //    Event e = Events.First(x => x.Id == Event.Id);
-        //   // e.UserInEvents.Add(User);
-
+        {       
             UsersInEvent UIE = new UsersInEvent();
             UIE.User = User;
             UIE.Event = Event;
@@ -233,6 +303,29 @@ namespace SportEvents.Models
         public Event GetEventById(int eventId)
         {
             return Events.FirstOrDefault(x => x.Id == eventId);    
+        }
+
+        public List<Event> GetEventsWhereIsThisParticipation(List<Event> ev, participation part, int userId) 
+        {
+            List<UsersInEvent> UIN = new List<UsersInEvent>();
+            foreach (var item in ev)
+            {
+                UsersInEvent UsInEv = new UsersInEvent();
+
+                UsInEv = UserInEvents.Where(x => x.EventId == item.Id && x.UserId == userId && (x.participation == part || x.participation == participation.Unspoken)).SingleOrDefault();
+                if (UsInEv != null)
+                {
+                    UIN.Add(UsInEv);
+                }
+                
+            }
+            List<Event> returnEvents = new List<Event>();
+            foreach (var item in UIN)
+            {
+                returnEvents.Add(Events.Where(x => x.Id == item.EventId).Single());
+            }
+
+            return returnEvents;
         }
 
         public List<User> UsersInEventParticipation (int evendId, participation part)
