@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 <h3 style="text-align:center"> @TempData["notice"]</h3>
-<h2>Seznam mých skupin</h2>
+<h2>@SportEvents.Languages.Resources.listOfMyGroups</h2>
     <hr />
 
 @if (Session["UserSession"] != null)
