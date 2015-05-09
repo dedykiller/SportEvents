@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 <h3 style="text-align:center"> @TempData["notice"]</h3>
-<h2>Seznam skupin, ve kterých jsem členem</h2>
+<h2>@SportEvents.Languages.Resources.groupsIn</h2>
     <hr />
 
 @if (Session["UserSession"] != null)
@@ -14,16 +14,16 @@
        @Html.ActionLink("List of Events", "Index", "Events")
    </p>*/
     <p class="button-link-first">        
-        @Html.ActionLink("Nová skupina", "Create")
+        @Html.ActionLink(@SportEvents.Languages.Resources.create, "Create")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Všechny skupiny", "Index", "Groups")
+        @Html.ActionLink(@SportEvents.Languages.Resources.allGroups, "Index", "Groups")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Skupiny, kterých jsem členem", "IndexMember", "Groups")
+        @Html.ActionLink(@SportEvents.Languages.Resources.groupsIn, "IndexMember", "Groups")
     </p>
     <p class="button-link">
-        @Html.ActionLink("Mnou vytvořené skupiny", "IndexCreator", "Groups")
+        @Html.ActionLink(@SportEvents.Languages.Resources.createdGroup, "IndexCreator", "Groups")
     </p>
 
 }
@@ -32,14 +32,14 @@
 <table class="table" >
     <tr>
         <th>
-            <h3>Název</h3>
+            <h3>@SportEvents.Languages.Resources.title</h3>
         </th>
         
         <th>
-            <h3>ID vlastníka</h3>
+            <h3>@SportEvents.Languages.Resources.IDowner</h3>
         </th>
         <th>
-            <h3>Počet uživatelů</h3>
+            <h3>@SportEvents.Languages.Resources.numberOfUsers</h3>
         </th>
         
         <th></th>
