@@ -255,4 +255,7 @@
   <data name="newGroup" xml:space="preserve">
     <value>Nová skupina</value>
   </data>
+  <data name="listOfMyGroups" xml:space="preserve">
+    <value>Seznam mých skupin</value>
+  </data>
 </root>

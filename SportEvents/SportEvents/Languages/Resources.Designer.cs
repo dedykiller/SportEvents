@@ -322,6 +322,15 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The list of my groups.
+        /// </summary>
+        public static string listOfMyGroups {
+            get {
+                return ResourceManager.GetString("listOfMyGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string log_In {
