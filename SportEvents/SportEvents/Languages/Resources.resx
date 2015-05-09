@@ -139,7 +139,7 @@
     <value>Registration</value>
   </data>
   <data name="backList" xml:space="preserve">
-    <value>Back to List</value>
+    <value>Back to login page</value>
   </data>
   <data name="create" xml:space="preserve">
     <value>Create</value>

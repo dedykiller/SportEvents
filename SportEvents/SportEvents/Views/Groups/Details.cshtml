@@ -14,6 +14,15 @@
         @Model.Group.Name
     </a>
     <hr />
+
+    @if (ViewBag.IsUserCreator == true)
+    {
+        <div class="button-link-first">
+            @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)
+            @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+        </div>
+    }
+
     @if (ViewBag.IsUserInGroup == true)
     {
         <div class="button-link-first">
@@ -22,15 +31,6 @@
         
     }
     
-    @if (ViewBag.IsUserCreator == true)
-    {
-        <div class="button-link-first">
-            @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
-            @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)
-        </div>
-    }
-
-
     <div id="container">
         <section id="left">
             @if (ViewBag.IsUserInGroup == false)

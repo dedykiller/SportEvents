@@ -14,6 +14,8 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ID)
         @Html.HiddenFor(model => model.GroupID)
+        @Html.HiddenFor(model => model.Picture)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -27,6 +29,10 @@
                 @Html.TextAreaFor(model => model.Body, new { cols = 100, rows = 20, @class = "form-control col-md-2" })
                 @Html.ValidationMessageFor(model => model.Body)
             </div>
+        </div>
+
+        <div>
+            <img src="@Url.Content(Model.Picture)" alt="images">
         </div>
 
         <div class="col-md-10">

@@ -37,22 +37,22 @@ namespace SportEvents.Controllers
                 if (usersBO.IsEmailInDatabase(user.Email)) // Pokud databáze zadaný e-mail obsahuje, vrátí nás na formulář pro registraci
                 {
                     ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
-                    return View();
+                    return View(user);
                 }
 
                 usersBO.RegisterUser(user);
 
 
-                string emailTo = user.Email;
-                string subject = string.Format("Potvrzeni registrace");
-                string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
+                //string emailTo = user.Email;
+                //string subject = string.Format("Potvrzeni registrace");
+                //string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
 
-                EmailService service = new EmailService();
+                //EmailService service = new EmailService();
 
-                bool kq = service.Send(emailTo, subject, body);
+                //bool kq = service.Send(emailTo, subject, body);
 
-                TempData["notice"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
-                return RedirectToAction("ListOfUsers");
+                TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do systému a byl zaslán potvrzovací e-mail na adresu : " + user.Email;
+                return RedirectToAction("index", "Home");
                 
             }
 

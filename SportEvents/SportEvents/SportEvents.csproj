@@ -199,8 +199,6 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="ViewModels\EventCommentsVM.cs" />
     <Compile Include="ViewModels\ArticleCommentsVM.cs" />
-    <Compile Include="ViewModels\FileSize.cs" />
-    <Compile Include="ViewModels\FileTypes.cs" />
     <Compile Include="ViewModels\GroupEventsArticlesVM.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ListOfPaymentsForUserInPaymentPeriodVM.cs" />
