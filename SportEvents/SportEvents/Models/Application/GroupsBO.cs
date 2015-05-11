@@ -154,6 +154,10 @@ namespace SportEvents.Models.Application
         public void EditGroup(Group group)
         {
 
+            group.CreateTime = DateTime.Now;
+
+            //group.NumberOfUsersInGroup = group.NumberOfUsersInGroup;
+            
             db.Entry(group).State = EntityState.Modified;
             db.SaveChanges();
         }

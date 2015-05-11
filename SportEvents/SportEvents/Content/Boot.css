@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     min-width: 800px;
+    text-align: center;
 }
 /*header*/
 header {
@@ -42,6 +43,7 @@ nav {
 }
 #navbar-login {
     float: right;
+    width: 400px;
 }
     #navbar-login li a:hover {
         color: white;
@@ -68,6 +70,7 @@ nav {
 main {
     width: 85%;
     margin: 0 auto;
+    text-align: left;
 }
 hr {
     border: 1px solid #ce5d12;
@@ -112,4 +115,8 @@ footer{
 }
 .button-link a:hover, .button-link-first a:hover{
     background: #52a9a6;
+}
+ ul form  {
+    margin: 0px !important;
+    clear: none !important;
 }

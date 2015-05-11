@@ -99,22 +99,23 @@ namespace SportEvents.Views
                 db.Articles.Add(article);
                 db.SaveChanges();
 
-                //Group g = db.Groups.Find(article.GroupID);
-                //string subject = string.Format("Upozornění na nový článek");
-                //string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name);
+                Group g = db.Groups.Find(article.GroupID);
+                string subject = string.Format("Upozornění na nový článek");
+                string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b>, přečíst si ho můžete <a href=\"http://sportevents.aspone.cz?redirect=http://sportevents.aspone.cz/Article/Details/{3}\">zde</a> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name, article.ID);
+                //string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b>, přečíst si ho můžete <a href=\"http://localhost:3922/?redirect=http://localhost:3922/Article/Details/{3}\">zde</a> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name, article.ID);
 
-                //List<User> users = db.AllUsersInGroup(g.Id);
-                //bool kq = false;
+                List<User> users = db.AllUsersInGroup(g.Id);
+                bool kq = false;
 
-                //foreach (User item in users)
-                //{
-                //    string emailTo = item.Email;
-                //    EmailService service = new EmailService();
-                //    kq = service.Send(emailTo, subject, body);
-                //}
+                foreach (User item in users)
+                {
+                    string emailTo = item.Email;
+                    EmailService service = new EmailService();
+                    kq = service.Send(emailTo, subject, body);
+                }
 
 
-                //TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
+                TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
                 TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });

@@ -15,7 +15,10 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <h2>@SportEvents.Languages.Resources.regForm</h2>
+    <a class="return" onclick="history.back()">
+        @SportEvents.Languages.Resources.regForm
+    </a>
+  
     <hr />
     @using (Html.BeginForm())
     {

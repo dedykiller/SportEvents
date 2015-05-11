@@ -4,38 +4,30 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
- 
+<a class="return" onclick="history.back()">
+    Odstranit článek
+</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
+<div class="description-groups">
+        <p style="font-size: 20px; font-weight:500">Opravdu chcete tento článek odstranit?</p>
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Title): </b>@Html.DisplayFor(model => model.Title)
+        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Body): </b>@Html.DisplayFor(model => model.Body)
+        </p>
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-        </div>
-    }
 </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Odstranit" class="button" /> 
+    </div>
+}
