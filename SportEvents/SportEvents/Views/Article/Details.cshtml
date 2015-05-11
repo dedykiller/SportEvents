@@ -65,9 +65,8 @@
 
 
             @Html.ValidationSummary(true)
-            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
-
-            <input type="hidden" value="@Model.Article.ID" name="ArticleID" />
+            <input type="hidden" value="@Model.Article.ID" name="ParentID" />
+            <input type="hidden" value="@SportEvents.Models.ParentType.Article" name="ParentType" />
             <textarea name="Text" id="Text"> </textarea>
             
             <div class="form-group">

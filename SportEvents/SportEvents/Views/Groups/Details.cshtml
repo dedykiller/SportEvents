@@ -14,23 +14,25 @@
         @Model.Group.Name
     </a>
     <hr />
+
+    @if (ViewBag.IsUserCreator == true)
+    {
+        <p class="button-link-first">
+           @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)        
+        </p>
+        <p class="button-link-first">
+            @Html.ActionLink("Editovat skupinu", "Edit", new { id = Model.Group.Id })
+        </p>
+         <p class="button-link-first">
+            @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+        </p>
+    }
+
     @if (ViewBag.IsUserInGroup == true)
     {
         <p class="button-link">
             @Html.ActionLink("Nový článek", "Create", "Article", new { id = Model.Group.Id }, null)           
         </p>
-          <p class="button-link-first">
-           @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)        
-        </p>
-              <p class="button-link">           
-             @Html.ActionLink("Editovat skupinu", "Edit", new { id = Model.Group.Id })
-        </p>
-        
-        <p class="button-link">
-            @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
-        </p>
-   
-        
     }
 
 

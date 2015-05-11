@@ -125,7 +125,7 @@
                 SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
                 if (user.Id == item.UserID)
                 {
-                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "EditEventComment", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "DeleteEventComment", "Comment", new { id = item.ID }, null)</span></h4>
+                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
                 }
                 else
                 {
@@ -137,14 +137,14 @@
         }
     </div>
     <div class="insert-comment">
-        @using (Html.BeginForm("CreateEventComment", "Comment", FormMethod.Post))
+        @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
             <div>
                 @Html.ValidationSummary(true)
-                @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
-                <input type="hidden" value="@Model.Event.Id" name="ArticleID" />
+                <input type="hidden" value="@Model.Event.Id" name="ParentID" />
+                <input type="hidden" value="@SportEvents.Models.ParentType.Event" name="ParentType" />
                 <textarea name="Text" id="Text"> </textarea>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
