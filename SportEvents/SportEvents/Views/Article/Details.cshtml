@@ -7,6 +7,7 @@
 <a class="return" onclick="history.back()">
     @Model.Article.Title
 </a>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <hr />
 
 
@@ -41,9 +42,9 @@
         <div>
 
             @Html.ValidationSummary(true)
-            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
 
-            <input type="hidden" value="@Model.Article.ID" name="ArticleID" />
+            <input type="hidden" value="@Model.Article.ID" name="ParentID" />
+            <input type="hidden" value="@SportEvents.Models.ParentType.Article" name="ParentType" />
             <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
 
             <div class="form-group">

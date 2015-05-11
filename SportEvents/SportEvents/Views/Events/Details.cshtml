@@ -4,6 +4,7 @@
     ViewBag.Title = "Details";
 }
 <h2>@Html.DisplayFor(model => Model.Event.Name)</h2>
+<h3 style="text-align:center"> @TempData["notice"]</h3>
 <hr />
 <div id="container">
     <div id="left">
@@ -107,16 +108,16 @@
 </div>
 
 <div>
-    @using (Html.BeginForm("CreateEventComment", "Comment", FormMethod.Post))
+    @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
         <div>
 
             @Html.ValidationSummary(true)
-            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
 
-            <input type="hidden" value="@Model.Event.Id" name="ArticleID" />
+            <input type="hidden" value="@Model.Event.Id" name="ParentID" />
+            <input type="hidden" value="@SportEvents.Models.ParentType.Event" name="ParentType" />
             <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
 
             <div class="form-group">
@@ -137,7 +138,7 @@
             SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
             if (user.Id == item.UserID)
             {
-                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "EditEventComment", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "DeleteEventComment", "Comment", new { id = item.ID }, null)</span></h4>
+                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
             }
             else
             {

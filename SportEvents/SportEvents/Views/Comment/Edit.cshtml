@@ -14,7 +14,8 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ID)
-        @Html.HiddenFor(model => model.ArticleID)
+        @Html.HiddenFor(model => model.ParentID)
+        @Html.HiddenFor(model => model.ParentType)
         
 
         <div class="form-group">

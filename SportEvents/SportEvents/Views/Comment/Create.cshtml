@@ -16,10 +16,10 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ArticleID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ParentID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ArticleID)
-                @Html.ValidationMessageFor(model => model.ArticleID)
+                @Html.EditorFor(model => model.ParentID)
+                @Html.ValidationMessageFor(model => model.ParentID)
             </div>
         </div>
 

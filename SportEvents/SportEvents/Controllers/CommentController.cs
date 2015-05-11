@@ -46,7 +46,7 @@ namespace SportEvents.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ArticleID,Text")] Comment comment)
+        public ActionResult Create([Bind(Include="ParentID,ParentType,Text")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -56,32 +56,27 @@ namespace SportEvents.Controllers
                 comment.CreatorFullName = user.FirstName + " " + user.Surname;
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
+
+                TempData["notice"] = "Uživatel " + user.FirstName + " úspěšně přidal komentář : " + comment.Text;
+                switch(comment.ParentType){
+                    case ParentType.Article:
+                        return RedirectToAction("Details", "Article", new { id = comment.ParentID });
+                    case ParentType.Event:
+                        return RedirectToAction("Details", "Events", new { id = comment.ParentID });    
+                    default:
+                        break;
+                }  
             }
 
-            return View(comment);
-        }
-
-        // POST: /Comment/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateEventComment([Bind(Include = "ArticleID,Text")] Comment comment)
-        {
-            if (ModelState.IsValid)
-            {
-                comment.CreationTime = DateTime.Now;
-                User user = (User)Session["UserSession"];
-                comment.UserID = user.Id;
-                comment.CreatorFullName = user.FirstName + " " + user.Surname;
-                db.Comments.Add(comment);
-                db.SaveChanges();
-                return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
+            TempData["notice"] = "Komentář se nepodařilo vytvořit, pravděpodobně je moc dlouhý";
+            if(comment.ParentType == ParentType.Article){
+                return RedirectToAction("Details", "Article", new { id = comment.ParentID });
+            }else{
+                return RedirectToAction("Details", "Events", new { id = comment.ParentID }); 
             }
-
-            return View(comment);
         }
+
+ 
 
         // GET: /Comment/Edit/5
         public ActionResult Edit(int? id)
@@ -98,26 +93,12 @@ namespace SportEvents.Controllers
             return View(comment);
         }
 
-        // GET: /Comment/Edit/5
-        public ActionResult EditEventComment(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }
 
         // POST: /Comment/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "ID,ArticleID,Text")]  Comment comment)
+        public ActionResult Edit([Bind(Include = "ID,ParentID,ParentType,Text")]  Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -128,29 +109,28 @@ namespace SportEvents.Controllers
                 db.Comments.Add(comment);
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
-            }
-            return View(comment);
-        }
 
-        // POST: /Comment/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult EditEventComment([Bind(Include = "ID,ArticleID,Text")]  Comment comment)
-        {
-            if (ModelState.IsValid)
-            {
-                comment.CreationTime = DateTime.Now;
-                User user = (User)Session["UserSession"];
-                comment.UserID = user.Id;
-                comment.CreatorFullName = user.FirstName + " " + user.Surname;
-                db.Comments.Add(comment);
-                db.Entry(comment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
+                TempData["notice"] = "Úspěšná editace komentáře na : " + comment.Text;
+                switch (comment.ParentType)
+                {
+                    case ParentType.Article:
+                        return RedirectToAction("Details", "Article", new { id = comment.ParentID });
+                    case ParentType.Event:
+                        return RedirectToAction("Details", "Events", new { id = comment.ParentID });
+                    default:
+                        break;
+                }  
             }
-            return View(comment);
+
+            TempData["notice"] = "Komentář se nepodařilo vytvořit, pravděpodobně je moc dlouhý";
+            if (comment.ParentType == ParentType.Article)
+            {
+                return RedirectToAction("Details", "Article", new { id = comment.ParentID });
+            }
+            else
+            {
+                return RedirectToAction("Details", "Events", new { id = comment.ParentID });
+            }
         }
 
         // GET: /Comment/Delete/5
@@ -168,20 +148,6 @@ namespace SportEvents.Controllers
             return View(comment);
         }
 
-        // GET: /Comment/Delete/5
-        public ActionResult DeleteEventComment(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }
 
         // POST: /Comment/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -190,18 +156,21 @@ namespace SportEvents.Controllers
             Comment comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Details", "Article", new { id = comment.ArticleID });
+
+            TempData["notice"] = "Komentář " + comment.Text + " byl úspěšně smazán";
+            switch (comment.ParentType)
+            {
+                case ParentType.Article:
+                    return RedirectToAction("Details", "Article", new { id = comment.ParentID });
+                case ParentType.Event:
+                    return RedirectToAction("Details", "Events", new { id = comment.ParentID });
+                default:
+                    break;
+            }
+
+            return View();
         }
 
-        // POST: /Comment/Delete/5
-        [HttpPost, ActionName("DeleteEventComment")]
-        public ActionResult DeleteEventComment(int id)
-        {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
-            db.SaveChanges();
-            return RedirectToAction("Details", "Events", new { id = comment.ArticleID });
-        }
 
         protected override void Dispose(bool disposing)
         {

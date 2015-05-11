@@ -11,7 +11,6 @@ using SportEvents.ViewModels;
 
 namespace SportEvents.Controllers
 {
-    //nic
     public class EventsController : Controller
     {
         private DataContext db = new DataContext();
@@ -63,7 +62,7 @@ namespace SportEvents.Controllers
 
             EventCommentsVM vm = new EventCommentsVM();
             vm.Event = @event;
-            vm.Comments = db.getAllCommentsOfArticle(id);
+            vm.Comments = db.getAllCommentsByParent(@event.Id, ParentType.Event); // vrátí všechny komenty pro dané ID události
             //vm.Comments = db.Comments.ToList(); všechny komentáře, ne pouze pro daný článek
             return View(vm);
         }
@@ -81,7 +80,7 @@ namespace SportEvents.Controllers
 
             EventCommentsVM vm = new EventCommentsVM();
             vm.Event = @event;
-            vm.Comments = db.getAllCommentsOfArticle(@event.Id);
+            vm.Comments = db.getAllCommentsByParent(@event.Id, ParentType.Event); // vrátí všechny komenty pro dané ID události
 
             return View(vm);
         }

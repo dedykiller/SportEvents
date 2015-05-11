@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("masterDB") 
+            : base("KuznikRoprDB") 
         {
         }
 
@@ -438,9 +438,9 @@ namespace SportEvents.Models
         }
 
 
-        public List<Comment> getAllCommentsOfArticle(int? ArticleID)
+        public List<Comment> getAllCommentsByParent(int? parentID, ParentType parentType)
         {
-            return Comments.Where(x => x.ArticleID == ArticleID).ToList();
+            return Comments.Where(x => x.ParentID == parentID && x.ParentType == parentType).ToList();
         }
     }
 }

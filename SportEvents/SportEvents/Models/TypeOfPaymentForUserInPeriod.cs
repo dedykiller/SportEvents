@@ -12,6 +12,7 @@ namespace SportEvents.Models
         Cash = 0,
         AfterPeriod = 1,
     }
+
     public class TypeOfPaymentForUserInPeriod
     {
         [Key, Column(Order = 0)]

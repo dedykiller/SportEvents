@@ -34,7 +34,7 @@ namespace SportEvents.Views
 
             ArticleCommentsVM vm = new ArticleCommentsVM();
             vm.Article = article;
-            vm.Comments = db.getAllCommentsOfArticle(id);
+            vm.Comments = db.getAllCommentsByParent(article.ID, ParentType.Article); // vrátí všechny komenty pro dané ID článku
             //vm.Comments = db.Comments.ToList(); všechny komentáře, ne pouze pro daný článek
 
             return View(vm);

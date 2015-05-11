@@ -163,7 +163,7 @@ namespace SportEvents.Controllers
                     //odeslani emailu
 
                     string emailTo = user.Email;
-                    string subject = string.Format("Potvrzeni registrace");
+                    string subject = string.Format("Potvrzení registrace");
                     string body = string.Format("Vaše nové heslo je " + genPassword);
 
                     EmailService service = new EmailService();
@@ -183,15 +183,6 @@ namespace SportEvents.Controllers
             return View();
         }
 
-
-
-
-
-
-
-
-
-        // TODO : 
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
