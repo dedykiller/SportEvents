@@ -46,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CreatorFullName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatorFullName, new { htmlAttributes = new { @class = "form-disabled", disabled = "disabled" } })
+                @Html.EditorFor(model => model.CreatorFullName, new { htmlAttributes = new { @class = "form-disabled", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.CreatorFullName)
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NumberOfUsersInGroup, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NumberOfUsersInGroup, new { htmlAttributes = new { @class = "form-disabled", disabled = "disabled" } })
+                @Html.EditorFor(model => model.NumberOfUsersInGroup, new { htmlAttributes = new { @class = "form-disabled", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.NumberOfUsersInGroup)
             </div>
         </div>
