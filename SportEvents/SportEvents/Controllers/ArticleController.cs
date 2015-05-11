@@ -105,18 +105,23 @@ namespace SportEvents.Views
                 //string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b>, přečíst si ho můžete <a href=\"http://localhost:3922/?redirect=http://localhost:3922/Article/Details/{3}\">zde</a> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name, article.ID);
 
                 List<User> users = db.AllUsersInGroup(g.Id);
-                bool kq = false;
+                EmailService service = new EmailService();
+                bool response = false;
 
                 foreach (User item in users)
                 {
-                    string emailTo = item.Email;
-                    EmailService service = new EmailService();
-                    kq = service.Send(emailTo, subject, body);
+                    response = service.Send(item.Email, subject, body);
                 }
 
-
-                TempData["email"] = "Uživatel " + user.Email + " byl přidán do systému a byl odeslán potvrzovací e-mail: " + kq;
-                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
+                if (response == true)
+                {
+                    TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + " a upozorňovací e-mail byl odeslán";
+                }
+                else
+                {
+                    TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + ", ale upozorňovací e-mail nebyl odeslán";
+                }
+                
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }

@@ -42,16 +42,21 @@ namespace SportEvents.Controllers
 
                 usersBO.RegisterUser(user);
 
+                string subject = string.Format("Potvrzeni registrace");
+                string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
 
-                //string emailTo = user.Email;
-                //string subject = string.Format("Potvrzeni registrace");
-                //string body = string.Format("Děkujeme Vám za Vaši registraci <b>{0}</b>:)<br/><br/>Váš ERASMUS team", user.FirstName);
+                EmailService service = new EmailService();
+                bool response = service.Send(user.Email, subject, body);
 
-                //EmailService service = new EmailService();
+                if (response == true)
+                {
+                    TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do systému a byl zaslán potvrzovací e-mail na adresu : " + user.Email;
+                }
+                else
+                {
+                    TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do systému, ale potvrzovací e-mail se nepodařilo poslat";
+                }
 
-                //bool kq = service.Send(emailTo, subject, body);
-
-                TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do systému a byl zaslán potvrzovací e-mail na adresu : " + user.Email;
                 return RedirectToAction("index", "Home");
                 
             }
