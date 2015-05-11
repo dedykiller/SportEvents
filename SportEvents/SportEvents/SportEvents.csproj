@@ -219,7 +219,6 @@
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
     <Content Include="Views\Groups\Details.cshtml" />
-    <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Index.cshtml" />
     <Content Include="Views\Groups\AddUserToGroup.cshtml" />
     <Content Include="Views\Groups\View.cshtml" />
@@ -249,6 +248,7 @@
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\EditEventComment.cshtml" />
     <Content Include="Views\Comment\DeleteEventComment.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

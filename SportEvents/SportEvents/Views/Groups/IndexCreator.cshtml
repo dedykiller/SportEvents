@@ -13,7 +13,7 @@
     /*<p>
         @Html.ActionLink("List of Events", "Index", "Events")
     </p>*/
-    <p class="button-link-first">
+    <p class="button-link">
         @Html.ActionLink(@SportEvents.Languages.Resources.createGroup, "Create")
     </p>
     <p class="button-link-first">
@@ -48,14 +48,14 @@
 
 @foreach (var item in Model) {
     <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
+        <td width="70%">
             @Html.DisplayFor(modelItem => item.Description)
         </td>
                
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>
         

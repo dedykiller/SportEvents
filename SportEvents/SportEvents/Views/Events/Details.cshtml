@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Details";
 }
-<h2>@Html.DisplayFor(model => Model.Event.Name)</h2>
+
+<a class="return" onclick="history.back()">
+   @Html.DisplayFor(model => Model.Event.Name)
+</a>
 <hr />
 <div id="container">
     <div id="left">
@@ -12,38 +15,41 @@
             <p><b>Místo: </b>@Html.DisplayFor(model => Model.Event.Place)</p>
             <p><b>Cena: </b>@Html.DisplayFor(model => Model.Event.Price)</p>
             <p><b>Popis: </b><br />@Html.DisplayFor(model => Model.Event.Description)</p>
+            <b style="margin: 0">Účast:</b><br />
+@using (Html.BeginForm("Details", "Events", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.Event.Id)
+    if (Model.Event.participation.ToString().Equals("Yes"))
+    {
+        <dt>
+            @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
+            @Html.RadioButtonFor(model => Model.Event.participation, 1, new { Checked = "checked" }) Účastním se
+        </dt>
+    }
+    if (Model.Event.participation.ToString().Equals("No"))
+    {
+        <dt>
+            @Html.RadioButtonFor(model => Model.Event.participation, -1, new { Checked = "checked" }) Nezúčastním se
+            @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
+        </dt>
+    }
+    if (Model.Event.participation.ToString().Equals("Unspoken"))
+    {
+
+        <dt>
+            @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
+            @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
+        </dt>
+    }
+
+
+    <input type="submit" value="Potvrď" class="button-comments" />
+}
+            
+            
         </div>
 
-        @using (Html.BeginForm("Details", "Events", FormMethod.Post))
-        {  
-            @Html.HiddenFor(model => Model.Event.Id)
-            if (Model.Event.participation.ToString().Equals("Yes"))
-            {
-                <dt>
-                    @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
-                    @Html.RadioButtonFor(model => Model.Event.participation, 1, new { Checked = "checked" }) Účastním se
-                </dt>
-            }
-            if (Model.Event.participation.ToString().Equals("No"))
-            {
-                <dt>
-                    @Html.RadioButtonFor(model => Model.Event.participation, -1, new { Checked = "checked" }) Nezúčastním se
-                    @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
-                </dt>
-            }
-            if (Model.Event.participation.ToString().Equals("Unspoken"))
-            {
-
-                <dt>
-
-                    @Html.RadioButtonFor(model => Model.Event.participation, -1) Nezúčastním se
-                    @Html.RadioButtonFor(model => Model.Event.participation, 1) Účastním se
-                </dt>
-            }
-
-
-            <input type="submit" value="Potvrď" class="button" />
-        }
+       
     </div>
     <div id="right">
         <table class="table">
@@ -106,46 +112,49 @@
     </div>
 </div>
 
-<div>
-    @using (Html.BeginForm("CreateEventComment", "Comment", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+<div class="description-groups">
+    <p style="font-size: 20px; font-weight:500">Komentáře</p>
 
-        <div>
+    <div class="comments">
+        @foreach (var item in Model.Comments)
+        {
 
-            @Html.ValidationSummary(true)
-            @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
 
-            <input type="hidden" value="@Model.Event.Id" name="ArticleID" />
-            <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
+            if (Session["UserSession"] != null)
+            {
+                SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+                if (user.Id == item.UserID)
+                {
+                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "EditEventComment", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "DeleteEventComment", "Comment", new { id = item.ID }, null)</span></h4>
+                }
+                else
+                {
+                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
+                }
+                <p>@Html.DisplayFor(modelItem => item.Text)</p>
+            }
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" name="Submit" value="Vytvořit komentář" class="button" />
+        }
+    </div>
+    <div class="insert-comment">
+        @using (Html.BeginForm("CreateEventComment", "Comment", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.ValidationSummary(true)
+                @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
+                <input type="hidden" value="@Model.Event.Id" name="ArticleID" />
+                <textarea name="Text" id="Text"> </textarea>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" name="Submit" value="Vytvořit komentář" class="button-comments" />
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
-<div class="comments">
-    @foreach (var item in Model.Comments)
-    {
-
-
-        if (Session["UserSession"] != null)
-        {
-            SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-            if (user.Id == item.UserID)
-            {
-                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "EditEventComment", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "DeleteEventComment", "Comment", new { id = item.ID }, null)</span></h4>
-            }
-            else
-            {
-                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
-            }
-            <p>@Html.DisplayFor(modelItem => item.Text)</p>
         }
 
-    }
+        </div>
 
-</div>
+      
+    </div>

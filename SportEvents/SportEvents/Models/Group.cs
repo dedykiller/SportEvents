@@ -25,6 +25,8 @@ namespace SportEvents.Models
         [Display(Name = "enterDescripGroup", ResourceType = typeof(SportEvents.Languages.Resources))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "pleaseFillDescrip", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Description { get; set; }
+
+        [DisplayName("Zakladatel skupiny")]
         public string CreatorFullName { get; set; }
         public DateTime CreateTime { get; set; }
 
@@ -39,6 +41,8 @@ namespace SportEvents.Models
         [Display(Name = "enterTypePay", ResourceType = typeof(SportEvents.Languages.Resources))]
       //  public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Event> Events { get; set; }
+
+        [DisplayName("Počet uživatelů")]
         public int NumberOfUsersInGroup { get; set; }
         public virtual ICollection<PaymentPeriod> PaymentPeriods { get; set; }
         

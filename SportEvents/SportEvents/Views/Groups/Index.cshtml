@@ -49,13 +49,13 @@ if (Session["UserSession"] != null)
 
 @foreach (var item in Model) {
     <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
-        <td>
+        <td width="50%">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatorFullName) 
+        <td style="text-align: center">
+            @Html.DisplayFor(modelItem => item.CreatorFullName)
         </td>        
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
         </td>
         

@@ -4,8 +4,10 @@
     ViewBag.Title = "Seznam zúčtovacích období";
 }
 
-<h2>Seznam zúčtovacích období</h2>
-
+<a class="return" onclick="history.back()">
+    Seznam zúčtovacích období
+</a>
+<hr />
 
     <section id="left">
         <table class="table">
@@ -39,7 +41,4 @@
             }
         </table>
 
-        <p>
-            @Html.ActionLink("Back to List", "Index")
-        </p>
     </section>

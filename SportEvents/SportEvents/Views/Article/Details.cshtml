@@ -15,7 +15,7 @@
     SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
     if (user.Id == Model.Article.UserID)
     {
-        <p class="button-link-first">
+        <p class="button-link">
             @Html.ActionLink("Editovat", "Edit", new { id = Model.Article.ID })
             @Html.ActionLink("Smazat", "Delete", new { id = Model.Article.ID })
         </p>
@@ -33,48 +33,51 @@
     </div>
 </div>
 
-<div>
-    @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+<div class="description-groups">
+    <p style="font-size: 20px; font-weight:500">Komentáře</p>
+    <div class="comments">
+        @foreach (var item in Model.Comments)
+        {
 
-        <div>
+
+            if (Session["UserSession"] != null)
+            {
+                SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+                if (user.Id == item.UserID)
+                {
+                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
+                }
+                else
+                {
+                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
+                }
+                <p>@Html.DisplayFor(modelItem => item.Text)</p>
+            }
+
+        }
+
+    </div>
+    <div class="insert-comment">
+        @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+
 
             @Html.ValidationSummary(true)
             @*@Html.HiddenFor(model => model.Article.ID, "ArticleID")*@
 
             <input type="hidden" value="@Model.Article.ID" name="ArticleID" />
-            <textarea cols="60" rows="8" name="Text" id="Text"> </textarea>
-
+            <textarea name="Text" id="Text"> </textarea>
+            
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" name="Submit" value="Vytvořit komentář" class="button" />
+                    <input type="submit" name="Submit" value="Vytvořit komentář" class="button-comments" />
                 </div>
             </div>
-        </div>
-    }
-</div>
-<div class="comments">
-    @foreach (var item in Model.Comments)
-    {
 
-
-        if (Session["UserSession"] != null)
-        {
-            SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-            if (user.Id == item.UserID)
-            {
-                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
-            }
-            else
-            {
-                <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
-            }
-            <p>@Html.DisplayFor(modelItem => item.Text)</p>
-        }
-
-    }
-
+        }</div>
+    
 </div>
 
 

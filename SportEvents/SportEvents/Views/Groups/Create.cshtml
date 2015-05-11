@@ -3,59 +3,62 @@
 @{
     ViewBag.Title = "Create";
 }
+<a class="return" onclick="history.back()">
+    Nová skupina
+</a>
 
-<h2>@SportEvents.Languages.Resources.newGroup</h2>
 <hr />
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
 <script src="~/Scripts/jquery.js"> </script>
 <script src="~/Scripts/jquery.datetimepicker.js"></script>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        
+
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @SportEvents.Languages.Resources.fillGroupName
-            <div class="col-md-10">
+            Zadej název skupiny
+            <div>
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
         <div class="form-group">
-            @SportEvents.Languages.Resources.enterDescripGroup
+            Zadej popis skupiny
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, 20, 50, new { @class = "form-control col-md-2" })
                 @Html.ValidationMessageFor(model => model.Description)
 
             </div>
         </div>
 
         <div class="form-group">
-            @SportEvents.Languages.Resources.endPayPeriod
+            Zadej konec zúčtovacího období
             <div class="col-md-10">
-               <input id="datetimepicker" type="text" name="EndOfPaymentPeriod" />
-                <script> jQuery('#datetimepicker').datetimepicker({
+                <input id="datetimepicker" type="text" name="EndOfPaymentPeriod" />
+                <script>
+ jQuery('#datetimepicker').datetimepicker({
      format: 'd.m.Y',
      lang: 'cs',
-     minDate: '1',
+     minDate: '0',
      timepicker: false
  }); </script>
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@SportEvents.Languages.Resources.create" class="button" />
+                <input type="submit" value="Vytvořit" class="button" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(@SportEvents.Languages.Resources.backListGroup, "Index")
+    @Html.ActionLink("Zpět na seznam skupin", "Index")
 </div>

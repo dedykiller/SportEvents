@@ -1,8 +1,4 @@
-﻿input,
-select,
-textarea {
-    max-width: 2000px;
-}
+﻿
 
 .field-validation-error {
     color: #ba0000;
@@ -33,7 +29,7 @@ form {
     clear: both;
 }
 
-input {
+input, textarea, select {
     background: white;
     padding: 10px 15px 10px 15px;
     font-size: 15px;
@@ -48,6 +44,11 @@ input {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
 }
+
+    input#Name, textarea#Description, input#Title, textarea#Body {
+        width: 600px;
+    }
+
 
 .label {
     font-size: 15px;
@@ -73,6 +74,8 @@ input {
 #left form {
     margin-left: 0;
 }
+
+
 /*table*/
 .table {
     width: 100%;
@@ -90,8 +93,9 @@ input {
 
 td {
     border-top: 1px solid #dcdcdc;
-    padding: 4px;
+    padding: 4px 4px 4px 8px;
     height: 30px;
+    text-align: left;
 }
 
 tr:hover td {
@@ -133,7 +137,7 @@ h2 {
 
 
 
-.description-groups, .comments {
+.description-groups {
     background: white;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -142,8 +146,9 @@ h2 {
     -webkit-box-shadow: 3px 3px 14px #3b3b3b;
     box-shadow: 3px 3px 14px #3b3b3b;
     padding: 10px;
-    width: 85%;
+    width: 80%;
     clear: both;
+    margin-bottom: 30px;
 }
 
     .description-groups p {
@@ -153,6 +158,11 @@ h2 {
     .description-groups h2 {
         margin: 0;
         font-size: 30px;
+    }
+
+    .description-groups img {
+        max-width: 100%;
+        max-height: 100%;
     }
 
 .date {
@@ -168,7 +178,6 @@ h2 {
     font-weight: 100;
     margin-top: 30px;
     color: #333333;
-    ;
 }
 
 #container {
@@ -252,32 +261,105 @@ tr:hover td {
     margin-top: 30px;
 }
 
-.description-groups p{
+
+.flags input {
+    padding: 0px !important;
+    border: 0px !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    width: 28px;
+}
+
+.description-groups p {
     border-bottom: 1px solid #e4e5e6;
     padding: 5px;
 }
 
-.description-groups p:last-child{
-    border-bottom: none;
+
+    .description-groups p:last-child {
+        border-bottom: none;
+    }
+
+#description {
+    background: white;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 3px 3px 14px #3b3b3b;
+    -webkit-box-shadow: 3px 3px 14px #3b3b3b;
+    box-shadow: 3px 3px 14px #3b3b3b;
+    padding: 10px;
+    width: 85%;
+    clear: both;
 }
+
+.input{
+    box-shadow: none;
+}
+
+.article-img {
+    width: 400px;
+    float: left;
+}
+
+.article-content {
+    width: 400px;
+    float: left;
+}
+
 
 .comments{
    background: white;   
-   padding: 5px;
+   padding: 15px;
 }
 
 .comments p{
-    
-    
+    border-bottom: none;
+    margin-bottom: 8px;   
    
 }
 
 .comments h4{
-    padding:0px;
+    padding: 2px;
     margin: 0;   
      border-bottom: 1px solid #dadada; 
+     background: #eaeaea;
 }
 
 .comments span{
     float: right;
+
+}
+
+.insert-comment textarea{
+    width: 90%;
+    padding: 0;
+    margin: 0;    
+    border-radius: 0;
+    border: 1px solid;
+    box-shadow: none;
+}
+
+.insert-comment{
+    padding: 15px;
+
+}
+
+.insert-comment form{
+    padding: 0;
+    margin: 0;
+}
+
+.header{
+    background: red;
+}
+
+.button-comments{
+    padding: 10px;
+    background: #79CBC9;
+    color: white;
+    border: none;
+    box-shadow: none;
+    margin-top: 10px;
+    text-shadow: none;
 }

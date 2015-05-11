@@ -14,7 +14,7 @@ namespace SportEvents.Models
 {
     public class GroupsController : BaseController
     {
-        
+
         GroupsBO groupsBO = new GroupsBO();
 
         // GET: /Groups/
@@ -49,10 +49,10 @@ namespace SportEvents.Models
             GroupEventsArticlesVM vm = new GroupEventsArticlesVM();
             vm.Group = group;
 
-            if(groupsBO.IsUserInGroup(user.Id, group.Id))
+            if (groupsBO.IsUserInGroup(user.Id, group.Id))
             {
                 vm.Events = groupsBO.AllEventsOfGroup(group.Id);
-                ViewBag.IsUserInGroup = (bool) true;
+                ViewBag.IsUserInGroup = (bool)true;
                 vm.Articles = groupsBO.GetAllArticlesOfGroup(group.Id);
             }
             else
@@ -63,7 +63,7 @@ namespace SportEvents.Models
                 vm.Articles = Articles;
                 ViewBag.IsUserInGroup = (bool)false;
             }
-            if (group.Creator== user.Id)
+            if (group.Creator == user.Id)
             {
                 ViewBag.IsUserCreator = (bool)true;
             }
@@ -72,7 +72,7 @@ namespace SportEvents.Models
                 ViewBag.IsUserCreator = (bool)false;
 
             }
-            
+
 
             return View(vm);
         }
@@ -104,13 +104,13 @@ namespace SportEvents.Models
                 if (Session["UserSession"] != null)
                 {
                     User user = (User)Session["UserSession"];
-                    
+
                     groupsBO.CreateGroup(group, user);
                     TempData["notice"] = "Skupina " + group.Name + " byla úspěšně vytvořena uživatelem " + user.Email;
 
                     return RedirectToAction("Index");
-                    
-                }              
+
+                }
             }
 
             return View(group);
@@ -124,7 +124,7 @@ namespace SportEvents.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Group group = groupsBO.GetGroupById(id);
-   
+
             return View(group);
         }
 
@@ -139,16 +139,17 @@ namespace SportEvents.Models
             {
                 if (Session["UserSession"] != null)
                 {
-                   
+
                     User user = (User)Session["UserSession"];
                     Group group = groupsBO.GetGroupById(id);
 
                     if (groupsBO.IsUserInGroup(user.Id, group.Id))
                     {
                         TempData["notice"] = "Uživatel " + user.FirstName + " už je členem skupiny " + group.Name;
-                    }else
+                    }
+                    else
                     {
-                    groupsBO.AddUserToGroup(group, user);
+                        groupsBO.AddUserToGroup(group, user);
                         TempData["notice"] = "Uživatel " + user.FirstName + " byl přidán do skupiny " + group.Name;
                     }
 
@@ -177,11 +178,12 @@ namespace SportEvents.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Name,Description")] Group group)
+        public ActionResult Edit([Bind(Include = "Id,Creator,CreatorFullName, Name, Description, NumberOfUsersInGroup")] Group group)
         {
             if (ModelState.IsValid)
             {
                 groupsBO.EditGroup(group);
+                
                 return RedirectToAction("Index");
             }
             return View(group);
