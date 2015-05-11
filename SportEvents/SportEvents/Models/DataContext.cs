@@ -438,9 +438,9 @@ namespace SportEvents.Models
         }
 
 
-        public List<Comment> getAllCommentsOfArticle(int? ArticleID)
+        public List<Comment> getAllCommentsByParent(int? ParentID, ParentType parentType)
         {
-            return Comments.Where(x => x.ArticleID == ArticleID).ToList();
+            return Comments.Where(x => x.ParentID == ParentID && x.ParentType == parentType).ToList();
         }
     }
 }
