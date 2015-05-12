@@ -34,9 +34,7 @@ namespace SportEvents.Controllers
             return View(@PaymentPeriod);
         }
 
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PaymentPeriod/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "End,Start,Id,GroupId")] PaymentPeriod @PaymentPeriod)
@@ -46,8 +44,14 @@ namespace SportEvents.Controllers
 
                 
                 db.Entry(@PaymentPeriod).State = EntityState.Modified;
+                
+                PaymentPeriod NextPaymentPeriod = new PaymentPeriod();
+                NextPaymentPeriod = db.GetNextPaymentPeriod(@PaymentPeriod);
+                NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               // return RedirectToAction("Index");
+                return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
             }
             
             return View(@PaymentPeriod);

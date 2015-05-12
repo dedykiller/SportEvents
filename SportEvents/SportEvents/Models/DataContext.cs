@@ -61,6 +61,11 @@ namespace SportEvents.Models
             return PaymentPeriods.Where(x => x.Start <= DateTime.Today && x.End >= DateTime.Today && x.GroupId == GroupId).Single();
         }
 
+        public PaymentPeriod GetNextPaymentPeriod(PaymentPeriod ActualPaymentPeriod)
+        {
+            return PaymentPeriods.Where(x => x.Start >= DateTime.Today && x.GroupId == ActualPaymentPeriod.Id).Single();
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();
