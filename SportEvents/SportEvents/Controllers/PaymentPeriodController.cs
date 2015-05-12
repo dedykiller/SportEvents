@@ -47,12 +47,20 @@ namespace SportEvents.Controllers
                 
                 PaymentPeriod NextPaymentPeriod = new PaymentPeriod();
                 NextPaymentPeriod = db.GetNextPaymentPeriod(@PaymentPeriod);
-                NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
-                if (NextPaymentPeriod.End <= NextPaymentPeriod.Start)
+                if (NextPaymentPeriod != null)
                 {
-                    NextPaymentPeriod.End = NextPaymentPeriod.Start.AddDays(30);
+                    NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
+                    if (NextPaymentPeriod.End <= NextPaymentPeriod.Start)
+                    {
+                        NextPaymentPeriod.End = NextPaymentPeriod.Start.AddDays(30);
+                    } 
                 }
 
+                if (@PaymentPeriod.End <= @PaymentPeriod.Start)
+                {
+                    TempData["notice"] = "Další zúčtovací období musí končit později než začíná.";
+                    return View(@PaymentPeriod);
+                }
                 db.SaveChanges();
                // return RedirectToAction("Index");
                 return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
@@ -85,7 +93,7 @@ namespace SportEvents.Controllers
             // začátek nového období je den po konci aktuálního
             PaymentPeriod.Start = db.GetActualPaymentPeriod(x).End.AddDays(1);
             PaymentPeriod.GroupId = x;
-            PaymentPeriod.GroupName = db.GetGroupById(x).Name;            
+            PaymentPeriod.GroupName = db.GetGroupById(x).Name;              
             return View(PaymentPeriod);
         }
 
