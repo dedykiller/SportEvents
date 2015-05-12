@@ -214,10 +214,12 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                User user = (User)Session["UserSession"];
+                @event.CreatorId = user.Id;
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["notice"] = "Událost : " + @event.Name + " dne " + @event.TimeOfEvent + " byla editována správcem skupiny";
+                return RedirectToAction("Details", "Groups", new { id = @event.GrpId });
             }
             ViewBag.GrpId = new SelectList(db.Groups, "Id", "Name", @event.GrpId);
             return View(@event);
@@ -246,7 +248,9 @@ namespace SportEvents.Controllers
             Event @event = db.Events.Find(id);
             db.Events.Remove(@event);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            TempData["notice"] = "Událost : " + @event.Name + " dne " + @event.TimeOfEvent + " byla smazána správcem skupiny";
+            return RedirectToAction("Details", "Groups", new { id = @event.GrpId });
         }
 
         protected override void Dispose(bool disposing)

@@ -9,6 +9,18 @@
 </a>
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <hr />
+
+@if (Session["UserSession"] != null)
+{
+    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+    if (user.Id == Model.Event.CreatorId)
+    {
+        <p class="button-link">
+            @Html.ActionLink("Editovat", "Edit", new { id = Model.Event.Id })
+            @Html.ActionLink("Smazat", "Delete", new { id = Model.Event.Id })
+        </p>
+    }
+}
 <div id="container">
     <div id="left">
         <div class="description-groups">
