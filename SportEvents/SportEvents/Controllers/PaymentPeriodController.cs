@@ -48,6 +48,10 @@ namespace SportEvents.Controllers
                 PaymentPeriod NextPaymentPeriod = new PaymentPeriod();
                 NextPaymentPeriod = db.GetNextPaymentPeriod(@PaymentPeriod);
                 NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
+                if (NextPaymentPeriod.End <= NextPaymentPeriod.Start)
+                {
+                    NextPaymentPeriod.End = NextPaymentPeriod.Start.AddDays(30);
+                }
 
                 db.SaveChanges();
                // return RedirectToAction("Index");
