@@ -6,12 +6,53 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SportEvents.ViewModels;
+using System.Data.Entity;
 
 namespace SportEvents.Controllers
 {
     public class PaymentPeriodController : Controller
     {
         private DataContext db = new DataContext();
+
+        // GET: Edit
+        public ActionResult Edit(int? groupId)
+        {
+            if (groupId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            // nelze převést int do int?, tak si vypomáhám tímhle
+            int x = groupId.GetValueOrDefault();
+
+            PaymentPeriod @PaymentPeriod = db.GetActualPaymentPeriod(x);
+            @PaymentPeriod.GroupId = x;
+            if (@PaymentPeriod == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(@PaymentPeriod);
+        }
+
+        // POST: Events/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "End,Start,Id,GroupId")] PaymentPeriod @PaymentPeriod)
+        {
+            if (ModelState.IsValid)
+            {
+
+                
+                db.Entry(@PaymentPeriod).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+            return View(@PaymentPeriod);
+        }
+
         // GET: PaymentPeriod
         public ActionResult CreateNextPaymentPeriod(int? groupId)
         {
@@ -75,7 +116,7 @@ namespace SportEvents.Controllers
 
             return View(vm);
         }
-        // TODO : nefunguje pro after period a nefunguje pokud jen jeden uživatel má afterperiod volbu pro dané zúčtovací období
+       
         public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
         {
             ListOfPaymentsForUserInPaymentPeriodVM vm = new ListOfPaymentsForUserInPaymentPeriodVM();
@@ -107,33 +148,9 @@ namespace SportEvents.Controllers
                 }
 
             }
-            
-
-
-            //if (vm.ChargedUsersPayingAfterPeriod.Any(x => x != null))
-            //{
-            //    foreach (var item in vm.ChargedUsersPayingAfterPeriod)
-            //    {
-            //        item.EventsParticipationYes = db.GetEventsWhereIsThisParticipation(vm.Events, participation.Yes, item.Id);
-            //        item.sum = item.EventsParticipationYes.Select(x => x.Price).Sum();
-            //        vm.SumAfterPeriod += item.sum;
-            //    }
-            //}
-
-            
-
+           
             vm.SumPrices = vm.SumCash + vm.SumAfterPeriod;
 
-           
-
-            //foreach (var item in vm.Events)
-            //{
-            //    item.UserParticipationYes = db.UsersInEventParticipation(item.Id, participation.Yes);
-            //    item.UserParticipationUnspoken = db.UsersInEventParticipation(item.Id, participation.Unspoken);
-            //    item.UserParticipationNo = db.UsersInEventParticipation(item.Id, participation.No);
-            //}
-            
-            //vm.ChargedUsersPayingByCash = db.GetAllChargedUsersPayingByCash(db.GetAllUsersPayingByCash(db.AllUsersInGroup(groupId), PaymentPeriodId),vm.Events, PaymentPeriodId);
             vm.PaymentPeriod = db.PaymentPeriods.Where(x => x.Id == PaymentPeriodId).Single();
             vm.PaymentPeriod.GroupName = db.Groups.Where(x => x.Id == vm.PaymentPeriod.GroupId).Single().Name;
             
