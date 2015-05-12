@@ -41,4 +41,8 @@
             }
         </table>
 
+
+        <p class="button-link-first">
+            @Html.ActionLink("Nové zúčtovací období", "CreateNextPaymentPeriod", "PaymentPeriod", new { groupId = Model.PaymentPeriods.First().GroupId }, null)
+        </p>
     </section>
