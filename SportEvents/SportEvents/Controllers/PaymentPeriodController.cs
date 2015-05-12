@@ -64,14 +64,24 @@ namespace SportEvents.Controllers
         // GET: PaymentPeriod
         public ActionResult CreateNextPaymentPeriod(int? groupId)
         {
+            int x = groupId.GetValueOrDefault();
             if (groupId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(x) == true)
+            {
+                
+
+                TempData["notice"] = "Následující účtovacé období již máte definováno, můžete ho vytvořit až po uplynutí aktuálního účtovacího období";
+                return RedirectToAction("Details", "Groups", new { id = x });
+
+            }
             
             PaymentPeriod PaymentPeriod = new PaymentPeriod();
             // nelze převést int do int?, tak si vypomáhám tímhle
-            int x = groupId.GetValueOrDefault();
+            
             // začátek nového období je den po konci aktuálního
             PaymentPeriod.Start = db.GetActualPaymentPeriod(x).End.AddDays(1);
             PaymentPeriod.GroupId = x;
@@ -127,7 +137,11 @@ namespace SportEvents.Controllers
        
         public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
         {
+            
             ListOfPaymentsForUserInPaymentPeriodVM vm = new ListOfPaymentsForUserInPaymentPeriodVM();
+            vm.SumPrices = 0;
+            vm.SumCash = 0;
+            vm.SumAfterPeriod = 0;
             vm.Events = db.GetAllEventsOfPaymentPeriod(PaymentPeriodId);
             List<User> AllUsersInGroup = db.AllUsersInGroup(groupId);
             List<User> AllUsersPayingCash = db.GetAllUsersPayingByCashOrAfterPeriod(AllUsersInGroup, PaymentPeriodId, TypeOfPaymentInPeriod.Cash);
@@ -156,7 +170,7 @@ namespace SportEvents.Controllers
                 }
 
             }
-           
+            
             vm.SumPrices = vm.SumCash + vm.SumAfterPeriod;
 
             vm.PaymentPeriod = db.PaymentPeriods.Where(x => x.Id == PaymentPeriodId).Single();
