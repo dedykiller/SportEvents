@@ -223,7 +223,7 @@
     <value>The groups where I'm a member</value>
   </data>
   <data name="IDowner" xml:space="preserve">
-    <value>ID owner</value>
+    <value>Creator</value>
   </data>
   <data name="listAllGroups" xml:space="preserve">
     <value>The list of all groups</value>
@@ -257,5 +257,29 @@
   </data>
   <data name="listOfMyGroups" xml:space="preserve">
     <value>The list of my groups</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="editGroup" xml:space="preserve">
+    <value>Edit group</value>
+  </data>
+  <data name="groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="logOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="nameEvent" xml:space="preserve">
+    <value>Name of event</value>
+  </data>
+  <data name="newArticle" xml:space="preserve">
+    <value>New article</value>
+  </data>
+  <data name="paymentPeriod" xml:space="preserve">
+    <value>Payment period</value>
   </data>
 </root>
