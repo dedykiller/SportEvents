@@ -114,7 +114,7 @@ namespace SportEvents.Views
                 }
 
 
-                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title;
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + " a byl zaslán e-mail všem členům skupiny";
 
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
