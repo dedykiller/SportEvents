@@ -18,20 +18,20 @@
     @if (ViewBag.IsUserCreator == true)
     {
         <p class="button-link">
-           @Html.ActionLink("Nová událost", "Create", "Events", new { groupId = Model.Group.Id }, null)        
+           @Html.ActionLink(@SportEvents.Languages.Resources.newEvent, "Create", "Events", new { groupId = Model.Group.Id }, null)        
         </p>
         <p class="button-link">
-            @Html.ActionLink("Editovat skupinu", "Edit", new { id = Model.Group.Id })
+            @Html.ActionLink(@SportEvents.Languages.Resources.editGroup, "Edit", new { id = Model.Group.Id })
         </p>
          <p class="button-link-first">
-            @Html.ActionLink("Účtovací období", "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+            @Html.ActionLink(@SportEvents.Languages.Resources.paymentPeriod, "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
         </p>
     }
 
     @if (ViewBag.IsUserInGroup == true)
     {
         <p class="button-link">
-            @Html.ActionLink("Nový článek", "Create", "Article", new { id = Model.Group.Id }, null)           
+            @Html.ActionLink(@SportEvents.Languages.Resources.newArticle, "Create", "Article", new { id = Model.Group.Id }, null)           
         </p>
     }
 
@@ -105,7 +105,7 @@
                 <table id="table-article">
                     <tr>
                         <th>
-                            <h3>Seznam článků</h3>
+                            <h3>@SportEvents.Languages.Resources.listArticle</h3>
                         </th>
                         <th>
 
@@ -129,8 +129,8 @@
                                     SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
                                     if (user.Id == item.UserID)
                                     {
-                                        @Html.ActionLink("Editovat", "Edit", "Article", new { id = item.ID }, null)
-                                        @Html.ActionLink("Smazat", "Delete", "Article", new { id = item.ID }, null)
+                                        @Html.ActionLink(@SportEvents.Languages.Resources.edit, "Edit", "Article", new { id = item.ID }, null)
+                                        @Html.ActionLink(@SportEvents.Languages.Resources.delete, "Delete", "Article", new { id = item.ID }, null)
                                     }
                                 }
                                 
