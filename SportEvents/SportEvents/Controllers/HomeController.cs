@@ -50,6 +50,8 @@ namespace SportEvents.Controllers
 
         public ActionResult Logout()
         {
+            User user = (User)Session["UserSession"];
+            TempData["notice"] = "Uživatel " + user.FirstName + " " + user.Surname +  " byl úspěšně odhlášen";
             Session["UserSession"] = null; // vynulování session
 
             return RedirectToAction("Index", "Home");
