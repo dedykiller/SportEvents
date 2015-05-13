@@ -19,7 +19,7 @@ namespace SportEvents
         {
             EmailService email = new EmailService();
 
-            email.Send("vojtech.srom@outlook.com", "Testujeme cron", "Ahoj, toto je test mail.");
+            email.Send("dedykiller@seznam.cz", "Testujeme cron", "Ahoj, toto je test mail.");
         }
     }
 }
