@@ -22,7 +22,6 @@ namespace SportEvents.Models
         [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         [DisplayFormat(DataFormatString= "{0:dd/MM/yyy hh:mm}",ApplyFormatInEditMode = true)]
         public DateTime TimeOfEvent { get; set; }
-        
         public DateTime? RepeatUntil { get; set; }
         public int GrpId { get; set; }
         public int CreatorId { get; set; }

@@ -34,9 +34,7 @@ namespace SportEvents.Controllers
             return View(@PaymentPeriod);
         }
 
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: PaymentPeriod/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "End,Start,Id,GroupId")] PaymentPeriod @PaymentPeriod)
@@ -46,8 +44,26 @@ namespace SportEvents.Controllers
 
                 
                 db.Entry(@PaymentPeriod).State = EntityState.Modified;
+                
+                PaymentPeriod NextPaymentPeriod = new PaymentPeriod();
+                NextPaymentPeriod = db.GetNextPaymentPeriod(@PaymentPeriod);
+                if (NextPaymentPeriod != null)
+                {
+                    NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
+                    if (NextPaymentPeriod.End <= NextPaymentPeriod.Start)
+                    {
+                        NextPaymentPeriod.End = NextPaymentPeriod.Start.AddDays(30);
+                    } 
+                }
+
+                if (@PaymentPeriod.End <= @PaymentPeriod.Start)
+                {
+                    TempData["notice"] = "Další zúčtovací období musí končit později než začíná.";
+                    return View(@PaymentPeriod);
+                }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               // return RedirectToAction("Index");
+                return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
             }
             
             return View(@PaymentPeriod);
@@ -56,18 +72,28 @@ namespace SportEvents.Controllers
         // GET: PaymentPeriod
         public ActionResult CreateNextPaymentPeriod(int? groupId)
         {
+            int x = groupId.GetValueOrDefault();
             if (groupId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(x) == true)
+            {
+                
+
+                TempData["notice"] = "Následující účtovacé období již máte definováno, můžete ho vytvořit až po uplynutí aktuálního účtovacího období";
+                return RedirectToAction("Details", "Groups", new { id = x });
+
+            }
             
             PaymentPeriod PaymentPeriod = new PaymentPeriod();
             // nelze převést int do int?, tak si vypomáhám tímhle
-            int x = groupId.GetValueOrDefault();
+            
             // začátek nového období je den po konci aktuálního
             PaymentPeriod.Start = db.GetActualPaymentPeriod(x).End.AddDays(1);
             PaymentPeriod.GroupId = x;
-            PaymentPeriod.GroupName = db.GetGroupById(x).Name;            
+            PaymentPeriod.GroupName = db.GetGroupById(x).Name;              
             return View(PaymentPeriod);
         }
 
@@ -119,7 +145,11 @@ namespace SportEvents.Controllers
        
         public ActionResult ListOfPayments(int groupId, int PaymentPeriodId) 
         {
+            
             ListOfPaymentsForUserInPaymentPeriodVM vm = new ListOfPaymentsForUserInPaymentPeriodVM();
+            vm.SumPrices = 0;
+            vm.SumCash = 0;
+            vm.SumAfterPeriod = 0;
             vm.Events = db.GetAllEventsOfPaymentPeriod(PaymentPeriodId);
             List<User> AllUsersInGroup = db.AllUsersInGroup(groupId);
             List<User> AllUsersPayingCash = db.GetAllUsersPayingByCashOrAfterPeriod(AllUsersInGroup, PaymentPeriodId, TypeOfPaymentInPeriod.Cash);
@@ -148,7 +178,7 @@ namespace SportEvents.Controllers
                 }
 
             }
-           
+            
             vm.SumPrices = vm.SumCash + vm.SumAfterPeriod;
 
             vm.PaymentPeriod = db.PaymentPeriods.Where(x => x.Id == PaymentPeriodId).Single();

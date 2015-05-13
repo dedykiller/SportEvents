@@ -10,9 +10,9 @@
 
 <body>
 
-    <a class="return" onclick="history.back()">
-        @Model.Group.Name
-    </a>
+    @Html.ActionLink(@Model.Group.Name, "Index", "Groups", null, new { @class = "return" })
+
+
     <hr />
 
     @if (ViewBag.IsUserCreator == true)

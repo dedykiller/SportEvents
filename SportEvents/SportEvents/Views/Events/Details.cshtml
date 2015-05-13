@@ -7,8 +7,21 @@
 <a class="return" onclick="history.back()">
    @Html.DisplayFor(model => Model.Event.Name)
 </a>
+
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <hr />
+
+@if (Session["UserSession"] != null)
+{
+    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+    if (user.Id == Model.Event.CreatorId)
+    {
+        <p class="button-link">
+            @Html.ActionLink("Editovat", "Edit", new { id = Model.Event.Id })
+            @Html.ActionLink("Smazat", "Delete", new { id = Model.Event.Id })
+        </p>
+    }
+}
 <div id="container">
     <div id="left">
         <div class="description-groups">
@@ -111,51 +124,49 @@
             }
         </table>
     </div>
-</div>
-
-<div class="description-groups">
-    <p style="font-size: 20px; font-weight:500">Komentáře</p>
-
-    <div class="comments">
-        @foreach (var item in Model.Comments)
-        {
-
-
-            if (Session["UserSession"] != null)
+    <div class="description-groups">
+        <p style="font-size: 20px; font-weight:500">Komentáře</p>
+        <div class="comments">
+            @foreach (var item in Model.Comments)
             {
-                SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
-                if (user.Id == item.UserID)
+
+
+                if (Session["UserSession"] != null)
                 {
-                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
+                    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
+                    if (user.Id == item.UserID)
+                    {
+                        <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime) <span>@Html.ActionLink("Editovat", "Edit", "Comment", new { id = item.ID }, null) @Html.ActionLink("Smazat", "Delete", "Comment", new { id = item.ID }, null)</span></h4>
+                    }
+                    else
+                    {
+                        <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
+                    }
+                    <p>@Html.DisplayFor(modelItem => item.Text)</p>
                 }
-                else
-                {
-                    <h4><b>@Html.DisplayFor(modelItem => item.CreatorFullName)</b> @Html.DisplayFor(modelItem => item.CreationTime)</h4>
-                }
-                <p>@Html.DisplayFor(modelItem => item.Text)</p>
+
             }
+        </div>
+        <div class="insert-comment">
+            @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-        }
-    </div>
-    <div class="insert-comment">
-        @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            <div>
-                @Html.ValidationSummary(true)
-                <input type="hidden" value="@Model.Event.Id" name="ParentID" />
-                <input type="hidden" value="@SportEvents.Models.ParentType.Event" name="ParentType" />
-                <textarea name="Text" id="Text"> </textarea>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" name="Submit" value="Vytvořit komentář" class="button-comments" />
+                <div>
+                    @Html.ValidationSummary(true)
+                    <input type="hidden" value="@Model.Event.Id" name="ParentID" />
+                    <input type="hidden" value="@SportEvents.Models.ParentType.Event" name="ParentType" />
+                    <textarea name="Text" id="Text" placeholder="Vložte komentář" style="padding: 5px"></textarea>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" name="Submit" value="Vytvořit komentář" class="button-comments" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-
+            }
         </div>
 
-      
     </div>
+</div>
+
+
