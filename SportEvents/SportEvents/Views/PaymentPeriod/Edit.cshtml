@@ -1,49 +1,51 @@
 ﻿@model SportEvents.Models.PaymentPeriod
 <h2 style="text-align:center"> @TempData["notice"]</h2>
-<h3>Úprava aktuálního zúčtovacího období </h3>
+<h3> </h3>
 
 
 @Html.DisplayFor(model => model.GroupName)
 
-
-
+<a class="return" onclick="history.back()">
+    Úprava aktuálního zúčtovacího období
+</a>
+<hr />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.GroupId)
-        @Html.HiddenFor(model => model.Start)
 
 
-        <p>Začátek:</p>
-        @Html.DisplayFor(Model => Model.Start)
+        <section id="left">
+            <div id="description">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.GroupId)
+                @Html.HiddenFor(model => model.Start)
 
-        <div class="form-group">
-            <p>Konec:</p>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                <b>Začátek:</b> @Html.DisplayFor(Model => Model.Start)
+                
+
+                </div>
+            <div class="form-group">
+                <br />Konec:
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.End, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Ulož" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Uložit" class="button" />
+                </div>
             </div>
-        </div>
-    </div>
-}
+            </section>
+
+            }
 
 
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -10,6 +10,13 @@
 <hr />
 
     <section id="left">
+
+        <p class="button-link">
+            @Html.ActionLink("Přidat nadcházející období", "CreateNextPaymentPeriod", "PaymentPeriod", new { groupId = Model.PaymentPeriods.First().GroupId }, null)
+        </p>
+        <p class="button-link">
+            @Html.ActionLink("Editace aktuálního období", "Edit", "PaymentPeriod", new { groupId = Model.PaymentPeriods.First().GroupId }, null)
+        </p>
         <table class="table">
             <tr>
                 <th>
@@ -42,11 +49,4 @@
         </table>
 
 
-        <p class="button-link-first">
-            @Html.ActionLink("Nové zúčtovací období", "CreateNextPaymentPeriod", "PaymentPeriod", new { groupId = Model.PaymentPeriods.First().GroupId }, null)
-        </p>
-
-        <p class="button-link-first">
-            @Html.ActionLink("Edituj aktuální zúčtovací období", "Edit", "PaymentPeriod", new { groupId = Model.PaymentPeriods.First().GroupId }, null)
-        </p>
     </section>
