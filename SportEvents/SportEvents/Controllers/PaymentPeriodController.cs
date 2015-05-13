@@ -50,7 +50,7 @@ namespace SportEvents.Controllers
                 if (NextPaymentPeriod != null)
                 {
                     NextPaymentPeriod.Start = @PaymentPeriod.End.AddDays(1);
-                    if (NextPaymentPeriod.End <= NextPaymentPeriod.Start)
+                    if (NextPaymentPeriod.End < NextPaymentPeriod.Start)
                     {
                         NextPaymentPeriod.End = NextPaymentPeriod.Start.AddDays(30);
                     } 
