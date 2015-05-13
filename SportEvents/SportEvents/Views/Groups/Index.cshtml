@@ -46,7 +46,7 @@ if (Session["UserSession"] != null)
 
 @foreach (var item in Model) {
     <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
-        <td style="text-align: center">
+        <td width="50%">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td style="text-align: center">
