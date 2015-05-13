@@ -25,7 +25,6 @@ namespace SportEvents.Models
                     smtpClient.EnableSsl = false; //http
                     smtpClient.Host = smtpHost;
                     smtpClient.Port = smtpPort;
-                    smtpClient.Timeout = 10000;
                     smtpClient.Credentials = new NetworkCredential(smtpUserName, smtpPassword);
                     var msg = new MailMessage
                     {
@@ -38,7 +37,7 @@ namespace SportEvents.Models
 
                     };
                     msg.To.Add(emailTo);
-                    smtpClient.SendMailAsync(msg);
+                    smtpClient.Send(msg);
                     return true;
                 }
             }
