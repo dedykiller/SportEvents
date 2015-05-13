@@ -1,12 +1,8 @@
-﻿
-using SportEvents.Controllers.Utility;
+﻿using Hangfire;
 using SportEvents.Languages;
 using SportEvents.Models;
 using SportEvents.Models.Application;
 using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,6 +15,17 @@ namespace SportEvents.Controllers
         // GET: /Home/Index
         public ActionResult Index()
         {
+            HangFireCronTest hgf = new HangFireCronTest();
+
+            // Test zapisu na disk, acc denied - proc?
+            // RecurringJob.AddOrUpdate(() => hgf.TestHangFire(), Cron.Minutely);
+
+            // Test, jestli se to odesle normalne - failed
+            hgf.TestEmailCron();
+
+            // Test jobu, prida se do success, ale email neprijde
+            RecurringJob.AddOrUpdate(() => hgf.TestEmailCron(), Cron.Minutely);
+
             return View();
         }
 
@@ -29,7 +36,7 @@ namespace SportEvents.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (usersBO.IsUserRegistered(login.Email, login.Password)) 
+                if (usersBO.IsUserRegistered(login.Email, login.Password))
                 {
                     User user = usersBO.GetUser(login);
                     Session["UserSession"] = user;
@@ -66,7 +73,6 @@ namespace SportEvents.Controllers
                 cookie.Value = culture;   // update cookie value
             else
             {
-
                 cookie = new HttpCookie("_culture");
                 cookie.Value = culture;
                 cookie.Expires = DateTime.Now.AddYears(1);
@@ -74,6 +80,6 @@ namespace SportEvents.Controllers
             Response.Cookies.Add(cookie);
 
             return Redirect(Request.UrlReferrer.ToString());
-        }    
-	}
+        }
+    }
 }
