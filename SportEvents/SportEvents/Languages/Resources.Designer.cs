@@ -115,6 +115,15 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change of password.
+        /// </summary>
+        public static string changedPassword {
+            get {
+                return ResourceManager.GetString("changedPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change password.
         /// </summary>
         public static string changePassword {
