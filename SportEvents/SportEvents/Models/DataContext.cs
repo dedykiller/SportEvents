@@ -11,11 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-<<<<<<< ours
-            : base("KuznikRoprDB") 
-=======
             : base("masterDB") 
->>>>>>> theirs
         {
         }
 

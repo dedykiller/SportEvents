@@ -9,9 +9,6 @@ using System.Web;
 
 namespace SportEvents.Models
 {
-    
-   
-    
     // jen pro komit
     public class Event
     {
