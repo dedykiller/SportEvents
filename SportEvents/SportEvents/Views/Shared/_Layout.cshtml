@@ -23,7 +23,7 @@
                     
                     @if (Session["UserSession"] != null)
                     {
-                        <li>@Html.ActionLink("Skupiny", "Index", "Groups")</li>
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.groups, "Index", "Groups")</li>
                     }
 
                 </ul>
@@ -32,7 +32,7 @@
                     {
                         SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
                         <li>@Html.ActionLink(user.Email, "EditAccount", "Users")</li>
-                        <li>@Html.ActionLink("Odhlásit", "Logout", "Home")</li>
+                        <li>@Html.ActionLink(@SportEvents.Languages.Resources.logOut, "Logout", "Home")</li>
                     }
                     else
                     {

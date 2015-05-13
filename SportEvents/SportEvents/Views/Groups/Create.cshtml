@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 <a class="return" onclick="history.back()">
-    Nová skupina
+    @SportEvents.Languages.Resources.newGroup
 </a>
 
 <hr />
@@ -21,7 +21,7 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            Zadej název skupiny
+            @SportEvents.Languages.Resources.fillGroupName
             <div>
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group">
-            Zadej popis skupiny
+            @SportEvents.Languages.Resources.enterDescripGroup
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.Description, 20, 50, new { @class = "form-control col-md-2" })
                 @Html.ValidationMessageFor(model => model.Description)
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            Zadej konec zúčtovacího období
+            @SportEvents.Languages.Resources.endPayPeriod
             <div class="col-md-10">
                 <input id="datetimepicker" type="text" name="EndOfPaymentPeriod" />
                 <script>
@@ -53,12 +53,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Vytvořit" class="button" />
+                <input type="submit" value="@SportEvents.Languages.Resources.create" class="button" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Zpět na seznam skupin", "Index")
-</div>
+

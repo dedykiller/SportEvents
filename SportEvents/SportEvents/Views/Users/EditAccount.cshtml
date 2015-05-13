@@ -5,16 +5,16 @@
 }
 
 <a class="return" onclick="history.back()">
-    Můj Profil
+    @SportEvents.Languages.Resources.myProfile
 </a>
 
 <hr />
 
 <p class="button-link">
-    @Html.ActionLink("Změnit údaje", "EditAccount")
+    @Html.ActionLink(@SportEvents.Languages.Resources.changeCredential, "EditAccount")
 </p>
 <p class="button-link">
-    @Html.ActionLink("Změnit heslo", "ChangePassword")
+    @Html.ActionLink(@SportEvents.Languages.Resources.changePassword, "ChangePassword")
 </p>
 
 
@@ -82,7 +82,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Uložit" class="button" />
+                <input type="submit" value="@SportEvents.Languages.Resources.save" class="button" />
             </div>
         </div>
     </div>
