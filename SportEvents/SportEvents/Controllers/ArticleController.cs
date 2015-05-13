@@ -105,23 +105,17 @@ namespace SportEvents.Views
                 //string body = string.Format("Byl přidán nový článek s názvem : <b>{0}</b> od uživatele : <b>{1}</b> ve skupině : <b>{2}</b>, přečíst si ho můžete <a href=\"http://localhost:3922/?redirect=http://localhost:3922/Article/Details/{3}\">zde</a> <br/><br/>Váš ERASMUS team", article.Title, article.CreatorFullName, g.Name, article.ID);
 
                 List<User> users = db.AllUsersInGroup(g.Id);
-                EmailService service = new EmailService();
                 bool response = false;
 
                 foreach (User item in users)
                 {
+                    EmailService service = new EmailService();
                     response = service.Send(item.Email, subject, body);
                 }
 
-                if (response == true)
-                {
-                    TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + " a upozorňovací e-mail byl odeslán";
-                }
-                else
-                {
-                    TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + ", ale upozorňovací e-mail nebyl odeslán";
-                }
-                
+
+                TempData["notice"] = "Uživatel " + article.CreatorFullName + " vložil článek : " + article.Title + " a byl zaslán e-mail všem členům skupiny";
+
 
                 return RedirectToAction("Details", "Groups", new { id = article.GroupID });
             }
@@ -219,6 +213,7 @@ namespace SportEvents.Views
             Article article = db.Articles.Find(id);
             db.Articles.Remove(article);
             db.SaveChanges();
+            TempData["notice"] = "Článek " + article.Title + " byl úspěšně smazán";
             return RedirectToAction("Details", "Groups", new { id = article.GroupID });
         }
 

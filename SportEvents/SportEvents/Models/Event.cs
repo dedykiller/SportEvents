@@ -1,6 +1,7 @@
 ﻿using Foolproof;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace SportEvents.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Vyplňte prosím název události")]
         [MaxLength(25, ErrorMessage = "Délka názvu musí být maximálně 25 znaků")]
+        [DisplayName("Název")]
         public string Name { get; set; }
         
         [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         [DisplayFormat(DataFormatString= "{0:dd/MM/yyy hh:mm}",ApplyFormatInEditMode = true)]
         public DateTime TimeOfEvent { get; set; }
-        
         public DateTime? RepeatUntil { get; set; }
         public int GrpId { get; set; }
         public int CreatorId { get; set; }

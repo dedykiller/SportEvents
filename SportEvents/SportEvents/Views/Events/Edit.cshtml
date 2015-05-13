@@ -4,15 +4,17 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<a class="return" onclick="history.back()">
+    Editace události: @Model.Name
+</a>
 
+<hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Event</h4>
-        <hr />
+      
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -21,6 +23,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.GrpId, "GrpId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GrpId", null, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownList("GrpId", null, new { @disabled = "disabled"})*@
+                @Html.ValidationMessageFor(model => model.GrpId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -35,16 +45,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RepeatUntil, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RepeatUntil, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RepeatUntil, new { htmlAttributes = new { @class = "form-disabled", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.RepeatUntil, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GrpId, "GrpId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("GrpId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GrpId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -72,16 +74,16 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Repeat, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Repeat, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Repeat, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Interval, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Interval, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Interval, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Interval, "", new { @class = "text-danger" })
@@ -90,12 +92,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Uložit" class="button" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

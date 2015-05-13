@@ -11,7 +11,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("masterDB") 
+            : base("czakyDB") 
         {
         }
 
@@ -59,6 +59,11 @@ namespace SportEvents.Models
         public PaymentPeriod GetActualPaymentPeriod(int GroupId)
         {
             return PaymentPeriods.Where(x => x.Start <= DateTime.Today && x.End >= DateTime.Today && x.GroupId == GroupId).Single();
+        }
+
+        public PaymentPeriod GetNextPaymentPeriod(PaymentPeriod ActualPaymentPeriod)
+        {
+            return PaymentPeriods.Where(x => x.Start >= DateTime.Today && x.GroupId == ActualPaymentPeriod.Id).SingleOrDefault();
         }
 
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
