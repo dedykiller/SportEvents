@@ -363,3 +363,8 @@ tr:hover td {
     margin-top: 10px;
     text-shadow: none;
 }
+
+.form-disabled:hover{
+    cursor:pointer;
+
+}
