@@ -2,37 +2,41 @@
 
 
 
+<a class="return" onclick="history.back()">
+    Seznam plateb pro účtovací období
+</a>
+<hr />
 
-<h2>Seznam plateb pro účtovací období @Html.DisplayFor(model => model.PaymentPeriod.Start) - 
-    @Html.DisplayFor(model => model.PaymentPeriod.End) skupiny @Html.DisplayFor(model => model.PaymentPeriod.GroupName)</h2>
-    
-   <b>
-    <p>Celkem dlužná částka: @Html.DisplayFor(model => model.SumPrices)  </p>
-    <p>Celkem zaplatili hotově na místě: @Html.DisplayFor(model => model.SumCash) </p>
-    <p>Celkem zaplatí zpětně: @Html.DisplayFor(model => model.SumAfterPeriod) </p>
-</b>
-<p></p>
+<div class="description-groups">
+    <p style="font-size: 20px; font-weight:500">Období @Html.DisplayFor(model => model.PaymentPeriod.Start) - @Html.DisplayFor(model => model.PaymentPeriod.End)</p>
+    <p><b>Skupina: </b>@Html.DisplayFor(model => model.PaymentPeriod.GroupName)</p>
+    <p style="color: red"><b>Celkem dlužná částka: </b>@Html.DisplayFor(model => model.SumPrices)  </p>
+    <p><b>Celkem zaplatili hotově na místě: </b>@Html.DisplayFor(model => model.SumCash) </p>
+    <p><b>Celkem zaplatí zpětně: </b>@Html.DisplayFor(model => model.SumAfterPeriod) </p>
+</div>
+
+
     @foreach (var item in Model.ChargedUsersPayingByCash)
     {
 
 
-        <p>
-            Uživatel @Html.DisplayFor(modelItem => item.FirstName)
-            @Html.DisplayFor(modelItem => item.Surname)
+        <p class="header-payments">
+            <b>@Html.DisplayFor(modelItem => item.FirstName)
+@Html.DisplayFor(modelItem => item.Surname)</b>
             zaplatil hotově na místě: @Html.DisplayFor(modelItem => item.sum)
         </p>
 
-        <table class="table">
+        <table class="table" style="width:60%">
             <tr>
                 <th>
-                    Cena události
+                    <h3>Cena události</h3>
                 </th>
                 <th>
-                    Název
+                    <h3>Název</h3>
                 </th>
 
                 <th>
-                    Datum a čas
+                    <h3>Datum a čas</h3>
                 </th>
             </tr>
             @if (item != null)
@@ -40,13 +44,13 @@
                 foreach (var item2 in item.EventsParticipationYes)
                 {
                     <tr>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.Price)
                         </td>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.Name)
                         </td>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.TimeOfEvent)
                         </td>
                     </tr>
@@ -88,13 +92,13 @@
                 foreach (var item2 in item.EventsParticipationYes)
                 {
                     <tr>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.Price)
                         </td>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.Name)
                         </td>
-                        <td>
+                        <td style="text-align: center">
                             @Html.DisplayFor(modelItem => item2.TimeOfEvent)
                         </td>
                     </tr>

@@ -293,7 +293,7 @@ tr:hover td {
     clear: both;
 }
 
-.input{
+.input {
     box-shadow: none;
 }
 
@@ -308,53 +308,50 @@ tr:hover td {
 }
 
 
-.comments{
-   background: white;   
-   padding: 15px;
+.comments {
+    background: white;
+    padding: 15px;
 }
 
-.comments p{
-    border-bottom: none;
-    margin-bottom: 8px;   
-   
-}
+    .comments p {
+        border-bottom: none;
+        margin-bottom: 8px;
+    }
 
-.comments h4{
-    padding: 2px;
-    margin: 0;   
-     border-bottom: 1px solid #dadada; 
-     background: #eaeaea;
-}
+    .comments h4 {
+        padding: 2px;
+        margin: 0;
+        border-bottom: 1px solid #dadada;
+        background: #eaeaea;
+    }
 
-.comments span{
-    float: right;
+    .comments span {
+        float: right;
+    }
 
-}
-
-.insert-comment textarea{
+.insert-comment textarea {
     width: 90%;
     padding: 0;
-    margin: 0;    
+    margin: 0;
     border-radius: 0;
     border: 1px solid;
     box-shadow: none;
 }
 
-.insert-comment{
+.insert-comment {
     padding: 15px;
-
 }
 
-.insert-comment form{
-    padding: 0;
-    margin: 0;
-}
+    .insert-comment form {
+        padding: 0;
+        margin: 0;
+    }
 
-.header{
+.header {
     background: red;
 }
 
-.button-comments{
+.button-comments {
     padding: 10px;
     background: #79CBC9;
     color: white;
@@ -364,7 +361,16 @@ tr:hover td {
     text-shadow: none;
 }
 
-.form-disabled:hover{
-    cursor:pointer;
+.form-disabled:hover {
+    cursor: pointer;
+}
 
+.header-payments {
+    background: #79CBC9;
+    width: 30%;
+    -moz-border-radius: 9px 9px 0 0;
+    -webkit-border-radius: 9px 9px 0 0;
+    border-radius: 9px 9px 0 0;
+    margin: 10px 0 0 0;
+    padding: 8px;
 }
