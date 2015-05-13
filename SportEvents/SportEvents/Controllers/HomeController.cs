@@ -34,6 +34,11 @@ namespace SportEvents.Controllers
                     User user = usersBO.GetUser(login);
                     Session["UserSession"] = user;
                     TempData["notice"] = "Uživatel " + login.Email + " byl úspěšně přihlášen";
+                    if (!String.IsNullOrEmpty(Request.QueryString["redirect"]))
+                    {
+                        string url = Request.QueryString["redirect"];
+                        Response.Redirect(url);
+                    }
                     return RedirectToAction("index", "Groups");
                 }
                 else
