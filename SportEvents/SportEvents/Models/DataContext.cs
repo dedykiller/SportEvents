@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 
@@ -51,6 +52,30 @@ namespace SportEvents.Models
                
         }
 
+        public List<User> GetAllUnspokenUsers(double numberOfDaysToEvent)
+        {
+            List<User> ReturnUsers = new List<User>();
+            List<Event> AllEventsStartInExactDays = new List<Event>();
+            List<UsersInEvent> UIN = new List<UsersInEvent>();
+
+            DateTime NowPlusSomeDays = new DateTime();
+            NowPlusSomeDays = DateTime.Now;
+            NowPlusSomeDays = NowPlusSomeDays.AddDays(numberOfDaysToEvent);
+         //   NowPlusSomeDays = NowPlusSomeDays.Date;
+
+            AllEventsStartInExactDays = Events.Where(x =>  DbFunctions.TruncateTime(x.TimeOfEvent) == (NowPlusSomeDays.Date)).ToList();
+            foreach (var item in AllEventsStartInExactDays)
+	            {
+                    UIN.AddRange(UserInEvents.Where(x=> x.EventId == item.Id).ToList());		 
+	            }
+
+            foreach (var item in UIN)
+            {
+                ReturnUsers.Add(Users.Where(x => x.Id == item.UserId).Single());
+            }
+            return ReturnUsers;
+        }
+
         public List<Article> GetAllArticlesOfGroup(int GroupId)
         {
             return Articles.Where(x => x.GroupID == GroupId).ToList();
@@ -59,6 +84,11 @@ namespace SportEvents.Models
         public PaymentPeriod GetActualPaymentPeriod(int GroupId)
         {
             return PaymentPeriods.Where(x => x.Start <= DateTime.Today && x.End >= DateTime.Today && x.GroupId == GroupId).Single();
+        }
+
+        public PaymentPeriod GetNextPaymentPeriod(PaymentPeriod ActualPaymentPeriod)
+        {
+            return PaymentPeriods.Where(x => x.Start >= DateTime.Today && x.End >= DateTime.Today && x.GroupId == ActualPaymentPeriod.GroupId).Single();
         }
 
         public void UpdateParticipation (int EventId, int UserId, participation participation) {

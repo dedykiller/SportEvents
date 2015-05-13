@@ -16,15 +16,18 @@ namespace SportEvents.Controllers
         public ActionResult Index()
         {
             HangFireCronTest hgf = new HangFireCronTest();
-
+            
             // Test zapisu na disk, acc denied - proc?
             // RecurringJob.AddOrUpdate(() => hgf.TestHangFire(), Cron.Minutely);
 
             // Test, jestli se to odesle normalne - failed
-            hgf.TestEmailCron();
+            //hgf.TestEmailCron();
+            //hgf.SentMessageToAllUnspokenUsers();
 
             // Test jobu, prida se do success, ale email neprijde
-            RecurringJob.AddOrUpdate(() => hgf.TestEmailCron(), Cron.Minutely);
+            RecurringJob.AddOrUpdate(() => hgf.SentMessageToAllUnspokenUsers(), Cron.Minutely);
+            RecurringJob.AddOrUpdate(() => hgf.TestEmailCron(), Cron.Daily);
+            
 
             return View();
         }
