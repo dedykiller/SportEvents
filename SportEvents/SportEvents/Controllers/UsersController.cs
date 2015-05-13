@@ -180,7 +180,7 @@ namespace SportEvents.Controllers
                     return RedirectToAction("index", "Home");
                 }
 
-                ViewBag.Error = "Uživatel pod tímto emailem je již registrován";
+                ViewBag.Error = "Uživatel pod tímto emailem není registrován";
                 return View();
 
             }
