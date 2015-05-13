@@ -258,6 +258,12 @@
   <data name="listOfMyGroups" xml:space="preserve">
     <value>The list of my groups</value>
   </data>
+  <data name="changeCredential" xml:space="preserve">
+    <value>Change credential</value>
+  </data>
+  <data name="changePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -273,6 +279,9 @@
   <data name="logOut" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="myProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
   <data name="nameEvent" xml:space="preserve">
     <value>Name of event</value>
   </data>
@@ -281,5 +290,8 @@
   </data>
   <data name="paymentPeriod" xml:space="preserve">
     <value>Payment period</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

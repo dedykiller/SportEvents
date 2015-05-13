@@ -106,6 +106,24 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change credential.
+        /// </summary>
+        public static string changeCredential {
+            get {
+                return ResourceManager.GetString("changeCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string changePassword {
+            get {
+                return ResourceManager.GetString("changePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please complete the confirmation password..
         /// </summary>
         public static string completePassword {
@@ -403,6 +421,15 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My profile.
+        /// </summary>
+        public static string myProfile {
+            get {
+                return ResourceManager.GetString("myProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string name {
@@ -534,6 +561,15 @@ namespace SportEvents.Languages {
         public static string regForm {
             get {
                 return ResourceManager.GetString("regForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
             }
         }
         

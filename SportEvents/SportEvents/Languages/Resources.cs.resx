@@ -258,6 +258,12 @@
   <data name="listOfMyGroups" xml:space="preserve">
     <value>Seznam mých skupin</value>
   </data>
+  <data name="changeCredential" xml:space="preserve">
+    <value>Změna údajů</value>
+  </data>
+  <data name="changePassword" xml:space="preserve">
+    <value>Změnit heslo</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Smazat</value>
   </data>
@@ -273,6 +279,9 @@
   <data name="logOut" xml:space="preserve">
     <value>Odhlásit</value>
   </data>
+  <data name="myProfile" xml:space="preserve">
+    <value>Můj profil</value>
+  </data>
   <data name="nameEvent" xml:space="preserve">
     <value>Název události</value>
   </data>
@@ -281,5 +290,8 @@
   </data>
   <data name="paymentPeriod" xml:space="preserve">
     <value>Účtovací období</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Uložit</value>
   </data>
 </root>
