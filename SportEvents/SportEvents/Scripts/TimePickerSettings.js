@@ -12,7 +12,7 @@ $(document).ready(function () {
         is24HourView: true,
         hourMin: 1,
         hourMax: 23,
-        minDate: "+1D",
+        minDate: "+0D",
     });
 });
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
         addSliderAccess: true,
         controlType: 'select',
         sliderAccessArgs: { touchonly: false },
-        minDate: "+1D",
+        minDate: "+0D",
     });
 });
 
