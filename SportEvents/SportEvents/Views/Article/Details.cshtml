@@ -28,9 +28,9 @@
         <img src="@Url.Content(Model.Article.Picture)" alt="images" width="200" height="200">
     </div>
     <div id="article-content">
-      <b>@Html.DisplayFor(model => model.Article.CreatorFullName)</b><br />
-       <b>@Html.DisplayFor(model => model.Article.CreationTime)</b><br /><br />
-       <p>@Html.DisplayFor(model => model.Article.Body)</p>     
+        <b>@Html.DisplayFor(model => model.Article.CreatorFullName)</b><br />
+        <b>@Html.DisplayFor(model => model.Article.CreationTime)</b><br /><br />
+        <p>@Html.DisplayFor(model => model.Article.Body)</p>
     </div>
 </div>
 
@@ -68,16 +68,17 @@
             @Html.ValidationSummary(true)
             <input type="hidden" value="@Model.Article.ID" name="ParentID" />
             <input type="hidden" value="@SportEvents.Models.ParentType.Article" name="ParentType" />
-            <textarea name="Text" id="Text"> </textarea>
-            
+            <textarea name="Text" id="Text" placeholder="Vložte komentář" style="padding: 5px"></textarea>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" name="Submit" value="Vytvořit komentář" class="button-comments" />
                 </div>
             </div>
 
-        }</div>
-    
+        }
+    </div>
+
 </div>
 
 
