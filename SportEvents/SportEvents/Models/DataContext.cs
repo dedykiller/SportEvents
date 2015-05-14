@@ -99,6 +99,21 @@ namespace SportEvents.Models
             return PaymentPeriods.Where(x => x.Start > DateTime.Today && x.End >= DateTime.Today && x.GroupId == ActualPaymentPeriod.GroupId).Single();
         }
 
+        public void SetDefaultTypeOfPaymentForUser(User User, PaymentPeriod PaymentPeriod)
+        {
+            TypeOfPaymentForUserInPeriod TypeOfPaymentForUserInPeriod = new TypeOfPaymentForUserInPeriod();
+            TypeOfPaymentForUserInPeriod.User = User;
+            TypeOfPaymentForUserInPeriod.PaymentPeriod = PaymentPeriod;
+            TypeOfPaymentForUserInPeriod.UserId = User.Id;
+            TypeOfPaymentForUserInPeriod.PaymentPeriodId = PaymentPeriod.Id;
+            TypeOfPaymentForUserInPeriod.UserTypeOfPaymentInPeriod = TypeOfPaymentInPeriod.Cash;
+
+            TypeOfPaymentForUserInPeriods.Add(TypeOfPaymentForUserInPeriod);
+            SaveChanges();
+
+
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();

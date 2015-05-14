@@ -4,6 +4,7 @@ using System.Web.Hosting;
 using SportEvents.Models;
 using System.Collections.Generic;
 using System;
+using SportEvents.Models.Application;
 
 namespace SportEvents
 {
@@ -75,6 +76,11 @@ namespace SportEvents
                         //next.TypeOfPaymentsForUsersInPeriods = actual.TypeOfPaymentsForUsersInPeriods;
                         db.PaymentPeriods.Add(next);
                         db.SaveChanges();
+
+                        foreach (var user in db.AllUsersInGroup(item.Id))
+                        {
+                            db.SetDefaultTypeOfPaymentForUser(user, next);
+                        }
                     
                     }
                     
