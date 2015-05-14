@@ -52,7 +52,7 @@ namespace SportEvents.Models
                
         }
 
-        public List<User> GetAllUnspokenUsers(double numberOfDaysToEvent)
+        public List<UsersInEvent> GetAllUnspokenUsers(double numberOfDaysToEvent)
         {
             List<User> ReturnUsers = new List<User>();
             List<Event> AllEventsStartInExactDays = new List<Event>();
@@ -68,12 +68,19 @@ namespace SportEvents.Models
 	            {
                     UIN.AddRange(UserInEvents.Where(x=> x.EventId == item.Id).ToList());		 
 	            }
+            return UIN;
 
-            foreach (var item in UIN)
-            {
-                ReturnUsers.Add(Users.Where(x => x.Id == item.UserId).Single());
-            }
-            return ReturnUsers;
+            //foreach (var item in UIN)
+            //{
+            //    ReturnUsers.Add(Users.Where(x => x.Id == item.UserId).Single());
+            //}
+            //return ReturnUsers;
+        }
+
+        public User GetUserById(int UserId)
+        {
+            User User = Users.Find(UserId);
+            return User;
         }
 
         public List<Article> GetAllArticlesOfGroup(int GroupId)

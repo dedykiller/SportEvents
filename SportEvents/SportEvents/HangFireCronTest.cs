@@ -26,19 +26,24 @@ namespace SportEvents
 
         public void SentMessageToAllUnspokenUsers()
         {
-            List<User> Users = new List<User>();
-            string body = "Zasíláme upozornění, že jste se ještě nevyjádřil k  události";
+            List<UsersInEvent> UsersInEvents = new List<UsersInEvent>();
+            string body = "";
             string subject = "Upozornění na událost";
 
 
 
 
-            Users = db.GetAllUnspokenUsers(1);
+            UsersInEvents = db.GetAllUnspokenUsers(1);
             bool response = false;
-            foreach (var item in Users)
+            // TODO p5epsat
+            
+            foreach (var item in UsersInEvents)
             {
+                User User = db.GetUserById(item.UserId);
+                Event Event = db.GetEventById(item.EventId);
                 EmailService service = new EmailService();
-                response = service.Send(item.Email, subject, body);
+                body = "Zasíláme upozornění, že jste se ještě nevyjádřil k  události " + Event.Name + " konané "+ Event.TimeOfEvent.Hour + Event.TimeOfEvent.Minute;
+                response = service.Send(User.Email, subject, body);
 
             }
 
