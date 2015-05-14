@@ -1,6 +1,7 @@
 ﻿using Foolproof;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,16 +18,18 @@ namespace SportEvents.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Vyplňte prosím název události")]
         [MaxLength(25, ErrorMessage = "Délka názvu musí být maximálně 25 znaků")]
+        [DisplayName("Název události")]
         public string Name { get; set; }
-        
+        [DisplayName("Termín události")]
         [Required(ErrorMessage = "Vyplňte prosím čas a datum události")]
         [DisplayFormat(DataFormatString= "{0:dd/MM/yyy hh:mm}",ApplyFormatInEditMode = true)]
         public DateTime TimeOfEvent { get; set; }
         public DateTime? RepeatUntil { get; set; }
         public int GrpId { get; set; }
         public int CreatorId { get; set; }
-       
+        [DisplayName("Místo")]
         public string Place { get; set; }
+        [DisplayName("Popis")]
         public string Description { get; set; }
         
          
@@ -34,6 +37,7 @@ namespace SportEvents.Models
         [Range(0, 99999999, ErrorMessage = "Cena události musí být kladné číslo nebo 0.")]
         [DisplayFormat(DataFormatString = "{0:#} Kč")]
       //  [RegularExpression(@" 0+\.[0-9]*[1-9][0-9]*$",ErrorMessage = "Cena musí být kladné číslo")]
+        [DisplayName("Cena")]
         public decimal Price { get; set; }
         public bool Repeat { get; set; } // opakovana udalost? ano x ne
 

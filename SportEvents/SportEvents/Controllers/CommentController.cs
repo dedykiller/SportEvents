@@ -57,7 +57,7 @@ namespace SportEvents.Controllers
                 db.Comments.Add(comment);
                 db.SaveChanges();
 
-                TempData["notice"] = "Uživatel " + user.FirstName + " úspěšně přidal komentář : " + comment.Text;
+                TempData["notice"] = "Uživatel " + user.FirstName + " úspěšně přidal komentář";
                 switch(comment.ParentType){
                     case ParentType.Article:
                         return RedirectToAction("Details", "Article", new { id = comment.ParentID });
@@ -110,7 +110,7 @@ namespace SportEvents.Controllers
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
 
-                TempData["notice"] = "Úspěšná editace komentáře na : " + comment.Text;
+                TempData["notice"] = "Úspěšná editace komentáře";
                 switch (comment.ParentType)
                 {
                     case ParentType.Article:

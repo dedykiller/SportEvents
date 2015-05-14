@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace SportEvents.Models
     {
         public int Id { get; set; }
         [DataType(DataType.Date)]
+        [DisplayName("Začátek období")]
         public DateTime Start { get; set; }
+        [DisplayName("Konec období")]
         [DataType(DataType.Date)]
         public DateTime End { get; set; }
         public int GroupId { get; set; }

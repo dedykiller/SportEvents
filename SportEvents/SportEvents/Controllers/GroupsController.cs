@@ -182,9 +182,12 @@ namespace SportEvents.Models
         {
             if (ModelState.IsValid)
             {
+                User user = (User)Session["UserSession"];
+                group.Creator = user.Id;
                 groupsBO.EditGroup(group);
-                
-                return RedirectToAction("Index");
+
+                TempData["notice"] = "Správce skupiny úspěšně editoval skupinu : " + group.Name;
+                return RedirectToAction("Details", "Groups", new { id = group.Id });
             }
             return View(group);
         }

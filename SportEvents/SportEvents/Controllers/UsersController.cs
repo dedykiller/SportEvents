@@ -175,9 +175,9 @@ namespace SportEvents.Controllers
 
                     bool kq = service.Send(emailTo, subject, body);
 
-                    TempData["notice"] = "Uživateli " + user.Email + " byl odeslán email s dočasným heslem: " + kq;
+                    TempData["notice"] = "Uživateli " + user.Email + " bylo odesláno nové heslo";
                     //return RedirectToAction("index", "Home");
-                    return RedirectToAction("ListOfUsers");
+                    return RedirectToAction("index", "Home");
                 }
 
                 ViewBag.Error = "Uživatel pod tímto emailem je již registrován";

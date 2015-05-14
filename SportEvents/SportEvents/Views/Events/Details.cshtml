@@ -4,9 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<a class="return" onclick="history.back()">
-   @Html.DisplayFor(model => Model.Event.Name)
-</a>
+@Html.ActionLink(@Model.Event.Name, "Details", "Groups", new { id = Model.Event.GrpId }, new { @class = "return" })
 
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <hr />
