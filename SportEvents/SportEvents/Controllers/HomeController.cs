@@ -25,8 +25,8 @@ namespace SportEvents.Controllers
             //hgf.SentMessageToAllUnspokenUsers();
 
             // Test jobu, prida se do success, ale email neprijde
-            RecurringJob.AddOrUpdate(() => hgf.SentMessageToAllUnspokenUsers(), Cron.Minutely);
-            RecurringJob.AddOrUpdate(() => hgf.TestEmailCron(), Cron.Daily);
+            RecurringJob.AddOrUpdate(() => hgf.SentMessageToAllUnspokenUsers(), Cron.Daily);
+       //     RecurringJob.AddOrUpdate(() => hgf.TestEmailCron(), Cron.Daily);
             
 
             return View();
