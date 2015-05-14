@@ -112,6 +112,12 @@ namespace SportEvents.Controllers
                     // jestli není, tak ho vytvoří a vypíše hlášku
                     db.PaymentPeriods.Add(PaymentPeriod);
                     db.SaveChanges();
+
+                    foreach (var UserInGroup in db.AllUsersInGroup(PaymentPeriod.GroupId))
+                    {
+                        db.SetDefaultTypeOfPaymentForUser(UserInGroup, PaymentPeriod);
+                    }
+
                     TempData["notice"] = "Následující účtovacé období od " +PaymentPeriod.Start + " do: "+ PaymentPeriod.End.Date +  " bylo vytvořeno uživatelem " + user.Email;
                     return RedirectToAction("Details", "Groups", new { id = PaymentPeriod.GroupId });
                 
