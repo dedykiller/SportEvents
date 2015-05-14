@@ -88,6 +88,7 @@ namespace SportEvents.Models
             return Articles.Where(x => x.GroupID == GroupId).ToList();
         }
 
+
         public PaymentPeriod GetActualPaymentPeriod(int GroupId)
         {
             return PaymentPeriods.Where(x => x.Start <= DateTime.Today && x.End >= DateTime.Today && x.GroupId == GroupId).Single();
@@ -95,7 +96,7 @@ namespace SportEvents.Models
 
         public PaymentPeriod GetNextPaymentPeriod(PaymentPeriod ActualPaymentPeriod)
         {
-            return PaymentPeriods.Where(x => x.Start >= DateTime.Today && x.End >= DateTime.Today && x.GroupId == ActualPaymentPeriod.GroupId).Single();
+            return PaymentPeriods.Where(x => x.Start > DateTime.Today && x.End >= DateTime.Today && x.GroupId == ActualPaymentPeriod.GroupId).Single();
         }
 
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
@@ -116,6 +117,20 @@ namespace SportEvents.Models
                 return true;
             }
             
+        }
+
+        public bool IsActualPaymentPeriodOfThisGroupEnding (int groupId)
+        {
+            PaymentPeriod PaymentPeriod = new PaymentPeriod();
+            if (PaymentPeriods.FirstOrDefault(x => x.Start.AddDays(2) > DateTime.Today && groupId == x.GroupId) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         public participation GetParticipation(int eventId, int userId)
@@ -478,6 +493,16 @@ namespace SportEvents.Models
         public List<Comment> getAllCommentsByParent(int? ParentID, ParentType parentType)
         {
             return Comments.Where(x => x.ParentID == ParentID && x.ParentType == parentType).ToList();
+        }
+
+        public List<PaymentPeriod> GetAllPaymentsPeriods()
+        {
+            return PaymentPeriods.ToList();
+        }
+
+        public List<Group> GetAllGroups()
+        {
+            return Groups.ToList();
         }
     }
 }

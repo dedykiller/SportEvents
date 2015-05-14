@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Hosting;
 using SportEvents.Models;
 using System.Collections.Generic;
+using System;
 
 namespace SportEvents
 {
@@ -48,10 +49,40 @@ namespace SportEvents
 
                 }
             }
-
-
-
-
+                        
         }
+
+        public void CreateNextPaymentPeriodIfNot()
+        {
+            
+            List<Group> AllGroups = new List<Group>();
+            AllGroups = db.GetAllGroups();
+
+            foreach (var item in AllGroups)
+            {
+                if (db.IsAlreadyDefinedNextPaymentPeriodInThisGroup(item.Id) == false)
+                {
+                    
+                    PaymentPeriod actual = db.GetActualPaymentPeriod(item.Id);
+                    if (actual.End.AddDays(2) > DateTime.Now.Date)
+                    {
+                        PaymentPeriod next = new PaymentPeriod();
+                        
+                        next.Start = actual.End.AddDays(1);
+                        next.End = actual.Start.AddDays(90);
+                        next.GroupId = actual.GroupId;
+                        next.GroupName = actual.GroupName;
+                        //next.TypeOfPaymentsForUsersInPeriods = actual.TypeOfPaymentsForUsersInPeriods;
+                        db.PaymentPeriods.Add(next);
+                        db.SaveChanges();
+                    
+                    }
+                    
+                }                
+            }
+        }
+            
+        
+        
     }
 }
