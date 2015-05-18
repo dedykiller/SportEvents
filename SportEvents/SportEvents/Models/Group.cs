@@ -18,15 +18,15 @@ namespace SportEvents.Models
         public int Id { get; set; }
         public int Creator { get; set; }
 
-        [DisplayName("Zadej název skupiny")]
-        [Required(ErrorMessage = "Vyplňte prosím název skupiny")]
+        [Display(Name = "fillGroupName", ResourceType = typeof(SportEvents.Languages.Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "pleaseFillName", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Name { get; set; }
 
         [Display(Name = "enterDescripGroup", ResourceType = typeof(SportEvents.Languages.Resources))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "pleaseFillDescrip", ErrorMessageResourceType = typeof(SportEvents.Languages.Resources))]
         public string Description { get; set; }
 
-        [DisplayName("Zakladatel skupiny")]
+        [Display(Name = "creatorGroup", ResourceType = typeof(SportEvents.Languages.Resources))]
         public string CreatorFullName { get; set; }
         public DateTime CreateTime { get; set; }
 
@@ -42,7 +42,7 @@ namespace SportEvents.Models
       //  public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Event> Events { get; set; }
 
-        [DisplayName("Počet uživatelů")]
+        [Display(Name = "numberOfUsers", ResourceType = typeof(SportEvents.Languages.Resources))]
         public int NumberOfUsersInGroup { get; set; }
         public virtual ICollection<PaymentPeriod> PaymentPeriods { get; set; }
         

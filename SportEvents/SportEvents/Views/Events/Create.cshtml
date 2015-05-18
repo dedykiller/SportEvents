@@ -1,7 +1,12 @@
 ﻿@model SportEvents.Models.Event
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create";
+}
+
 <a class="return" onclick="history.back()">
-    @SportEvents.Languages.Resources.newEvent
+   Nová událost
 </a>
 <hr />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

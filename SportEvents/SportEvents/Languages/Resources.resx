@@ -297,4 +297,10 @@
   <data name="changedPassword" xml:space="preserve">
     <value>Change of password</value>
   </data>
+  <data name="creatorGroup" xml:space="preserve">
+    <value>Creator of group</value>
+  </data>
+  <data name="listOfPaymentPeriod" xml:space="preserve">
+    <value>The list of payment period</value>
+  </data>
 </root>

@@ -169,6 +169,15 @@ namespace SportEvents.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creator of group.
+        /// </summary>
+        public static string creatorGroup {
+            get {
+                return ResourceManager.GetString("creatorGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string delete {
@@ -390,6 +399,15 @@ namespace SportEvents.Languages {
         public static string listOfMyGroups {
             get {
                 return ResourceManager.GetString("listOfMyGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The list of payment period.
+        /// </summary>
+        public static string listOfPaymentPeriod {
+            get {
+                return ResourceManager.GetString("listOfPaymentPeriod", resourceCulture);
             }
         }
         
