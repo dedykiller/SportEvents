@@ -114,6 +114,11 @@ namespace SportEvents.Models
 
         }
 
+        public TypeOfPaymentForUserInPeriod GetTypeOfPaymentForUserInPeriod(User user, PaymentPeriod PaymentPeriod)
+        {
+            return TypeOfPaymentForUserInPeriods.Where(x => x.UserId == user.Id && x.PaymentPeriodId == PaymentPeriod.Id).Single();
+        }
+
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
             UserInEvents.Where(x => x.EventId == EventId && x.UserId == UserId).Single().participation = participation;
             UsersInEvent e = new UsersInEvent();
@@ -518,6 +523,23 @@ namespace SportEvents.Models
         public List<Group> GetAllGroups()
         {
             return Groups.ToList();
+        }
+
+        public UsersInGroup GetUserInGroup(Group group, User user)
+        {
+            return UsersInGroups.Where(x => x.GroupID == group.Id && x.UserID == user.Id).Single();
+        }
+
+        internal bool isUserInEvent(int userID, int eventID)
+        {
+            if (UserInEvents.Any(x => x.UserId == userID && x.EventId == eventID))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

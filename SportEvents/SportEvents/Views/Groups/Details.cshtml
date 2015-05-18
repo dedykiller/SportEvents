@@ -33,7 +33,16 @@
         <p class="button-link">
             @Html.ActionLink(@SportEvents.Languages.Resources.newArticle, "Create", "Article", new { id = Model.Group.Id }, null)           
         </p>
+        
     }
+    @if (ViewBag.IsUserInGroup == true && ViewBag.IsUserCreator == false)
+    {
+        <p class="button-link">
+            @Html.ActionLink("Odhlásit", "RemoveUserFromGroup", new { id = Model.Group.Id }, null)
+        </p>
+    }
+    
+    
 
 
     <div id="container">

@@ -129,6 +129,7 @@ namespace SportEvents.Models
         }
 
 
+
         // POST: /Groups/AddUserToGroup/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -154,6 +155,53 @@ namespace SportEvents.Models
                     }
 
                     return RedirectToAction("Details", "Groups", new { id = group.Id });
+                }
+            }
+
+            TempData["notice"] = "Uživatel není přihlášený";
+            return View();
+        }
+
+
+        // GET: /Groups/RemoveUserFromGroup/5
+        public ActionResult RemoveUserFromGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = groupsBO.GetGroupById(id);
+
+            return View(group);
+        }
+
+        // POST: /Groups/RemoveUserFromGroup/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("RemoveUserFromGroup")]
+        public ActionResult RemoveUserFromGroup(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["UserSession"] != null)
+                {
+
+                    User user = (User)Session["UserSession"];
+                    Group group = groupsBO.GetGroupById(id);
+
+                    if (groupsBO.IsUserInGroup(user.Id, group.Id))
+                    {
+                        groupsBO.RemoveUserFromGroup(group, user);
+                        TempData["notice"] = "Uživatel " + user.FirstName + " se úspěšně odhlásil ze skupiny : " + group.Name;
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+                    else
+                    {
+                        TempData["notice"] = "Uživatel " + user.FirstName + " již není ve skupině : " + group.Name;
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+
+                    
                 }
             }
 

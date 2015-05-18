@@ -1,0 +1,45 @@
+﻿﻿@model SportEvents.Models.Group
+
+@{
+    ViewBag.Title = "Odhlásit uživatele ze skupiny";
+}
+
+<a class="return" onclick="history.back()">
+    Odhlásit uživatele ze skupiny
+</a>
+<hr />
+
+<div class="description-groups">
+    <p style="font-size: 20px; font-weight:500">Opravdu chcete uživatele odhlásit ze skupiny?</p>
+    <p>
+        <b>@Html.DisplayNameFor(model => model.Name): </b>@Html.DisplayFor(model => model.Name)
+    </p>
+
+    <p>
+        <b>@Html.DisplayNameFor(model => model.CreatorFullName): </b>@Html.DisplayFor(model => model.CreatorFullName)
+    </p>
+
+    <p>
+        <b>@Html.DisplayNameFor(model => model.NumberOfUsersInGroup): </b>@Html.DisplayFor(model => model.NumberOfUsersInGroup)
+    </p>
+
+    <p>
+        <b>@Html.DisplayNameFor(model => model.CreateTime): </b>@Html.DisplayFor(model => model.CreateTime)
+    </p>
+
+    <p>
+        <b>@Html.DisplayNameFor(model => model.EndOfPaymentPeriod): </b>@Html.DisplayFor(model => model.EndOfPaymentPeriod)
+    </p>
+
+
+
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <input type="submit" value="Odhlásit" class="button" />
+
+
+}

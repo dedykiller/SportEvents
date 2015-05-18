@@ -128,9 +128,6 @@
     <Content Include="Content\Boot.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\TextFile1.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Zapisovaci\TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -257,6 +254,7 @@
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\PaymentPeriod\Edit.cshtml" />
+    <Content Include="Views\Groups\RemoveUserFromGroup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 
@@ -116,9 +117,6 @@ namespace SportEvents.Models.Application
 
             group.NumberOfUsersInGroup += 1;
             user = db.GetUserByEmail(user.Email);
-
-                
-           
             UsersInGroup userIngroup = new UsersInGroup();
             userIngroup.UserID = user.Id;
             userIngroup.GroupID = group.Id;
@@ -127,8 +125,19 @@ namespace SportEvents.Models.Application
             SetDefaultTypeOfPaymentForUser(user, group);
             db.SaveChanges();
 
-            // TODO : dodělat výpis zda byl uživatel nebo nebyl přidán do skupiny
             
+        }
+
+        public void RemoveUserFromGroup(Group group, User user)
+        {
+            group.NumberOfUsersInGroup -= 1;
+            user = db.GetUserByEmail(user.Email);
+            PaymentPeriod pp = db.GetActualPaymentPeriod(group.Id);
+            TypeOfPaymentForUserInPeriod typeOfPayment = db.GetTypeOfPaymentForUserInPeriod(user, pp);
+            UsersInGroup uig = db.GetUserInGroup(group, user);
+            db.UsersInGroups.Remove(uig);
+            db.TypeOfPaymentForUserInPeriods.Remove(typeOfPayment);
+            db.SaveChanges();
         }
 
         public List<Event> AllEventsOfGroup(int groupId)
@@ -153,7 +162,12 @@ namespace SportEvents.Models.Application
             AllEventsOfGroup = db.AllEventsOfGroup(groupId);            
             foreach (var item in AllEventsOfGroup)
             {
-                db.AddUserToEvent(user, item);
+
+                if(db.isUserInEvent(user.Id, item.Id)==false)
+                {
+                    db.AddUserToEvent(user, item);
+                }
+                
             }
             
         }
@@ -193,6 +207,11 @@ namespace SportEvents.Models.Application
         public List<Article> GetAllArticlesOfGroup(int groupId)
         {
             return db.GetAllArticlesOfGroup(groupId);
+        }
+
+        public UsersInGroup GetUserInGroup(Group group, User user)
+        {
+            return db.GetUserInGroup(group, user);
         }
     }
 }
