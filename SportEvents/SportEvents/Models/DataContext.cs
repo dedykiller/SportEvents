@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 
@@ -11,7 +12,7 @@ namespace SportEvents.Models
     {
 
         public DataContext()
-            : base("masterDB") 
+            : base("dedekDB") 
         {
         }
 
@@ -51,10 +52,42 @@ namespace SportEvents.Models
                
         }
 
+        public List<UsersInEvent> GetAllUnspokenUsers(double numberOfDaysToEvent)
+        {
+            List<User> ReturnUsers = new List<User>();
+            List<Event> AllEventsStartInExactDays = new List<Event>();
+            List<UsersInEvent> UIN = new List<UsersInEvent>();
+
+            DateTime NowPlusSomeDays = new DateTime();
+            NowPlusSomeDays = DateTime.Now;
+            NowPlusSomeDays = NowPlusSomeDays.AddDays(numberOfDaysToEvent);
+         //   NowPlusSomeDays = NowPlusSomeDays.Date;
+
+            AllEventsStartInExactDays = Events.Where(x =>  DbFunctions.TruncateTime(x.TimeOfEvent) == (NowPlusSomeDays.Date)).ToList();
+            foreach (var item in AllEventsStartInExactDays)
+	            {
+                    UIN.AddRange(UserInEvents.Where(x=> x.EventId == item.Id).ToList());		 
+	            }
+            return UIN;
+
+            //foreach (var item in UIN)
+            //{
+            //    ReturnUsers.Add(Users.Where(x => x.Id == item.UserId).Single());
+            //}
+            //return ReturnUsers;
+        }
+
+        public User GetUserById(int UserId)
+        {
+            User User = Users.Find(UserId);
+            return User;
+        }
+
         public List<Article> GetAllArticlesOfGroup(int GroupId)
         {
             return Articles.Where(x => x.GroupID == GroupId).ToList();
         }
+
 
         public PaymentPeriod GetActualPaymentPeriod(int GroupId)
         {
@@ -63,7 +96,22 @@ namespace SportEvents.Models
 
         public PaymentPeriod GetNextPaymentPeriod(PaymentPeriod ActualPaymentPeriod)
         {
-            return PaymentPeriods.Where(x => x.Start > DateTime.Today && x.GroupId == ActualPaymentPeriod.Id).SingleOrDefault();
+            return PaymentPeriods.Where(x => x.Start > DateTime.Today && x.End >= DateTime.Today && x.GroupId == ActualPaymentPeriod.GroupId).Single();
+        }
+
+        public void SetDefaultTypeOfPaymentForUser(User User, PaymentPeriod PaymentPeriod)
+        {
+            TypeOfPaymentForUserInPeriod TypeOfPaymentForUserInPeriod = new TypeOfPaymentForUserInPeriod();
+            TypeOfPaymentForUserInPeriod.User = User;
+            TypeOfPaymentForUserInPeriod.PaymentPeriod = PaymentPeriod;
+            TypeOfPaymentForUserInPeriod.UserId = User.Id;
+            TypeOfPaymentForUserInPeriod.PaymentPeriodId = PaymentPeriod.Id;
+            TypeOfPaymentForUserInPeriod.UserTypeOfPaymentInPeriod = TypeOfPaymentInPeriod.Cash;
+
+            TypeOfPaymentForUserInPeriods.Add(TypeOfPaymentForUserInPeriod);
+            SaveChanges();
+
+
         }
 
         public void UpdateParticipation (int EventId, int UserId, participation participation) {
@@ -84,6 +132,20 @@ namespace SportEvents.Models
                 return true;
             }
             
+        }
+
+        public bool IsActualPaymentPeriodOfThisGroupEnding (int groupId)
+        {
+            PaymentPeriod PaymentPeriod = new PaymentPeriod();
+            if (PaymentPeriods.FirstOrDefault(x => x.Start.AddDays(2) > DateTime.Today && groupId == x.GroupId) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         public participation GetParticipation(int eventId, int userId)
@@ -446,6 +508,16 @@ namespace SportEvents.Models
         public List<Comment> getAllCommentsByParent(int? ParentID, ParentType parentType)
         {
             return Comments.Where(x => x.ParentID == ParentID && x.ParentType == parentType).ToList();
+        }
+
+        public List<PaymentPeriod> GetAllPaymentsPeriods()
+        {
+            return PaymentPeriods.ToList();
+        }
+
+        public List<Group> GetAllGroups()
+        {
+            return Groups.ToList();
         }
     }
 }

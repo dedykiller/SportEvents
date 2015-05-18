@@ -96,6 +96,21 @@ namespace SportEvents.Models.Application
 
         }
 
+        public void SetDefaultTypeOfPaymentForUser(User User, PaymentPeriod PaymentPeriod)
+        {
+            TypeOfPaymentForUserInPeriod TypeOfPaymentForUserInPeriod = new TypeOfPaymentForUserInPeriod();
+            TypeOfPaymentForUserInPeriod.User = User;
+            TypeOfPaymentForUserInPeriod.PaymentPeriod = PaymentPeriod;
+            TypeOfPaymentForUserInPeriod.UserId = User.Id;
+            TypeOfPaymentForUserInPeriod.PaymentPeriodId = PaymentPeriod.Id;
+            TypeOfPaymentForUserInPeriod.UserTypeOfPaymentInPeriod = TypeOfPaymentInPeriod.Cash;
+
+            db.TypeOfPaymentForUserInPeriods.Add(TypeOfPaymentForUserInPeriod);
+            db.SaveChanges();
+
+
+        }
+
         public void AddUserToGroup(Group group, User user)
         {
 

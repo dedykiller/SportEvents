@@ -23,7 +23,6 @@ namespace SportEvents
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            //RecurringJob.AddOrUpdate(() => UtilityMethods.CreateNewPaymentPeriodByCron, Cron.Minutely);
         }
 
         protected void Application_PreRequestHandlerExecute()
