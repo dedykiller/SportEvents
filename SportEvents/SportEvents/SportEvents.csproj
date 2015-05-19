@@ -255,6 +255,8 @@
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\PaymentPeriod\Edit.cshtml" />
     <Content Include="Views\Groups\RemoveUserFromGroup.cshtml" />
+    <Content Include="Views\Groups\CloseGroup.cshtml" />
+    <Content Include="Views\Groups\OpenGroup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,35 +14,63 @@
 
 
     <hr />
-
-    @if (ViewBag.IsUserCreator == true)
+    @if(Model.Group.IsOpened==true)
     {
+         if (ViewBag.IsUserCreator == true)
+        {
         <p class="button-link">
            @Html.ActionLink(@SportEvents.Languages.Resources.newEvent, "Create", "Events", new { groupId = Model.Group.Id }, null)        
         </p>
         <p class="button-link">
             @Html.ActionLink(@SportEvents.Languages.Resources.editGroup, "Edit", new { id = Model.Group.Id })
         </p>
-         <p class="button-link-first">
+         <p class="button-link">
             @Html.ActionLink(@SportEvents.Languages.Resources.paymentPeriod, "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
         </p>
-    }
+        <p class="button-link-first">
+            @Html.ActionLink("Uzavřít", "CloseGroup", new { id = Model.Group.Id }, null)
+        </p>
+        }
 
-    @if (ViewBag.IsUserInGroup == true)
+        if (ViewBag.IsUserInGroup == true)
+        {
+            <p class="button-link">
+                @Html.ActionLink(@SportEvents.Languages.Resources.newArticle, "Create", "Article", new { id = Model.Group.Id }, null)           
+            </p>
+        
+        }
+        if (ViewBag.IsUserInGroup == true && ViewBag.IsUserCreator == false)
+        {
+            <p class="button-link">
+                @Html.ActionLink("Odhlásit", "RemoveUserFromGroup", new { id = Model.Group.Id }, null)
+            </p>
+        }
+    }
+    else
     {
+        if (ViewBag.IsUserCreator == true)
+        {
+            <p class="button-link">
+           @Html.ActionLink(@SportEvents.Languages.Resources.newEvent, "Create", "Events", new { groupId = Model.Group.Id }, null)        
+        </p>
+        <p class="button-link">
+            @Html.ActionLink(@SportEvents.Languages.Resources.editGroup, "Edit", new { id = Model.Group.Id })
+        </p>
+         <p class="button-link">
+            @Html.ActionLink(@SportEvents.Languages.Resources.paymentPeriod, "Index", "PaymentPeriod", new { groupId = Model.Group.Id }, null)
+        </p>
+        <p class="button-link-first">
+            @Html.ActionLink("Otevřít", "OpenGroup", new { id = Model.Group.Id }, null)
+        </p>
         <p class="button-link">
             @Html.ActionLink(@SportEvents.Languages.Resources.newArticle, "Create", "Article", new { id = Model.Group.Id }, null)           
         </p>
-        
+        }
+        else
+        {
+            <h2>Skupina je uzavřená, požádejte správce skupiny o otevření</h2>
+        }
     }
-    @if (ViewBag.IsUserInGroup == true && ViewBag.IsUserCreator == false)
-    {
-        <p class="button-link">
-            @Html.ActionLink("Odhlásit", "RemoveUserFromGroup", new { id = Model.Group.Id }, null)
-        </p>
-    }
-    
-    
 
 
     <div id="container">

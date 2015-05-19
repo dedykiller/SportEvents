@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    SportEvents.Models.User user = (SportEvents.Models.User)Session["UserSession"];
 }
 <h3 style="text-align:center"> @TempData["notice"]</h3>
 <h2>@SportEvents.Languages.Resources.listOfMyGroups</h2>
@@ -44,18 +45,49 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
-        <td style="text-align: center">
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td width="70%">
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-               
-        <td style="text-align: center">
-            @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
-        </td>   
-    </tr>
+     if (item.IsOpened == true)
+    {
+        <tr onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
+            <td width="50%">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.CreatorFullName)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
+            </td>
+        </tr>
+    }
+    if (item.IsOpened == false && user.Id == item.Creator)
+    {
+        <tr style="background-color:lightsalmon;" onclick="location.href = '@(Url.Action("Details", "Groups", new { id = item.Id }))'">
+            <td width="50%">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.CreatorFullName)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
+            </td>
+        </tr>
+    }
+
+    if (item.IsOpened == false && user.Id != item.Creator)
+    {
+        <tr style="background-color:lightsalmon;">
+            <td width="50%">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.CreatorFullName)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.NumberOfUsersInGroup)
+            </td>
+        </tr>
+    }
 }
 
 </table>

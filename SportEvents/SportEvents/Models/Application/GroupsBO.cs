@@ -45,6 +45,7 @@ namespace SportEvents.Models.Application
             UsersInGroup userIngroup = new UsersInGroup(); 
             //group.StartOfPaymentPeriod = DateTime.Now;            
             group.NumberOfUsersInGroup += 1;
+            group.IsOpened = true;
             group.CreatorFullName = user.FirstName + " " + user.Surname;
             db.Groups.Add(group);
             db.SaveChanges();
@@ -212,6 +213,20 @@ namespace SportEvents.Models.Application
         public UsersInGroup GetUserInGroup(Group group, User user)
         {
             return db.GetUserInGroup(group, user);
+        }
+
+        public void CloseGroup(Group group)
+        {
+            group.IsOpened = false;
+            db.Entry(group).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void OpenGroup(Group group)
+        {
+            group.IsOpened = true;
+            db.Entry(group).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

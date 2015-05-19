@@ -209,6 +209,98 @@ namespace SportEvents.Models
             return View();
         }
 
+        // GET: /Groups/CloseGroup/5
+        public ActionResult CloseGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = groupsBO.GetGroupById(id);
+
+            return View(group);
+        }
+
+        // POST: /Groups/CloseGroup/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("CloseGroup")]
+        public ActionResult CloseGroup(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["UserSession"] != null)
+                {
+
+                    User user = (User)Session["UserSession"];
+                    Group group = groupsBO.GetGroupById(id);
+
+                    if (group.Creator == user.Id && group.IsOpened==true)
+                    {
+                        groupsBO.CloseGroup(group);
+                        TempData["notice"] = "Uživatel " + user.FirstName + " úspěšně uzavřel skupinu : " + group.Name;
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+                    else
+                    {
+                        TempData["notice"] = "Skupina " + group.Name + " již je uzavřená";
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+
+
+                }
+            }
+
+            TempData["notice"] = "Uživatel není přihlášený";
+            return View();
+        }
+
+        // GET: /Groups/OpenGroup/5
+        public ActionResult OpenGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Group group = groupsBO.GetGroupById(id);
+
+            return View(group);
+        }
+
+        // POST: /Groups/OpenGroup/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("OpenGroup")]
+        public ActionResult OpenGroup(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Session["UserSession"] != null)
+                {
+
+                    User user = (User)Session["UserSession"];
+                    Group group = groupsBO.GetGroupById(id);
+
+                    if (group.Creator == user.Id && group.IsOpened == false)
+                    {
+                        groupsBO.OpenGroup(group);
+                        TempData["notice"] = "Uživatel " + user.FirstName + " úspěšně otevřel skupinu : " + group.Name;
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+                    else
+                    {
+                        TempData["notice"] = "Skupina " + group.Name + " již je otevřená";
+                        return RedirectToAction("Details", "Groups", new { id = group.Id });
+                    }
+
+
+                }
+            }
+
+            TempData["notice"] = "Uživatel není přihlášený";
+            return View();
+        }
+
         // GET: /Groups/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -37,6 +37,8 @@ namespace SportEvents.Models
         [NotMapped]
         [DataType(DataType.Date)]
         public DateTime EndOfPaymentPeriod { get; set; }
+
+        
                 
         [Display(Name = "enterTypePay", ResourceType = typeof(SportEvents.Languages.Resources))]
       //  public virtual ICollection<User> Users { get; set; }
@@ -58,5 +60,6 @@ namespace SportEvents.Models
 
 
         public List<Event> EventList { get; set; }
+        public bool IsOpened { get; set; }
     }
 }
